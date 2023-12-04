@@ -25,11 +25,7 @@ const ImageBox = ({
         loading={loading}
         onClick={onClick}
       />
-      {ButtonComponent && (
-        <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
-          {ButtonComponent}
-        </div>
-      )}
+      {ButtonComponent && <div className="-mt-14 pb-4 flex flex-row justify-center">{ButtonComponent}</div>}
     </div>
   );
 };
