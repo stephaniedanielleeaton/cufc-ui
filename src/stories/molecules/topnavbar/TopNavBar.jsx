@@ -6,12 +6,14 @@ const TopNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-ashGray text-white w-full h-10 flex flex-row">
-      <div className="flex flex-row w-2/3 pt-2">
+    <nav className="flex items-center justify-between bg-gradient-to-r from-blue-500 text-white py-4 px-6 w-full h-16" >
+      <div className="flex-initial mr-4">
         <FontAwesomeIcon icon={faCat} className="h-6 w-6 px-2" />
-        <p className="w-full">Fencing Club for Cats</p>
       </div>
-      <div className="flex justify-end w-1/3 h-full">
+      <div className="flex-1 text-center">
+        <p className="w-full text-center text-white font-poppins text-24 font-bold">FCFC</p>
+      </div>
+      <div className="flex-initial ml-4">
         <button
           type="button"
           className="inline-flex items-center p-2 rounded-md text-white hover:text-white hover:bg-gray-700"
@@ -21,31 +23,6 @@ const TopNavbar = () => {
         >
           <FontAwesomeIcon icon={faBars} className="h-6 w-6" />
         </button>
-      </div>
-      <div className={`${isOpen ? 'block' : 'hidden'} absolute right-2 z-50 mt-2 `}>
-        <div
-          className="-mt-1 px-4 py-5 rounded-md space-y-0 bg-ashGray text-white w-full"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Link 1
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Link 2
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Link 3
-          </a>
-        </div>
       </div>
     </nav>
   );

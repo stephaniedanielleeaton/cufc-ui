@@ -19,7 +19,12 @@ module.exports = {
         hoverOuterSpace: '#7E8587',
         hoverAshGray: '#D8DCDD',
       },
+      gradientColorStops: {
+        'blue-pink': 'linear-gradient(90deg, #375A7A 1.85%, #BD929F 50%)',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp')
+  ],
 };
