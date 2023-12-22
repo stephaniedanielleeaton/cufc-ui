@@ -30,6 +30,7 @@ const HomePage = ({ imageOptions, buttonTexts, textContents, contactButtonText }
           </div>
         ))}
       </div>
+
       <div className="mt-4 w-full flex flex-row justify-center">
         <BaseButton text={contactButtonText} shape="rectangle" />
       </div>

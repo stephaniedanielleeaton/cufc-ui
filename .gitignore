@@ -25,3 +25,7 @@ storybook-static/
 *.njsproj
 *.sln
 *.sw?
+.storybook/output.css
+package-lock.json
+storybook-static/iframe.html
+storybook-static/project.json

@@ -1,8 +1,8 @@
-import Button from './BaseButton';
+import BaseButton from './BaseButton';
 
 export default {
   title: 'Molecules/BaseButton',
-  component: Button,
+  component: BaseButton,
   parameters: {
     layout: 'centered',
   },
@@ -18,14 +18,7 @@ export default {
     },
     textColor: {
       control: 'select',
-      options: [
-        'lavender',
-        'wine',
-        'gunmetal',
-        'outerSpace',
-        'ashGray',
-        'white',
-      ],
+      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'white'],
     },
     textSize: {
       control: 'select',

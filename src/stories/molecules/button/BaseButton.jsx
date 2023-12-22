@@ -28,7 +28,7 @@ const colors = {
   white: 'text-white bg-white hover:text-hoverWhite hover:bg-hoverWhite',
 };
 
-const Button = ({ size, color, textColor, textSize, text, shape, onClick }) => {
+const BaseButton = ({ size, color, textColor, textSize, text, shape, onClick }) => {
   const textSizeClass = textSizes[size];
   const colorClass = colors[color];
   const shapeClass = shapes[shape];
@@ -42,7 +42,7 @@ const Button = ({ size, color, textColor, textSize, text, shape, onClick }) => {
   );
 };
 
-Button.propTypes = {
+BaseButton.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
   shape: PropTypes.oneOf(['pill', 'rectangle']),
   color: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray']),
@@ -52,7 +52,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
 };
 
-Button.defaultProps = {
+BaseButton.defaultProps = {
   size: 'md',
   color: 'gunmetal',
   shape: 'pill',
@@ -61,4 +61,4 @@ Button.defaultProps = {
   onClick: () => {},
 };
 
-export default Button;
+export default BaseButton;

@@ -1,13 +1,15 @@
 // tailwind.config.js
 module.exports = {
-  content: [
-    './src/**/*.{js,jsx,ts,tsx}',
-    // Include paths to all your storybook files as well
-    './.storybook/**/*.{js,jsx,ts,tsx}',
-  ],
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './.storybook/**/*.{js,jsx,ts,tsx}'],
+  safelist: ['font-extrabold', 'font-bold', 'font-semibold', 'font-normal', 'text-3xl', 'text-4xl'],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
       colors: {
+        deepSeaBlue: '#375A7A',
         lavender: '#CEABB5',
         wine: '#602537',
         gunmetal: '#1B2C3C',
