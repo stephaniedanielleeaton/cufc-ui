@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import BaseText from '../../atoms/text/BaseText.jsx';
+import BaseButton from '../../molecules/button/BaseButton.jsx';
 
 const TopNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,11 +51,14 @@ const TopNavbar = () => {
       <div className="w-1/2 flex flex-row justify-center p-2">
         <BaseText content="FCFC" color="white" weight="bold" size="3xl" font="poppins" />
       </div>
-      <div className="w-1/4 flex flex-row justify-center p-4">
-        <BaseText className="px-2" content="Admin" color="white" weight="normal" size="sm" font="inter" />
-        <BaseText className="px-2" content="About" color="white" weight="normal" size="sm" font="inter" />
-        <BaseText className="px-2" content="Contact" color="white" weight="normal" size="sm" font="inter" />
+      <div className="w-1/2 flex flex-row justify-center p-4">
+        <BaseText className="px-2 hover:text-blue-300" content="Admin" color="white" weight="normal" size="sm" font="poppins"/>
+        <BaseText className="px-2 hover:text-blue-300" content="About" color="white" weight="normal" size="sm" font="poppins" />
+        <BaseText className="px-2 hover:text-blue-300" content="Contact" color="white" weight="normal" size="sm" font="poppins" />
+        <BaseButton text={"Sign Up"} color={"transparent"} border={"white"} size={"sm"}/>
       </div>
+      <div className="w-1/4 flex flex-row justify-center">
+        </div>
     </nav>
   );
 };
