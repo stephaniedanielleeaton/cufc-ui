@@ -26,14 +26,22 @@ const colors = {
   outerSpace: 'text-outerSpace bg-outerSpace hover:text-hoverOuterSpace hover:bg-hoverOuterSpace',
   ashGray: 'text-ashGray bg-ashGray hover:text-hoverAshGray hover:bg-hoverAshGray',
   white: 'text-white bg-white hover:text-hoverWhite hover:bg-hoverWhite',
+  transparent: 'text-white bg-transparent hover:bg-gunmetal hover:bg-opacity-25',
 };
 
-const BaseButton = ({ size, color, textColor, textSize, text, shape, onClick }) => {
+const borders = {
+  none: '',
+  white: 'border border-white',
+};
+
+const BaseButton = ({ size, color, textColor, textSize, text, shape, border, onClick }) => {
   const textSizeClass = textSizes[size];
   const colorClass = colors[color];
   const shapeClass = shapes[shape];
   const paddingClass = shape === 'rectangle' ? rectanglePadding : defaultPadding;
-  const buttonClasses = `${shapeClass} ${colorClass} ${paddingClass} shadow-xl flex justify-center items-center ${textSizeClass}`;
+  const hoverTransition = 'transition duration-300 ease-in-out';
+  const borderClass = borders[border];
+  const buttonClasses = `${shapeClass} ${colorClass} ${paddingClass} ${hoverTransition} ${borderClass} shadow-xl flex justify-center items-center ${textSizeClass}`;
 
   return (
     <button className={buttonClasses} onClick={onClick}>
@@ -50,6 +58,7 @@ BaseButton.propTypes = {
   textSize: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']),
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  border: PropTypes.oneOf(['none', 'white']),
 };
 
 BaseButton.defaultProps = {
@@ -58,6 +67,7 @@ BaseButton.defaultProps = {
   shape: 'pill',
   textColor: 'white',
   textSize: 'md',
+  border: 'none',
   onClick: () => {},
 };
 

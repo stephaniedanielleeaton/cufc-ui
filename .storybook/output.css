@@ -704,6 +704,15 @@ video {
   border-radius: 0.375rem;
 }
 
+.border {
+  border-width: 1px;
+}
+
+.border-white {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
 .bg-ashGray {
   --tw-bg-opacity: 1;
   background-color: rgb(168 180 183 / var(--tw-bg-opacity));
@@ -724,6 +733,10 @@ video {
   background-color: rgb(70 79 81 / var(--tw-bg-opacity));
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -731,7 +744,7 @@ video {
 
 .bg-wine {
   --tw-bg-opacity: 1;
-  background-color: rgb(96 37 55 / var(--tw-bg-opacity));
+  background-color: rgb(122 37 63 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-r {
@@ -887,13 +900,29 @@ video {
 
 .text-wine {
   --tw-text-opacity: 1;
-  color: rgb(96 37 55 / var(--tw-text-opacity));
+  color: rgb(122 37 63 / var(--tw-text-opacity));
 }
 
 .shadow-xl {
   --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.transition {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.duration-300 {
+  transition-duration: 300ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .font-poppins {
@@ -907,6 +936,11 @@ video {
 .hover\:bg-gray-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-gunmetal:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(27 44 60 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-hoverAshGray:hover {
@@ -932,6 +966,10 @@ video {
 .hover\:bg-hoverWine:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(158 96 115 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-opacity-25:hover {
+  --tw-bg-opacity: 0.25;
 }
 
 .hover\:text-hoverAshGray:hover {

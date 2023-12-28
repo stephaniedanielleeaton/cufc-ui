@@ -11,7 +11,7 @@ module.exports = {
       colors: {
         deepSeaBlue: '#375A7A',
         lavender: '#CEABB5',
-        wine: '#602537',
+        wine: '#7A253F',
         gunmetal: '#1B2C3C',
         outerSpace: '#464F51',
         ashGray: '#A8B4B7',
@@ -26,7 +26,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/line-clamp')
-  ],
+  plugins: [require('@tailwindcss/line-clamp')],
 };

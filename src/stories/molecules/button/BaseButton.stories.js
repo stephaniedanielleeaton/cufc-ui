@@ -14,7 +14,7 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray'],
+      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparent'],
     },
     textColor: {
       control: 'select',
@@ -26,6 +26,10 @@ export default {
     },
     text: {
       control: 'text',
+    },
+    border: {
+      control: 'select',
+      options: ['none', 'white'],
     },
     onClick: { action: 'clicked' },
   },
