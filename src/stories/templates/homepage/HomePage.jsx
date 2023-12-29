@@ -1,26 +1,13 @@
 import React from 'react';
-import BaseButton from '../../molecules/button/BaseButton.jsx';
-import BaseText from '../../atoms/text/BaseText.jsx';
 import PropTypes from 'prop-types';
 import NavHero from '../../organisms/navhero/NavHero.jsx';
+import About from '../../molecules/about/About.jsx';
 
-const HomePage = ({ textContents, contactButtonText }) => {
+const HomePage = () => {
   return (
     <div>
       <NavHero />
-      <div className="flex flex-col justify-center w-full">
-        {textContents.map(({ header, body }, index) => (
-          <div key={index} className="mt-2 flex flex-col">
-            <BaseText content={header} size={'2xl'} />
-            {body.split('\n').map((line, lineIndex) => (
-              <React.Fragment key={lineIndex}>
-                <BaseText content={line} />
-                {lineIndex < body.split('\n').length - 1}
-              </React.Fragment>
-            ))}
-          </div>
-        ))}
-      </div>
+      <About />
     </div>
   );
 };
