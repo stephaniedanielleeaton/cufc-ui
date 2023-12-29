@@ -1,12 +1,12 @@
 import React from 'react';
-import TopNavbar from './TopNavbar';
+import About from './About.jsx';
 
 export default {
   title: 'Molecules/TopNavBar',
-  component: TopNavbar,
+  component: About,
   tags: ['autodocs'],
 };
 
-const Template = (args) => <TopNavbar {...args} />;
+const Template = (args) => <About {...args} />;
 
 export const Default = Template.bind({});
