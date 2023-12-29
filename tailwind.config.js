@@ -15,7 +15,7 @@ module.exports = {
         gunmetal: '#1B2C3C',
         outerSpace: '#464F51',
         ashGray: '#A8B4B7',
-        hoverDeepSeaBlue: '#7E8587',
+        hoverDeepSeaBlue: '#45586A',
         hoverLavender: '#E9D6DB',
         hoverWine: '#9E6073',
         hoverGunmetal: '#45586A',

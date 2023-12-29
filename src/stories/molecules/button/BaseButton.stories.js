@@ -14,7 +14,7 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparent'],
+      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparent', 'transparentDeepBlue'],
     },
     textColor: {
       control: 'select',

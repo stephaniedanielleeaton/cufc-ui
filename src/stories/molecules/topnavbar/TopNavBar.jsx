@@ -45,7 +45,7 @@ function TopNavbar() {
 
       {/* Desktop Navigation */}
       <div className="w-1/3">
-        <div className="lg:flex justify-between p-4 items-center hidden">
+        <div className="lg:flex justify-between items-center hidden">
           <BaseText
             className="px-2 hover:text-blue-300"
             content="Admin"

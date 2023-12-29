@@ -27,6 +27,7 @@ const colors = {
   ashGray: 'text-ashGray bg-ashGray hover:text-hoverAshGray hover:bg-hoverAshGray',
   white: 'text-white bg-white hover:text-hoverWhite hover:bg-hoverWhite',
   transparent: 'text-white bg-transparent hover:bg-white hover:bg-opacity-25',
+  transparentDeepBlue: 'text-white bg-deepSeaBlue hover:bg-white hover:bg-opacity-75 bg-opacity-75',
 };
 
 const borders = {
@@ -53,7 +54,7 @@ const BaseButton = ({ size, color, textColor, textSize, text, shape, border, onC
 BaseButton.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
   shape: PropTypes.oneOf(['pill', 'rectangle']),
-  color: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray']),
+  color: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparentDeepBlue']),
   textColor: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray']),
   textSize: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']),
   text: PropTypes.string.isRequired,

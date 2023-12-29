@@ -1,4 +1,5 @@
 import React from 'react';
+import BaseButton from '../button/BaseButton.jsx';
 
 const HeroBannerOverlay = () => {
   function renderContent() {
@@ -7,12 +8,10 @@ const HeroBannerOverlay = () => {
         <h1 className="text-white text-4xl font-poppins font-bold leading-relaxed text-center">
           Get ready to leap into Historical Swordsmanship
         </h1>
-        <p className="text-white text-s text-center">
+        <p className="text-white text-s text-center mb-4">
           We have everything you need to start doing historical martial arts while fencing against a lynx
         </p>
-        <button className="bg-white text-blue-900 px-4 py-2 mt-4 rounded">
-          Your Button
-        </button>
+        <BaseButton className="px-2 mt-4" text={'Sign Up'} color={'transparentDeepBlue'} border={'white'} size={'sm'} />
       </>
     );
   }
