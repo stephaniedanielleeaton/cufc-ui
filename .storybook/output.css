@@ -1120,6 +1120,10 @@ video {
     margin-right: 1rem;
   }
 
+  .lg\:block {
+    display: block;
+  }
+
   .lg\:flex {
     display: flex;
   }
@@ -1154,5 +1158,9 @@ video {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:pl-4 {
+    padding-left: 1rem;
   }
 }
