@@ -586,6 +586,10 @@ video {
   position: relative;
 }
 
+.inset-0 {
+  inset: 0px;
+}
+
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -593,6 +597,10 @@ video {
 
 .top-16 {
   top: 4rem;
+}
+
+.bottom-0 {
+  bottom: 0px;
 }
 
 .col-span-2 {
@@ -809,12 +817,22 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
+.from-deepSeaBlue\/50 {
+  --tw-gradient-from: rgb(55 90 122 / 0.5) var(--tw-gradient-from-position);
+  --tw-gradient-to: rgb(55 90 122 / 0) var(--tw-gradient-to-position);
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
+}
+
 .to-transparent {
   --tw-gradient-to: transparent var(--tw-gradient-to-position);
 }
 
 .to-wine {
   --tw-gradient-to: #7A253F var(--tw-gradient-to-position);
+}
+
+.to-wine\/50 {
+  --tw-gradient-to: rgb(122 37 63 / 0.5) var(--tw-gradient-to-position);
 }
 
 .bg-cover {

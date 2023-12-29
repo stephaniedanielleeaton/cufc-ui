@@ -16,9 +16,9 @@ const HeroBannerOverlay = () => {
     );
   }
   return (
-    <div>
+    <div className="h-full">
       {/* Large Screen Size */}
-      <div className="w-full h-80vh bg-gradient-to-r from-deepSeaBlue to-transparent hidden lg:flex">
+      <div className="w-full h-full bg-gradient-to-r from-deepSeaBlue to-transparent hidden lg:flex">
         <div className="w-1/2 h-full flex flex-col justify-center p-8 items-center">
           {renderContent()}
         </div>

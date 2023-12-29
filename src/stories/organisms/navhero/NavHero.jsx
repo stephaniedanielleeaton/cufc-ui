@@ -9,7 +9,7 @@ function NavHero() {
       style={{ backgroundImage: "url('src/stories/assets/Lynx/LeapingLynx.jpg')" }}
     >
       <TopNavbar />
-      <HeroBannerOverlay />
+      <HeroBannerOverlay className="h-full" />
     </div>
   );
 }

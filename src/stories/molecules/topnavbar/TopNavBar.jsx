@@ -8,7 +8,7 @@ function TopNavbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-gradient-to-r from-deepSeaBlue to-wine bg-opacity-50 text-white w-full flex justify-between items-center px-4 min-h-16">
+    <nav className="bg-gradient-to-r from-deepSeaBlue to-wine/50 text-white w-full flex justify-between items-center px-4 min-h-16">
       <div className="flex-none h-full">
         {/* Mobile Navigation */}
         <div className="lg:hidden">
