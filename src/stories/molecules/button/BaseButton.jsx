@@ -16,7 +16,7 @@ const shapes = {
   rectangle: 'rounded-md',
 };
 
-const defaultPadding = 'px-4 py-2';
+const defaultPadding = 'px-4 py-1';
 const rectanglePadding = 'px-7 py-4'; // Adjust this padding for the rectangle shape
 
 const colors = {
@@ -26,7 +26,7 @@ const colors = {
   outerSpace: 'text-outerSpace bg-outerSpace hover:text-hoverOuterSpace hover:bg-hoverOuterSpace',
   ashGray: 'text-ashGray bg-ashGray hover:text-hoverAshGray hover:bg-hoverAshGray',
   white: 'text-white bg-white hover:text-hoverWhite hover:bg-hoverWhite',
-  transparent: 'text-white bg-transparent hover:bg-gunmetal hover:bg-opacity-25',
+  transparent: 'text-white bg-transparent hover:bg-white hover:bg-opacity-25',
 };
 
 const borders = {

@@ -1,16 +1,17 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
 import BaseText from '../../atoms/text/BaseText.jsx';
 import BaseButton from '../../molecules/button/BaseButton.jsx';
 
 const TopNavbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScreenTooSmall, setIsScreenTooSmall] = useState(false);
 
   return (
-    <nav className="bg-gradient-to-r from-deepSeaBlue to-lavender text-white w-full flex flex-row">
-      <div className="flex justify-end w-1/4 h-full">
+    <nav className="bg-gradient-to-r from-deepSeaBlue to-lavender text-white w-full flex justify-between items-center px-4">
+      <div className="flex-none h-full">
         <div className="flex md:hidden">
           <button
             type="button"
@@ -48,17 +49,24 @@ const TopNavbar = () => {
           </div>
         </div>
       </div>
-      <div className="w-1/2 flex flex-row justify-center p-2">
+      <div className="w-1/3 absolute inset-x-0 mx-auto text-center p-2">
         <BaseText content="FCFC" color="white" weight="bold" size="3xl" font="poppins" />
       </div>
-      <div className="w-1/2 flex flex-row justify-center p-4">
-        <BaseText className="px-2 hover:text-blue-300" content="Admin" color="white" weight="normal" size="sm" font="poppins"/>
-        <BaseText className="px-2 hover:text-blue-300" content="About" color="white" weight="normal" size="sm" font="poppins" />
-        <BaseText className="px-2 hover:text-blue-300" content="Contact" color="white" weight="normal" size="sm" font="poppins" />
-        <BaseButton text={"Sign Up"} color={"transparent"} border={"white"} size={"sm"}/>
-      </div>
-      <div className="w-1/4 flex flex-row justify-center">
+      <div className="w-1/3 ">
+        <div className="justify-between p-4 items-center hidden md:flex">
+          <BaseText className="px-2 hover:text-blue-300" content="Admin" color="white" weight="normal" size="sm"
+                  font="poppins" />
+          <BaseText className="px-2 hover:text-blue-300" content="About" color="white" weight="normal" size="sm"
+                  font="poppins" />
+          <BaseText className="px-2 hover:text-blue-300" content="Contact" color="white" weight="normal" size="sm"
+                  font="poppins" />
+          <BaseButton className="px-2 whitespace-nowrap" text={'Sign Up'} color={'transparent'} border={'white'} size={'sm'} />
+          <FontAwesomeIcon icon={faUser} className="h-6 w-6" />
         </div>
+        <div className="flex justify-end" >
+          <FontAwesomeIcon icon={faUser} className="h-6 w-6 md:hidden" />
+        </div>
+      </div>
     </nav>
   );
 };
