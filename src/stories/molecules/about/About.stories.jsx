@@ -2,7 +2,7 @@ import React from 'react';
 import About from './About.jsx';
 
 export default {
-  title: 'Molecules/TopNavBar',
+  title: 'Molecules/About',
   component: About,
   tags: ['autodocs'],
 };
