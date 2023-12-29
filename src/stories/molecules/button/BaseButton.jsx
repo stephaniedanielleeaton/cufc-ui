@@ -41,7 +41,7 @@ const BaseButton = ({ size, color, textColor, textSize, text, shape, border, onC
   const paddingClass = shape === 'rectangle' ? rectanglePadding : defaultPadding;
   const hoverTransition = 'transition duration-300 ease-in-out';
   const borderClass = borders[border];
-  const buttonClasses = `${shapeClass} ${colorClass} ${paddingClass} ${hoverTransition} ${borderClass} shadow-xl flex justify-center items-center ${textSizeClass}`;
+  const buttonClasses = `${shapeClass} ${colorClass} ${paddingClass} ${hoverTransition} ${borderClass} shadow-xl whitespace-nowrap justify-center items-center ${textSizeClass}`;
 
   return (
     <button className={buttonClasses} onClick={onClick}>
