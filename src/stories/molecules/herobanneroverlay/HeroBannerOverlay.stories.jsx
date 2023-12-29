@@ -1,4 +1,3 @@
-// HeroBannerOverlay.stories.js
 import React from 'react';
 import HeroBannerOverlay from './HeroBannerOverlay.jsx';
 
