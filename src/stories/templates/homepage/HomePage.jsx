@@ -1,22 +1,13 @@
 import React from 'react';
-import Navbar from '../../molecules/topnavbar/TopNavBar.jsx';
-import Image from '../../molecules/imagebox/ImageBox.jsx';
 import BaseButton from '../../molecules/button/BaseButton.jsx';
 import BaseText from '../../atoms/text/BaseText.jsx';
 import PropTypes from 'prop-types';
+import NavHero from '../../organisms/navhero/NavHero.jsx';
 
-const HomePage = ({ imageOptions, buttonTexts, textContents, contactButtonText }) => {
+const HomePage = ({ textContents, contactButtonText }) => {
   return (
     <div>
-      <Navbar />
-      <Image {...imageOptions} ButtonComponent={<BaseButton text="Learn How To Join" />} />
-      <div className="mt-4 grid grid-cols-2 gap-4 w-full">
-        {buttonTexts.map((text, index) => (
-          <div key={index} className={`${index < 2 ? '' : 'col-start-1 col-span-2'} flex justify-center`}>
-            <BaseButton text={text} shape="rectangle" />
-          </div>
-        ))}
-      </div>
+      <NavHero />
       <div className="flex flex-col justify-center w-full">
         {textContents.map(({ header, body }, index) => (
           <div key={index} className="mt-2 flex flex-col">
@@ -29,10 +20,6 @@ const HomePage = ({ imageOptions, buttonTexts, textContents, contactButtonText }
             ))}
           </div>
         ))}
-      </div>
-
-      <div className="mt-4 w-full flex flex-row justify-center">
-        <BaseButton text={contactButtonText} shape="rectangle" />
       </div>
     </div>
   );
