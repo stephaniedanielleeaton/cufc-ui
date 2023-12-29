@@ -1,6 +1,6 @@
 import React from 'react';
 import HomePage from './HomePage';
-import Lynx5 from '../../assets/Lynx/Lynx5.png';
+import LeapingLynx from '../../assets/Lynx/LeapingLynx.jpg';
 
 export default {
   title: 'Templates/HomePage',
@@ -14,7 +14,7 @@ export const DefaultView = Template.bind({});
 
 DefaultView.args = {
   imageOptions: {
-    src: Lynx5,
+    src: LeapingLynx,
     alt: 'Description of the image',
     width: '100%',
     objectFit: 'cover',

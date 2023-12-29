@@ -48,6 +48,7 @@ ImageBox.defaultProps = {
   alt: '',
   objectFit: 'cover',
   loading: 'lazy',
+  width: 'w-full',
 };
 
 export default ImageBox;

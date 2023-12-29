@@ -9,7 +9,7 @@ const HomePage = ({ imageOptions, buttonTexts, textContents, contactButtonText }
   return (
     <div>
       <Navbar />
-      <Image {...imageOptions} ButtonComponent={<BaseButton text="Join" />} />
+      <Image {...imageOptions} ButtonComponent={<BaseButton text="Learn How To Join" />} />
       <div className="mt-4 grid grid-cols-2 gap-4 w-full">
         {buttonTexts.map((text, index) => (
           <div key={index} className={`${index < 2 ? '' : 'col-start-1 col-span-2'} flex justify-center`}>

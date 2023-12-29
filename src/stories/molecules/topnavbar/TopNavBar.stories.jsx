@@ -1,9 +1,9 @@
-// TopNavbar.stories.js
+// HeroBannerOverlay.stories.js
 import React from 'react';
 import TopNavbar from './TopNavbar';
 
 export default {
-  title: 'Molecules/TopNavbar',
+  title: 'Molecules/TopNavBar',
   component: TopNavbar,
   tags: ['autodocs'],
 };

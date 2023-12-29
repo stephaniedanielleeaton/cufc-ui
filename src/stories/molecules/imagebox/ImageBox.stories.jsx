@@ -1,7 +1,7 @@
 import React from 'react';
 import ImageBox from './ImageBox';
 import BaseButton from '../button/BaseButton';
-import Lynx5 from '../../assets/Lynx/Lynx5.png';
+import LeapingLynx from '../../assets/Lynx/LeapingLynx.jpg';
 
 export default {
   title: 'Molecules/ImageBox',
@@ -34,6 +34,6 @@ WithLynx.args = {
   ...Default.args,
   width: '300px',
   height: '3000px',
-  src: Lynx5,
+  src: LeapingLynx,
   ButtonComponent: <BaseButton text="text" />,
 };
