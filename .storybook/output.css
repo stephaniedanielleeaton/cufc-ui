@@ -998,11 +998,6 @@ video {
   background-color: rgb(216 220 221 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-hoverDeepSeaBlue:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(69 88 106 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-hoverGunmetal:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(69 88 106 / var(--tw-bg-opacity));
