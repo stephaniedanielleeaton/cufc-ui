@@ -4,15 +4,15 @@ import BaseButton from '../button/BaseButton.jsx';
 const HeroBannerOverlay = () => {
   function renderContent() {
     return (
-      <>
-        <h1 className="text-white text-4xl font-poppins font-bold leading-relaxed text-center">
+      <div className="p-4">
+        <h1 className="text-white text-4xl font-poppins font-bold leading-relaxed">
           Get ready to leap into Historical Swordsmanship
         </h1>
-        <p className="text-white text-s text-center mb-4">
+        <p className="text-white text-s mb-4">
           We have everything you need to start doing historical martial arts while fencing against a lynx
         </p>
-        <BaseButton className="px-2 mt-4" text={'Sign Up'} color={'transparentDeepBlue'} border={'white'} size={'sm'} />
-      </>
+        <BaseButton className="px-2 mt-4" text={'Sign Up'} color={'transparentDeepBlue'} border={'white'} size={'lg'} />
+      </div>
     );
   }
   return (
@@ -25,8 +25,8 @@ const HeroBannerOverlay = () => {
       </div>
 
       {/* Small and Medium Screen Size */}
-      <div className="w-full h-80vh bg-gradient-to-b from-deepSeaBlue to-transparent lg:hidden">
-        <div className="flex flex-col justify-center items-center">
+      <div className="w-full h-full bg-gradient-to-b from-deepSeaBlue to-transparent lg:hidden">
+        <div className="flex flex-col justify-center items-center text-center">
           {renderContent()}
         </div>
       </div>
