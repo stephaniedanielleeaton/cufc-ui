@@ -652,6 +652,14 @@ video {
   height: 100%;
 }
 
+.h-64 {
+  height: 16rem;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
 .min-h-16 {
   min-height: 4rem;
 }
@@ -774,6 +782,11 @@ video {
   background-color: rgb(122 37 63 / var(--tw-bg-opacity));
 }
 
+.bg-pink-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 168 212 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
@@ -802,6 +815,14 @@ video {
 
 .to-wine {
   --tw-gradient-to: #7A253F var(--tw-gradient-to-position);
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-center {
+  background-position: center;
 }
 
 .p-2 {

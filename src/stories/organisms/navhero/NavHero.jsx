@@ -4,7 +4,10 @@ import HeroBannerOverlay from '../../molecules/herobanneroverlay/HeroBannerOverl
 
 function NavHero() {
   return (
-    <div>
+    <div
+      className="bg-cover bg-center h-screen"
+      style={{ backgroundImage: "url('src/stories/assets/Lynx/LeapingLynx.jpg')" }}
+    >
       <TopNavbar />
       <HeroBannerOverlay />
     </div>
