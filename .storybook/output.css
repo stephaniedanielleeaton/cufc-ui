@@ -700,6 +700,14 @@ video {
   width: 1rem;
 }
 
+.min-w-72 {
+  min-width: 18rem;
+}
+
+.min-w-80 {
+  min-width: 20rem;
+}
+
 .max-w-screen-xl {
   max-width: 1280px;
 }
