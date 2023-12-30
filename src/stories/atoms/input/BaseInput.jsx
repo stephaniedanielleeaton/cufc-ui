@@ -9,7 +9,7 @@ const iconDefs = [
   { ref: 'faCalendar', value: faCalendar },
 ];
 
-const commonStyle = 'min-w-80 py-3 pl-10 pr-16 bg-inputGray text-base rounded-lg focus:box-shadow focus:ring-0';
+const commonStyle = 'w-full py-3 pl-10 pr-16 bg-inputGray text-base rounded-lg focus:box-shadow focus:ring-0';
 
 const BaseInput = ({ placeHolderText, faIcon, isDropDown }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
@@ -30,19 +30,10 @@ const BaseInput = ({ placeHolderText, faIcon, isDropDown }) => {
   }
 
   return (
-    <div className="relative">
-      <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
-        <svg
-          className="w-4 h-4 text-outerSpace inline"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <FontAwesomeIcon icon={icon} className="h-full w-full" />
-        </svg>
+    <div className="flex flex-row w-full bg-red-400">
+      poop
+      <span className="absolute left-5 top-1/2 transform -translate-y-1/2 w-full">
+        <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
       </span>
       {inputType}
     </div>

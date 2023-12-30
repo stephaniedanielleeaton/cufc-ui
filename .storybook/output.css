@@ -591,8 +591,8 @@ video {
   right: 0px;
 }
 
-.left-2 {
-  left: 0.5rem;
+.left-5 {
+  left: 1.25rem;
 }
 
 .top-1\/2 {
@@ -601,10 +601,6 @@ video {
 
 .top-16 {
   top: 4rem;
-}
-
-.left-3 {
-  left: 0.75rem;
 }
 
 .mx-auto {
@@ -644,8 +640,8 @@ video {
   display: none;
 }
 
-.h-5 {
-  height: 1.25rem;
+.h-4 {
+  height: 1rem;
 }
 
 .h-6 {
@@ -664,10 +660,6 @@ video {
   height: 100vh;
 }
 
-.h-4 {
-  height: 1rem;
-}
-
 .min-h-16 {
   min-height: 4rem;
 }
@@ -680,8 +672,8 @@ video {
   width: 33.333333%;
 }
 
-.w-5 {
-  width: 1.25rem;
+.w-4 {
+  width: 1rem;
 }
 
 .w-5\/12 {
@@ -694,18 +686,6 @@ video {
 
 .w-full {
   width: 100%;
-}
-
-.w-4 {
-  width: 1rem;
-}
-
-.min-w-72 {
-  min-width: 18rem;
-}
-
-.min-w-80 {
-  min-width: 20rem;
 }
 
 .max-w-screen-xl {
@@ -767,12 +747,12 @@ video {
   border-radius: 9999px;
 }
 
-.rounded-md {
-  border-radius: 0.375rem;
-}
-
 .rounded-lg {
   border-radius: 0.5rem;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
 }
 
 .border {
@@ -821,6 +801,11 @@ video {
 .bg-outerSpace {
   --tw-bg-opacity: 1;
   background-color: rgb(70 79 81 / var(--tw-bg-opacity));
+}
+
+.bg-red-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 113 113 / var(--tw-bg-opacity));
 }
 
 .bg-transparent {
@@ -913,14 +898,14 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-4 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .pb-4 {
@@ -929,22 +914,6 @@ video {
 
 .pl-10 {
   padding-left: 2.5rem;
-}
-
-.pr-3 {
-  padding-right: 0.75rem;
-}
-
-.pl-12 {
-  padding-left: 3rem;
-}
-
-.pr-4 {
-  padding-right: 1rem;
-}
-
-.pr-8 {
-  padding-right: 2rem;
 }
 
 .pr-16 {
@@ -1031,11 +1000,6 @@ video {
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
-.text-gray-500 {
-  --tw-text-opacity: 1;
-  color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
 .text-gunmetal {
@@ -1169,10 +1133,6 @@ video {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.focus\:border:focus {
-  border-width: 1px;
 }
 
 .focus\:border-blue-500:focus {
