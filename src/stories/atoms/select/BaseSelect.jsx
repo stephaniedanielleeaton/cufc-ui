@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,8 +8,7 @@ const iconDefs = [
   { ref: 'faEnvelope', value: faEnvelope },
   { ref: 'faCalendar', value: faCalendar },
 ];
-
-const BaseSelect = ({ placeholder, onChange, value, faIcon }) => {
+const BaseSelect = ({ placeholder, onChange, value, options, faIcon }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
   return (
     <div className="w-full">
@@ -21,7 +20,13 @@ const BaseSelect = ({ placeholder, onChange, value, faIcon }) => {
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-      />
+      >
+        {options.map((option, index) => (
+          <option key={index} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };
@@ -33,6 +38,7 @@ BaseSelect.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.string,
   value: PropTypes.string,
+  options: PropTypes.arrayOf(string),
 };
 
 BaseSelect.defaultProps = {
@@ -40,4 +46,5 @@ BaseSelect.defaultProps = {
   placeholder: 'Sample Text',
   onChange: '',
   value: '',
+  options: ['option 1', 'option 2', 'option 3'],
 };
