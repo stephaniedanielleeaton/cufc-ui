@@ -17,7 +17,7 @@ const BaseTextInput = ({ placeholder, onChange, value, faIcon }) => {
         <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
       </span>
       <input
-        className="w-full border rounded-md pl-8 px-3 py-2 focus:outline-none focus:border-blue-500"
+        className="w-full border rounded-md pl-8 px-3 py-2 focus:outline-none focus:border-periwinkle"
         type="text"
         placeholder={placeholder}
         onChange={onChange}

@@ -22,6 +22,7 @@ module.exports = {
         hoverOuterSpace: '#7E8587',
         hoverAshGray: '#D8DCDD',
         inputGray: '#F7F8F8',
+        periwinkle: '#CCCCFF',
       },
       gradientColorStops: {
         'blue-pink': 'linear-gradient(90deg, #375A7A 1.85%, #BD929F 50%)',

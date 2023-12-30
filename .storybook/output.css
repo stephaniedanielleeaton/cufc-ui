@@ -916,12 +916,12 @@ video {
   padding-left: 2.5rem;
 }
 
-.pr-16 {
-  padding-right: 4rem;
-}
-
 .pl-8 {
   padding-left: 2rem;
+}
+
+.pr-16 {
+  padding-right: 4rem;
 }
 
 .text-center {
@@ -1139,9 +1139,14 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.focus\:border-blue-500:focus {
+.focus\:border-lavender:focus {
   --tw-border-opacity: 1;
-  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+  border-color: rgb(206 171 181 / var(--tw-border-opacity));
+}
+
+.focus\:border-periwinkle:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(204 204 255 / var(--tw-border-opacity));
 }
 
 .focus\:outline-none:focus {
