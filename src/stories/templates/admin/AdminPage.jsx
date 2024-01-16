@@ -4,7 +4,8 @@ import TopNavBar from '../../molecules/topnavbar/TopNavBar.jsx';
 
 const AdminPage = ({ members }) => {
   return (
-    <div>
+    <div className="mx-auto max-w-screen-lg">
+      {/* Center the content with max-width screen-lg */}
       <TopNavBar />
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
@@ -17,27 +18,29 @@ const AdminPage = ({ members }) => {
         </div>
       </div>
 
-      <div className="flex flex-wrap mb-2 font-bold">
-        <div className="w-full sm:w-1/7">Member</div>
-        <div className="w-full sm:w-1/7">Status</div>
-        <div className="w-full sm:w-1/7">Plan</div>
-        <div className="w-full sm:w-1/7">Type</div>
-        <div className="w-full sm:w-1/7">Last Renewal Date</div>
-        <div className="w-full sm:w-1/7">Months Paid</div>
-        <div className="w-full sm:w-1/7">Valid Until</div>
-      </div>
-
-      {members.map((member) => (
-        <div key={member.id} className="flex flex-wrap mb-2">
-          <div className="w-full sm:w-1/7">{member.name}</div>
-          <div className="w-full sm:w-1/7">{member.status}</div>
-          <div className="w-full sm:w-1/7">{member.plan}</div>
-          <div className="w-full sm:w-1/7">{member.type}</div>
-          <div className="w-full sm:w-1/7">{member.lastRenewalDate}</div>
-          <div className="w-full sm:w-1/7">{member.monthsPaid}</div>
-          <div className="w-full sm:w-1/7">{member.validUntil}</div>
+      <div className="w-80">
+        <div className="flex flex-wrap mb-2 font-bold">
+          <div className="w-full sm:w-1/7">Member</div>
+          <div className="w-full sm:w-1/7">Status</div>
+          <div className="w-full sm:w-1/7">Plan</div>
+          <div className="w-full sm:w-1/7">Type</div>
+          <div className="w-full sm:w-1/7">Last Renewal Date</div>
+          <div className="w-full sm:w-1/7">Months Paid</div>
+          <div className="w-full sm:w-1/7">Valid Until</div>
         </div>
-      ))}
+
+        {members.map((member) => (
+          <div key={member.id} className="flex flex-wrap mb-2">
+            <div className="w-full sm:w-1/7">{member.name}</div>
+            <div className="w-full sm:w-1/7">{member.status}</div>
+            <div className="w-full sm:w-1/7">{member.plan}</div>
+            <div className="w-full sm:w-1/7">{member.type}</div>
+            <div className="w-full sm:w-1/7">{member.lastRenewalDate}</div>
+            <div className="w-full sm:w-1/7">{member.monthsPaid}</div>
+            <div className="w-full sm:w-1/7">{member.validUntil}</div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
