@@ -36,7 +36,7 @@ export default BaseSelect;
 BaseSelect.propTypes = {
   faIcon: PropTypes.string,
   placeholder: PropTypes.string,
-  onChange: PropTypes.string,
+  onChange: PropTypes.func,
   value: PropTypes.string,
   options: PropTypes.arrayOf(string),
 };

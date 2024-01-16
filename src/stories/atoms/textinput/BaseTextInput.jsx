@@ -32,7 +32,7 @@ export default BaseTextInput;
 BaseTextInput.propTypes = {
   faIcon: PropTypes.string,
   placeholder: PropTypes.string,
-  onChange: PropTypes.string,
+  onChange: PropTypes.func,
   value: PropTypes.string,
 };
 
