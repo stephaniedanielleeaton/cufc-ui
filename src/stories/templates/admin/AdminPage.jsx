@@ -29,12 +29,12 @@ const AdminPage = ({ members }) => {
       </div>
 
       <div className="w-90 mx-auto">
-        <div className="grid grid-cols-7 font-bold border-b border-black">
+        <div className="grid grid-cols-7 font-bold border-b mb-4 border-black">
           <div className="min-content">Member</div>
           <div className="min-content">Status</div>
           <div className="min-content">Plan</div>
           <div className="min-content">Type</div>
-          <div className="min-content">Last Renewal Date</div>
+          <div className="min-content">Last Renewal</div>
           <div className="min-content">Months Paid</div>
           <div className="min-content">Valid Until</div>
         </div>
@@ -46,7 +46,7 @@ const AdminPage = ({ members }) => {
             <div className="min-content">{member.plan}</div>
             <div className="min-content">{member.type}</div>
             <div className="min-content">{formatDate(member.lastRenewalDate)}</div>
-            <div className="min-content">{member.monthsPaid}</div>
+            <div className="min-content">{member.plan === 'Subscription' ? 'x' : member.monthsPaid}</div>
             <div className={`min-content ${isDateInFuture(member.validUntil) ? 'text-green-500' : 'text-red-500'}`}>
               {formatDate(member.validUntil)}
             </div>

@@ -15,7 +15,7 @@ DefaultView.args = {
   members: [
     {
       id: 1,
-      name: 'Edith',
+      name: 'Edith Eaton',
       status: 'Active',
       plan: 'Subscription',
       type: 'Full',
@@ -25,7 +25,7 @@ DefaultView.args = {
     },
     {
       id: 1,
-      name: 'Toby',
+      name: 'Toby Crackel',
       status: 'Inactive',
       plan: 'Monthly',
       type: 'Saturday',
