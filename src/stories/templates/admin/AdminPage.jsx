@@ -17,12 +17,15 @@ const isDateInFuture = (date) => {
 
 const AdminPage = ({ members }) => {
   return (
-    <div className="mx-auto max-w-screen-lg font-poppins">
+    <div className="mx-auto font-poppins">
       <TopNavBar />
-      <div className="flex items-center justify-between mb-4">
+      <div className="mb-8 mt-4">
         <div className="flex items-center">
-          <input type="text" placeholder="Search" className="mr-2 p-2 border border-gray-300 rounded" />
-          <button className="bg-blue-500 text-white p-2 rounded">
+          <div className="flex items-center">
+            <i className="fas fa-search text-gray-500"></i>
+            <input type="text" placeholder="Search" className="ml-2 p-2 border border-gray-300 rounded" />
+          </div>
+          <button className="bg-blue-500 text-white p-2 rounded ml-4">
             <i className="fas fa-user-plus"></i>
           </button>
         </div>
