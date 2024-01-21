@@ -26,7 +26,8 @@ function NewUserAboutYou() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="p-4">
+      <div className="p-4 font-poppins">
+        <div className="font-bold text-wine">About You</div>
         <BaseTextInput
           name="displayFirstName"
           onChange={handleChange}

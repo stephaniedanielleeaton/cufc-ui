@@ -17,10 +17,10 @@ const BaseTextInput = ({ placeholder, onChange, value, faIcon, name }) => {
   };
 
   return (
-    <div className="w-full p-2">
+    <div className="w-full p-2 text-sm">
       <div className="flex items-center relative">
         <input
-          className="w-full border rounded-md pl-10 py-2 focus:outline-none focus:border-periwinkle"
+          className="w-full border rounded-md pl-10 p-3 focus:outline-none focus:border-periwinkle"
           type="text"
           placeholder={placeholder}
           onChange={handleChange}
