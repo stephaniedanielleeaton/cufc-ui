@@ -12,7 +12,7 @@ const iconDefs = [
 const BaseTextInput = ({ placeholder, onChange, value, faIcon }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
   return (
-    <div className="w-full">
+    <div className="w-full p-2">
       <div className="flex items-center relative">
         <input
           className="w-full border rounded-md pl-8 px-3 py-2 focus:outline-none focus:border-periwinkle"

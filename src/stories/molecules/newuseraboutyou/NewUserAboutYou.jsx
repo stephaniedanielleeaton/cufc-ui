@@ -1,10 +1,9 @@
 import React from 'react';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+
 function NewUserAboutYou() {
   return (
-    <>
+    <div className="p-4">
       <BaseTextInput
         onChange={() => {}}
         placeholder="Enter text..."
@@ -13,7 +12,7 @@ function NewUserAboutYou() {
         onChange={() => {}}
         placeholder="Enter text..."
       />
-    </>
+    </div>
   );
 }
 
