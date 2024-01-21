@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TopNavBar from '../../molecules/topnavbar/TopNavBar.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 const formatDate = (date) => {
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -19,6 +19,7 @@ const isDateInFuture = (date) => {
 
 const AdminPage = ({ members }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [hoveredMemberId, setHoveredMemberId] = useState(null);
 
   const filteredMembers = members.filter((member) => member.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
@@ -57,8 +58,20 @@ const AdminPage = ({ members }) => {
           </div>
 
           {filteredMembers.map((member) => (
-            <div key={member.id} className="grid grid-cols-7 items-center mb-4">
-              <div className="min-content">{member.name}</div>
+            <div
+              key={member.id}
+              className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
+                hoveredMemberId === member.id ? 'bg-gray-200' : ''
+              }`}
+              onMouseEnter={() => setHoveredMemberId(member.id)}
+              onMouseLeave={() => setHoveredMemberId(null)}
+            >
+              <div className="min-content flex items-center">
+                {member.name}
+                {hoveredMemberId === member.id && (
+                  <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />
+                )}
+              </div>
               <div className="min-content">{member.status}</div>
               <div className="min-content">{member.plan}</div>
               <div className="min-content">{member.type}</div>
