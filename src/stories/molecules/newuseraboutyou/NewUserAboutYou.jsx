@@ -5,6 +5,10 @@ function NewUserAboutYou() {
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
+    legalFirstName: '',
+    legalLastName: '',
+    email: '',
+    dateOfBirth: '',
   });
 
   const handleChange = (name, value) => {
@@ -34,6 +38,32 @@ function NewUserAboutYou() {
           onChange={handleChange}
           placeholder="Preferred Last Name"
           value={formData.displayLastName}
+        />
+        <BaseTextInput
+          name="legalFirstName"
+          onChange={handleChange}
+          placeholder="Legal First Name"
+          value={formData.legalFirstName}
+        />
+        <BaseTextInput
+          name="legalLastName"
+          onChange={handleChange}
+          placeholder="Legal Last Name"
+          value={formData.legalLastName}
+        />
+        <BaseTextInput
+          faIcon="faEnvelope"
+          name="email"
+          onChange={handleChange}
+          placeholder="Email"
+          value={formData.legalLastName}
+        />
+        <BaseTextInput
+          faIcon="faCalendar"
+          name="dateOfBirth"
+          onChange={handleChange}
+          placeholder="Date Of Birth"
+          value={formData.legalLastName}
         />
       </div>
     </form>
