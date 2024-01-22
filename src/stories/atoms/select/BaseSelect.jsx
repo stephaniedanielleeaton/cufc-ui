@@ -10,15 +10,19 @@ const iconDefs = [
 ];
 const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
+
   return (
     <div className="w-full p-2 text-sm">
       <div className="flex items-center relative">
         <select
           className="w-full border rounded-md pl-10 p-3 focus:outline-none focus:border-periwinkle"
-          placeholder={placeholder}
           onChange={onChange}
           value={value}
+          name={name}
         >
+          <option value="" disabled selected>
+            {placeholder}
+          </option>
           {options.map((option, index) => (
             <option key={index} value={option}>
               {option}
@@ -32,6 +36,7 @@ const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => 
     </div>
   );
 };
+
 
 export default BaseSelect;
 
