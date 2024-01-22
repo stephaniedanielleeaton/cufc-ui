@@ -43,14 +43,14 @@ BaseTextInput.propTypes = {
   type: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.string,
-  name: PropTypes.string, // Add name prop type
+  name: PropTypes.string,
 };
 
 BaseTextInput.defaultProps = {
   faIcon: 'faUser',
   placeholder: 'Sample Text',
   type: 'text',
-  onChange: () => {}, // Provide a default function for onChange
+  onChange: () => {},
   value: '',
-  name: '', // Provide a default value for name
+  name: '',
 };

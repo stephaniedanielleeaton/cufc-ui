@@ -8,7 +8,7 @@ const iconDefs = [
   { ref: 'faEnvelope', value: faEnvelope },
   { ref: 'faCalendar', value: faCalendar },
 ];
-const BaseSelect = ({ placeholder, onChange, value, options, faIcon }) => {
+const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
   return (
     <div className="w-full p-2 text-sm">
@@ -41,6 +41,7 @@ BaseSelect.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   options: PropTypes.arrayOf(string),
+  name: PropTypes.string,
 };
 
 BaseSelect.defaultProps = {
@@ -49,4 +50,5 @@ BaseSelect.defaultProps = {
   onChange: '',
   value: '',
   options: ['option 1', 'option 2', 'option 3'],
+  name: '',
 };

@@ -83,16 +83,26 @@ function NewUserAboutYou() {
           value={formData.streetAddress}
         />
         <BaseTextInput name="city" onChange={handleChange} placeholder="City" value={formData.city} />
-        <BaseTextInput name="state" onChange={handleChange} placeholder="state" value={formData.state} />
-        <BaseTextInput name="zipcode" onChange={handleChange} placeholder="zipcode" value={formData.zipcode} />
         <BaseSelect
-          onChange={() => {}}
+          name="state"
+          onChange={handleChange}
           options={[
             'option 1',
             'option 2',
             'option 3'
           ]}
-          placeholder="Enter text..."
+          placeholder="State"
+        />
+        <BaseTextInput name="zipcode" onChange={handleChange} placeholder="Zipcode" value={formData.zipcode} />
+        <BaseSelect
+          name="country"
+          onChange={handleChange}
+          options={[
+            'option 1',
+            'option 2',
+            'option 3'
+          ]}
+          placeholder="Country"
         />
         <BaseTextInput
           faIcon="faEnvelope"
