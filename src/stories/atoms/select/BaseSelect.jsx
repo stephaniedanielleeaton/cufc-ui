@@ -11,22 +11,24 @@ const iconDefs = [
 const BaseSelect = ({ placeholder, onChange, value, options, faIcon }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
   return (
-    <div className="w-full">
-      <span className="absolute left-5 top-1/2 transform -translate-y-1/2">
-        <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
-      </span>
-      <select
-        className="w-full border rounded-md pl-8 px-3 py-2 focus:outline-none focus:border-periwinkle"
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-      >
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+    <div className="w-full p-2 text-sm">
+      <div className="flex items-center relative">
+        <select
+          className="w-full border rounded-md pl-10 p-3 focus:outline-none focus:border-periwinkle"
+          placeholder={placeholder}
+          onChange={onChange}
+          value={value}
+        >
+          {options.map((option, index) => (
+            <option key={index} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+          <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
+        </div>
+      </div>
     </div>
   );
 };

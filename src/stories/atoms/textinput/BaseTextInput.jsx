@@ -9,7 +9,7 @@ const iconDefs = [
   { ref: 'faCalendar', value: faCalendar },
 ];
 
-const BaseTextInput = ({ placeholder, onChange, value, faIcon, name }) => {
+const BaseTextInput = ({ placeholder, onChange, value, faIcon, name, type }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
 
   const handleChange = (e) => {
@@ -21,7 +21,7 @@ const BaseTextInput = ({ placeholder, onChange, value, faIcon, name }) => {
       <div className="flex items-center relative">
         <input
           className="w-full border rounded-md pl-10 p-3 focus:outline-none focus:border-periwinkle"
-          type="text"
+          type={type}
           placeholder={placeholder}
           onChange={handleChange}
           value={value}
@@ -40,6 +40,7 @@ export default BaseTextInput;
 BaseTextInput.propTypes = {
   faIcon: PropTypes.string,
   placeholder: PropTypes.string,
+  type: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.string,
   name: PropTypes.string, // Add name prop type
@@ -48,6 +49,7 @@ BaseTextInput.propTypes = {
 BaseTextInput.defaultProps = {
   faIcon: 'faUser',
   placeholder: 'Sample Text',
+  type: 'text',
   onChange: () => {}, // Provide a default function for onChange
   value: '',
   name: '', // Provide a default value for name

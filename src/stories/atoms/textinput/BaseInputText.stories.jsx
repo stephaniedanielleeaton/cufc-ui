@@ -7,6 +7,10 @@ export default {
   tags: ['autodocs'],
   argTypes: {
     onChange: { action: 'changed' },
+    type: {
+      control: 'select',
+      options: ['text', 'date'],
+    },
     faIcon: {
       control: 'select',
       options: ['faUser', 'faEnvelope', 'faCalendar'],
