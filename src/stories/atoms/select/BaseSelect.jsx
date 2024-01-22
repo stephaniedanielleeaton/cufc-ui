@@ -1,12 +1,24 @@
 import React from 'react';
 import PropTypes, { string } from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalendar,
+  faCity,
+  faEnvelope,
+  faMapPin,
+  faMobilePhone,
+  faStreetView,
+  faUser,
+} from '@fortawesome/free-solid-svg-icons';
 
 const iconDefs = [
   { ref: 'faUser', value: faUser },
   { ref: 'faEnvelope', value: faEnvelope },
   { ref: 'faCalendar', value: faCalendar },
+  { ref: 'faStreetView', value: faStreetView },
+  { ref: 'faCity', value: faCity },
+  { ref: 'faMapPin', value: faMapPin },
+  { ref: 'faMobilePhone', value: faMobilePhone },
 ];
 const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;

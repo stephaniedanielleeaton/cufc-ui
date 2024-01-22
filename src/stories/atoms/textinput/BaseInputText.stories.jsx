@@ -13,7 +13,7 @@ export default {
     },
     faIcon: {
       control: 'select',
-      options: ['faUser', 'faEnvelope', 'faCalendar'],
+      options: ['faUser', 'faEnvelope', 'faCalendar', 'faStreetView', 'faCity', 'faMapPin', 'faMobilePhone'],
     },
   },
 };

@@ -79,27 +79,30 @@ function NewUserAboutYou() {
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
           <div className="font-bold text-wine">Address</div>
           <BaseTextInput
+            faIcon="faStreetView"
             name="streetAddress"
             onChange={handleChange}
             placeholder="Street Address"
             value={formData.streetAddress}
           />
-          <BaseTextInput name="city" onChange={handleChange} placeholder="City" value={formData.city} />
+          <BaseTextInput faIcon="faCity" name="city" onChange={handleChange} placeholder="City" value={formData.city} />
           <BaseSelect
+            faIcon="faMapPin"
             name="state"
             onChange={handleChange}
             options={['option 1', 'option 2', 'option 3']}
             placeholder="State"
           />
-          <BaseTextInput name="zipcode" onChange={handleChange} placeholder="Zipcode" value={formData.zipcode} />
+          <BaseTextInput faIcon="faMapPin" name="zipcode" onChange={handleChange} placeholder="Zipcode" value={formData.zipcode} />
           <BaseSelect
+            faIcon="faMapPin"
             name="country"
             onChange={handleChange}
             options={['option 1', 'option 2', 'option 3']}
             placeholder="Country"
           />
           <BaseTextInput
-            faIcon="faEnvelope"
+            faIcon="faMobilePhone"
             name="phoneNumber"
             onChange={handleChange}
             placeholder="Phone Number"

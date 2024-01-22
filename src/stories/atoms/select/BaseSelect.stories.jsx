@@ -9,7 +9,7 @@ export default {
     onChange: { action: 'changed' },
     faIcon: {
       control: 'select',
-      options: ['faUser', 'faEnvelope', 'faCalendar'],
+      options: ['faUser', 'faEnvelope', 'faCalendar', 'faStreetView', 'faCity', 'faMapPin', 'faMobilePhone'],
     },
   },
 };
