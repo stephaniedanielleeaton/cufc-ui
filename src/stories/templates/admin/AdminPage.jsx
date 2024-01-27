@@ -17,6 +17,29 @@ const isDateInFuture = (date) => {
   return new Date(date) > today;
 };
 
+const MemberRow = ({ member, hoveredMemberId, setHoveredMemberId }) => (
+  <div
+    className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
+      hoveredMemberId === member.id ? 'bg-gray-200' : ''
+    }`}
+    onMouseEnter={() => setHoveredMemberId(member.id)}
+    onMouseLeave={() => setHoveredMemberId(null)}
+  >
+    <div className="min-content flex items-center">
+      {member.name}
+      {hoveredMemberId === member.id && <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />}
+    </div>
+    <div className="min-content">{member.status}</div>
+    <div className="min-content">{member.plan}</div>
+    <div className="min-content">{member.type}</div>
+    <div className="min-content">{formatDate(member.lastRenewalDate)}</div>
+    <div className="min-content">{member.plan === 'Subscription' ? 'x' : member.monthsPaid}</div>
+    <div className={`min-content ${isDateInFuture(member.validUntil) ? 'text-green-500' : 'text-red-500'}`}>
+      {formatDate(member.validUntil)}
+    </div>
+  </div>
+);
+
 const AdminPage = ({ members }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredMemberId, setHoveredMemberId] = useState(null);
@@ -58,29 +81,12 @@ const AdminPage = ({ members }) => {
           </div>
 
           {filteredMembers.map((member) => (
-            <div
+            <MemberRow
               key={member.id}
-              className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
-                hoveredMemberId === member.id ? 'bg-gray-200' : ''
-              }`}
-              onMouseEnter={() => setHoveredMemberId(member.id)}
-              onMouseLeave={() => setHoveredMemberId(null)}
-            >
-              <div className="min-content flex items-center">
-                {member.name}
-                {hoveredMemberId === member.id && (
-                  <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />
-                )}
-              </div>
-              <div className="min-content">{member.status}</div>
-              <div className="min-content">{member.plan}</div>
-              <div className="min-content">{member.type}</div>
-              <div className="min-content">{formatDate(member.lastRenewalDate)}</div>
-              <div className="min-content">{member.plan === 'Subscription' ? 'x' : member.monthsPaid}</div>
-              <div className={`min-content ${isDateInFuture(member.validUntil) ? 'text-green-500' : 'text-red-500'}`}>
-                {formatDate(member.validUntil)}
-              </div>
-            </div>
+              member={member}
+              hoveredMemberId={hoveredMemberId}
+              setHoveredMemberId={setHoveredMemberId}
+            />
           ))}
         </div>
       </div>
