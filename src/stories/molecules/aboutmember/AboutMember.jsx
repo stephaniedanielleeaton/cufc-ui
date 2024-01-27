@@ -1,49 +1,98 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const formatDate = (date) => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const day = date.getUTCDate();
+  const month = months[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+  return `${month} ${day}, ${year}`;
+};
+
 function AboutMember({ member }) {
   return (
-    <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
-      <div className="py-2">
-        <div className="font-bold text-wine">About You</div>
-        <div>
-          <b>Preferred First Name : </b>
-          {member.displayFirstName}
-        </div>
-        <div>
-          <b>Preferred Last Name : </b>
-          {member.displayLastName}
-        </div>
-        <div>
-          <b>Legal First Name : </b>
-          {member.legalFirstName}
-        </div>
-        <div>
-          <b>Legal Last Name : </b>
-          {member.legalLastName}
-        </div>
-        <div>
-          <b>Email : </b>
-          {member.email}
-        </div>
-        <div>
-          <b>Date of Birth : </b>
-          {member.dateOfBirth}
+    <div className="p-4 font-poppins flex-grow bg-white shadow-md rounded-md">
+      <div className="mb-4">
+        <div className="text-lg font-bold text-wine">Personal Information</div>
+        <hr className="my-2 border-gray-300 mb" />
+        <div className="flex flex-wrap mt-2">
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Preferred First Name:</div>
+            <div className="text-lg font-medium">{member.displayFirstName}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Preferred Last Name:</div>
+            <div className="text-lg font-medium">{member.displayLastName}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Legal First Name:</div>
+            <div className="text-lg font-medium">{member.legalFirstName}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Legal Last Name:</div>
+            <div className="text-lg font-medium">{member.legalLastName}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Email:</div>
+            <div className="text-lg font-medium">{member.email}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Date of Birth:</div>
+            <div className="text-lg font-medium">{member.dateOfBirth}</div>
+          </div>
         </div>
       </div>
-      <div className="py-2">
-        <div className="font-bold text-wine">Address</div>
-        <div>{member.streetAddress}</div>
-        <div>{member.city}</div>
-        <div>{member.state}</div>
-        <div>{member.zipcode}</div>
-        <div>{member.country}</div>
+      <div className="mb-4">
+        <div className="text-lg font-bold text-wine">Address</div>
+        <hr className="my-2 border-gray-300" />
+        <div className="flex flex-wrap mt-2">
+          <div className="w-full py-2">
+            <div className="text-lg font-medium">
+              {member.streetAddress}<br />
+              {member.city}, {member.state}<br />
+              {member.zipcode}<br />
+              {member.country}
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="py-2">
-      <div className="font-bold text-wine">Membership Information</div>
-        <div>
-          <b>Plan : </b>
-          {member.plan}
+      <div>
+        <div className="text-lg font-bold text-wine">Membership Information</div>
+        <hr className="my-2 border-gray-300" />
+        <div className="flex flex-wrap mt-2">
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Plan:</div>
+            <div className="text-lg font-medium">{member.plan}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Type:</div>
+            <div className="text-lg font-medium">{member.type}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Last Renewal Date:</div>
+            <div className="text-lg font-medium">{formatDate(member.lastRenewalDate)}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Months Paid:</div>
+            <div className="text-lg font-medium">{member.monthsPaid}</div>
+          </div>
+          <div className="w-full py-2">
+            <div className="text-sm text-outerSpace">Membership Valid Until:</div>
+            <div className="text-lg font-medium">{formatDate(member.validUntil)}</div>
+          </div>
         </div>
       </div>
     </div>
@@ -57,20 +106,18 @@ AboutMember.propTypes = {
     legalFirstName: PropTypes.string.isRequired,
     legalLastName: PropTypes.string,
     email: PropTypes.string.isRequired,
-    dateOfBirth: PropTypes.instanceOf(Date).isRequired,
+    dateOfBirth: PropTypes.string.isRequired,
     streetAddress: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     state: PropTypes.string.isRequired,
     zipcode: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string,
     // Membership Info
-    status: PropTypes.string.isRequired,
     plan: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    lastRenewalDate: PropTypes.instanceOf(Date).isRequired,
+    lastRenewalDate: PropTypes.string.isRequired,
     monthsPaid: PropTypes.number.isRequired,
-    validUntil: PropTypes.instanceOf(Date).isRequired,
+    validUntil: PropTypes.string.isRequired,
   }).isRequired,
 };
 
