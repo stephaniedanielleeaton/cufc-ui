@@ -93,7 +93,13 @@ function NewUserAboutYou() {
             options={['option 1', 'option 2', 'option 3']}
             placeholder="State"
           />
-          <BaseTextInput faIcon="faMapPin" name="zipcode" onChange={handleChange} placeholder="Zipcode" value={formData.zipcode} />
+          <BaseTextInput
+            faIcon="faMapPin"
+            name="zipcode"
+            onChange={handleChange}
+            placeholder="Zipcode"
+            value={formData.zipcode}
+          />
           <BaseSelect
             faIcon="faMapPin"
             name="country"
@@ -111,8 +117,7 @@ function NewUserAboutYou() {
         </div>
       </form>
       <div className="w-full text-center p-4">
-        <BaseButton color="wine" onClick={() => {
-        }} text="Save + Next" />
+        <BaseButton color="wine" onClick={() => {}} text="Save + Next" />
       </div>
     </div>
   );
