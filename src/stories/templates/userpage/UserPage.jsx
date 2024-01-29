@@ -3,14 +3,23 @@ import PropTypes from 'prop-types';
 
 import BaseButton from '../../molecules/button/BaseButton.jsx';
 import AboutMember from '../../molecules/aboutmember/AboutMember.jsx';
+import TopNavbar from '../../molecules/topnavbar/TopNavBar.jsx';
 
 const UserPage = ({ member }) => {
   return (
     <div className="mx-auto font-poppins">
-      <div className="flex justify-around mb-4 mt-2">
-        <BaseButton text="Edit Profile" color="wine" onClick={() => {}} />
-        <BaseButton text="Update Membership" color="wine" onClick={() => {}} />
+      <TopNavbar />
+      <div className="flex flex-col sm:flex-row justify-around mb-4 mt-4">
+        <div className="mb-2 sm:mb-0 sm:mr-2">
+          <BaseButton text="Edit Profile" color="wine" onClick={() => {
+          }} />
+        </div>
+        <div className="sm:ml-2">
+          <BaseButton text="Update Membership" color="wine" onClick={() => {
+          }} />
+        </div>
       </div>
+
       <AboutMember member={member}></AboutMember>
     </div>
   );
