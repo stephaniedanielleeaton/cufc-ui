@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import BaseButton from '../button/BaseButton.jsx';
 
 const formatDate = (date) => {
   const months = [
