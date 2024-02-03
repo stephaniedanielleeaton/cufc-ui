@@ -16,7 +16,7 @@ export const BaseText = ({ font, color, size, weight, content, ...props }) => {
 
 BaseText.propTypes = {
   font: PropTypes.oneOf(['poppins', 'inter']),
-  color: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'white']),
+  color: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'white', 'transparent']),
   size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']),
   weight: PropTypes.oneOf(['normal', 'semibold', 'bold', 'extrabold']),
   content: PropTypes.string.isRequired,

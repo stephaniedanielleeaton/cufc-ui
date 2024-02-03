@@ -54,8 +54,8 @@ const BaseButton = ({ size, color, textColor, textSize, text, shape, border, onC
 BaseButton.propTypes = {
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
   shape: PropTypes.oneOf(['pill', 'rectangle']),
-  color: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparentDeepBlue']),
-  textColor: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray']),
+  color: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparent', 'white',            'transparentDeepBlue']),
+  textColor: PropTypes.oneOf(['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparent', 'white']),
   textSize: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl']),
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,

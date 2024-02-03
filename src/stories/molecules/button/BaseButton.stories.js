@@ -14,11 +14,11 @@ export default {
     },
     color: {
       control: 'select',
-      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparent', 'transparentDeepBlue'],
+      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'transparent', 'white', 'transparentDeepBlue'],
     },
     textColor: {
       control: 'select',
-      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'white'],
+      options: ['lavender', 'wine', 'gunmetal', 'outerSpace', 'ashGray', 'white', 'transparent'],
     },
     textSize: {
       control: 'select',

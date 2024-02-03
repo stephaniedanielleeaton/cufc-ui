@@ -6,4 +6,8 @@ declare module 'cufc-ui' {
   export const BaseButton: React.ComponentType<any>;
   export const ImageBox: React.ComponentType<any>;
   export const TopNavbar: React.ComponentType<any>;
+  export const AdminPage: React.ComponentType<any>;
+  export const UserPage: React.ComponentType<any>;
+
+  export const SignUp: React.ComponentType<any>;
 }
