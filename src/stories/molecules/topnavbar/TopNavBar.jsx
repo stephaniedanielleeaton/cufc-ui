@@ -26,21 +26,45 @@ function TopNavbar({ onNavigationClick }) {
                 href="#"
                 className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 onClick={() => {
-                  onNavigationClick('test');
+                  onNavigationClick('signup');
                 }}
               >
                 Sign Up
               </a>
-              <a href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              <a
+                href="#"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => {
+                  onNavigationClick('donate');
+                }}
+              >
                 Donate
               </a>
-              <a href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              <a
+                href="#"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => {
+                  onNavigationClick('donate');
+                }}
+              >
                 Contact
               </a>
-              <a href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              <a
+                href="#"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => {
+                  onNavigationClick('about');
+                }}
+              >
                 About
               </a>
-              <a href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              <a
+                href="#"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => {
+                  onNavigationClick('admin');
+                }}
+              >
                 Admin
               </a>
             </div>
@@ -63,6 +87,9 @@ function TopNavbar({ onNavigationClick }) {
             weight="normal"
             size="sm"
             font="poppins"
+            onClick={() => {
+              onNavigationClick('admin');
+            }}
           />
           <BaseText
             className="px-2 hover:text-blue-300"
@@ -71,6 +98,9 @@ function TopNavbar({ onNavigationClick }) {
             weight="normal"
             size="sm"
             font="poppins"
+            onClick={() => {
+              onNavigationClick('about');
+            }}
           />
           <BaseText
             className="px-2 hover:text-blue-300"
@@ -79,6 +109,9 @@ function TopNavbar({ onNavigationClick }) {
             weight="normal"
             size="sm"
             font="poppins"
+            onClick={() => {
+              onNavigationClick('contact');
+            }}
           />
           <BaseText
             className="px-2 hover:text-blue-300"
@@ -87,12 +120,36 @@ function TopNavbar({ onNavigationClick }) {
             weight="normal"
             size="sm"
             font="poppins"
+            onClick={() => {
+              onNavigationClick('donate');
+            }}
           />
-          <BaseButton className="px-2" text={'Sign Up'} color={'transparent'} border={'white'} size={'sm'} />
-          <FontAwesomeIcon icon={faUser} className="h-6 w-6" />
+          <BaseButton
+            className="px-2"
+            text={'Sign Up'}
+            color={'transparent'}
+            border={'white'}
+            size={'sm'}
+            onClick={() => {
+              onNavigationClick('signup');
+            }}
+          />
+          <FontAwesomeIcon
+            icon={faUser}
+            className="h-6 w-6"
+            onClick={() => {
+              onNavigationClick('user');
+            }}
+          />
         </div>
         <div className="flex justify-end">
-          <FontAwesomeIcon icon={faUser} className="h-6 w-6 lg:hidden" />
+          <FontAwesomeIcon
+            icon={faUser}
+            className="h-6 w-6 lg:hidden"
+            onClick={() => {
+              onNavigationClick('user');
+            }}
+          />
         </div>
       </div>
     </nav>
