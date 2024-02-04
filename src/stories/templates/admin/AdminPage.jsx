@@ -17,34 +17,41 @@ const isDateInFuture = (date) => {
   return new Date(date) > today;
 };
 
-const MemberRow = ({ member, hoveredMemberId, setHoveredMemberId }) => (
-  <div
-    className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
-      hoveredMemberId === member.id ? 'bg-gray-200' : ''
-    }`}
-    onMouseEnter={() => setHoveredMemberId(member.id)}
-    onMouseLeave={() => setHoveredMemberId(null)}
-  >
-    <div className="min-content flex items-center">
-      {member.name}
-      {hoveredMemberId === member.id && <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />}
-    </div>
-    <div className="min-content">{member.status}</div>
-    <div className="min-content">{member.plan}</div>
-    <div className="min-content">{member.type}</div>
-    <div className="min-content">{formatDate(member.lastRenewalDate)}</div>
-    <div className="min-content">{member.plan === 'Subscription' ? 'x' : member.monthsPaid}</div>
-    <div className={`min-content ${isDateInFuture(member.validUntil) ? 'text-green-500' : 'text-red-500'}`}>
-      {formatDate(member.validUntil)}
-    </div>
-  </div>
-);
+function calculateValidUntilDate(membershipRenewalDate, months) {
+  // Get the year, month, and day of the original date in UTC
+  let year = membershipRenewalDate.getUTCFullYear();
+  let month = membershipRenewalDate.getUTCMonth();
+  let day = membershipRenewalDate.getUTCDate();
+
+  // Calculate the new month and year after adding the specified number of months
+  month += months;
+  year += Math.floor(month / 12);
+  month %= 12;
+
+  // Handle cases where month becomes negative or greater than 11
+  if (month < 0) {
+    month += 12;
+    year--;
+  }
+
+  // Get the number of days in the new month
+  const daysInNewMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+
+  // Adjust the day if it's greater than the number of days in the new month
+  day = Math.min(day, daysInNewMonth);
+
+  // Return the new date in UTC
+  return new Date(Date.UTC(year, month, day));
+}
 
 const AdminPage = ({ members }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredMemberId, setHoveredMemberId] = useState(null);
 
-  const filteredMembers = members.filter((member) => member.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredMembers = members.filter((member) => {
+    const fullName = `${member.display_first_name} ${member.display_last_name}`;
+    return fullName.toLowerCase().includes(searchQuery.toLowerCase());
+  });
 
   return (
     <div className="mx-auto font-poppins">
@@ -72,7 +79,7 @@ const AdminPage = ({ members }) => {
         <div className="mx-auto">
           <div className="grid grid-cols-7 font-bold border-b mb-4 border-black">
             <div className="min-content">Member</div>
-            <div className="min-content">Status</div>
+            <div className="min-content">Subscription Status</div>
             <div className="min-content">Plan</div>
             <div className="min-content">Type</div>
             <div className="min-content">Last Renewal</div>
@@ -81,12 +88,33 @@ const AdminPage = ({ members }) => {
           </div>
 
           {filteredMembers.map((member) => (
-            <MemberRow
+            <div
               key={member.id}
-              member={member}
-              hoveredMemberId={hoveredMemberId}
-              setHoveredMemberId={setHoveredMemberId}
-            />
+              className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
+                hoveredMemberId === member.id ? 'bg-gray-200' : ''
+              }`}
+              onMouseEnter={() => setHoveredMemberId(member.id)}
+              onMouseLeave={() => setHoveredMemberId(null)}
+            >
+              <div className="min-content flex items-center">
+                {member.display_first_name} {member.display_last_name}
+                {hoveredMemberId === member.id && <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />}
+              </div>
+              <div className="min-content">{member.subscription_status}</div>
+              <div className="min-content">Monthly</div>
+              <div className="min-content">Regular</div>
+              <div className="min-content">{formatDate(member.membership_renewed_date)}</div>
+              <div className="min-content">{member.membership_months_paid}</div>
+              <div
+                className={`min-content ${
+                  isDateInFuture(calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid))
+                    ? 'text-green-500'
+                    : 'text-red-500'
+                }`}
+              >
+                {formatDate(calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -98,13 +126,11 @@ AdminPage.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
-      plan: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      lastRenewalDate: PropTypes.instanceOf(Date).isRequired,
-      monthsPaid: PropTypes.number.isRequired,
-      validUntil: PropTypes.instanceOf(Date).isRequired,
+      display_first_name: PropTypes.string.isRequired,
+      display_last_name: PropTypes.string.isRequired,
+      subscription_status: PropTypes.string.isRequired,
+      membership_renewed_date: PropTypes.instanceOf(Date).isRequired,
+      membership_months_paid: PropTypes.number.isRequired,
     })
   ),
 };
