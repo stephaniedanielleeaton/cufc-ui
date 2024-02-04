@@ -32,27 +32,27 @@ function AboutMember({ member }) {
         <div className="flex flex-wrap mt-2">
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Preferred First Name:</div>
-            <div className="text-lg font-medium">{member.displayFirstName}</div>
+            <div className="text-lg font-medium">{member.display_first_name}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Preferred Last Name:</div>
-            <div className="text-lg font-medium">{member.displayLastName}</div>
+            <div className="text-lg font-medium">{member.display_last_name}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Legal First Name:</div>
-            <div className="text-lg font-medium">{member.legalFirstName}</div>
+            <div className="text-lg font-medium">{member.legal_first_name}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Legal Last Name:</div>
-            <div className="text-lg font-medium">{member.legalLastName}</div>
+            <div className="text-lg font-medium">{member.legal_last_name}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Email:</div>
-            <div className="text-lg font-medium">{member.email}</div>
+            <div className="text-lg font-medium">{member.personal_info.email}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Date of Birth:</div>
-            <div className="text-lg font-medium">{member.dateOfBirth}</div>
+            <div className="text-lg font-medium">{member.personal_info.date_of_birth}</div>
           </div>
         </div>
       </div>
@@ -62,10 +62,10 @@ function AboutMember({ member }) {
         <div className="flex flex-wrap mt-2">
           <div className="w-full py-2">
             <div className="text-lg font-medium">
-              {member.streetAddress}<br />
-              {member.city}, {member.state}<br />
-              {member.zipcode}<br />
-              {member.country}
+              {member.address.street}<br />
+              {member.address.city}, {member.address.state}<br />
+              {member.address.zipcode}<br />
+              {member.address.country}
             </div>
           </div>
         </div>
@@ -75,20 +75,20 @@ function AboutMember({ member }) {
         <hr className="my-2 border-gray-300" />
         <div className="flex flex-wrap mt-2">
           <div className="w-full py-2">
-            <div className="text-sm text-outerSpace">Plan:</div>
-            <div className="text-lg font-medium">{member.plan}</div>
+            <div className="text-sm text-outerSpace">Subscription Status:</div>
+            <div className="text-lg font-medium">{member.subscription_status}</div>
           </div>
           <div className="w-full py-2">
-            <div className="text-sm text-outerSpace">Type:</div>
-            <div className="text-lg font-medium">{member.type}</div>
+            <div className="text-sm text-outerSpace">Start Date:</div>
+            <div className="text-lg font-medium">{member.membership_start_date}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Last Renewal Date:</div>
-            <div className="text-lg font-medium">{formatDate(member.lastRenewalDate)}</div>
+            <div className="text-lg font-medium">{formatDate(member.membership_renewed_date)}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Months Paid:</div>
-            <div className="text-lg font-medium">{member.monthsPaid}</div>
+            <div className="text-lg font-medium">{member.membership_months_paid}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Membership Valid Until:</div>
@@ -102,23 +102,28 @@ function AboutMember({ member }) {
 
 AboutMember.propTypes = {
   member: PropTypes.shape({
-    displayFirstName: PropTypes.string,
-    displayLastName: PropTypes.string,
-    legalFirstName: PropTypes.string.isRequired,
-    legalLastName: PropTypes.string,
-    email: PropTypes.string.isRequired,
-    dateOfBirth: PropTypes.string.isRequired,
-    streetAddress: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
-    zipcode: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    // Membership Info
-    plan: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    lastRenewalDate: PropTypes.string.isRequired,
-    monthsPaid: PropTypes.number.isRequired,
-    validUntil: PropTypes.string.isRequired,
+    _id: PropTypes.string,
+    display_first_name: PropTypes.string,
+    display_last_name: PropTypes.string,
+    personal_info: PropTypes.shape({
+      legal_first_name: PropTypes.string.isRequired,
+      legal_last_name: PropTypes.string,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string,
+      date_of_birth: PropTypes.string.isRequired,
+      address: PropTypes.shape({
+        street: PropTypes.string.isRequired,
+        city: PropTypes.string.isRequired,
+        state: PropTypes.string.isRequired,
+        zipcode: PropTypes.string.isRequired,
+        country: PropTypes.string.isRequired,
+      })
+    }),
+    subscription_status: PropTypes.string,
+    membership_start_date: PropTypes.string.isRequired,
+    membership_renewed_date: PropTypes.string.isRequired,
+    membership_months_paid: PropTypes.number.isRequired,
+    role: PropTypes.string.isRequired,
   }).isRequired,
 };
 

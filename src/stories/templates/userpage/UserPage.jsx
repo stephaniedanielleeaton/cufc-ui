@@ -8,7 +8,6 @@ import TopNavbar from '../../molecules/topnavbar/TopNavBar.jsx';
 const UserPage = ({ member }) => {
   return (
     <div className="mx-auto font-poppins">
-      <TopNavbar />
       <div className="flex flex-col sm:flex-row justify-around mb-4 mt-4">
         <div className="mb-2 sm:mb-0 sm:mr-2">
           <BaseButton text="Edit Profile" color="wine" onClick={() => {
@@ -27,23 +26,28 @@ const UserPage = ({ member }) => {
 
 UserPage.propTypes = {
   member: PropTypes.shape({
-    displayFirstName: PropTypes.string,
-    displayLastName: PropTypes.string,
-    legalFirstName: PropTypes.string.isRequired,
-    legalLastName: PropTypes.string,
-    email: PropTypes.string.isRequired,
-    dateOfBirth: PropTypes.string.isRequired,
-    streetAddress: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
-    zipcode: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    // Membership Info
-    plan: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    lastRenewalDate: PropTypes.string.isRequired,
-    monthsPaid: PropTypes.number.isRequired,
-    validUntil: PropTypes.string.isRequired,
+    _id: PropTypes.string,
+    display_first_name: PropTypes.string,
+    display_last_name: PropTypes.string,
+    personal_info: PropTypes.shape({
+      legal_first_name: PropTypes.string.isRequired,
+      legal_last_name: PropTypes.string,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string,
+      date_of_birth: PropTypes.string.isRequired,
+      address: PropTypes.shape({
+        street: PropTypes.string.isRequired,
+        city: PropTypes.string.isRequired,
+        state: PropTypes.string.isRequired,
+        zipcode: PropTypes.string.isRequired,
+        country: PropTypes.string.isRequired,
+      })
+    }),
+    subscription_status: PropTypes.string,
+    membership_start_date: PropTypes.string.isRequired,
+    membership_renewed_date: PropTypes.string.isRequired,
+    membership_months_paid: PropTypes.number.isRequired,
+    role: PropTypes.string.isRequired,
   }).isRequired,
 };
 

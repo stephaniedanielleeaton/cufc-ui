@@ -5,7 +5,6 @@ import NewUserAboutYou from '../../molecules/newuseraboutyou/NewUserAboutYou.jsx
 const SignUpPage = () => {
   return (
     <div>
-      <TopNavbar />
       <NewUserAboutYou />
     </div>
   );
