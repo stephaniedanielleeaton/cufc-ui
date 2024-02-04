@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
 import BaseText from '../../atoms/text/BaseText.jsx';
 import BaseButton from '../../molecules/button/BaseButton.jsx';
+import PropTypes from 'prop-types';
 
-function TopNavbar() {
+function TopNavbar({ onNavigationClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -21,7 +22,13 @@ function TopNavbar() {
           </button>
           <div className={isOpen ? 'block absolute left top-16' : 'hidden absolute left top-16'}>
             <div className="px-4 py-2 rounded-md space-y-0 bg-deepSeaBlue w-full">
-              <a href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+              <a
+                href="#"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                onClick={() => {
+                  onNavigationClick('test');
+                }}
+              >
                 Sign Up
               </a>
               <a href="#" className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
@@ -92,4 +99,7 @@ function TopNavbar() {
   );
 }
 
+TopNavbar.propTypes = {
+  onNavigationClick: PropTypes.func.isRequired,
+};
 export default TopNavbar;

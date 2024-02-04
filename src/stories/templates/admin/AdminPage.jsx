@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import TopNavBar from '../../molecules/topnavbar/TopNavBar.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
@@ -55,7 +54,6 @@ const AdminPage = ({ members }) => {
 
   return (
     <div className="mx-auto font-poppins">
-      <TopNavBar />
       <div className="p-4">
         <div className="mb-8 mt-4 flex items-center">
           <div className="flex items-center relative">
@@ -87,35 +85,39 @@ const AdminPage = ({ members }) => {
             <div className="min-content">Valid Until</div>
           </div>
 
-          {filteredMembers.map((member) => (
-            <div
-              key={member.id}
-              className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
-                hoveredMemberId === member.id ? 'bg-gray-200' : ''
-              }`}
-              onMouseEnter={() => setHoveredMemberId(member.id)}
-              onMouseLeave={() => setHoveredMemberId(null)}
-            >
-              <div className="min-content flex items-center">
-                {member.display_first_name} {member.display_last_name}
-                {hoveredMemberId === member.id && <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />}
-              </div>
-              <div className="min-content">{member.subscription_status}</div>
-              <div className="min-content">Monthly</div>
-              <div className="min-content">Regular</div>
-              <div className="min-content">{formatDate(member.membership_renewed_date)}</div>
-              <div className="min-content">{member.membership_months_paid}</div>
+          {filteredMembers.map((member) => {
+            // Convert membership_renewed_date to a Date object
+            const membershipRenewalDate = new Date(member.membership_renewed_date);
+            return (
               <div
-                className={`min-content ${
-                  isDateInFuture(calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid))
-                    ? 'text-green-500'
-                    : 'text-red-500'
+                key={member._id}
+                className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
+                  hoveredMemberId === member._id ? 'bg-gray-200' : ''
                 }`}
+                onMouseEnter={() => setHoveredMemberId(member._id)}
+                onMouseLeave={() => setHoveredMemberId(null)}
               >
-                {formatDate(calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid))}
+                <div className="min-content flex items-center">
+                  {member.display_first_name} {member.display_last_name}
+                  {hoveredMemberId === member._id && <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />}
+                </div>
+                <div className="min-content">{member.subscription_status}</div>
+                <div className="min-content">Monthly</div>
+                <div className="min-content">Regular</div>
+                <div className="min-content">{formatDate(membershipRenewalDate)}</div>
+                <div className="min-content">{member.membership_months_paid}</div>
+                <div
+                  className={`min-content ${
+                    isDateInFuture(calculateValidUntilDate(membershipRenewalDate, member.membership_months_paid))
+                      ? 'text-green-500'
+                      : 'text-red-500'
+                  }`}
+                >
+                  {formatDate(calculateValidUntilDate(membershipRenewalDate, member.membership_months_paid))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -125,7 +127,7 @@ const AdminPage = ({ members }) => {
 AdminPage.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
+      _id: PropTypes.string.isRequired,
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
       subscription_status: PropTypes.string.isRequired,

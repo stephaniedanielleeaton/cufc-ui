@@ -6,7 +6,10 @@ export default {
   component: TopNavbar,
   tags: ['autodocs'],
 };
+const handleOnNavigationClick = (message) => {
+  console.log(message);
+};
 
-const Template = (args) => <TopNavbar {...args} />;
+//const Template = (args) => <TopNavbar {...args} />;
 
-export const Default = Template.bind({});
+export const Default = () => <TopNavbar onNavigationClick={handleOnNavigationClick} />;

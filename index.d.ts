@@ -8,6 +8,5 @@ declare module 'cufc-ui' {
   export const TopNavbar: React.ComponentType<any>;
   export const AdminPage: React.ComponentType<any>;
   export const UserPage: React.ComponentType<any>;
-
   export const SignUp: React.ComponentType<any>;
 }
