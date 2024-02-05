@@ -1,5 +1,6 @@
 import React from 'react';
 import AboutMember from './AboutMember.jsx';
+import PropTypes from 'prop-types';
 
 export default {
   title: 'Molecules/AboutMember',
@@ -8,24 +9,24 @@ export default {
 };
 
 const defaultMember = {
-  displayFirstName: 'Jasmine',
-  displayLastName: 'Crackel',
-  legalFirstName: 'Jasmine',
-  legalLastName: 'Crackel',
-  email: 'jasmine.fluff@example.com',
-  dateOfBirth: '2023-01-01',
-  streetAddress: '123 Main St',
-  city: 'Anytown',
-  state: 'State',
-  zipcode: '12345',
-  country: 'Country',
-  phoneNumber: '123-456-7890',
-  status: 'Active',
-  plan: 'Subscription',
-  type: 'Full',
-  lastRenewalDate: new Date(1702166400000),
-  monthsPaid: 3,
-  validUntil: new Date(1710032400000),
+  id: 1,
+  display_first_name: 'Edith',
+  display_last_name: 'Eaton',
+  personal_info: {
+    legal_first_name: 'Edith',
+    legal_last_name: 'Eaton',
+    address: {
+      street: '20 Pennsylvania Ave',
+      city: 'Delaware',
+      state: 'OH',
+      zipcode: '43015',
+      country: 'USA',
+    }
+
+  },
+  subscription_status: 'active',
+  membership_renewed_date: new Date(1702166400000),
+  membership_months_paid: 3,
 };
 
 const Template = (args) => <AboutMember {...args} />;

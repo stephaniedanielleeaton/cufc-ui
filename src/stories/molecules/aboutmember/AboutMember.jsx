@@ -23,7 +23,40 @@ const formatDate = (date) => {
   return `${month} ${day}, ${year}`;
 };
 
+const isDateInFuture = (date) => {
+  const today = new Date();
+  return new Date(date) > today;
+};
+
+function calculateValidUntilDate(membershipRenewalDate, months) {
+  // Get the year, month, and day of the original date in UTC
+  let year = membershipRenewalDate.getUTCFullYear();
+  let month = membershipRenewalDate.getUTCMonth();
+  let day = membershipRenewalDate.getUTCDate();
+
+  // Calculate the new month and year after adding the specified number of months
+  month += months;
+  year += Math.floor(month / 12);
+  month %= 12;
+
+  // Handle cases where month becomes negative or greater than 11
+  if (month < 0) {
+    month += 12;
+    year--;
+  }
+
+  // Get the number of days in the new month
+  const daysInNewMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+
+  // Adjust the day if it's greater than the number of days in the new month
+  day = Math.min(day, daysInNewMonth);
+
+  // Return the new date in UTC
+  return new Date(Date.UTC(year, month, day));
+}
+
 function AboutMember({ member }) {
+  const membershipRenewalDate = new Date(member.membership_renewed_date);
   return (
     <div className="p-4 font-poppins flex-grow bg-white shadow-md rounded-md">
       <div className="mb-4">
@@ -40,11 +73,11 @@ function AboutMember({ member }) {
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Legal First Name:</div>
-            <div className="text-lg font-medium">{member.legal_first_name}</div>
+            <div className="text-lg font-medium">{member.personal_info.legal_first_name}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Legal Last Name:</div>
-            <div className="text-lg font-medium">{member.legal_last_name}</div>
+            <div className="text-lg font-medium">{member.personal_info.legal_last_name}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Email:</div>
@@ -62,10 +95,10 @@ function AboutMember({ member }) {
         <div className="flex flex-wrap mt-2">
           <div className="w-full py-2">
             <div className="text-lg font-medium">
-              {member.address.street}<br />
-              {member.address.city}, {member.address.state}<br />
-              {member.address.zipcode}<br />
-              {member.address.country}
+              {member.personal_info.address.street}<br />
+              {member.personal_info.address.city}, {member.personal_info.address.state}<br />
+              {member.personal_info.address.zipcode}<br />
+              {member.personal_info.address.country}
             </div>
           </div>
         </div>
@@ -92,7 +125,7 @@ function AboutMember({ member }) {
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Membership Valid Until:</div>
-            <div className="text-lg font-medium">{formatDate(member.validUntil)}</div>
+            <div className="text-lg font-medium">{formatDate(calculateValidUntilDate(membershipRenewalDate, member.membership_months_paid))}</div>
           </div>
         </div>
       </div>
@@ -102,28 +135,28 @@ function AboutMember({ member }) {
 
 AboutMember.propTypes = {
   member: PropTypes.shape({
-    _id: PropTypes.string,
+    _id: PropTypes.string.isRequired,
     display_first_name: PropTypes.string,
     display_last_name: PropTypes.string,
     personal_info: PropTypes.shape({
-      legal_first_name: PropTypes.string.isRequired,
+      legal_first_name: PropTypes.string,
       legal_last_name: PropTypes.string,
       email: PropTypes.string.isRequired,
       phone: PropTypes.string,
-      date_of_birth: PropTypes.string.isRequired,
+      date_of_birth: PropTypes.string,
       address: PropTypes.shape({
-        street: PropTypes.string.isRequired,
-        city: PropTypes.string.isRequired,
-        state: PropTypes.string.isRequired,
-        zipcode: PropTypes.string.isRequired,
-        country: PropTypes.string.isRequired,
+        street: PropTypes.string,
+        city: PropTypes.string,
+        state: PropTypes.string,
+        zipcode: PropTypes.string,
+        country: PropTypes.string,
       })
     }),
     subscription_status: PropTypes.string,
-    membership_start_date: PropTypes.string.isRequired,
-    membership_renewed_date: PropTypes.string.isRequired,
-    membership_months_paid: PropTypes.number.isRequired,
-    role: PropTypes.string.isRequired,
+    membership_start_date: PropTypes.string,
+    membership_renewed_date: PropTypes.string,
+    membership_months_paid: PropTypes.number,
+    role: PropTypes.string,
   }).isRequired,
 };
 

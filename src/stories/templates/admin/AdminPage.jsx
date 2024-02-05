@@ -130,9 +130,9 @@ AdminPage.propTypes = {
       _id: PropTypes.string.isRequired,
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
-      subscription_status: PropTypes.string.isRequired,
-      membership_renewed_date: PropTypes.instanceOf(Date).isRequired,
-      membership_months_paid: PropTypes.number.isRequired,
+      subscription_status: PropTypes.string,
+      membership_renewed_date: PropTypes.string,
+      membership_months_paid: PropTypes.number,
     })
   ),
 };
