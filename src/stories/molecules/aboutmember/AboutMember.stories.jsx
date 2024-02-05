@@ -21,8 +21,7 @@ const defaultMember = {
       state: 'OH',
       zipcode: '43015',
       country: 'USA',
-    }
-
+    },
   },
   subscription_status: 'active',
   membership_renewed_date: new Date(1702166400000),
