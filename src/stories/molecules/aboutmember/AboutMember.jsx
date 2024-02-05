@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BaseButton from '../button/BaseButton.jsx';
 
 const formatDate = (date) => {
   const months = [
@@ -21,11 +20,6 @@ const formatDate = (date) => {
   const month = months[date.getUTCMonth()];
   const year = date.getUTCFullYear();
   return `${month} ${day}, ${year}`;
-};
-
-const isDateInFuture = (date) => {
-  const today = new Date();
-  return new Date(date) > today;
 };
 
 function calculateValidUntilDate(membershipRenewalDate, months) {
