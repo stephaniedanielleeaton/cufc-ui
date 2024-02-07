@@ -6,4 +6,4 @@ export { default as HomePage } from './stories/templates/homepage/HomePage';
 export { default as AdminPage } from './stories/templates/admin/AdminPage.jsx';
 export { default as UserPage } from './stories/templates/userpage/UserPage.jsx';
 export { default as AboutMember } from './stories/molecules/aboutmember/AboutMember.jsx';
-export { default as SignUp } from './stories/templates/signup/SignUpPage.jsx';
+export { default as SignUpPage } from './stories/templates/signup/SignUpPage.jsx';
