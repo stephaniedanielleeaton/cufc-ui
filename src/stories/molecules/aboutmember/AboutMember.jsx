@@ -46,7 +46,7 @@ function calculateValidUntilDate(membershipRenewalDate, months) {
 }
 
 function AboutMember({ member }) {
-  if (!member) return null; // Handle undefined member gracefully
+  if (!member) return null;
 
   const memberBirthDate = member.personal_info.date_of_birth
     ? formatDate(new Date(member.personal_info.date_of_birth))

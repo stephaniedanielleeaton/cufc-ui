@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import BaseButton from '../button/BaseButton.jsx';
+import PropTypes from 'prop-types';
 
-function UpdateUser() {
+function UpdateUser({ member }) {
   const [formData, setFormData] = useState({
-    displayFirstName: '',
-    displayLastName: '',
-    legalFirstName: '',
-    legalLastName: '',
-    email: '',
-    dateOfBirth: '',
-    streetAddress: '',
-    city: '',
-    state: '',
-    zipcode: '',
-    country: '',
-    phoneNumber: '',
+    displayFirstName: member.display_first_name,
+    displayLastName: member.display_last_name,
+    legalFirstName: member.personal_info.legal_first_name,
+    legalLastName: member.personal_info.legal_last_name,
+    email: member.personal_info.email,
+    dateOfBirth: member.personal_info.date_of_birth,
+    streetAddress: member.personal_info.address.street,
+    city: member.personal_info.address.city,
+    state: member.personal_info.address.state,
+    zipcode: member.personal_info.address.zipcode,
+    country: member.personal_info.address.country,
+    phoneNumber: member.personal_info.phone,
   });
 
   const handleChange = (name, value) => {
@@ -123,4 +124,30 @@ function UpdateUser() {
   );
 }
 
+UpdateUser.propTypes = {
+  member: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    display_first_name: PropTypes.string,
+    display_last_name: PropTypes.string,
+    personal_info: PropTypes.shape({
+      legal_first_name: PropTypes.string,
+      legal_last_name: PropTypes.string,
+      email: PropTypes.string.isRequired,
+      phone: PropTypes.string,
+      date_of_birth: PropTypes.string,
+      address: PropTypes.shape({
+        street: PropTypes.string,
+        city: PropTypes.string,
+        state: PropTypes.string,
+        zipcode: PropTypes.string,
+        country: PropTypes.string,
+      }),
+    }),
+    subscription_status: PropTypes.string,
+    membership_start_date: PropTypes.string,
+    membership_renewed_date: PropTypes.string,
+    membership_months_paid: PropTypes.number,
+    role: PropTypes.string,
+  }).isRequired,
+};
 export default UpdateUser;

@@ -14,6 +14,7 @@ const defaultMember = {
   personal_info: {
     legal_first_name: 'Edith',
     legal_last_name: 'Eaton',
+    date_of_birth: new Date(1702166400000),
     address: {
       street: '20 Pennsylvania Ave',
       city: 'Delaware',
