@@ -3,7 +3,7 @@ import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import BaseButton from '../button/BaseButton.jsx';
 
-function UpdateMember() {
+function UpdateUser() {
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
@@ -123,4 +123,4 @@ function UpdateMember() {
   );
 }
 
-export default UpdateMember;
+export default UpdateUser;
