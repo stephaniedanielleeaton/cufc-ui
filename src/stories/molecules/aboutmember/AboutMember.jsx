@@ -48,9 +48,13 @@ function calculateValidUntilDate(membershipRenewalDate, months) {
 function AboutMember({ member }) {
   if (!member) return null; // Handle undefined member gracefully
 
-  const memberBirthDate = new Date(member.personal_info.date_of_birth);
-  const membershipRenewalDate = new Date(member.membership_renewed_date);
-  const membershipStartDate = new Date(member.membership_start_date);
+  const memberBirthDate = member.personal_info.date_of_birth
+    ? formatDate(new Date(member.personal_info.date_of_birth))
+    : '';
+  const membershipRenewalDate = member.membership_renewed_date
+    ? formatDate(new Date(member.membership_renewed_date))
+    : '';
+  const membershipStartDate = member.membership_start_date ? formatDate(new Date(member.membership_start_date)) : '';
 
   return (
     <div className="p-4 font-poppins flex-grow bg-white shadow-md rounded-md">
@@ -80,7 +84,7 @@ function AboutMember({ member }) {
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Date of Birth:</div>
-            <div className="text-lg font-medium">{formatDate(memberBirthDate) || ''}</div>
+            <div className="text-lg font-medium">{memberBirthDate}</div>
           </div>
         </div>
       </div>
@@ -111,11 +115,11 @@ function AboutMember({ member }) {
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Start Date:</div>
-            <div className="text-lg font-medium">{formatDate(membershipStartDate) || ''}</div>
+            <div className="text-lg font-medium">{membershipStartDate}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Last Renewal Date:</div>
-            <div className="text-lg font-medium">{formatDate(membershipRenewalDate) || ''}</div>
+            <div className="text-lg font-medium">{membershipRenewalDate}</div>
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Months Paid:</div>
@@ -123,9 +127,7 @@ function AboutMember({ member }) {
           </div>
           <div className="w-full py-2">
             <div className="text-sm text-outerSpace">Membership Valid Until:</div>
-            <div className="text-lg font-medium">
-              {formatDate(calculateValidUntilDate(membershipRenewalDate, member.membership_months_paid)) || ''}
-            </div>
+            <div className="text-lg font-medium">{membershipRenewalDate}</div>
           </div>
         </div>
       </div>
