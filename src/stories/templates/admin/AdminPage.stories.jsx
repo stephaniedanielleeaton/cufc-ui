@@ -14,7 +14,7 @@ export const DefaultView = Template.bind({});
 DefaultView.args = {
   members: [
     {
-      id: 1,
+      _id: 1,
       display_first_name: 'Edith',
       display_last_name: 'Eaton',
       subscription_status: 'active',
@@ -22,7 +22,7 @@ DefaultView.args = {
       membership_months_paid: 3,
     },
     {
-      id: 2,
+      _id: 2,
       display_first_name: 'Toby',
       display_last_name: 'Crackel',
       subscription_status: 'active',

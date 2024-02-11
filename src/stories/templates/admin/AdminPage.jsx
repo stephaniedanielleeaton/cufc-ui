@@ -86,7 +86,6 @@ const AdminPage = ({ members }) => {
           </div>
 
           {filteredMembers.map((member) => {
-            // Convert membership_renewed_date to a Date object
             const membershipRenewalDate = new Date(member.membership_renewed_date);
             return (
               <div
