@@ -20,11 +20,22 @@ function UpdateUser({ member }) {
     phoneNumber: member.personal_info.phone,
   });
 
+  const defaultDateForDatePicker = convertUTCDateToYYYYMMDD(formData.dateOfBirth);
+
+  function convertUTCDateToYYYYMMDD(utcDate) {
+    const date = new Date(utcDate);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Adding 1 because getUTCMonth() returns 0-based index
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
   const handleChange = (name, value) => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    console.log(formData);
   };
 
   const handleSubmit = (e) => {
@@ -73,8 +84,7 @@ function UpdateUser({ member }) {
             name="dateOfBirth"
             type="date"
             onChange={handleChange}
-            placeholder="Date Of Birth"
-            value={formData.dateOfBirth}
+            value={defaultDateForDatePicker}
           />
         </div>
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
