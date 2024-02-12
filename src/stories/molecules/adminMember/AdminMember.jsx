@@ -4,69 +4,10 @@ import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { calculateValidUntilDate, convertUTCDateToYYYYMMDD, formatDate } from '../../../utils/dateUtils.jsx';
 
 function AdminMember({ member }) {
   const [memberData, setMemberData] = useState(member);
-
-  const formatDate = (date) => {
-    if (!date) return ''; // Handle undefined date gracefully
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    const day = date.getUTCDate();
-    const month = months[date.getUTCMonth()];
-    const year = date.getUTCFullYear();
-    return `${month} ${day}, ${year}`;
-  };
-
-  function convertUTCDateToYYYYMMDD(utcDate) {
-    if (utcDate === null) {
-      return '';
-    }
-    const date = new Date(utcDate);
-    const year = String(date.getUTCFullYear());
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Adding 1 because getUTCMonth() returns 0-based index
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-  }
-  function calculateValidUntilDate(membershipRenewalDate, months) {
-    // Get the year, month, and day of the original date in UTC
-    let year = membershipRenewalDate.getUTCFullYear();
-    let month = membershipRenewalDate.getUTCMonth();
-    let day = membershipRenewalDate.getUTCDate();
-
-    // Calculate the new month and year after adding the specified number of months
-    month += +months;
-    year += Math.floor(month / 12);
-    month %= 12;
-
-    // Handle cases where month becomes negative or greater than 11
-    if (month < 0) {
-      month += 12;
-      year--;
-    }
-
-    // Get the number of days in the new month
-    const daysInNewMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
-
-    // Adjust the day if it's greater than the number of days in the new month
-    day = Math.min(day, daysInNewMonth);
-
-    // Return the new date in UTC
-    return new Date(Date.UTC(year, month, day));
-  }
 
   const handleChange = (e) => {
     let name, value;
@@ -251,7 +192,7 @@ function AdminMember({ member }) {
                 name="membership_renewed_date"
                 type="date"
                 onChange={handleChange}
-                value={convertUTCDateToYYYYMMDD(member.membership_renewed_date)}
+                value={convertUTCDateToYYYYMMDD(memberData.membership_renewed_date)}
               />
             </div>
             <div className="w-full py-2">
@@ -267,15 +208,11 @@ function AdminMember({ member }) {
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Membership Valid Until:</div>
-              <BaseTextInput
-                faIcon="none"
-                name="membership_valid_until"
-                type="date"
-                onChange={handleChange}
-                value={convertUTCDateToYYYYMMDD(
-                  calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid)
+              <div className="text-lg font-medium">
+                {formatDate(
+                  calculateValidUntilDate(memberData.membership_renewed_date, memberData.membership_months_paid)
                 )}
-              />
+              </div>
             </div>
           </div>
         </div>
