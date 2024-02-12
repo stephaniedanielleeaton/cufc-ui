@@ -19,6 +19,7 @@ const iconDefs = [
   { ref: 'faCity', value: faCity },
   { ref: 'faMapPin', value: faMapPin },
   { ref: 'faMobilePhone', value: faMobilePhone },
+  { ref: 'none', value: 'none' },
 ];
 const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
@@ -41,9 +42,11 @@ const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => 
             </option>
           ))}
         </select>
-        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-          <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
-        </div>
+        {faIcon !== 'none' ? (
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+            <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
+          </div>
+        ) : null}
       </div>
     </div>
   );

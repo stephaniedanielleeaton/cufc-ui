@@ -8,7 +8,7 @@ export default {
 };
 
 const defaultMember = {
-  id: 1,
+  _id: '1',
   display_first_name: 'Edith',
   display_last_name: 'Eaton',
   personal_info: {
@@ -25,7 +25,7 @@ const defaultMember = {
   },
   subscription_status: 'active',
   membership_renewed_date: new Date(1702166400000),
-  membership_months_paid: 3,
+  membership_months_paid: '3',
 };
 
 const Template = (args) => <AdminMember {...args} />;

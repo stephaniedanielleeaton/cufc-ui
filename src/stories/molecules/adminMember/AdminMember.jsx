@@ -5,20 +5,7 @@ import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
 
 function AdminMember({ member }) {
-  const [formData, setFormData] = useState({
-    displayFirstName: member.display_first_name,
-    displayLastName: member.display_last_name,
-    legalFirstName: member.personal_info.legal_first_name,
-    legalLastName: member.personal_info.legal_last_name,
-    email: member.personal_info.email,
-    dateOfBirth: member.personal_info.date_of_birth,
-    streetAddress: member.personal_info.address.street,
-    city: member.personal_info.address.city,
-    state: member.personal_info.address.state,
-    zipcode: member.personal_info.address.zipcode,
-    country: member.personal_info.address.country,
-    phoneNumber: member.personal_info.phone,
-  });
+  const[memberData, setMemberData] = useState(member)
 
   const formatDate = (date) => {
     if (!date) return ''; // Handle undefined date gracefully
@@ -47,7 +34,7 @@ function AdminMember({ member }) {
       return '';
     }
     const date = new Date(utcDate);
-    const year = date.getUTCFullYear();
+    const year = String(date.getUTCFullYear());
     const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Adding 1 because getUTCMonth() returns 0-based index
     const day = String(date.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
@@ -59,7 +46,7 @@ function AdminMember({ member }) {
     let day = membershipRenewalDate.getUTCDate();
 
     // Calculate the new month and year after adding the specified number of months
-    month += months;
+    month += +months;
     year += Math.floor(month / 12);
     month %= 12;
 
@@ -80,16 +67,16 @@ function AdminMember({ member }) {
   }
 
   const handleChange = (name, value) => {
-    setFormData((prevData) => ({
+    setMemberData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    console.log(formData);
+    console.log(memberData);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit(memberData);
   };
 
   return (
@@ -105,43 +92,43 @@ function AdminMember({ member }) {
           <hr className="my-2 border-gray-300 mb" />
           <div className="text-sm text-outerSpace">Preferred First Name:</div>
           <BaseTextInput
-            name="displayFirstName"
+            name="display_first_name"
             faIcon="none"
             onChange={handleChange}
             placeholder="Preferred First Name"
-            value={formData.displayFirstName}
+            value={memberData.display_first_name}
           />
           <div className="text-sm text-outerSpace">Preferred Last Name:</div>
           <BaseTextInput
-            name="displayLastName"
+            name="display_last_name"
             faIcon="none"
             onChange={handleChange}
             placeholder="Preferred Last Name"
-            value={formData.displayLastName}
+            value={memberData.display_last_name}
           />
           <div className="text-sm text-outerSpace">Legal First Name:</div>
           <BaseTextInput
-            name="legalFirstName"
+            name="legal_first_name"
             faIcon="none"
             onChange={handleChange}
             placeholder="Legal First Name"
-            value={formData.legalFirstName}
+            value={memberData.personal_info.legal_first_name}
           />
           <div className="text-sm text-outerSpace">Legal Last Name:</div>
           <BaseTextInput
-            name="legalLastName"
+            name="legal_last_name"
             faIcon="none"
             onChange={handleChange}
             placeholder="Legal Last Name"
-            value={formData.legalLastName}
+            value={memberData.personal_info.legal_last_name}
           />
           <div className="text-sm text-outerSpace">Date of Birth:</div>
           <BaseTextInput
             faIcon="none"
-            name="dateOfBirth"
+            name="date_of_birth"
             type="date"
             onChange={handleChange}
-            value={convertUTCDateToYYYYMMDD(member.personal_info.date_of_birth)}
+            value={convertUTCDateToYYYYMMDD(memberData.personal_info.date_of_birth)}
           />
         </div>
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
@@ -150,13 +137,13 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">Street:</div>
           <BaseTextInput
             faIcon="none"
-            name="streetAddress"
+            name="street"
             onChange={handleChange}
             placeholder="Street Address"
-            value={formData.streetAddress}
+            value={memberData.personal_info.address.street}
           />
           <div className="text-sm text-outerSpace">City:</div>
-          <BaseTextInput faIcon="none" name="city" onChange={handleChange} placeholder="City" value={formData.city} />
+          <BaseTextInput faIcon="none" name="city" onChange={handleChange} placeholder="City" value={memberData.personal_info.address.city} />
           <div className="text-sm text-outerSpace">State:</div>
           <BaseSelect
             faIcon="none"
@@ -171,7 +158,7 @@ function AdminMember({ member }) {
             name="zipcode"
             onChange={handleChange}
             placeholder="Zipcode"
-            value={formData.zipcode}
+            value={memberData.personal_info.address.zipcode}
           />
           <div className="text-sm text-outerSpace">Country:</div>
           <BaseSelect
@@ -190,21 +177,21 @@ function AdminMember({ member }) {
             name="email"
             onChange={handleChange}
             placeholder="Email"
-            value={formData.email}
+            value={memberData.personal_info.email}
           />
           <BaseTextInput
             faIcon="faMobilePhone"
             name="phoneNumber"
             onChange={handleChange}
             placeholder="Phone Number"
-            value={formData.phoneNumber}
+            value={memberData.personal_info.phone}
           />
           <div className="text-lg font-bold text-wine">Membership Information</div>
           <hr className="my-2 border-gray-300" />
           <div className="flex flex-wrap mt-2">
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Subscription Status:</div>
-              <div className="text-lg font-medium">{member.subscription_status || ''}</div>
+              <div className="text-lg font-medium">{memberData.subscription_status || ''}</div>
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Start Date:</div>
@@ -222,13 +209,20 @@ function AdminMember({ member }) {
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Months Paid:</div>
-              <div className="text-lg font-medium">{member.membership_months_paid}</div>
+              <BaseSelect
+                faIcon="none"
+                name="membershipMonthsPaid"
+                onChange={handleChange}
+                options={['1', '2', '3', '4', '5', '6']}
+                value={memberData.membership_months_paid}
+                placeholder="State"
+              />
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Membership Valid Until:</div>
               <BaseTextInput
                 faIcon="none"
-                name="dateOfBirth"
+                name="membershipValidUntil"
                 type="date"
                 onChange={handleChange}
                 value={convertUTCDateToYYYYMMDD(
@@ -254,9 +248,9 @@ AdminMember.propTypes = {
     personal_info: PropTypes.shape({
       legal_first_name: PropTypes.string,
       legal_last_name: PropTypes.string,
-      email: PropTypes.string.isRequired,
+      email: PropTypes.string,
       phone: PropTypes.string,
-      date_of_birth: PropTypes.string,
+      date_of_birth: PropTypes.instanceOf(Date),
       address: PropTypes.shape({
         street: PropTypes.string,
         city: PropTypes.string,
@@ -266,9 +260,9 @@ AdminMember.propTypes = {
       }),
     }),
     subscription_status: PropTypes.string,
-    membership_start_date: PropTypes.string,
-    membership_renewed_date: PropTypes.string,
-    membership_months_paid: PropTypes.number,
+    membership_start_date: PropTypes.instanceOf(Date),
+    membership_renewed_date: PropTypes.instanceOf(Date),
+    membership_months_paid: PropTypes.string,
     role: PropTypes.string,
   }).isRequired,
 };
