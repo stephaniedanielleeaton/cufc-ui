@@ -1,14 +1,14 @@
 import React from 'react';
-import UpdateUser from './UpdateUser.jsx';
+import AdminMembership from './AdminMembership.jsx';
 
 export default {
-  title: 'Molecules/UpdateUser',
-  component: UpdateUser,
+  title: 'Molecules/AdminMembership',
+  component: AdminMembership,
   tags: ['autodocs'],
 };
 
 const defaultMember = {
-  id: 1,
+  _id: '1',
   display_first_name: 'Edith',
   display_last_name: 'Eaton',
   personal_info: {
@@ -25,10 +25,10 @@ const defaultMember = {
   },
   subscription_status: 'active',
   membership_renewed_date: new Date(1702166400000),
-  membership_months_paid: 3,
+  membership_months_paid: '3',
 };
 
-const Template = (args) => <UpdateUser {...args} />;
+const Template = (args) => <AdminMembership {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

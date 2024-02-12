@@ -4,10 +4,13 @@ import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
-import { convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
+import { calculateValidUntilDate, convertUTCDateToYYYYMMDD, formatDate } from '../../../utils/dateUtils.jsx';
 
-function AdminMember({ member }) {
+function AdminMembership({ member }) {
   const [memberData, setMemberData] = useState(member);
+  const [overRideData, setOverRideData] = useState(
+    {override_renewal_date: '', override_months: '', override_reasoning: ''}
+  )
 
   const handleChange = (e) => {
     const { name, value } = e.target || e;
@@ -108,6 +111,33 @@ function AdminMember({ member }) {
     </>
   );
 
+  const renderMembershipInfo = () => (
+    <div className="flex flex-wrap mt-2">
+      <div className="w-full py-2">
+        <div className="text-sm text-outerSpace">Subscription Status:</div>
+        <div className="text-lg font-medium">{memberData.subscription_status || ''}</div>
+      </div>
+      <div className="w-full py-2">
+        <div className="text-sm text-outerSpace">Start Date:</div>
+        <div className="text-lg font-medium">{formatDate(member.membership_start_date)}</div>
+      </div>
+      <div className="w-full py-2">
+        <div className="text-sm text-outerSpace">Last Renewal Date:</div>
+        <div className="text-lg font-medium">{formatDate(memberData.membership_renewed_date)}</div>
+      </div>
+      <div className="w-full py-2">
+        <div className="text-sm text-outerSpace">Months Paid:</div>
+        <div className="text-lg font-medium">{member.membership_months_paid}</div>
+      </div>
+      <div className="w-full py-2">
+        <div className="text-sm text-outerSpace">Membership Valid Until:</div>
+        <div className="text-lg font-medium">
+          {formatDate(calculateValidUntilDate(memberData.membership_renewed_date, memberData.membership_months_paid))}
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div>
       <div className="flex justify-center">
@@ -133,11 +163,49 @@ function AdminMember({ member }) {
         </div>
         <div className="w-full text-center pl-16 flex justify-around">
           <BaseButton color="wine" onClick={handleSubmit} text="Save" />
-          <BaseButton color="wine" onClick={() => {}} text="Cancel / Return" />
+          <BaseButton color="wine" onClick={() => {
+          }} text="Cancel / Return" />
+        </div>
+      </form>
+      <form onSubmit={handleSubmit} className="flex flex-wrap">
+        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+          <div className="text-lg font-bold text-wine">Membership Information</div>
+          <hr className="my-2 border-gray-300" />
+          {renderMembershipInfo()}
+        </div>
+        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+          <div className="text-lg font-bold text-wine">Override</div>
+          <hr className="my-2 border-gray-300" />
+          <div className="text-sm"> Membership Valid Until date is an extrapolation of last renewal date + the number of
+            months paid. If you would like to adjust a member's valid until date, please use the form below to set a new
+            renewed date and provide details as to why this override is being performed.
+          </div>
+          <BaseTextInput
+            faIcon="none"
+            name=""
+            type="date"
+            onChange={handleChange}
+          />
+          <BaseSelect
+            name=""
+            faIcon="none"
+            onChange={handleChange}
+            options={['1', '2']}
+            placeholder="Months"
+            value={getNestedValue(memberData, name)}
+          />
+          <BaseTextInput
+            faIcon="none"
+            name=""
+            onChange={handleChange}
+            value=""
+            placeholder="Reasoning for Override"
+          />
+          <div className="text-sm">Examples: Cash transaction, gratuity, automation error, etc</div>
         </div>
       </form>
     </div>
-  );
+);
 }
 
 AdminMember.propTypes = {
@@ -171,4 +239,4 @@ function getNestedValue(obj, path) {
   return path.split('.').reduce((acc, key) => (acc && acc[key] !== 'undefined' ? acc[key] : ''), obj);
 }
 
-export default AdminMember;
+export default AdminMembership;
