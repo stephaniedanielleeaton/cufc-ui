@@ -3,8 +3,12 @@ import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
+import { faCircleCheck, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function AdminMember({ member }) {
+  const [editableField, setEditableField] = useState('');
+  const [hoveringField, setHoveringField] = useState('');
   const [formData, setFormData] = useState({
     displayFirstName: member.display_first_name,
     displayLastName: member.display_last_name,
@@ -19,6 +23,9 @@ function AdminMember({ member }) {
     country: member.personal_info.address.country,
     phoneNumber: member.personal_info.phone,
   });
+  const handleEdit = (fieldName) => {
+    setEditableField(fieldName);
+  };
 
   const defaultDateForDatePicker = convertUTCDateToYYYYMMDD(formData.dateOfBirth);
 
@@ -47,7 +54,7 @@ function AdminMember({ member }) {
     <div>
       <form onSubmit={handleSubmit} className="flex flex-wrap">
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
-          <div className="font-bold text-wine">About You</div>
+          <div className="font-bold">About</div>
           <BaseTextInput
             name="displayFirstName"
             onChange={handleChange}
@@ -89,6 +96,45 @@ function AdminMember({ member }) {
         </div>
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
           <div className="font-bold text-wine">Address</div>
+          <BaseTextInput
+            faIcon="faStreetView"
+            name="streetAddress"
+            onChange={handleChange}
+            placeholder="Street Address"
+            value={formData.streetAddress}
+          />
+          <BaseTextInput faIcon="faCity" name="city" onChange={handleChange} placeholder="City" value={formData.city} />
+          <BaseSelect
+            faIcon="faMapPin"
+            name="state"
+            onChange={handleChange}
+            options={['option 1', 'option 2', 'option 3']}
+            placeholder="State"
+          />
+          <BaseTextInput
+            faIcon="faMapPin"
+            name="zipcode"
+            onChange={handleChange}
+            placeholder="Zipcode"
+            value={formData.zipcode}
+          />
+          <BaseSelect
+            faIcon="faMapPin"
+            name="country"
+            onChange={handleChange}
+            options={['option 1', 'option 2', 'option 3']}
+            placeholder="Country"
+          />
+          <BaseTextInput
+            faIcon="faMobilePhone"
+            name="phoneNumber"
+            onChange={handleChange}
+            placeholder="Phone Number"
+            value={formData.phoneNumber}
+          />
+        </div>
+        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+          <div className="font-bold text-wine">Membership Information</div>
           <BaseTextInput
             faIcon="faStreetView"
             name="streetAddress"
