@@ -67,10 +67,37 @@ function AdminMember({ member }) {
   }
 
   const handleChange = (name, value) => {
-    setMemberData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    console.log(name);
+    console.log(value);
+    // Split the name into an array of keys
+    const keys = name.split('.');
+
+    // Handle nested state updates
+    if (keys.length === 1) {
+      setMemberData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    } else if (keys.length === 2) {
+      setMemberData((prevData) => ({
+        ...prevData,
+        [keys[0]]: {
+          ...prevData[keys[0]],
+          [keys[1]]: value,
+        },
+      }));
+    } else if (keys.length === 3) {
+      setMemberData((prevData) => ({
+        ...prevData,
+        [keys[0]]: {
+          ...prevData[keys[0]],
+          [keys[1]]: {
+            ...prevData[keys[0]][keys[1]],
+            [keys[2]]: value,
+          },
+        },
+      }));
+    }
     console.log(memberData);
   };
 
@@ -108,7 +135,7 @@ function AdminMember({ member }) {
           />
           <div className="text-sm text-outerSpace">Legal First Name:</div>
           <BaseTextInput
-            name="legal_first_name"
+            name="personal_info.legal_first_name"
             faIcon="none"
             onChange={handleChange}
             placeholder="Legal First Name"
@@ -116,7 +143,7 @@ function AdminMember({ member }) {
           />
           <div className="text-sm text-outerSpace">Legal Last Name:</div>
           <BaseTextInput
-            name="legal_last_name"
+            name="personal_info.legal_last_name"
             faIcon="none"
             onChange={handleChange}
             placeholder="Legal Last Name"
@@ -125,7 +152,7 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">Date of Birth:</div>
           <BaseTextInput
             faIcon="none"
-            name="date_of_birth"
+            name="personal_info.date_of_birth"
             type="date"
             onChange={handleChange}
             value={convertUTCDateToYYYYMMDD(memberData.personal_info.date_of_birth)}
@@ -137,7 +164,7 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">Street:</div>
           <BaseTextInput
             faIcon="none"
-            name="street"
+            name="personal_info.address.street"
             onChange={handleChange}
             placeholder="Street Address"
             value={memberData.personal_info.address.street}
@@ -147,7 +174,7 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">State:</div>
           <BaseSelect
             faIcon="none"
-            name="state"
+            name="personal_info.address.state"
             onChange={handleChange}
             options={['option 1', 'option 2', 'option 3']}
             placeholder="State"
@@ -155,7 +182,7 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">Zipcode:</div>
           <BaseTextInput
             faIcon="none"
-            name="zipcode"
+            name="personal_info.address.zipcode"
             onChange={handleChange}
             placeholder="Zipcode"
             value={memberData.personal_info.address.zipcode}
@@ -163,7 +190,7 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">Country:</div>
           <BaseSelect
             faIcon="none"
-            name="country"
+            name="personal_info.address.street.country"
             onChange={handleChange}
             options={['option 1', 'option 2', 'option 3']}
             placeholder="Country"
@@ -174,14 +201,14 @@ function AdminMember({ member }) {
           <hr className="my-2 border-gray-300" />
           <BaseTextInput
             faIcon="faEnvelope"
-            name="email"
+            name="personal_info.email"
             onChange={handleChange}
             placeholder="Email"
             value={memberData.personal_info.email}
           />
           <BaseTextInput
             faIcon="faMobilePhone"
-            name="phoneNumber"
+            name="personal_info.phone"
             onChange={handleChange}
             placeholder="Phone Number"
             value={memberData.personal_info.phone}
@@ -201,7 +228,7 @@ function AdminMember({ member }) {
               <div className="text-sm text-outerSpace">Last Renewal Date:</div>
               <BaseTextInput
                 faIcon="none"
-                name="dateOfBirth"
+                name="membership_renewed_date"
                 type="date"
                 onChange={handleChange}
                 value={convertUTCDateToYYYYMMDD(member.membership_renewed_date)}
@@ -222,7 +249,7 @@ function AdminMember({ member }) {
               <div className="text-sm text-outerSpace">Membership Valid Until:</div>
               <BaseTextInput
                 faIcon="none"
-                name="membershipValidUntil"
+                name="membership_valid_until"
                 type="date"
                 onChange={handleChange}
                 value={convertUTCDateToYYYYMMDD(
