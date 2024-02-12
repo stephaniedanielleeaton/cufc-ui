@@ -8,6 +8,9 @@ import { calculateValidUntilDate, convertUTCDateToYYYYMMDD, formatDate } from '.
 
 function AdminMember({ member }) {
   const [memberData, setMemberData] = useState(member);
+  const [overRideData, setOverRideData] = useState(
+    {override_renewal_date: '', override_months: '', override_reasoning: ''}
+  )
 
   const handleChange = (e) => {
     const { name, value } = e.target || e;
@@ -158,6 +161,13 @@ function AdminMember({ member }) {
           <hr className="my-2 border-gray-300" />
           {renderContactInputs()}
         </div>
+        <div className="w-full text-center pl-16 flex justify-around">
+          <BaseButton color="wine" onClick={handleSubmit} text="Save" />
+          <BaseButton color="wine" onClick={() => {
+          }} text="Cancel / Return" />
+        </div>
+      </form>
+      <form onSubmit={handleSubmit} className="flex flex-wrap">
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
           <div className="text-lg font-bold text-wine">Membership Information</div>
           <hr className="my-2 border-gray-300" />
@@ -166,7 +176,9 @@ function AdminMember({ member }) {
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
           <div className="text-lg font-bold text-wine">Override</div>
           <hr className="my-2 border-gray-300" />
-          <div className="text-sm"> Membership Valid Until date is an extrapolation of last renewal date + the number of months paid. If you would like to adjust a member's valid until date, please use the form below and provide details as to why this override is being performed.
+          <div className="text-sm"> Membership Valid Until date is an extrapolation of last renewal date + the number of
+            months paid. If you would like to adjust a member's valid until date, please use the form below to set a new
+            renewed date and provide details as to why this override is being performed.
           </div>
           <BaseTextInput
             faIcon="none"
@@ -174,29 +186,26 @@ function AdminMember({ member }) {
             type="date"
             onChange={handleChange}
           />
-          <BaseTextInput
+          <BaseSelect
+            name=""
             faIcon="none"
-            name="personal_info.date_of_birth"
             onChange={handleChange}
-            value=""
+            options={['1', '2']}
+            placeholder="Months"
+            value={getNestedValue(memberData, name)}
           />
           <BaseTextInput
             faIcon="none"
-            name="personal_info.date_of_birth"
+            name=""
             onChange={handleChange}
             value=""
             placeholder="Reasoning for Override"
           />
+          <div className="text-sm">Examples: Cash transaction, gratuity, automation error, etc</div>
         </div>
       </form>
-      <div className="w-full text-center pl-16 flex justify-around">
-        <BaseButton color="wine" onClick={() => {
-        }} text="Save" />
-        <BaseButton color="wine" onClick={() => {
-        }} text="Cancel / Return" />
-      </div>
     </div>
-  );
+);
 }
 
 AdminMember.propTypes = {
