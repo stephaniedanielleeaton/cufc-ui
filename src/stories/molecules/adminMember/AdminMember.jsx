@@ -127,18 +127,14 @@ function AdminMember({ member }) {
             value={memberData.personal_info.address.city}
           />
           <div className="text-sm text-outerSpace">State:</div>
-          <div className="w-full p-2 text-sm">
-            <div className="flex items-center relative">
-              <BaseSelect
-                faIcon="none"
-                name="personal_info.address.state"
-                onChange={handleChange}
-                options={usStateAbbreviations}
-                placeholder="Country"
-                value={memberData.personal_info.address.state}
-              />
-            </div>
-          </div>
+          <BaseSelect
+            faIcon="none"
+            name="personal_info.address.state"
+            onChange={handleChange}
+            options={usStateAbbreviations}
+            placeholder="Country"
+            value={memberData.personal_info.address.state}
+          />
           <div className="text-sm text-outerSpace">Zipcode:</div>
           <BaseTextInput
             faIcon="none"
