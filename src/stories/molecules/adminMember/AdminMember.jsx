@@ -158,15 +158,42 @@ function AdminMember({ member }) {
           <hr className="my-2 border-gray-300" />
           {renderContactInputs()}
         </div>
-        <div className="p-4 font-poppins flex-grow w-full">
+        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
           <div className="text-lg font-bold text-wine">Membership Information</div>
           <hr className="my-2 border-gray-300" />
           {renderMembershipInfo()}
         </div>
+        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+          <div className="text-lg font-bold text-wine">Override</div>
+          <hr className="my-2 border-gray-300" />
+          <div className="text-sm"> Membership Valid Until date is an extrapolation of last renewal date + the number of months paid. If you would like to adjust a member's valid until date, please use the form below and provide details as to why this override is being performed.
+          </div>
+          <BaseTextInput
+            faIcon="none"
+            name=""
+            type="date"
+            onChange={handleChange}
+          />
+          <BaseTextInput
+            faIcon="none"
+            name="personal_info.date_of_birth"
+            onChange={handleChange}
+            value=""
+          />
+          <BaseTextInput
+            faIcon="none"
+            name="personal_info.date_of_birth"
+            onChange={handleChange}
+            value=""
+            placeholder="Reasoning for Override"
+          />
+        </div>
       </form>
       <div className="w-full text-center pl-16 flex justify-around">
-        <BaseButton color="wine" onClick={() => {}} text="Save" />
-        <BaseButton color="wine" onClick={() => {}} text="Cancel / Return" />
+        <BaseButton color="wine" onClick={() => {
+        }} text="Save" />
+        <BaseButton color="wine" onClick={() => {
+        }} text="Cancel / Return" />
       </div>
     </div>
   );
