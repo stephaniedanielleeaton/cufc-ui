@@ -3,9 +3,11 @@ import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
+import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function AdminMember({ member }) {
-  const[memberData, setMemberData] = useState(member)
+  const [memberData, setMemberData] = useState(member);
 
   const formatDate = (date) => {
     if (!date) return ''; // Handle undefined date gracefully
@@ -66,9 +68,8 @@ function AdminMember({ member }) {
     return new Date(Date.UTC(year, month, day));
   }
 
-  const handleChange = (name, value) => {
-    console.log(name);
-    console.log(value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     // Split the name into an array of keys
     const keys = name.split('.');
 
@@ -170,15 +171,34 @@ function AdminMember({ member }) {
             value={memberData.personal_info.address.street}
           />
           <div className="text-sm text-outerSpace">City:</div>
-          <BaseTextInput faIcon="none" name="city" onChange={handleChange} placeholder="City" value={memberData.personal_info.address.city} />
-          <div className="text-sm text-outerSpace">State:</div>
-          <BaseSelect
+          <BaseTextInput
             faIcon="none"
-            name="personal_info.address.state"
+            name="personal_info.address.city"
             onChange={handleChange}
-            options={['option 1', 'option 2', 'option 3']}
-            placeholder="State"
+            placeholder="City"
+            value={memberData.personal_info.address.city}
           />
+          <div className="text-sm text-outerSpace">State:</div>
+          <div className="w-full p-2 text-sm">
+            <div className="flex items-center relative">
+              <select
+                className="w-full h-12 border rounded-md pl-10 focus:outline-none focus:border-periwinkle"
+                onChange={handleChange}
+                value={memberData.personal_info.address.state}
+                name="personal_info.address.state"
+              >
+                <option value="" disabled defaultValue>
+                  State
+                </option>
+                {usStateAbbreviations.map((stateAbbr) => (
+                  <option key={stateAbbr} value={stateAbbr}>
+                    {stateAbbr}
+                  </option>
+                ))}
+              </select>
+
+            </div>
+          </div>
           <div className="text-sm text-outerSpace">Zipcode:</div>
           <BaseTextInput
             faIcon="none"
@@ -190,10 +210,11 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">Country:</div>
           <BaseSelect
             faIcon="none"
-            name="personal_info.address.street.country"
+            name="personal_info.address.country"
             onChange={handleChange}
-            options={['option 1', 'option 2', 'option 3']}
+            options={commonCountries}
             placeholder="Country"
+            value={memberData.personal_info.address.country}
           />
         </div>
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
