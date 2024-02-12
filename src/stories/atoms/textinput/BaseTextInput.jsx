@@ -19,6 +19,7 @@ const iconDefs = [
   { ref: 'faCity', value: faCity },
   { ref: 'faMapPin', value: faMapPin },
   { ref: 'faMobilePhone', value: faMobilePhone },
+  { ref: 'none', value: '' },
 ];
 
 const BaseTextInput = ({ placeholder, onChange, value, faIcon, name, type }) => {
@@ -39,9 +40,11 @@ const BaseTextInput = ({ placeholder, onChange, value, faIcon, name, type }) => 
           value={value}
           name={name} // Pass the name prop to the input
         />
-        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-          <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
-        </div>
+        {faIcon !== '' ? (
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+            <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
+          </div>
+        ) : null}
       </div>
     </div>
   );

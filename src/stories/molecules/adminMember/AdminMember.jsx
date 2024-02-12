@@ -52,33 +52,97 @@ function AdminMember({ member }) {
 
   return (
     <div>
+      <div className="flex justify-center">
+        <div className="w-full max-w-screen-lg">
+          <img src="src/stories/assets/Lynx/wtaermark.PNG" alt="Your Image" className="mx-auto w-64 h-auto" />
+        </div>
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-wrap">
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
-          <div className="font-bold">About</div>
+          <div className="text-lg font-bold text-wine">Personal Information</div>
+          <hr className="my-2 border-gray-300 mb" />
+          <div className="text-sm text-outerSpace">Preferred First Name:</div>
           <BaseTextInput
             name="displayFirstName"
+            faIcon="none"
             onChange={handleChange}
             placeholder="Preferred First Name"
             value={formData.displayFirstName}
           />
+          <div className="text-sm text-outerSpace">Preferred Last Name:</div>
           <BaseTextInput
             name="displayLastName"
+            faIcon="none"
             onChange={handleChange}
             placeholder="Preferred Last Name"
             value={formData.displayLastName}
           />
+          <div className="text-sm text-outerSpace">Legal First Name:</div>
           <BaseTextInput
             name="legalFirstName"
+            faIcon="none"
             onChange={handleChange}
             placeholder="Legal First Name"
             value={formData.legalFirstName}
           />
+          <div className="text-sm text-outerSpace">Legal Last Name:</div>
           <BaseTextInput
             name="legalLastName"
+            faIcon="none"
             onChange={handleChange}
             placeholder="Legal Last Name"
             value={formData.legalLastName}
           />
+          <div className="text-sm text-outerSpace">Date of Birth:</div>
+          <BaseTextInput
+            faIcon="none"
+            name="dateOfBirth"
+            type="date"
+            onChange={handleChange}
+            value={defaultDateForDatePicker}
+          />
+        </div>
+        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+          <div className="text-lg font-bold text-wine">Address</div>
+          <hr className="my-2 border-gray-300 mb" />
+          <div className="text-sm text-outerSpace">Street:</div>
+          <BaseTextInput
+            faIcon="none"
+            name="streetAddress"
+            onChange={handleChange}
+            placeholder="Street Address"
+            value={formData.streetAddress}
+          />
+          <div className="text-sm text-outerSpace">City:</div>
+          <BaseTextInput faIcon="none" name="city" onChange={handleChange} placeholder="City" value={formData.city} />
+          <div className="text-sm text-outerSpace">State:</div>
+          <BaseSelect
+            faIcon="none"
+            name="state"
+            onChange={handleChange}
+            options={['option 1', 'option 2', 'option 3']}
+            placeholder="State"
+          />
+          <div className="text-sm text-outerSpace">Zipcode:</div>
+          <BaseTextInput
+            faIcon="none"
+            name="zipcode"
+            onChange={handleChange}
+            placeholder="Zipcode"
+            value={formData.zipcode}
+          />
+          <div className="text-sm text-outerSpace">Country:</div>
+          <BaseSelect
+            faIcon="none"
+            name="country"
+            onChange={handleChange}
+            options={['option 1', 'option 2', 'option 3']}
+            placeholder="Country"
+          />
+        </div>
+        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+          <div className="text-lg font-bold text-wine">Contact Information</div>
+          <hr className="my-2 border-gray-300" />
           <BaseTextInput
             faIcon="faEnvelope"
             name="email"
@@ -87,94 +151,41 @@ function AdminMember({ member }) {
             value={formData.email}
           />
           <BaseTextInput
-            faIcon="faCalendar"
-            name="dateOfBirth"
-            type="date"
-            onChange={handleChange}
-            value={defaultDateForDatePicker}
-          />
-        </div>
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
-          <div className="font-bold text-wine">Address</div>
-          <BaseTextInput
-            faIcon="faStreetView"
-            name="streetAddress"
-            onChange={handleChange}
-            placeholder="Street Address"
-            value={formData.streetAddress}
-          />
-          <BaseTextInput faIcon="faCity" name="city" onChange={handleChange} placeholder="City" value={formData.city} />
-          <BaseSelect
-            faIcon="faMapPin"
-            name="state"
-            onChange={handleChange}
-            options={['option 1', 'option 2', 'option 3']}
-            placeholder="State"
-          />
-          <BaseTextInput
-            faIcon="faMapPin"
-            name="zipcode"
-            onChange={handleChange}
-            placeholder="Zipcode"
-            value={formData.zipcode}
-          />
-          <BaseSelect
-            faIcon="faMapPin"
-            name="country"
-            onChange={handleChange}
-            options={['option 1', 'option 2', 'option 3']}
-            placeholder="Country"
-          />
-          <BaseTextInput
             faIcon="faMobilePhone"
             name="phoneNumber"
             onChange={handleChange}
             placeholder="Phone Number"
             value={formData.phoneNumber}
           />
-        </div>
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
-          <div className="font-bold text-wine">Membership Information</div>
-          <BaseTextInput
-            faIcon="faStreetView"
-            name="streetAddress"
-            onChange={handleChange}
-            placeholder="Street Address"
-            value={formData.streetAddress}
-          />
-          <BaseTextInput faIcon="faCity" name="city" onChange={handleChange} placeholder="City" value={formData.city} />
-          <BaseSelect
-            faIcon="faMapPin"
-            name="state"
-            onChange={handleChange}
-            options={['option 1', 'option 2', 'option 3']}
-            placeholder="State"
-          />
-          <BaseTextInput
-            faIcon="faMapPin"
-            name="zipcode"
-            onChange={handleChange}
-            placeholder="Zipcode"
-            value={formData.zipcode}
-          />
-          <BaseSelect
-            faIcon="faMapPin"
-            name="country"
-            onChange={handleChange}
-            options={['option 1', 'option 2', 'option 3']}
-            placeholder="Country"
-          />
-          <BaseTextInput
-            faIcon="faMobilePhone"
-            name="phoneNumber"
-            onChange={handleChange}
-            placeholder="Phone Number"
-            value={formData.phoneNumber}
-          />
+          <div className="text-lg font-bold text-wine">Membership Information</div>
+          <hr className="my-2 border-gray-300" />
+          <div className="flex flex-wrap mt-2">
+            <div className="w-full py-2">
+              <div className="text-sm text-outerSpace">Subscription Status:</div>
+              <div className="text-lg font-medium">{member.subscription_status || ''}</div>
+            </div>
+            <div className="w-full py-2">
+              <div className="text-sm text-outerSpace">Start Date:</div>
+              <div className="text-lg font-medium">{}</div>
+            </div>
+            <div className="w-full py-2">
+              <div className="text-sm text-outerSpace">Last Renewal Date:</div>
+              <div className="text-lg font-medium">{}</div>
+            </div>
+            <div className="w-full py-2">
+              <div className="text-sm text-outerSpace">Months Paid:</div>
+              <div className="text-lg font-medium">{}</div>
+            </div>
+            <div className="w-full py-2">
+              <div className="text-sm text-outerSpace">Membership Valid Until:</div>
+              <div className="text-lg font-medium">{}</div>
+            </div>
+          </div>
         </div>
       </form>
       <div className="w-full text-center p-4">
-        <BaseButton color="wine" onClick={() => {}} text="Save + Next" />
+        <BaseButton color="wine" onClick={() => {
+        }} text="Save + Next" />
       </div>
     </div>
   );
