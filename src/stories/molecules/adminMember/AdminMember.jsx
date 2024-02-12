@@ -12,7 +12,7 @@ function AdminMember({ member }) {
   const handleChange = (e) => {
     const { name, value } = e.target || e;
     const keys = name.split('.');
-    setMemberData(prevData => {
+    setMemberData((prevData) => {
       let newData = { ...prevData };
       let currentLevel = newData;
       keys.forEach((key, index) => {
@@ -128,7 +128,9 @@ function AdminMember({ member }) {
       </div>
       <div className="w-full py-2">
         <div className="text-sm text-outerSpace">Membership Valid Until:</div>
-        <div className="text-lg font-medium">{formatDate(calculateValidUntilDate(memberData.membership_renewed_date, memberData.membership_months_paid))}</div>
+        <div className="text-lg font-medium">
+          {formatDate(calculateValidUntilDate(memberData.membership_renewed_date, memberData.membership_months_paid))}
+        </div>
       </div>
     </div>
   );
@@ -151,17 +153,20 @@ function AdminMember({ member }) {
           <hr className="my-2 border-gray-300 mb" />
           {renderAddressInputs()}
         </div>
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+        <div className="p-4 font-poppins flex-grow w-full">
           <div className="text-lg font-bold text-wine">Contact Information</div>
           <hr className="my-2 border-gray-300" />
           {renderContactInputs()}
+        </div>
+        <div className="p-4 font-poppins flex-grow w-full">
           <div className="text-lg font-bold text-wine">Membership Information</div>
           <hr className="my-2 border-gray-300" />
           {renderMembershipInfo()}
         </div>
       </form>
-      <div className="w-full text-center p-4">
-        <BaseButton color="wine" onClick={() => {}} text="Save + Next" />
+      <div className="w-full text-center pl-16 flex justify-around">
+        <BaseButton color="wine" onClick={() => {}} text="Save" />
+        <BaseButton color="wine" onClick={() => {}} text="Cancel / Return" />
       </div>
     </div>
   );
