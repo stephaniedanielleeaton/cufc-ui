@@ -181,22 +181,14 @@ function AdminMember({ member }) {
           <div className="text-sm text-outerSpace">State:</div>
           <div className="w-full p-2 text-sm">
             <div className="flex items-center relative">
-              <select
-                className="w-full h-12 border rounded-md pl-10 focus:outline-none focus:border-periwinkle"
-                onChange={handleChange}
-                value={memberData.personal_info.address.state}
+              <BaseSelect
+                faIcon="none"
                 name="personal_info.address.state"
-              >
-                <option value="" disabled defaultValue>
-                  State
-                </option>
-                {usStateAbbreviations.map((stateAbbr) => (
-                  <option key={stateAbbr} value={stateAbbr}>
-                    {stateAbbr}
-                  </option>
-                ))}
-              </select>
-
+                onChange={handleChange}
+                options={usStateAbbreviations}
+                placeholder="Country"
+                value={memberData.personal_info.address.state}
+              />
             </div>
           </div>
           <div className="text-sm text-outerSpace">Zipcode:</div>
