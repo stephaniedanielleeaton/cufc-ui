@@ -211,11 +211,11 @@ function AdminMember({ member }) {
               <div className="text-sm text-outerSpace">Months Paid:</div>
               <BaseSelect
                 faIcon="none"
-                name="membershipMonthsPaid"
+                name="membership_months_paid"
                 onChange={handleChange}
                 options={['1', '2', '3', '4', '5', '6']}
                 value={memberData.membership_months_paid}
-                placeholder="State"
+                placeholder="-"
               />
             </div>
             <div className="w-full py-2">
