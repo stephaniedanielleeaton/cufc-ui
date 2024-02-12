@@ -3,12 +3,8 @@ import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
-import { faCircleCheck, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function AdminMember({ member }) {
-  const [editableField, setEditableField] = useState('');
-  const [hoveringField, setHoveringField] = useState('');
   const [formData, setFormData] = useState({
     displayFirstName: member.display_first_name,
     displayLastName: member.display_last_name,
@@ -23,18 +19,64 @@ function AdminMember({ member }) {
     country: member.personal_info.address.country,
     phoneNumber: member.personal_info.phone,
   });
-  const handleEdit = (fieldName) => {
-    setEditableField(fieldName);
+
+  const formatDate = (date) => {
+    if (!date) return ''; // Handle undefined date gracefully
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+    const day = date.getUTCDate();
+    const month = months[date.getUTCMonth()];
+    const year = date.getUTCFullYear();
+    return `${month} ${day}, ${year}`;
   };
 
-  const defaultDateForDatePicker = convertUTCDateToYYYYMMDD(formData.dateOfBirth);
-
   function convertUTCDateToYYYYMMDD(utcDate) {
+    if (utcDate === null) {
+      return '';
+    }
     const date = new Date(utcDate);
     const year = date.getUTCFullYear();
     const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Adding 1 because getUTCMonth() returns 0-based index
     const day = String(date.getUTCDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
+  }
+  function calculateValidUntilDate(membershipRenewalDate, months) {
+    // Get the year, month, and day of the original date in UTC
+    let year = membershipRenewalDate.getUTCFullYear();
+    let month = membershipRenewalDate.getUTCMonth();
+    let day = membershipRenewalDate.getUTCDate();
+
+    // Calculate the new month and year after adding the specified number of months
+    month += months;
+    year += Math.floor(month / 12);
+    month %= 12;
+
+    // Handle cases where month becomes negative or greater than 11
+    if (month < 0) {
+      month += 12;
+      year--;
+    }
+
+    // Get the number of days in the new month
+    const daysInNewMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+
+    // Adjust the day if it's greater than the number of days in the new month
+    day = Math.min(day, daysInNewMonth);
+
+    // Return the new date in UTC
+    return new Date(Date.UTC(year, month, day));
   }
 
   const handleChange = (name, value) => {
@@ -99,7 +141,7 @@ function AdminMember({ member }) {
             name="dateOfBirth"
             type="date"
             onChange={handleChange}
-            value={defaultDateForDatePicker}
+            value={convertUTCDateToYYYYMMDD(member.personal_info.date_of_birth)}
           />
         </div>
         <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
@@ -166,26 +208,39 @@ function AdminMember({ member }) {
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Start Date:</div>
-              <div className="text-lg font-medium">{}</div>
+              <div className="text-lg font-medium">{formatDate(member.membership_start_date)}</div>
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Last Renewal Date:</div>
-              <div className="text-lg font-medium">{}</div>
+              <BaseTextInput
+                faIcon="none"
+                name="dateOfBirth"
+                type="date"
+                onChange={handleChange}
+                value={convertUTCDateToYYYYMMDD(member.membership_renewed_date)}
+              />
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Months Paid:</div>
-              <div className="text-lg font-medium">{}</div>
+              <div className="text-lg font-medium">{member.membership_months_paid}</div>
             </div>
             <div className="w-full py-2">
               <div className="text-sm text-outerSpace">Membership Valid Until:</div>
-              <div className="text-lg font-medium">{}</div>
+              <BaseTextInput
+                faIcon="none"
+                name="dateOfBirth"
+                type="date"
+                onChange={handleChange}
+                value={convertUTCDateToYYYYMMDD(
+                  calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid)
+                )}
+              />
             </div>
           </div>
         </div>
       </form>
       <div className="w-full text-center p-4">
-        <BaseButton color="wine" onClick={() => {
-        }} text="Save + Next" />
+        <BaseButton color="wine" onClick={() => {}} text="Save + Next" />
       </div>
     </div>
   );
