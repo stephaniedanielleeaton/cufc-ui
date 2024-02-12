@@ -1,3 +1,5 @@
+import { instance } from 'eslint-plugin-react/lib/util/lifecycleMethods.js';
+
 export const formatDate = (date) => {
   if (!date) return ''; // Handle undefined date gracefully
   const months = [
@@ -21,8 +23,12 @@ export const formatDate = (date) => {
 };
 
 export const convertUTCDateToYYYYMMDD = (utcDate) => {
+  console.log(utcDate);
   if (utcDate === null) {
     return '';
+  }
+  if (utcDate === String) {
+    return utcDate;
   }
   const date = new Date(utcDate);
   const year = String(date.getUTCFullYear());
