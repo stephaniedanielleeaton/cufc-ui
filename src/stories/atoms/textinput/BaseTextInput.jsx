@@ -25,10 +25,6 @@ const iconDefs = [
 const BaseTextInput = ({ placeholder, onChange, value, faIcon, name, type }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
 
-  const handleChange = (e) => {
-    onChange(name, e.target.value);
-  };
-
   return (
     <div className="w-full p-2 text-sm">
       <div className="flex items-center relative">
@@ -36,7 +32,7 @@ const BaseTextInput = ({ placeholder, onChange, value, faIcon, name, type }) => 
           className="w-full border rounded-md pl-10 h-12 p-3 focus:outline-none focus:border-periwinkle"
           type={type}
           placeholder={placeholder}
-          onChange={handleChange}
+          onChange={onChange}
           value={value}
           name={name} // Pass the name prop to the input
         />

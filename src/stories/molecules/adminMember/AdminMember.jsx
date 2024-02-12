@@ -69,7 +69,14 @@ function AdminMember({ member }) {
   }
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let name, value;
+    if (e && e.target) {
+      name = e.target.name;
+      value = e.target.value;
+    } else {
+      name = e.name;
+      value = e.value;
+    }
     // Split the name into an array of keys
     const keys = name.split('.');
 
