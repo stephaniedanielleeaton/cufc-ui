@@ -693,10 +693,6 @@ video {
   height: 100%;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .min-h-16 {
   min-height: 4rem;
 }
@@ -917,14 +913,6 @@ video {
   --tw-gradient-to: rgb(122 37 63 / 0.5) var(--tw-gradient-to-position);
 }
 
-.bg-cover {
-  background-size: cover;
-}
-
-.bg-center {
-  background-position: center;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -982,6 +970,10 @@ video {
 
 .pl-10 {
   padding-left: 2.5rem;
+}
+
+.pl-16 {
+  padding-left: 4rem;
 }
 
 .text-center {

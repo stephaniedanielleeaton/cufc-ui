@@ -11,4 +11,5 @@ declare module 'cufc-ui' {
 
   export const AboutMember: React.ComponentType<any>;
   export const SignUpPage: React.ComponentType<any>;
+  export const AdminMember: React.ComponentType<any>;
 }

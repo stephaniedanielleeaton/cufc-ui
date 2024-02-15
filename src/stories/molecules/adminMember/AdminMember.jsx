@@ -7,6 +7,8 @@ import { commonCountries, usStateAbbreviations } from '../../../utils/constants.
 import { convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
 
 function AdminMember({ member }) {
+  if (!member) return null;
+
   const [memberData, setMemberData] = useState(member);
 
   const handleChange = (e) => {
