@@ -5,6 +5,7 @@ import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 import { convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
+import  profilePlaceHolder  from 'src/stories/assets/Lynx/wtaermark.PNG0';
 
 function AdminMember({ member }) {
   if (!member) return null;

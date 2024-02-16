@@ -28,7 +28,7 @@ const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => 
     <div className="w-full p-2 text-sm">
       <div className="flex items-center relative">
         <select
-          className="w-full h-12 border rounded-md pl-10 focus:outline-none focus:border-periwinkle"
+          className="w-full border rounded-md pl-10 h-12 p-3 focus:outline-none focus:border-periwinkle"
           onChange={onChange}
           value={value}
           name={name}
