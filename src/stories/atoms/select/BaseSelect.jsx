@@ -33,7 +33,7 @@ const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => 
           value={value}
           name={name}
         >
-          <option value="" disabled selected>
+          <option value="" disabled>
             {placeholder}
           </option>
           {options.map((option, index) => (
@@ -51,6 +51,7 @@ const BaseSelect = ({ placeholder, onChange, value, options, faIcon, name }) => 
     </div>
   );
 };
+
 
 
 export default BaseSelect;

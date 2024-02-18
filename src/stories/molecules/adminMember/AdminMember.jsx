@@ -5,9 +5,8 @@ import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 import { convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
-import  profilePlaceHolder  from 'src/stories/assets/Lynx/wtaermark.PNG0';
 
-function AdminMember({ member }) {
+function AdminMember({ member, profilePicture }) {
   if (!member) return null;
 
   const [memberData, setMemberData] = useState(member);
@@ -115,7 +114,7 @@ function AdminMember({ member }) {
     <div>
       <div className="flex justify-center">
         <div className="w-full max-w-screen-lg">
-          <img src="src/stories/assets/Lynx/wtaermark.PNG" alt="Your Image" className="mx-auto w-64 h-auto" />
+          <img src={profilePicture} alt="Your Image" className="mx-auto w-64 h-auto" />
         </div>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-wrap">
@@ -165,9 +164,10 @@ AdminMember.propTypes = {
     subscription_status: PropTypes.string,
     membership_start_date: PropTypes.instanceOf(Date),
     membership_renewed_date: PropTypes.instanceOf(Date),
-    membership_months_paid: PropTypes.string,
+    membership_months_paid: PropTypes.number,
     role: PropTypes.string,
   }).isRequired,
+  profilePicture: PropTypes.string,
 };
 
 function getNestedValue(obj, path) {

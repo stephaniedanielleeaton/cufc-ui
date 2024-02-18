@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const formatDate = (date) => {
-  if (!date) return ''; // Handle undefined date gracefully
+  if (!date) return '';
   const months = [
     'January',
     'February',
@@ -24,7 +24,7 @@ const formatDate = (date) => {
 };
 
 function calculateValidUntilDate(membershipRenewalDate, months) {
-  if (!membershipRenewalDate) return ''; // Handle undefined renewal date gracefully
+  if (!membershipRenewalDate) return '';
 
   let year = membershipRenewalDate.getUTCFullYear();
   let month = membershipRenewalDate.getUTCMonth();

@@ -33,4 +33,5 @@ const Template = (args) => <AdminMember {...args} />;
 export const Default = Template.bind({});
 Default.args = {
   member: defaultMember,
+  profilePicture: "src/stories/assets/Lynx/wtaermark.PNG"
 };
