@@ -23,7 +23,6 @@ export const formatDate = (date) => {
 };
 
 export const convertUTCDateToYYYYMMDD = (utcDate) => {
-  console.log(utcDate);
   if (utcDate === null) {
     return '';
   }
