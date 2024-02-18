@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 import { convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
 
-function AdminMember({ member, profilePicture }) {
+function AdminMember({ member, profilePicture, onSubmit }) {
   if (!member) return null;
 
   const [memberData, setMemberData] = useState(member);
@@ -168,6 +168,7 @@ AdminMember.propTypes = {
     role: PropTypes.string,
   }).isRequired,
   profilePicture: PropTypes.string,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 function getNestedValue(obj, path) {
