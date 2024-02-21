@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NavHero from '../../organisms/navhero/NavHero.jsx';
 import About from '../../molecules/about/About.jsx';
 
 const HomePage = () => {
   return (
     <div>
-      <NavHero />
       <About />
     </div>
   );

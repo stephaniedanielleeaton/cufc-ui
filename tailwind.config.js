@@ -23,6 +23,16 @@ module.exports = {
         hoverAshGray: '#D8DCDD',
         inputGray: '#F7F8F8',
         periwinkle: '#CCCCFF',
+        // New Stuff
+        Navy: '#182A3A',
+        DeepRed: '#511F33',
+        MediumPink: '#904F69',
+        LightPink: '#C18797',
+        DarkGray: '#485056',
+        MediumGray: '#979EA3',
+        LightGray: '#C8CBCB',
+        Black: '#000',
+        TextBlack: '#212223',
       },
       gradientColorStops: {
         'blue-pink': 'linear-gradient(90deg, #375A7A 1.85%, #BD929F 50%)',
