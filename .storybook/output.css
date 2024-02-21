@@ -685,6 +685,14 @@ video {
   height: 1.5rem;
 }
 
+.h-\[187px\] {
+  height: 187px;
+}
+
+.h-\[70px\] {
+  height: 70px;
+}
+
 .h-auto {
   height: auto;
 }
@@ -719,6 +727,18 @@ video {
 
 .w-64 {
   width: 16rem;
+}
+
+.w-\[100px\] {
+  width: 100px;
+}
+
+.w-\[160px\] {
+  width: 160px;
+}
+
+.w-\[200px\] {
+  width: 200px;
 }
 
 .w-full {
@@ -800,6 +820,18 @@ video {
   margin-bottom: calc(0px * var(--tw-space-y-reverse));
 }
 
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -843,6 +875,16 @@ video {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
+.bg-MediumPink {
+  --tw-bg-opacity: 1;
+  background-color: rgb(144 79 105 / var(--tw-bg-opacity));
+}
+
+.bg-Navy {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 42 58 / var(--tw-bg-opacity));
+}
+
 .bg-ashGray {
   --tw-bg-opacity: 1;
   background-color: rgb(168 180 183 / var(--tw-bg-opacity));
@@ -856,11 +898,6 @@ video {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
-.bg-gray-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
 .bg-gunmetal {
@@ -954,6 +991,11 @@ video {
   padding-right: 1.75rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -979,6 +1021,10 @@ video {
 
 .pl-16 {
   padding-left: 4rem;
+}
+
+.pl-24 {
+  padding-left: 6rem;
 }
 
 .text-center {
@@ -1056,6 +1102,11 @@ video {
 .text-ashGray {
   --tw-text-opacity: 1;
   color: rgb(168 180 183 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-blue-500 {
