@@ -1,6 +1,5 @@
 import React from 'react';
 import AboutMember from './AboutMember.jsx';
-import PropTypes from 'prop-types';
 
 export default {
   title: 'Molecules/AboutMember',

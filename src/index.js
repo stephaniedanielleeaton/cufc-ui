@@ -1,7 +1,7 @@
 export { default as BaseText } from './stories/atoms/text/BaseText';
 export { default as BaseButton } from './stories/molecules/button/BaseButton';
-export { default as BaseSelect } from './stories/atoms/select/BaseSelect.jsx'
-export { default as BaseTextInput } from './stories/atoms/textinput/BaseTextInput.jsx'
+export { default as BaseSelect } from './stories/atoms/select/BaseSelect.jsx';
+export { default as BaseTextInput } from './stories/atoms/textinput/BaseTextInput.jsx';
 export { default as ImageBox } from './stories/molecules/imagebox/ImageBox';
 export { default as TopNavbar } from './stories/molecules/topnavbar/TopNavbar';
 export { default as AdminPage } from './stories/templates/admin/AdminPage.jsx';
