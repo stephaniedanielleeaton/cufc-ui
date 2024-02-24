@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import svgUrl from '../../assets/LogoFullColourNavy.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-      <nav className="w-full bg-Navy flex justify-between items-center h-[70px] px-4 min-h-16">
+      <nav className="w-full bg-Navy flex justify-between md:justify-end items-center h-[70px] px-4 min-h-16">
         {/* Mobile Navigation */}
         <div className="md:hidden">
           <div>
@@ -22,11 +22,11 @@ function Nav() {
           </div>
 
           <div className={isOpen ? 'block absolute left top-16' : 'hidden absolute left top-16'}>
-            <div className="px-4 py-2 rounded-md space-y-0 bg-deepSeaBlue w-full">
+            <div className="px-4 py-2 rounded-md space-y-0 bg-Navy w-full">
               {/* Navigation links */}
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
                 onClick={() => {
                   onNavigationClick('signup');
                 }}
@@ -35,7 +35,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
                 onClick={() => {
                   onNavigationClick('donate');
                 }}
@@ -44,7 +44,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
                 onClick={() => {
                   onNavigationClick('donate');
                 }}
@@ -53,7 +53,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
                 onClick={() => {
                   onNavigationClick('about');
                 }}
@@ -62,7 +62,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
                 onClick={() => {
                   onNavigationClick('admin');
                 }}
@@ -79,17 +79,11 @@ function Nav() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex justify-start items-center">
-          <button
-            type="button"
-            className="button w-[160px] flex justify-center items-center"
-          >
+        <div className="hidden md:flex justify-start items-center h-full">
+          <button type="button" className="button w-[160px] flex justify-center items-center">
             <span className="font-Khula text-base font-normal text-white">DASHBOARD</span>
           </button>
-          <button
-            type="button"
-            className="button bg-MediumPink w-[160px] h-full flex justify-center items-center"
-          >
+          <button type="button" className="button bg-MediumPink w-[160px] h-full flex justify-center items-center">
             <span className="font-Khula font-normal text-base text-white">SIGN IN</span>
           </button>
           <div className="button w-[154px]"></div>

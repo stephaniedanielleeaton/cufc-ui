@@ -1310,6 +1310,10 @@ video {
   .md\:w-1\/2 {
     width: 50%;
   }
+
+  .md\:justify-end {
+    justify-content: flex-end;
+  }
 }
 
 @media (min-width: 1024px) {
