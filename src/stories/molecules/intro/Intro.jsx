@@ -17,7 +17,12 @@ function Intro() {
         </button>
       </div>
       <div className="md:w-1/3">
-        Disciplines
+        <p className="font-bold">Disciplines</p>
+        <ul className="list-disc pl-4">
+          <li>Foil</li>
+          <li>Epee</li>
+          <li>Sabre</li>
+        </ul>
       </div>
     </div>
   );
