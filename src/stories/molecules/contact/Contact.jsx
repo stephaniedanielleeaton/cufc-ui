@@ -39,16 +39,19 @@ function Contact() {
               <img src={instagram} alt="Instagram Logo" className="w-8 h-8" />
             </div>
           </div>
-
         </div>
       </div>
       <div className="md:w-1/2 flex items-center mx-16">
-        <div>
+        <form className="w-full">
+          <input type="text" placeholder="Full Name" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4" />
+          <input type="email" placeholder="Email Address" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4" />
+          <input type="tel" placeholder="Contact Number" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4" />
+          <textarea placeholder="Message" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"></textarea>
           <button
-            className="tracking-wider border-2 border-black text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
+            className="w-full bg-black text-white text-sm font-bold px-4 py-2 rounded-md hover:bg-white hover:text-black hover:border-black border border-black">
             SUBMIT
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
