@@ -48,7 +48,7 @@ function Contact() {
           <input type="tel" placeholder="Contact Number" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4" />
           <textarea placeholder="Message" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"></textarea>
           <button
-            className="w-full bg-black text-white text-sm font-bold px-4 py-2 rounded-md hover:bg-white hover:text-black hover:border-black border border-black">
+            className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black">
             SUBMIT
           </button>
         </form>
