@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import svgUrl from '../../assets/LogoFullColourNavy.svg';
+import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
+import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +9,7 @@ function Nav() {
 
   return (
     <div>
-      <nav className="w-full bg-Navy flex justify-between md:justify-end items-center h-[70px] px-4 min-h-16">
+      <nav className="w-full bg-Navy flex justify-between md:justify-end items-center h-[70px] min-h-16">
         {/* Mobile Navigation */}
         <div className="md:hidden">
           <div>
@@ -23,7 +24,6 @@ function Nav() {
 
           <div className={isOpen ? 'block absolute left top-16' : 'hidden absolute left top-16'}>
             <div className="px-4 py-2 rounded-md space-y-0 bg-Navy w-full">
-              {/* Navigation links */}
               <a
                 href="#"
                 className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
@@ -75,7 +75,7 @@ function Nav() {
 
         {/* Center Content */}
         <div className="w-1/3 absolute inset-x-0 mx-auto text-center p-2 md:hidden">
-          <span className="font-Khula font-normal text-base text-white">CUFC</span>
+          <img src={logoAllWhiteSvg} alt="Logo" className="px-4" />
         </div>
 
         {/* Desktop Navigation */}
@@ -92,9 +92,8 @@ function Nav() {
 
       <div>
         <div className="hidden md:flex justify-between items-center h-[187px] px-8">
-          {/* Other content */}
           <div className="w-1/3 bg-white h-full flex justify-center items-center">
-            <img src={svgUrl} alt="Logo" className="w-[200px]" />
+            <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
           </div>
           <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
             <div className="button flex justify-center items-center">
