@@ -1103,6 +1103,16 @@ video {
   padding-right: 4rem;
 }
 
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -1266,6 +1276,11 @@ video {
 .text-Navy {
   --tw-text-opacity: 1;
   color: rgb(24 42 58 / var(--tw-text-opacity));
+}
+
+.text-LightPink {
+  --tw-text-opacity: 1;
+  color: rgb(193 135 151 / var(--tw-text-opacity));
 }
 
 .shadow-md {
