@@ -6,6 +6,7 @@ import Intro from '../../molecules/intro/Intro.jsx';
 import Schedule from '../../molecules/schedule/Schedule.jsx';
 import Footer from '../../molecules/footer/Footer.jsx';
 import Contact from '../../molecules/contact/Contact.jsx';
+import CTA from '../../molecules/calltoaction/CTA.jsx';
 const HomePage = () => {
   return (
     <div>
@@ -14,6 +15,7 @@ const HomePage = () => {
       <Intro />
       <Schedule />
       <Contact />
+      <CTA />
       <Footer />
     </div>
   );
