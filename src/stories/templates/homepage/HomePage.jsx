@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import About from '../../molecules/about/About.jsx';
-
 const HomePage = () => {
   return (
     <div>
-      <About />
     </div>
   );
 };
