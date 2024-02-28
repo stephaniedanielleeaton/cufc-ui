@@ -617,6 +617,21 @@ video {
   margin-bottom: 0.5rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mx-16 {
+  margin-left: 4rem;
+  margin-right: 4rem;
+}
+
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .-mt-14 {
   margin-top: -3.5rem;
 }
@@ -860,6 +875,12 @@ video {
   margin-bottom: calc(0px * var(--tw-space-y-reverse));
 }
 
+.space-y-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1rem * var(--tw-space-y-reverse));
+}
+
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -886,6 +907,10 @@ video {
 
 .border-8 {
   border-width: 8px;
+}
+
+.border-2 {
+  border-width: 2px;
 }
 
 .border-b {
@@ -1040,6 +1065,11 @@ video {
   padding-bottom: 1rem;
 }
 
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -1191,6 +1221,16 @@ video {
   color: rgb(122 37 63 / var(--tw-text-opacity));
 }
 
+.text-DeepRed {
+  --tw-text-opacity: 1;
+  color: rgb(81 31 51 / var(--tw-text-opacity));
+}
+
+.text-Navy {
+  --tw-text-opacity: 1;
+  color: rgb(24 42 58 / var(--tw-text-opacity));
+}
+
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -1236,6 +1276,11 @@ video {
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
+.hover\:border-white:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
 .hover\:bg-gray-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
@@ -1269,6 +1314,11 @@ video {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-black:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-opacity-25:hover {
@@ -1374,6 +1424,10 @@ video {
 
   .md\:w-2\/3 {
     width: 66.666667%;
+  }
+
+  .md\:w-auto {
+    width: auto;
   }
 
   .md\:flex-row {
