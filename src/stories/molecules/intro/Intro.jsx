@@ -2,8 +2,8 @@ import React from 'react';
 
 function Intro() {
   return (
-    <div className="flex flex-col md:flex-row font-khula mx-16">
-      <div className="md:w-2/3 md:mr-4 mb-4 md:mb-0">
+    <div className="flex flex-col md:flex-row font-khula">
+      <div className="md:w-2/3 md:mr-4 md:mb-0 mx-16">
         <div className="flex flex-col space-y-4"> {/* Add space between spans */}
           <span className="font-extrabold text-xs text-DeepRed">ABOUT US</span>
           <span className="font-bold text-2xl text-Navy">Columbus United Fencing Club</span>
@@ -16,13 +16,15 @@ function Intro() {
           MORE {/* Make button width auto */}
         </button>
       </div>
-      <div className="md:w-1/3">
-        <p className="font-bold">Disciplines</p>
-        <ul className="list-disc pl-4">
-          <li>Foil</li>
-          <li>Epee</li>
-          <li>Sabre</li>
-        </ul>
+      <div className="md:w-1/3 flex items-center mx-16">
+        <div>
+          <p className="font-bold text-Navy">Disciplines</p>
+          <ul className="list-disc pl-4 font-light text-sm">
+            <li>Foil</li>
+            <li>Epee</li>
+            <li>Sabre</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
