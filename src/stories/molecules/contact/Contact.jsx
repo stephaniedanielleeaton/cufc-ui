@@ -43,12 +43,26 @@ function Contact() {
       </div>
       <div className="md:w-1/2 flex items-center mx-16">
         <form className="w-full">
-          <input type="text" placeholder="Full Name" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4" />
-          <input type="email" placeholder="Email Address" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4" />
-          <input type="tel" placeholder="Contact Number" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4" />
-          <textarea placeholder="Message" className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"></textarea>
-          <button
-            className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black">
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+          />
+          <input
+            type="email"
+            placeholder="Email Address"
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+          />
+          <input
+            type="tel"
+            placeholder="Contact Number"
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+          />
+          <textarea
+            placeholder="Message"
+            className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
+          ></textarea>
+          <button className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black">
             SUBMIT
           </button>
         </form>
