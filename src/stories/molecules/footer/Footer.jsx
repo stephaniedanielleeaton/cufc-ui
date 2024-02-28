@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
 import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import facebookSvg from '../../assets/facebook.svg';
+import instagramSvg from '../../assets/instagram.svg';
 
 function Footer() {
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
@@ -15,20 +14,25 @@ function Footer() {
             <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
           </div>
           <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
-            ADRESS
+            <span className="font-light font-inter"> 4601 Nickerson Rd, Columbus, OH 43228 </span>
           </div>
           <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
-            FB INSTA
+            <div className="flex items-center">
+              <img src={facebookSvg} alt="Facebook Logo" className="w-10 h-10 mr-4" />
+              <img src={instagramSvg} alt="Instagram Logo" className="w-10 h-10" />
+            </div>
+
           </div>
         </div>
       </div>
       <div className="w-full bg-Navy flex justify-between md:justify-end items-center h-[70px] min-h-16">
-        {/* Center Content */}
-        <div className="w-1/3 absolute inset-x-0 mx-auto text-center p-2 md:hidden">
-          <img src={logoAllWhiteSvg} alt="Logo" className="px-4" />
+        <div className="w-1/2 h-full flex justify-center items-center">
+          <span className="text-xs text-white">© 2024 Columbus United Fencing Club. All rights reserved</span>
+        </div>
+        <div className="w-1/2 h-full flex justify-center items-center">
+          <span></span>
         </div>
       </div>
-
     </div>
   );
 }
