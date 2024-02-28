@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Nav from '../../molecules/nav/Nav.jsx';
+import Hero from '../../molecules/hero/Hero.jsx';
+import Intro from '../../molecules/intro/Intro.jsx';
+import Schedule from '../../molecules/schedule/Schedule.jsx';
+import Footer from '../../molecules/footer/Footer.jsx';
 const HomePage = () => {
   return (
     <div>
+      <Nav />
+      <Hero />
+      <Intro />
+      <Schedule />
+      <Footer />
     </div>
   );
 };

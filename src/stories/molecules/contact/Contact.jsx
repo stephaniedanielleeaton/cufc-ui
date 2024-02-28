@@ -1,33 +1,53 @@
 import React from 'react';
+import cellphone from '../../assets/cellphone.svg';
+import addresspin from '../../assets/addresspin.svg';
+import facebook from '../../assets/facebook.svg';
+import instagram from '../../assets/instagram.svg';
 
 function Contact() {
   return (
-    <div className="flex flex-col md:flex-row font-khula">
-      <div className="md:w-2/3 md:mr-4 md:mb-0 mx-16">
+    <div className="flex flex-col md:flex-row font-khula text-sm">
+      <div className="md:w-1/2 md:mr-4 md:mb-0 mx-16">
         <div className="flex flex-col space-y-4">
-          {' '}
-          {/* Add space between spans */}
-          <span className="font-extrabold text-xs text-DeepRed">ABOUT US</span>
-          <span className="font-bold text-2xl text-Navy">Columbus United Fencing Club</span>
-          <span className="font-light text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum nisi sapien, id consequat felis
-            tempor et. Ut pellentesque eu arcu nec maximus. Donec mauris nunc, tincidunt tincidunt maximus id, sodales
-            nec nisi. Aliquam magna ex, semper a tellus quis, tempor feugiat ex.
+          <span className="font-bold text-2xl text-Navy">Contact Us</span>
+          <span className="font-light">
+            Have a question? <b>Send us a message.</b>
           </span>
+          <div className="flex items-center">
+            <div className="mr-4">
+              <img src={cellphone} alt="Phone Icon" className="w-8 h-8" />
+            </div>
+            <div className="block w-full">
+              <span className="w-full block font-bold">Give Us A Call</span>
+              <span className="w-full block">123-456-7890</span>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="mr-4">
+              <img src={addresspin} alt="Address Icon" className="w-8 h-8" />
+            </div>
+            <div className="block w-full">
+              <span className="w-full block font-bold">Address</span>
+              <span className="w-full block">4601 Nickerson Rd, Columbus, OH 43228</span>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="mr-4">
+              <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />
+            </div>
+            <div className="mr-4">
+              <img src={instagram} alt="Instagram Logo" className="w-8 h-8" />
+            </div>
+          </div>
+
         </div>
-        <button className="tracking-wider border-2 border-black text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
-          {' '}
-          LEARN LEARN MORE {/* Make button width auto */}
-        </button>
       </div>
-      <div className="md:w-1/3 flex items-center mx-16">
+      <div className="md:w-1/2 flex items-center mx-16">
         <div>
-          <p className="font-bold text-Navy">Disciplines</p>
-          <ul className="list-disc pl-4 font-light text-sm">
-            <li>Saber</li>
-            <li>Longsword</li>
-            <li>Footwork & Thrusting Weapons</li>
-          </ul>
+          <button
+            className="tracking-wider border-2 border-black text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
+            SUBMIT
+          </button>
         </div>
       </div>
     </div>
