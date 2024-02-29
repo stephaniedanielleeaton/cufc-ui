@@ -8,7 +8,7 @@ function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <nav className="w-full bg-Navy flex justify-between md:justify-end items-center h-[70px] min-h-16">
         {/* Mobile Navigation */}
         <div className="md:hidden">
@@ -26,7 +26,7 @@ function Nav() {
             <div className="px-4 py-2 rounded-md space-y-0 bg-Navy w-full">
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
                 onClick={() => {
                   onNavigationClick('signup');
                 }}
@@ -35,7 +35,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
                 onClick={() => {
                   onNavigationClick('donate');
                 }}
@@ -44,7 +44,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
                 onClick={() => {
                   onNavigationClick('donate');
                 }}
@@ -53,7 +53,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
                 onClick={() => {
                   onNavigationClick('about');
                 }}
@@ -62,7 +62,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base"
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
                 onClick={() => {
                   onNavigationClick('admin');
                 }}
@@ -79,38 +79,47 @@ function Nav() {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex justify-start items-center h-full">
-          <button type="button" className="button w-[160px] flex justify-center items-center">
+        <div className="hidden md:flex justify-around items-center h-full md: w-1/2 lg:w-1/3">
+          <button type="button" className="button h-full flex-grow flex justify-center items-center">
+            <span className="font-Khula text-base font-normal text-white">ADMIN</span>
+          </button>
+          <button type="button" className="button h-full flex-grow flex justify-center items-center">
             <span className="font-Khula text-base font-normal text-white">DASHBOARD</span>
           </button>
-          <button type="button" className="button bg-MediumPink w-[160px] h-full flex justify-center items-center">
+          <button type="button" className="button bg-MediumPink h-full flex-grow flex justify-center items-center">
             <span className="font-Khula font-normal text-base text-white">SIGN IN</span>
           </button>
-          <div className="button w-[154px]"></div>
+          <div className="flex-grow"></div>
+          {/* Added flex-grow */}
         </div>
+
       </nav>
 
       <div>
-        <div className="hidden md:flex justify-between items-center h-[187px] px-8">
-          <div className="w-1/3 bg-white h-full flex justify-center items-center">
+        <div className="hidden md:flex justify-around items-center h-[187px] px-8">
+          <div className="flex-none md:flex justify-center items-center bg-white h-full">
             <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
           </div>
-          <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
-            <div className="button flex justify-center items-center">
-              <span className="font-Khula font-normal text-base text-black">ABOUT US</span>
+          <div
+            className="md:w-1/2 lg:w-1/3 bg-white h-full flex items-center space-x-4 justify-center"> {/* Updated justify-end */}
+            <div className="button flex items-center whitespace-nowrap">
+              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">ABOUT US</span>
             </div>
-            <div className="button flex justify-center items-center">
-              <span className="font-Khula font-normal text-base text-black">CLASSES</span>
+            <div className="button flex items-center whitespace-nowrap">
+              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">CLASSES</span>
             </div>
-            <div className="button flex justify-center items-center">
-              <span className="font-Khula font-normal text-base text-black">EVENTS</span>
+            <div className="button flex items-center whitespace-nowrap">
+              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">EVENTS</span>
             </div>
-            <div className="button flex justify-center items-center">
-              <span className="font-Khula font-normal text-base text-black">CONTACT US</span>
+            <div className="button flex items-center whitespace-nowrap">
+              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">CONTACT US</span>
             </div>
           </div>
         </div>
+
+
       </div>
+
     </div>
   );
 }

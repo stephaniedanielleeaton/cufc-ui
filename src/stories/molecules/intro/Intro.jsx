@@ -2,15 +2,13 @@ import React from 'react';
 
 function Intro() {
   return (
-    <div className="flex flex-col md:flex-row font-khula">
+    <div className="flex flex-col md:flex-row font-khula py-16">
       <div className="md:w-2/3 md:mr-4 md:mb-0 mx-16">
         <div className="flex flex-col space-y-4">
           <span className="font-extrabold text-xs text-DeepRed">ABOUT US</span>
-          <span className="font-bold text-2xl text-Navy">Columbus United Fencing Club</span>
+          <h2 className="font-bold text-2xl text-Navy">Columbus United Fencing Club</h2>
           <span className="font-light text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus rutrum nisi sapien, id consequat felis
-            tempor et. Ut pellentesque eu arcu nec maximus. Donec mauris nunc, tincidunt tincidunt maximus id, sodales
-            nec nisi. Aliquam magna ex, semper a tellus quis, tempor feugiat ex.
+            An inclusive historical fencing club located in Columbus, Ohio, Columbus United Fencing Club welcomes fencers of all levels and backgrounds to train in the art of the blade. Whether you want to learn a new skill, improve your fitness, compete in Historical European Martial Arts tournaments, or join a supportive community, you've found the right place.
           </span>
         </div>
         <button className="tracking-wider border-2 border-black text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
