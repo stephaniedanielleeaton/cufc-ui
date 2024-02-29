@@ -4,12 +4,8 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
 import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
 
-function Nav() {
+function Nav({onNavigationClick}) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleNavigationClick = (target) => {
-    console.log(target);
-  };
 
   return (
     <div>
@@ -32,35 +28,35 @@ function Nav() {
             <a
               href="#"
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => handleNavigationClick('signup')}
+              onClick={() => onNavigationClick('signup')}
             >
               Sign Up
             </a>
             <a
               href="#"
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => handleNavigationClick('donate')}
+              onClick={() => onNavigationClick('donate')}
             >
               Donate
             </a>
             <a
               href="#"
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => handleNavigationClick('contact')}
+              onClick={() => onNavigationClick('contact')}
             >
               Contact
             </a>
             <a
               href="#"
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => handleNavigationClick('about')}
+              onClick={() => onNavigationClick('about')}
             >
               About
             </a>
             <a
               href="#"
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => handleNavigationClick('admin')}
+              onClick={() => onNavigationClick('admin')}
             >
               Admin
             </a>
@@ -80,7 +76,7 @@ function Nav() {
           <div className="button flex items-center px-4 whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => handleNavigationClick('admin')}
+              onClick={() => onNavigationClick('admin')}
             >
               ADMIN
             </span>
@@ -88,7 +84,7 @@ function Nav() {
           <div className="button flex items-center px-4 whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => handleNavigationClick('dashboard')}
+              onClick={() => onNavigationClick('dashboard')}
             >
               DASHBOARD
             </span>
@@ -96,7 +92,7 @@ function Nav() {
           <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4">
             <span
               className="font-Khula font-normal text-base h-full hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => handleNavigationClick('signin')}
+              onClick={() => onNavigationClick('signin')}
             >
               SIGN IN
             </span>
@@ -113,7 +109,7 @@ function Nav() {
           <div className="button flex items-center whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => handleNavigationClick('about')}
+              onClick={() => onNavigationClick('about')}
             >
               ABOUT US
             </span>
@@ -121,7 +117,7 @@ function Nav() {
           <div className="button flex items-center whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => handleNavigationClick('classes')}
+              onClick={() => onNavigationClick('classes')}
             >
               CLASSES
             </span>
@@ -129,7 +125,7 @@ function Nav() {
           <div className="button flex items-center whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => handleNavigationClick('events')}
+              onClick={() => onNavigationClick('events')}
             >
               EVENTS
             </span>
@@ -137,7 +133,7 @@ function Nav() {
           <div className="button flex items-center whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => handleNavigationClick('contact')}
+              onClick={() => onNavigationClick('contact')}
             >
               CONTACT US
             </span>
