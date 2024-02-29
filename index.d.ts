@@ -10,8 +10,14 @@ declare module 'cufc-ui' {
   export const TopNavbar: React.ComponentType<any>;
   export const AdminPage: React.ComponentType<any>;
   export const UserPage: React.ComponentType<any>;
-
   export const AboutMember: React.ComponentType<any>;
   export const SignUpPage: React.ComponentType<any>;
   export const AdminMember: React.ComponentType<any>;
+  export const CTA: React.ComponentType<any>;
+  export const Contact: React.ComponentType<any>;
+  export const Footer: React.ComponentType<any>;
+  export const Hero: React.ComponentType<any>;
+  export const Intro: React.ComponentType<any>;
+  export const Nav: React.ComponentType<any>;
+  export const Schedule: React.ComponentType<any>;
 }
