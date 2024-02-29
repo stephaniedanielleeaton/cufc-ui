@@ -13,14 +13,14 @@ const Hero = () => {
     );
   }
   return (
-    <div className="h-full">
+    <div className="h-full p-20 bg-gray-600">
       {/* Large Screen Size */}
-      <div className="w-full h-full hidden md:flex bg-gray-600">
+      <div className="w-full h-full hidden md:flex">
         <div className="w-1/2 h-full flex flex-col justify-center p-8 items-center">{renderContent()}</div>
       </div>
 
       {/* Small and Medium Screen Size */}
-      <div className="w-full h-full md:hidden bg-gray-600">
+      <div className="w-full h-full md:hidden">
         <div className="flex flex-col justify-center items-center text-center">{renderContent()}</div>
       </div>
     </div>

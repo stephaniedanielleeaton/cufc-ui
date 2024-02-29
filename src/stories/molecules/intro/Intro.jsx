@@ -2,9 +2,9 @@ import React from 'react';
 
 function Intro() {
   return (
-    <div className="flex flex-col md:flex-row font-khula py-16">
-      <div className="md:w-2/3 md:mr-4 md:mb-0 mx-16">
-        <div className="flex flex-col space-y-4">
+    <div className="flex flex-col md:flex-row font-khula p-20">
+      <div className="md:w-2/3 md:mr-4 md:mb-0 px-4">
+        <div className="flex flex-col space-y-4 pr-8">
           <span className="font-extrabold text-xs text-DeepRed">ABOUT US</span>
           <h2 className="font-bold text-2xl text-Navy">Columbus United Fencing Club</h2>
           <span className="font-light text-sm">
@@ -15,13 +15,13 @@ function Intro() {
           LEARN MORE
         </button>
       </div>
-      <div className="md:w-1/3 flex items-center mx-16">
+      <div className="md:w-1/3 flex items-center px-4">
         <div>
-          <p className="font-bold text-Navy">Disciplines</p>
+          <p className="font-bold text-Navy mb-2">Disciplines</p>
           <ul className="list-disc pl-4 font-light text-sm">
-            <li>Saber</li>
-            <li>Longsword</li>
-            <li>Footwork & Thrusting Weapons</li>
+            <li className="mb-2">Saber</li>
+            <li className="mb-2">Longsword</li>
+            <li className="mb-2">Footwork & Thrusting Weapons</li>
           </ul>
         </div>
       </div>
