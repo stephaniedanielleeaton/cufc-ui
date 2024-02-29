@@ -8,7 +8,7 @@ function Footer() {
   return (
     <div>
       {/* Desktop/Tablet */}
-      <div className="hidden md:flex justify-between items-center h-[187px] px-8">
+      <div className="hidden md:flex justify-between items-center h-[150px] px-8">
         <div className="w-1/3 bg-white h-full flex justify-center items-center">
           <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
         </div>
