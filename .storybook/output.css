@@ -607,6 +607,14 @@ video {
   top: 4rem;
 }
 
+.left-0 {
+  left: 0px;
+}
+
+.right-0 {
+  right: 0px;
+}
+
 .mx-16 {
   margin-left: 4rem;
   margin-right: 4rem;
@@ -765,6 +773,14 @@ video {
 
 .h-\[150px\] {
   height: 150px;
+}
+
+.max-h-\[70px\] {
+  max-height: 70px;
+}
+
+.max-h-\[64px\] {
+  max-height: 64px;
 }
 
 .min-h-16 {
@@ -1434,6 +1450,16 @@ video {
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.hover\:text-LightPink:hover {
+  --tw-text-opacity: 1;
+  color: rgb(193 135 151 / var(--tw-text-opacity));
+}
+
+.hover\:text-MediumGray:hover {
+  --tw-text-opacity: 1;
+  color: rgb(151 158 163 / var(--tw-text-opacity));
 }
 
 .focus\:border-periwinkle:focus {

@@ -8,10 +8,10 @@ function Nav() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="overflow-x-auto">
-      <nav className="w-full bg-Navy flex justify-between md:justify-end items-center h-[70px] min-h-16">
-        {/* Mobile Navigation */}
-        <div className="md:hidden">
+    <div>
+      {/* Mobile Navigation */}
+      <div className="md:hidden w-full bg-Navy flex items-center h-[70px] min-h-16">
+        <nav>
           <div>
             <button
               type="button"
@@ -21,12 +21,12 @@ function Nav() {
               <FontAwesomeIcon icon={faBars} className="h-6 w-6" />
             </button>
           </div>
-
+          {/* Mobile DropDown */}
           <div className={isOpen ? 'block absolute left top-16' : 'hidden absolute left top-16'}>
             <div className="px-4 py-2 rounded-md space-y-0 bg-Navy w-full">
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
                 onClick={() => {
                   onNavigationClick('signup');
                 }}
@@ -35,7 +35,7 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
                 onClick={() => {
                   onNavigationClick('donate');
                 }}
@@ -44,16 +44,16 @@ function Nav() {
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
                 onClick={() => {
-                  onNavigationClick('donate');
+                  onNavigationClick('contact');
                 }}
               >
                 Contact
               </a>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap" // Added whitespace-nowrap class
+                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
                 onClick={() => {
                   onNavigationClick('about');
                 }}
@@ -71,50 +71,55 @@ function Nav() {
               </a>
             </div>
           </div>
-        </div>
+        </nav>
 
         {/* Center Content */}
-        <div className="w-1/3 absolute inset-x-0 mx-auto text-center p-2 md:hidden">
-          <img src={logoAllWhiteSvg} alt="Logo" className="px-4" />
+        <div className="w-1/3 absolute inset-x-0 mx-auto text-center p-2 md:hidden flex justify-center items-center">
+          <img src={logoAllWhiteSvg} alt="Logo" className="px-4 max-h-[64px]" />
         </div>
+      </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex justify-around items-center h-full md: w-1/2 lg:w-1/3">
-          <button type="button" className="button h-full flex-grow flex justify-center items-center">
-            <span className="font-Khula text-base font-normal text-white">ADMIN</span>
-          </button>
-          <button type="button" className="button h-full flex-grow flex justify-center items-center">
-            <span className="font-Khula text-base font-normal text-white">DASHBOARD</span>
-          </button>
-          <button type="button" className="button bg-MediumPink h-full flex-grow flex justify-center items-center">
-            <span className="font-Khula font-normal text-base text-white">SIGN IN</span>
-          </button>
-          <div className="flex-grow"></div>
-          {/* Added flex-grow */}
-        </div>
-
-      </nav>
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex justify-around items-center min-h-16 bg-Navy h-full">
+        <div></div>
+        <nav
+          className="md:w-1/2 lg:w-1/3 h-full flex items-center justify-center text-white">
+          <div className="button flex items-center px-4 whitespace-nowrap">
+            <span
+              className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]">ADMIN</span>
+          </div>
+          <div className="button flex items-center px-4 whitespace-nowrap">
+            <span
+              className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]">DASHBOARD</span>
+          </div>
+          <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4">
+            <span className="font-Khula font-normal text-base h-full hover:text-MediumGray tracking-[2.4px]">SIGN IN</span>
+          </div>
+        </nav>
+      </div>
 
       <div>
         <div className="hidden md:flex justify-around items-center h-[187px] px-8">
           <div className="flex-none md:flex justify-center items-center bg-white h-full">
             <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
           </div>
-          <div
-            className="md:w-1/2 lg:w-1/3 bg-white h-full flex items-center space-x-4 justify-center"> {/* Updated justify-end */}
+          <nav
+            className="md:w-1/2 lg:w-1/3 bg-white h-full flex items-center space-x-4 justify-center">
             <div className="button flex items-center whitespace-nowrap">
-              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">ABOUT US</span>
+              <span className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]">ABOUT US</span>
             </div>
             <div className="button flex items-center whitespace-nowrap">
-              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">CLASSES</span>
+              <span
+                className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]">CLASSES</span>
             </div>
             <div className="button flex items-center whitespace-nowrap">
-              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">EVENTS</span>
+              <span
+                className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]">EVENTS</span>
             </div>
             <div className="button flex items-center whitespace-nowrap">
-              <span className="font-Khula font-normal text-base text-black tracking-[2.4px]">CONTACT US</span>
+              <span className="font-Khula font-normal text-base text-black hover:text-MediumGray tracking-[2.4px]">CONTACT US</span>
             </div>
-          </div>
+          </nav>
         </div>
 
 
