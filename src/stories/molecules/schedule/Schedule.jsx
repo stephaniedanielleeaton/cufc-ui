@@ -8,10 +8,10 @@ function Schedule() {
           <span className="font-bold text-2xl text-white px-4">Class Schedule</span>
         </div>
         <div>
-          <button
-            className="tracking-wider border-2 border-white text-white text-xs font-bold px-4 py-2 rounded-none md:w-auto hover:bg-white hover:text-black hover:border-black">
-            SEE EVENTS
-          </button>
+          {/*<button*/}
+          {/*  className="tracking-wider border-2 border-white text-white text-xs font-bold px-4 py-2 rounded-none md:w-auto hover:bg-white hover:text-black hover:border-black">*/}
+          {/*  SEE EVENTS*/}
+          {/*</button>*/}
         </div>
       </div>
 

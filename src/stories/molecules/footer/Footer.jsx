@@ -13,7 +13,7 @@ function Footer() {
           <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
         </div>
         <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
-          <span className="font-light font-inter">4601 Nickerson Rd, Columbus, OH 43228</span>
+          {/*<span className="font-light font-inter">4601 Nickerson Rd, Columbus, OH 43228</span>*/}
         </div>
         <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
           <div className="flex items-center">
@@ -25,10 +25,10 @@ function Footer() {
       {/* Mobile */}
       <div className="flex md:hidden justify-between items-center h-[100px] px-4">
         <img src={logoFullColourNavySvg} alt="Logo" className="w-16" />
-        <div className="flex flex-col items-start">
-          <span className="font-light font-inter text-xs">4601 Nickerson Rd,</span>
-          <span className="font-light font-inter text-xs">Columbus, OH 43228</span>
-        </div>
+        {/*<div className="flex flex-col items-start">*/}
+        {/*  <span className="font-light font-inter text-xs">4601 Nickerson Rd,</span>*/}
+        {/*  <span className="font-light font-inter text-xs">Columbus, OH 43228</span>*/}
+        {/*</div>*/}
         <div className="flex items-center space-x-2">
           <img src={facebookSvg} alt="Facebook Logo" className="w-6 h-6" />
           <img src={instagramSvg} alt="Instagram Logo" className="w-6 h-6" />
