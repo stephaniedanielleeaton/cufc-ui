@@ -6,7 +6,7 @@ import instagram from '../../assets/instagram.svg';
 
 function Contact() {
   return (
-    <div className="flex flex-col md:flex-row font-khula text-sm my-16 mx-16">
+    <div className="flex flex-col md:flex-row font-khula text-sm md:my-16 md:mx-16 my-4 mx-4">
       <div className="md:w-1/2 md:mr-4 md:mb-0 mx-16">
         <div className="flex flex-col space-y-4">
           <span className="font-bold text-2xl text-Navy">Contact Us</span>
@@ -41,7 +41,7 @@ function Contact() {
           </div>
         </div>
       </div>
-      <div className="md:w-1/2 flex items-center mx-16">
+      <div className="md:w-1/2 flex items-center mx-16 my-4">
         <form className="w-full">
           <input
             type="text"
