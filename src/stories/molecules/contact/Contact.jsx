@@ -24,7 +24,6 @@ function Contact({ onSubmit }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setShouldRender(true)
-    console.log(isEmailSent)
     onSubmit(formData);
   };
 
