@@ -4,7 +4,7 @@ import addresspin from '../../assets/addresspin.svg';
 import facebook from '../../assets/facebook.svg';
 import instagram from '../../assets/instagram.svg';
 
-function Contact() {
+function Contact({onSubmit}) {
   return (
     <div className="flex flex-col md:flex-row font-khula text-sm md:my-16 md:mx-16 my-4 mx-4">
       <div className="md:w-1/2 md:mr-4 md:mb-0 mx-16">
@@ -19,18 +19,18 @@ function Contact() {
             </div>
             <div className="block w-full">
               <span className="w-full block font-bold">Give Us A Call</span>
-              <span className="w-full block">123-456-7890</span>
+              <span className="w-full block">513-633-0140</span>
             </div>
           </div>
-          <div className="flex items-center">
-            <div className="mr-4">
-              <img src={addresspin} alt="Address Icon" className="w-8 h-8" />
-            </div>
-            <div className="block w-full">
-              <span className="w-full block font-bold">Address</span>
-              <span className="w-full block">4601 Nickerson Rd, Columbus, OH 43228</span>
-            </div>
-          </div>
+          {/*<div className="flex items-center">*/}
+          {/*  <div className="mr-4">*/}
+          {/*    <img src={addresspin} alt="Address Icon" className="w-8 h-8" />*/}
+          {/*  </div>*/}
+          {/*  <div className="block w-full">*/}
+          {/*    <span className="w-full block font-bold">Address</span>*/}
+          {/*    <span className="w-full block">4601 Nickerson Rd, Columbus, OH 43228</span>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
           <div className="flex items-center">
             <div className="mr-4">
               <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />

@@ -7,7 +7,6 @@ declare module 'cufc-ui' {
   export const BaseTextInput: React.ComponentType<any>;
   export const BaseButton: React.ComponentType<any>;
   export const ImageBox: React.ComponentType<any>;
-  export const TopNavbar: React.ComponentType<any>;
   export const AdminPage: React.ComponentType<any>;
   export const UserPage: React.ComponentType<any>;
   export const AboutMember: React.ComponentType<any>;
@@ -20,4 +19,7 @@ declare module 'cufc-ui' {
   export const Intro: React.ComponentType<any>;
   export const Nav: React.ComponentType<any>;
   export const Schedule: React.ComponentType<any>;
+  export const TempNav: React.ComponentType<any>;
+
+  export const HeroWithFriends: React.ComponentType<any>;
 }
