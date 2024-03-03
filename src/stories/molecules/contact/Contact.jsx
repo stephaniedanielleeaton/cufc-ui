@@ -11,6 +11,7 @@ function Contact({ onSubmit }) {
     contactNumber: '',
     message: ''
   });
+  const [shouldRender, setShouldRender] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,6 +23,8 @@ function Contact({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setShouldRender(true)
+    console.log(isEmailSent)
     onSubmit(formData);
   };
 
@@ -100,6 +103,7 @@ function Contact({ onSubmit }) {
           >
             SUBMIT
           </button>
+          {shouldRender && <span className="p-4">Email Sent!</span>}
         </form>
       </div>
     </div>
