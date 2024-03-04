@@ -611,10 +611,6 @@ video {
   top: 50%;
 }
 
-.top-16 {
-  top: 4rem;
-}
-
 .top-full {
   top: 100%;
 }
@@ -784,10 +780,6 @@ video {
   width: 1rem;
 }
 
-.w-5\/12 {
-  width: 41.666667%;
-}
-
 .w-6 {
   width: 1.5rem;
 }
@@ -861,10 +853,6 @@ video {
   align-items: center;
 }
 
-.justify-end {
-  justify-content: flex-end;
-}
-
 .justify-center {
   justify-content: center;
 }
@@ -893,20 +881,10 @@ video {
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-y-0 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0px * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0px * var(--tw-space-y-reverse));
-}
-
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.overflow-x-auto {
-  overflow-x: auto;
 }
 
 .whitespace-nowrap {
@@ -1037,18 +1015,8 @@ video {
   --tw-bg-opacity: 0.75;
 }
 
-.bg-gradient-to-r {
-  background-image: linear-gradient(to right, var(--tw-gradient-stops));
-}
-
-.from-deepSeaBlue {
-  --tw-gradient-from: #375A7A var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(55 90 122 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.to-wine\/50 {
-  --tw-gradient-to: rgb(122 37 63 / 0.5) var(--tw-gradient-to-position);
+.bg-opacity-20 {
+  --tw-bg-opacity: 0.2;
 }
 
 .bg-cover {
@@ -1082,11 +1050,6 @@ video {
 .px-16 {
   padding-left: 4rem;
   padding-right: 4rem;
-}
-
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 
 .px-20 {
@@ -1260,11 +1223,6 @@ video {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
-}
-
 .text-gray-300 {
   --tw-text-opacity: 1;
   color: rgb(209 213 219 / var(--tw-text-opacity));
@@ -1413,11 +1371,6 @@ video {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.hover\:text-blue-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(147 197 253 / var(--tw-text-opacity));
-}
-
 .hover\:text-hoverAshGray:hover {
   --tw-text-opacity: 1;
   color: rgb(216 220 221 / var(--tw-text-opacity));
@@ -1523,10 +1476,6 @@ video {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .md\:grid-cols-7 {
-    grid-template-columns: repeat(7, minmax(0, 1fr));
-  }
-
   .md\:flex-row {
     flex-direction: row;
   }
@@ -1549,14 +1498,6 @@ video {
 }
 
 @media (min-width: 1024px) {
-  .lg\:flex {
-    display: flex;
-  }
-
-  .lg\:hidden {
-    display: none;
-  }
-
   .lg\:w-1\/3 {
     width: 33.333333%;
   }

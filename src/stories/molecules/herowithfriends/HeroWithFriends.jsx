@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '../../assets/friendsedit.png';
+import backgroundImage from '../../assets/meyerwatercolor.png';
 
 const HeroWithFriends = ({onNavigationClick}) => {
   function renderContent() {
@@ -14,7 +14,7 @@ const HeroWithFriends = ({onNavigationClick}) => {
   return (
     <div className="h-full p-20 bg-cover bg-no-repeat relative" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: '25% 25%' }}>
       {/* Semi-transparent overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-20"></div>
 
       {/* Large Screen Size */}
       <div className="w-full h-full hidden md:flex">
