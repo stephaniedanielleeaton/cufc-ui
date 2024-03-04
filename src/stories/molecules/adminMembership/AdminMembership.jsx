@@ -114,7 +114,7 @@ function AdminMembership({ member }) {
   );
 
   const renderMembershipInfo = () => (
-    <div className="flex flex-wrap mt-2">
+    <div className="flex flex-wrap mt-2 font-khula">
       <div className="w-full py-2">
         <div className="text-sm text-outerSpace">Subscription Status:</div>
         <div className="text-lg font-medium">{memberData.subscription_status || ''}</div>
@@ -142,39 +142,13 @@ function AdminMembership({ member }) {
 
   return (
     <div>
-      <div className="flex justify-center">
-        <div className="w-full max-w-screen-lg">
-          <img src="src/stories/assets/Lynx/wtaermark.PNG" alt="Your Image" className="mx-auto w-64 h-auto" />
-        </div>
-      </div>
       <form onSubmit={handleSubmit} className="flex flex-wrap">
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
-          <div className="text-lg font-bold text-wine">Personal Information</div>
-          <hr className="my-2 border-gray-300 mb" />
-          {renderPersonalInfoInputs()}
-        </div>
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
-          <div className="text-lg font-bold text-wine">Address</div>
-          <hr className="my-2 border-gray-300 mb" />
-          {renderAddressInputs()}
-        </div>
-        <div className="p-4 font-poppins flex-grow w-full">
-          <div className="text-lg font-bold text-wine">Contact Information</div>
-          <hr className="my-2 border-gray-300" />
-          {renderContactInputs()}
-        </div>
-        <div className="w-full text-center pl-16 flex justify-around">
-          <BaseButton color="wine" onClick={handleSubmit} text="Save" />
-          <BaseButton color="wine" onClick={() => {}} text="Cancel / Return" />
-        </div>
-      </form>
-      <form onSubmit={handleSubmit} className="flex flex-wrap">
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
           <div className="text-lg font-bold text-wine">Membership Information</div>
           <hr className="my-2 border-gray-300" />
           {renderMembershipInfo()}
         </div>
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
           <div className="text-lg font-bold text-wine">Override</div>
           <hr className="my-2 border-gray-300" />
           <div className="text-sm">

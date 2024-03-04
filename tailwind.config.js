@@ -6,7 +6,6 @@ module.exports = {
     extend: {
       fontFamily: {
         khula: ['Khula', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
       colors: {

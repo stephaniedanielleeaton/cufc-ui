@@ -34,7 +34,7 @@ function NewUserAboutYou() {
   return (
     <div>
       <form onSubmit={handleSubmit} className="flex flex-wrap">
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
           <div className="font-bold text-wine">About You</div>
           <BaseTextInput
             name="displayFirstName"
@@ -76,7 +76,7 @@ function NewUserAboutYou() {
             value={formData.dateOfBirth}
           />
         </div>
-        <div className="p-4 font-poppins flex-grow w-full md:w-1/2">
+        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
           <div className="font-bold text-wine">Address</div>
           <BaseTextInput
             faIcon="faStreetView"
@@ -117,7 +117,14 @@ function NewUserAboutYou() {
         </div>
       </form>
       <div className="w-full text-center p-4">
-        <BaseButton color="wine" onClick={() => {}} text="Save + Next" />
+        <button
+          type="submit"
+          onClick={() => {
+          }}
+          className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
+        >
+          SUBMIT
+        </button>
       </div>
     </div>
   );

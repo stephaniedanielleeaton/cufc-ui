@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.font-poppins {
-    font-family: 'Poppins', sans-serif;
+
+.font-khula {
+    font-family: 'Khula', sans-serif;
 }
 
 .font-inter {

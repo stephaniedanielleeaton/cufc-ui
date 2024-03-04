@@ -57,7 +57,7 @@ function AboutMember({ member }) {
   const membershipStartDate = member.membership_start_date ? formatDate(new Date(member.membership_start_date)) : '';
 
   return (
-    <div className="p-4 font-poppins flex-grow bg-white shadow-md rounded-md">
+    <div className="p-4 font-khula flex-grow bg-white shadow-md rounded-md">
       <div className="mb-4">
         <div className="text-lg font-bold text-wine">Personal Information</div>
         <hr className="my-2 border-gray-300 mb" />

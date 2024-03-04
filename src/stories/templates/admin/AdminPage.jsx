@@ -53,7 +53,7 @@ const AdminPage = ({ members }) => {
   });
 
   return (
-    <div className="mx-auto font-poppins">
+    <div className="mx-auto font-khula">
       <div className="p-4">
         <div className="mb-8 mt-4 flex items-center">
           <div className="flex items-center relative">
@@ -98,7 +98,6 @@ const AdminPage = ({ members }) => {
               >
                 <div className="min-content flex items-center">
                   {member.display_first_name} {member.display_last_name}
-                  {hoveredMemberId === member._id && <FontAwesomeIcon icon={faEdit} className="ml-2 text-blue-500" />}
                 </div>
                 <div className="min-content">{member.subscription_status}</div>
                 <div className="min-content">Monthly</div>
