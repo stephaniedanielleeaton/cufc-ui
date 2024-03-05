@@ -37,97 +37,21 @@ function AdminMembership({ member }) {
     onSubmit(memberData);
   };
 
-  const renderTextInput = (name, placeholder) => (
-    <BaseTextInput
-      name={name}
-      faIcon="none"
-      onChange={handleChange}
-      placeholder={placeholder}
-      value={getNestedValue(memberData, name)}
-    />
-  );
-
-  const renderSelect = (name, options, placeholder) => (
-    <BaseSelect
-      name={name}
-      faIcon="none"
-      onChange={handleChange}
-      options={options}
-      placeholder={placeholder}
-      value={getNestedValue(memberData, name)}
-    />
-  );
-
-  const renderPersonalInfoInputs = () => (
-    <>
-      <div className="text-sm text-outerSpace">Preferred First Name:</div>
-      {renderTextInput('display_first_name', 'Preferred First Name')}
-      <div className="text-sm text-outerSpace">Preferred Last Name:</div>
-      {renderTextInput('display_last_name', 'Preferred Last Name')}
-      <div className="text-sm text-outerSpace">Legal First Name:</div>
-      {renderTextInput('personal_info.legal_first_name', 'Legal First Name')}
-      <div className="text-sm text-outerSpace">Legal Last Name:</div>
-      {renderTextInput('personal_info.legal_last_name', 'Legal Last Name')}
-      <div className="text-sm text-outerSpace">Date of Birth:</div>
-      <BaseTextInput
-        faIcon="none"
-        name="personal_info.date_of_birth"
-        type="date"
-        onChange={handleChange}
-        value={convertUTCDateToYYYYMMDD(memberData.personal_info.date_of_birth)}
-      />
-    </>
-  );
-
-  const renderAddressInputs = () => (
-    <>
-      <div className="text-sm text-outerSpace">Street:</div>
-      {renderTextInput('personal_info.address.street', 'Street Address')}
-      <div className="text-sm text-outerSpace">City:</div>
-      {renderTextInput('personal_info.address.city', 'City')}
-      <div className="text-sm text-outerSpace">State:</div>
-      {renderSelect('personal_info.address.state', usStateAbbreviations, 'State')}
-      <div className="text-sm text-outerSpace">Zipcode:</div>
-      {renderTextInput('personal_info.address.zipcode', 'Zipcode')}
-      <div className="text-sm text-outerSpace">Country:</div>
-      {renderSelect('personal_info.address.country', commonCountries, 'Country')}
-    </>
-  );
-
-  const renderContactInputs = () => (
-    <>
-      <BaseTextInput
-        faIcon="faEnvelope"
-        name="personal_info.email"
-        onChange={handleChange}
-        placeholder="Email"
-        value={memberData.personal_info.email}
-      />
-      <BaseTextInput
-        faIcon="faMobilePhone"
-        name="personal_info.phone"
-        onChange={handleChange}
-        placeholder="Phone Number"
-        value={memberData.personal_info.phone}
-      />
-    </>
-  );
-
   const renderMembershipInfo = () => (
-    <div className="flex flex-wrap mt-2 font-khula">
-      <div className="w-full py-2">
-        <div className="text-sm text-outerSpace">Subscription Status:</div>
-        <div className="text-lg font-medium">{memberData.subscription_status || ''}</div>
-      </div>
-      <div className="w-full py-2">
-        <div className="text-sm text-outerSpace">Start Date:</div>
-        <div className="text-lg font-medium">{formatDate(member.membership_start_date)}</div>
-      </div>
-      <div className="w-full py-2">
-        <div className="text-sm text-outerSpace">Last Renewal Date:</div>
-        <div className="text-lg font-medium">{formatDate(memberData.membership_renewed_date)}</div>
-      </div>
-      <div className="w-full py-2">
+  <div className="flex flex-wrap mt-2 font-khula">
+    <div className="w-full py-2">
+      <div className="text-sm text-outerSpace">Subscription Status:</div>
+      <div className="text-lg font-medium">{memberData.subscription_status || ''}</div>
+    </div>
+    <div className="w-full py-2">
+      <div className="text-sm text-outerSpace">Start Date:</div>
+      <div className="text-lg font-medium">{formatDate(member.membership_start_date)}</div>
+    </div>
+    <div className="w-full py-2">
+      <div className="text-sm text-outerSpace">Last Renewal Date:</div>
+      <div className="text-lg font-medium">{formatDate(memberData.membership_renewed_date)}</div>
+    </div>
+    <div className="w-full py-2">
         <div className="text-sm text-outerSpace">Months Paid:</div>
         <div className="text-lg font-medium">{member.membership_months_paid}</div>
       </div>
@@ -141,36 +65,62 @@ function AdminMembership({ member }) {
   );
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className="flex flex-wrap">
-        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
-          <div className="text-lg font-bold text-wine">Membership Information</div>
-          <hr className="my-2 border-gray-300" />
-          {renderMembershipInfo()}
+    <>
+      <div className="flex flex-col md:flex-row font-khula bg-DeepRed text-white py-12">
+        <div className="md:w-1/5  md:mb-0 mx-12 flex items-center justify-center"> {/* Updated this line */}
+          <span className="font-bold text-2xl">Membership Info</span>
         </div>
-        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
-          <div className="text-lg font-bold text-wine">Override</div>
-          <hr className="my-2 border-gray-300" />
-          <div className="text-sm">
-            {' '}
-            Membership Valid Until date is an extrapolation of last renewal date + the number of months paid. If you
-            would like to adjust a member's valid until date, please use the form below to set a new renewed date and
-            provide details as to why this override is being performed.
+        <div className="md:w-1/5 md:mr-4 md:mb-0 mx-4 flex items-center justify-center"> {/* Updated this line */}
+          <span >Membership Info</span>
+        </div>
+        <div className="md:w-1/5 md:mr-4 md:mb-0 mx-4 flex items-center justify-center"> {/* Updated this line */}
+          <span>Membership Info</span>
+        </div>
+        <div className="md:w-1/5 md:mr-4 md:mb-0 mx-4 flex items-center justify-center"> {/* Updated this line */}
+          <span >Membership Info</span>
+        </div>
+        <div className="md:w-1/5 flex items-center justify-center md:justify-start mx-12">
+          <button
+            className="tracking-wider border-2 border-white text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-white hover:text-black hover:border-black"
+            onClick={() => onNavigationClick('contact')}
+          >
+            UPDATE
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <form onSubmit={handleSubmit} className="flex flex-wrap">
+          <div className="p-4 font-khula flex-grow w-full md:w-1/2">
+            <div className="text-lg font-bold text-wine">Membership Information</div>
+            <hr className="my-2 border-gray-300" />
+            {renderMembershipInfo()}
           </div>
-          <BaseTextInput faIcon="none" name="" type="date" onChange={handleChange} />
-          <BaseSelect
-            name=""
-            faIcon="none"
-            onChange={handleChange}
-            options={['1', '2']}
-            placeholder="Months"
-            value={getNestedValue(memberData, name)}
-          />
-          <BaseTextInput faIcon="none" name="" onChange={handleChange} value="" placeholder="Reasoning for Override" />
-          <div className="text-sm">Examples: Cash transaction, gratuity, automation error, etc</div>
-        </div>
-      </form>
-    </div>
+          <div className="p-4 font-khula flex-grow w-full md:w-1/2">
+            <div className="text-lg font-bold text-wine">Override</div>
+            <hr className="my-2 border-gray-300" />
+            <div className="text-sm">
+              {' '}
+              Membership Valid Until date is an extrapolation of last renewal date + the number of months paid. If you
+              would like to adjust a member's valid until date, please use the form below to set a new renewed date and
+              provide details as to why this override is being performed.
+            </div>
+            <BaseTextInput faIcon="none" name="" type="date" onChange={handleChange} />
+            <BaseSelect
+              name=""
+              faIcon="none"
+              onChange={handleChange}
+              options={['1', '2']}
+              placeholder="Months"
+              value={getNestedValue(memberData, name)}
+            />
+            <BaseTextInput faIcon="none" name="" onChange={handleChange} value=""
+                           placeholder="Reasoning for Override" />
+            <div className="text-sm">Examples: Cash transaction, gratuity, automation error, etc</div>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 

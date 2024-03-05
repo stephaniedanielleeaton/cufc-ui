@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
-import BaseButton from '../button/BaseButton.jsx';
 import PropTypes from 'prop-types';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 import { convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
@@ -85,7 +84,7 @@ function AdminMember({ member, profilePicture, onSubmit }) {
       <div className="text-sm text-outerSpace">State:</div>
       {renderSelect('personal_info.address.state', usStateAbbreviations, 'State')}
       <div className="text-sm text-outerSpace">Zipcode:</div>
-      {renderTextInput('personal_info.address.zipcode', 'Zipcode')}
+      {renderTextInput('personal_info.address.zip', 'Zipcode')}
       <div className="text-sm text-outerSpace">Country:</div>
       {renderSelect('personal_info.address.country', commonCountries, 'Country')}
     </>
@@ -117,29 +116,29 @@ function AdminMember({ member, profilePicture, onSubmit }) {
           <img src={profilePicture} alt="Your Image" className="mx-auto w-64 h-auto" />
         </div>
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-wrap">
-        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
+      <form onSubmit={handleSubmit} className="flex flex-wrap md:px-16">
+        <div className="p-4 font-khula flex-grow w-full md:w-1/2 px-8">
           <div className="text-lg font-bold text-wine">Personal Information</div>
           <hr className="my-2 border-gray-300 mb" />
           {renderPersonalInfoInputs()}
         </div>
-        <div className="p-4 font-khula flex-grow w-full md:w-1/2">
+        <div className="p-4 font-khula flex-grow w-full md:w-1/2 px-8">
           <div className="text-lg font-bold text-wine">Address</div>
           <hr className="my-2 border-gray-300 mb" />
           {renderAddressInputs()}
         </div>
-        <div className="p-4 font-khula flex-grow w-full">
+        <div className="p-4 font-khula flex-grow w-full px-8">
           <div className="text-lg font-bold text-wine">Contact Information</div>
           <hr className="my-2 border-gray-300" />
           {renderContactInputs()}
         </div>
         <div className="w-full px-16 text-center flex justify-around">
           <button onClick={handleSubmit}
-                  className="tracking-wider border-2 border-black text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
+                  className="tracking-wider border-2 border-black text-sm font-bold my-4 mx-2 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
             SAVE
           </button>
           <button onClick={() => {
-          }} className="tracking-wider border-2 border-black text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
+          }} className="tracking-wider border-2 border-black text-sm font-bold my-4 mx-2 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
             CANCEL / RETURN
           </button>
         </div>

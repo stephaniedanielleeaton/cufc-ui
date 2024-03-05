@@ -7,11 +7,16 @@ export default {
   tags: ['autodocs'],
 };
 
+const handleOnNavigationClick = (message) => {
+  console.log(message);
+};
+
 const Template = (args) => <AdminPage {...args} />;
 
 export const DefaultView = Template.bind({});
 
 DefaultView.args = {
+  onNavigationClick: handleOnNavigationClick,
   members: [
     {
       _id: 1,

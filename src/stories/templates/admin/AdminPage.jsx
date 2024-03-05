@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 
 const formatDate = (date) => {
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -43,7 +43,7 @@ function calculateValidUntilDate(membershipRenewalDate, months) {
   return new Date(Date.UTC(year, month, day));
 }
 
-const AdminPage = ({ members }) => {
+const AdminPage = ({ members, onNavigationClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredMemberId, setHoveredMemberId] = useState(null);
 
@@ -68,21 +68,21 @@ const AdminPage = ({ members }) => {
               <FontAwesomeIcon icon={faSearch} />
             </div>
           </div>
-          <button className="ml-4">
+          <button className="ml-4"  onClick={() => onNavigationClick('newmember')}>
             <FontAwesomeIcon icon={faUserPlus} />
             <i className="fas fa-user-plus"></i>
           </button>
         </div>
 
         <div className="mx-auto">
-          <div className="grid grid-cols-7 font-bold border-b mb-4 border-black">
-            <div className="min-content">Member</div>
-            <div className="min-content">Subscription Status</div>
-            <div className="min-content">Plan</div>
-            <div className="min-content">Type</div>
-            <div className="min-content">Last Renewal</div>
-            <div className="min-content">Months Paid</div>
-            <div className="min-content">Valid Until</div>
+          <div className="grid grid-cols-7 font-bold text-sm border-b mb-4 border-black">
+            <div className="min-content flex-nowrap">Member</div>
+            <div className="min-content flex-nowrap">Subscription Status</div>
+            <div className="min-content flex-nowrap">Plan</div>
+            <div className="min-content flex-nowrap">Type</div>
+            <div className="min-content flex-nowrap">Last Renewal</div>
+            <div className="min-content flex-nowrap">Months Paid</div>
+            <div className="min-content flex-nowrap">Valid Until</div>
           </div>
 
           {filteredMembers.map((member) => {
@@ -95,6 +95,7 @@ const AdminPage = ({ members }) => {
                 }`}
                 onMouseEnter={() => setHoveredMemberId(member._id)}
                 onMouseLeave={() => setHoveredMemberId(null)}
+                onClick={() => onNavigationClick('admin/member/' + member._id)}
               >
                 <div className="min-content flex items-center">
                   {member.display_first_name} {member.display_last_name}
