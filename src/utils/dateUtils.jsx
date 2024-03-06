@@ -61,3 +61,8 @@ export const calculateValidUntilDate = (membershipRenewalDate, months) => {
   // Return the new date in UTC
   return new Date(Date.UTC(year, month, day));
 }
+
+export const isDateInFuture = (date) => {
+  const today = new Date();
+  return new Date(date) > today;
+};

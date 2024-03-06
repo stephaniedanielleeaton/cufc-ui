@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { calculateValidUntilDate } from '../../../utils/dateUtils.jsx';
+import { calculateValidUntilDate, isD } from '../../../utils/dateUtils.jsx';
 
 const formatDate = (date) => {
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];

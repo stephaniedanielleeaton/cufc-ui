@@ -18,6 +18,8 @@ declare module 'cufc-ui' {
   export const Nav: React.ComponentType<any>;
   export const Schedule: React.ComponentType<any>;
   export const TempNav: React.ComponentType<any>;
-
   export const HeroWithFriends: React.ComponentType<any>;
+  export const AdminMembership: React.ComponentType<any>;
+
+  export const AdminMembershipOverride: React.ComponentType<any>;
 }

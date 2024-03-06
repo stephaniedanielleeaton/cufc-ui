@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { calculateValidUntilDate, formatDate } from '../../../utils/dateUtils.jsx';
+import { calculateValidUntilDate, formatDate, isDateInFuture } from '../../../utils/dateUtils.jsx';
 
 function AdminMembership({ member }) {
   const [memberData, setMemberData] = useState(member);
+
+  const isMembershipActive = () => {
+    return isDateInFuture(calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid))
+  }
 
   return (
     <>
@@ -30,10 +34,10 @@ function AdminMembership({ member }) {
         <div className="md:w-2/3  m-4 flex justify-center">
           <span
             className={`font-extrabold text-2xl text-center ${
-              memberData.subscription_status === 'active' ? 'text-green-500' : 'text-red-500'
+              isMembershipActive() ? 'text-green-500' : 'text-red-500'
             }`}
           >
-            Membership Status: {memberData.subscription_status === 'active' ? 'Active' : 'Inactive'}
+            Membership Status: {isMembershipActive() ? 'Active' : 'Inactive'}
           </span>
         </div>
         <div className="md:w-1/3 flex items-center justify-center md:justify-start mx-12">

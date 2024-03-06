@@ -15,3 +15,5 @@ export { default as Nav } from './stories/molecules/nav/Nav.jsx';
 export { default as Schedule } from './stories/molecules/schedule/Schedule.jsx';
 export { default as TempNav } from './stories/molecules/tempnav/TempNav.jsx';
 export { default as HeroWithFriends } from './stories/molecules/herowithfriends/HeroWithFriends.jsx';
+export { default as AdminMembership } from './stories/molecules/adminmembership/AdminMembership.jsx';
+export { default as AdminMembershipOverride } from './stories/molecules/adminmembershipoverride/AdminMembershipOverride.jsx';
