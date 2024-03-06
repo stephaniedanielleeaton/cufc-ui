@@ -109,7 +109,7 @@ AdminMembershipOverride.propTypes = {
     subscription_status: PropTypes.string,
     membership_start_date: PropTypes.instanceOf(Date),
     membership_renewed_date: PropTypes.instanceOf(Date),
-    membership_months_paid: PropTypes.string,
+    membership_months_paid: PropTypes.number,
     role: PropTypes.string,
   }).isRequired,
   onSubmit: PropTypes.func.isRequired,

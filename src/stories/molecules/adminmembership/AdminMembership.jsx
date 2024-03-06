@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { calculateValidUntilDate, formatDate, isDateInFuture } from '../../../utils/dateUtils.jsx';
 
 function AdminMembership({ member }) {
   const [memberData, setMemberData] = useState(member);
 
+  useEffect(() => {
+    setMemberData(member); // Update memberData when member prop changes
+  }, [member]);
+
   const isMembershipActive = () => {
-    return isDateInFuture(calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid))
-  }
+    return isDateInFuture(
+      calculateValidUntilDate(memberData.membership_renewed_date, memberData.membership_months_paid)
+    );
+  };
 
   return (
     <>
@@ -17,11 +23,11 @@ function AdminMembership({ member }) {
         </div>
         <div className="md:w-1/4 flex-col m-4 flex items-center justify-center">
           <span className="font-extrabold text-xs mb-1 whitespace-nowrap">MEMBER SINCE</span>
-          <span className="text-center">{formatDate(member.membership_start_date) || ''}</span>
+          <span className="text-center">{formatDate(memberData.membership_start_date) || ''}</span>
         </div>
         <div className="md:w-1/4 flex-col m-4 flex items-center justify-center">
           <span className="font-extrabold text-xs mb-1 whitespace-nowrap">LAST RENEWAL</span>
-          <span className="text-center">{formatDate(member.membership_renewed_date)}</span>
+          <span className="text-center">{formatDate(memberData.membership_renewed_date)}</span>
         </div>
         <div className="md:w-1/4 flex-col m-4 flex items-center justify-center">
           <span className="font-extrabold text-xs mb-1 whitespace-nowrap">VALID UNTIL</span>
@@ -43,7 +49,7 @@ function AdminMembership({ member }) {
         <div className="md:w-1/3 flex items-center justify-center md:justify-start mx-12">
           <button
             className="tracking-wider border-2 border-Navy text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-Navy hover:text-white hover:border-white"
-            onClick={() => onNavigationClick('contact')}
+            onClick={() => onNavigationClick('membershipupdate')}
           >
             UPDATE
           </button>
@@ -75,7 +81,7 @@ AdminMembership.propTypes = {
     subscription_status: PropTypes.string,
     membership_start_date: PropTypes.instanceOf(Date),
     membership_renewed_date: PropTypes.instanceOf(Date),
-    membership_months_paid: PropTypes.string,
+    membership_months_paid: PropTypes.number,
     role: PropTypes.string,
   }).isRequired,
 };
