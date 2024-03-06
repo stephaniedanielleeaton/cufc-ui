@@ -29,9 +29,14 @@ const defaultMember = {
   membership_months_paid: '3',
 };
 
+const onSubmitDefault = (e) => {
+  console.log(e)
+}
+
 const Template = (args) => <AdminMembershipOverride {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   member: defaultMember,
+  onSubmit: onSubmitDefault
 };

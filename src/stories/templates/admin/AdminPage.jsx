@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { calculateValidUntilDate } from '../../../utils/dateUtils.jsx';
 
 const formatDate = (date) => {
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -15,33 +16,6 @@ const isDateInFuture = (date) => {
   const today = new Date();
   return new Date(date) > today;
 };
-
-function calculateValidUntilDate(membershipRenewalDate, months) {
-  // Get the year, month, and day of the original date in UTC
-  let year = membershipRenewalDate.getUTCFullYear();
-  let month = membershipRenewalDate.getUTCMonth();
-  let day = membershipRenewalDate.getUTCDate();
-
-  // Calculate the new month and year after adding the specified number of months
-  month += months;
-  year += Math.floor(month / 12);
-  month %= 12;
-
-  // Handle cases where month becomes negative or greater than 11
-  if (month < 0) {
-    month += 12;
-    year--;
-  }
-
-  // Get the number of days in the new month
-  const daysInNewMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
-
-  // Adjust the day if it's greater than the number of days in the new month
-  day = Math.min(day, daysInNewMonth);
-
-  // Return the new date in UTC
-  return new Date(Date.UTC(year, month, day));
-}
 
 const AdminPage = ({ members, onNavigationClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -68,7 +42,7 @@ const AdminPage = ({ members, onNavigationClick }) => {
               <FontAwesomeIcon icon={faSearch} />
             </div>
           </div>
-          <button className="ml-4"  onClick={() => onNavigationClick('newmember')}>
+          <button className="ml-4" onClick={() => onNavigationClick('newmember')}>
             <FontAwesomeIcon icon={faUserPlus} />
             <i className="fas fa-user-plus"></i>
           </button>

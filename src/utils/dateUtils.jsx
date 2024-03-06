@@ -1,4 +1,3 @@
-import { instance } from 'eslint-plugin-react/lib/util/lifecycleMethods.js';
 
 export const formatDate = (date) => {
   if (!date) return ''; // Handle undefined date gracefully
