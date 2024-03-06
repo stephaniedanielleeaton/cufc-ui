@@ -10,6 +10,13 @@ function AdminMember({ member, profilePicture, onSubmit }) {
 
   const [memberData, setMemberData] = useState(member);
 
+  const displayPicture = () => {
+    if(profilePicture){
+      return profilePicture
+    }
+    return 'src/stories/assets/Lynx/wtaermark.PNG'
+  }
+
   const handleChange = (e) => {
     const { name, value } = e.target || e;
     const keys = name.split('.');
@@ -113,7 +120,7 @@ function AdminMember({ member, profilePicture, onSubmit }) {
     <div>
       <div className="flex justify-center">
         <div className="w-full max-w-screen-lg">
-          <img src={profilePicture} alt="Your Image" className="mx-auto w-64 h-auto" />
+          <img src={displayPicture()} alt="Your Image" className="mx-auto w-64 h-auto" />
         </div>
       </div>
       <form onSubmit={handleSubmit} className="flex flex-wrap md:px-16">
