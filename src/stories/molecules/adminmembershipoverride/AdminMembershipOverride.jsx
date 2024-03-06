@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import PropTypes from 'prop-types';
-import { calculateValidUntilDate, formatDate } from '../../../utils/dateUtils.jsx';
 
 function AdminMembershipOverride({ member }) {
   const [memberData, setMemberData] = useState(member);
@@ -37,56 +36,18 @@ function AdminMembershipOverride({ member }) {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row font-khula bg-DeepRed text-white py-10">
-        <div className="md:w-1/4 flex-col m-4 flex items-center justify-center">
-          <span className="font-extrabold text-2xl text-center">Membership Info</span>
-        </div>
-        <div className="md:w-1/4 flex-col m-4 flex items-center justify-center">
-          <span className="font-extrabold text-xs mb-1 whitespace-nowrap">MEMBER SINCE</span>
-          <span className="text-center">{formatDate(member.membership_start_date) || ''}</span>
-        </div>
-        <div className="md:w-1/4 flex-col m-4 flex items-center justify-center">
-          <span className="font-extrabold text-xs mb-1 whitespace-nowrap">LAST RENEWAL</span>
-          <span className="text-center">{formatDate(member.membership_renewed_date)}</span>
-        </div>
-        <div className="md:w-1/4 flex-col m-4 flex items-center justify-center">
-          <span className="font-extrabold text-xs mb-1 whitespace-nowrap">VALID UNTIL</span>
-          <span className="text-center">
-            {formatDate(calculateValidUntilDate(memberData.membership_renewed_date, memberData.membership_months_paid))}
-          </span>
-        </div>
-      </div>
       <div className="flex flex-col md:flex-row font-khula bg-white text-Navy py-10">
-        <div className="md:w-2/3  m-4 flex justify-center">
-          <span
-            className={`font-extrabold text-2xl text-center ${
-              memberData.subscription_status === 'active' ? 'text-green-500' : 'text-red-500'
-            }`}
-          >
-            Membership Status: {memberData.subscription_status === 'active' ? 'Active' : 'Inactive'}
+        <div className="md:w-1/2  m-4 flex flex-col justify-center">
+          <span className="font-extrabold text-sm leading-loose mb-2"> ADMIN OVERRIDE </span>
+          <span>
+            {' '}
+            Membership Valid Until date is an extrapolation of last renewal date + the number of months paid. If you
+            would like to adjust a member's valid until date, please use the form below to set a new renewed date and
+            provide details as to why this override is being performed.
           </span>
         </div>
-        <div className="md:w-1/3 flex items-center justify-center md:justify-start mx-12">
-          <button
-            className="tracking-wider border-2 border-Navy text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-Navy hover:text-white hover:border-white"
-            onClick={() => onNavigationClick('contact')}
-          >
-            UPDATE
-          </button>
-        </div>
-      </div>
-
-      <div>
-        <form onSubmit={handleSubmit} className="flex flex-wrap">
-          <div className="p-4 font-khula flex-grow w-full md:w-1/2">
-            <div className="text-lg font-bold text-wine">Override</div>
-            <hr className="my-2 border-gray-300" />
-            <div className="text-sm">
-              {' '}
-              Membership Valid Until date is an extrapolation of last renewal date + the number of months paid. If you
-              would like to adjust a member's valid until date, please use the form below to set a new renewed date and
-              provide details as to why this override is being performed.
-            </div>
+        <div className="md:w-1/2 flex items-center justify-center md:justify-start mx-12">
+          <form onSubmit={handleSubmit} className="flex flex-wrap">
             <BaseTextInput faIcon="none" name="" type="date" onChange={handleChange} />
             <BaseSelect
               name=""
@@ -104,8 +65,14 @@ function AdminMembershipOverride({ member }) {
               placeholder="Reasoning for Override"
             />
             <div className="text-sm">Examples: Cash transaction, gratuity, automation error, etc</div>
-          </div>
-        </form>
+            <button
+              className="tracking-wider border-2 border-Navy text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-Navy hover:text-white hover:border-white"
+              onClick={() => onNavigationClick('contact')}
+            >
+              UPDATE
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
