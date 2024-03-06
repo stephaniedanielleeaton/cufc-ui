@@ -4,7 +4,7 @@ import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import PropTypes from 'prop-types';
 import { calculateValidUntilDate, formatDate } from '../../../utils/dateUtils.jsx';
 
-function AdminMembership({ member }) {
+function AdminMembershipOverride({ member }) {
   const [memberData, setMemberData] = useState(member);
   const [overRideData, setOverRideData] = useState({
     override_renewal_date: '',
@@ -58,11 +58,13 @@ function AdminMembership({ member }) {
       </div>
       <div className="flex flex-col md:flex-row font-khula bg-white text-Navy py-10">
         <div className="md:w-2/3  m-4 flex justify-center">
-          <span className={`font-extrabold text-2xl text-center ${
-            memberData.subscription_status === 'active' ? 'text-green-500' : 'text-red-500'
-          }`}>
-    Membership Status: {memberData.subscription_status === 'active' ? 'Active' : 'Inactive'}
-  </span>
+          <span
+            className={`font-extrabold text-2xl text-center ${
+              memberData.subscription_status === 'active' ? 'text-green-500' : 'text-red-500'
+            }`}
+          >
+            Membership Status: {memberData.subscription_status === 'active' ? 'Active' : 'Inactive'}
+          </span>
         </div>
         <div className="md:w-1/3 flex items-center justify-center md:justify-start mx-12">
           <button
@@ -109,7 +111,7 @@ function AdminMembership({ member }) {
   );
 }
 
-AdminMembership.propTypes = {
+AdminMembershipOverride.propTypes = {
   member: PropTypes.shape({
     _id: PropTypes.string.isRequired,
     display_first_name: PropTypes.string,
@@ -140,4 +142,4 @@ function getNestedValue(obj, path) {
   return path.split('.').reduce((acc, key) => (acc && acc[key] !== 'undefined' ? acc[key] : ''), obj);
 }
 
-export default AdminMembership;
+export default AdminMembershipOverride;

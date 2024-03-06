@@ -5,7 +5,7 @@ export { default as BaseTextInput } from './stories/atoms/textinput/BaseTextInpu
 export { default as AdminPage } from './stories/templates/admin/AdminPage.jsx';
 export { default as UserPage } from './stories/templates/userpage/UserPage.jsx';
 export { default as AboutMember } from './stories/molecules/aboutmember/AboutMember.jsx';
-export { default as AdminMember } from './stories/molecules/adminMember/AdminMember.jsx';
+export { default as AdminMember } from './stories/molecules/adminmember/AdminMember.jsx';
 export { default as CTA } from './stories/molecules/calltoaction/CTA.jsx';
 export { default as Contact } from './stories/molecules/contact/Contact.jsx';
 export { default as Footer } from './stories/molecules/footer/Footer.jsx';
