@@ -37,24 +37,29 @@ function AdminMembershipOverride({ member }) {
   return (
     <>
       <div className="flex flex-col md:flex-row font-khula bg-white text-Navy py-10">
-        <div className="md:w-1/2  m-4 flex flex-col justify-center">
+        <div className="md:w-1/2  m-4 flex flex-col md:mx-8">
           <span className="font-extrabold text-sm leading-loose mb-2"> ADMIN OVERRIDE </span>
           <span>
-            {' '}
-            Membership Valid Until date is an extrapolation of last renewal date + the number of months paid. If you
-            would like to adjust a member's valid until date, please use the form below to set a new renewed date and
-            provide details as to why this override is being performed.
+            The database only stores the following bits of information: <b>Renewal Date</b> (the day the member is
+            invoiced), and the Number of Months paid. If you would like to adjust the <b>Valid Until </b>
+            date for a member, please use the form to to set a Renewal Date, number of months paid, and provide details
+            as to why this override is being performed.
+            <br />
+            <br /> Please use the most recent valid until date as the Renewal Date, as it would would would represent
+            the day that a member on a subscription would be given an invoice. Exceptions can be made if last check in
+            date is over a month old.
           </span>
         </div>
-        <div className="md:w-1/2 flex items-center justify-center md:justify-start mx-12">
-          <form onSubmit={handleSubmit} className="flex flex-wrap">
+        <div className="md:w-1/2 flex items-center justify-center md:justify-start">
+          <form onSubmit={handleSubmit} className="flex flex-wrap w-full">
+            <span className="font-extrabold text-xs leading-loose"> Renewal Date </span>
             <BaseTextInput faIcon="none" name="" type="date" onChange={handleChange} />
             <BaseSelect
               name=""
               faIcon="none"
               onChange={handleChange}
-              options={['1', '2']}
-              placeholder="Months"
+              options={['1', '2', '3']}
+              placeholder="Months Paid"
               value={getNestedValue(memberData, name)}
             />
             <BaseTextInput
@@ -64,13 +69,15 @@ function AdminMembershipOverride({ member }) {
               value=""
               placeholder="Reasoning for Override"
             />
-            <div className="text-sm">Examples: Cash transaction, gratuity, automation error, etc</div>
-            <button
-              className="tracking-wider border-2 border-Navy text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-Navy hover:text-white hover:border-white"
-              onClick={() => onNavigationClick('contact')}
-            >
-              UPDATE
-            </button>
+            <div className="w-full flex flex-col justify-center items-center">
+              <div className="text-sm">Examples: Cash transaction, gratuity, automation error, etc</div>
+              <button
+                className="tracking-wider border-2 border-Navy text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-Navy hover:text-white hover:border-white"
+                onClick={() => onNavigationClick('contact')}
+              >
+                UPDATE
+              </button>
+            </div>
           </form>
         </div>
       </div>
