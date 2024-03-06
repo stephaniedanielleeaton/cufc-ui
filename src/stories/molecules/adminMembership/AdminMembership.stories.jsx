@@ -24,6 +24,7 @@ const defaultMember = {
     },
   },
   subscription_status: 'active',
+  membership_start_date: new Date(1702166400000),
   membership_renewed_date: new Date(1702166400000),
   membership_months_paid: '3',
 };
