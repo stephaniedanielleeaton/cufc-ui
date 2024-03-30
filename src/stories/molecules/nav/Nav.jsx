@@ -6,7 +6,7 @@ import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
 import PropTypes from 'prop-types';
 import GoogleLogin from '../../atoms/googlelogin/GoogleLogin.jsx';
 
-function Nav({ onNavigationClick, userLoggedIn, userProfilePic, login }) {
+function Nav({ onNavigationClick, userLoggedIn, userProfilePic, handleAuth }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -91,8 +91,9 @@ function Nav({ onNavigationClick, userLoggedIn, userProfilePic, login }) {
               DASHBOARD
             </span>
           </div>
-          <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4">
-            <GoogleLogin onClick={() => login()} />
+          <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4"
+          onClick={handleAuth}>
+            <GoogleLogin />
           </div>
           {/* User Profile Icon */}
           {userLoggedIn ? (
@@ -155,7 +156,7 @@ Nav.propTypes = {
   onNavigationClick: PropTypes.func,
   userLoggedIn: PropTypes.bool,
   userProfilePic: PropTypes.string,
-  login: PropTypes.func,
+  handleAuth: PropTypes.func,
 };
 
 export default Nav;
