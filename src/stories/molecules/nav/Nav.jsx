@@ -6,7 +6,7 @@ import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
 import PropTypes from 'prop-types';
 import GoogleLogin from '../../atoms/googlelogin/GoogleLogin.jsx';
 
-function Nav({ onNavigationClick }) {
+function Nav({ onNavigationClick, userLoggedIn, userProfilePic }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -94,6 +94,16 @@ function Nav({ onNavigationClick }) {
           <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4">
             <GoogleLogin />
           </div>
+          {/* User Profile Icon */}
+          {userLoggedIn ? (
+            <img
+              src={userProfilePic ? userProfilePic : 'placeholder-avatar.jpg'}
+              alt="Profile"
+              className="w-12 h-12 rounded-full m-4"
+            />
+          ) : (
+            <div className="w-12 h-12 rounded-full bg-gray-300"></div>
+          )}
         </nav>
       </div>
 
@@ -143,6 +153,8 @@ function Nav({ onNavigationClick }) {
 
 Nav.propTypes = {
   onNavigationClick: PropTypes.func,
+  userLoggedIn: PropTypes.bool,
+  userProfilePic: PropTypes.string,
 };
 
 export default Nav;
