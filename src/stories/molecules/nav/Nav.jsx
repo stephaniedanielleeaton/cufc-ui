@@ -4,15 +4,13 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
 import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
 import PropTypes from 'prop-types';
+import GoogleLogin from '../../atoms/googlelogin/GoogleLogin.jsx';
 
 function Nav({ onNavigationClick }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-      <button type="button" onClick={() => auth()}>
-        <img src="../../assets/googlelogin.png" alt="google login" />
-      </button>
       {/* Mobile Navigation */}
       <div className="md:hidden bg-Navy flex items-center h-[70px] min-h-16">
         <nav>
@@ -94,12 +92,7 @@ function Nav({ onNavigationClick }) {
             </span>
           </div>
           <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4">
-            <span
-              className="font-Khula font-normal text-base h-full hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => onNavigationClick('signin')}
-            >
-              SIGN IN
-            </span>
+            <GoogleLogin />
           </div>
         </nav>
       </div>

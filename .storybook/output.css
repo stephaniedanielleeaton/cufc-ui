@@ -770,6 +770,10 @@ video {
   height: 100%;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .max-h-\[64px\] {
   max-height: 64px;
 }
@@ -820,6 +824,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .max-w-screen-lg {
