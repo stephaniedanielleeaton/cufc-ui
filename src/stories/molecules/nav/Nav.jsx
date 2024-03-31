@@ -83,7 +83,7 @@ function Nav({ onNavigationClick, userLoggedIn, userProfilePic, handleAuth }) {
               ADMIN
             </span>
           </div>
-          <div className="button flex items-center px-4 whitespace-nowrap">
+          <div className="button flex items-center px-4 h-full whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
               onClick={() => onNavigationClick('dashboard')}
@@ -92,15 +92,22 @@ function Nav({ onNavigationClick, userLoggedIn, userProfilePic, handleAuth }) {
             </span>
           </div>
           <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4"
-          onClick={handleAuth}>
-            <GoogleLogin />
+               // onClick={handleAuth}
+          >
+            <span
+              className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
+              onClick={() => onNavigationClick('signin')}
+            >
+              SIGN IN
+            </span>
+            {/*<GoogleLogin />*/}
           </div>
           {/* User Profile Icon */}
           {userLoggedIn ? (
             <img
               src={userProfilePic ? userProfilePic : 'placeholder-avatar.jpg'}
               alt="Profile"
-              className="w-12 h-12 rounded-full m-4"
+              className="w-12 h-12 rounded-full mx-4"
             />
           ) : (
             <div className="w-12 h-12 rounded-full bg-gray-300 m-4"></div>
