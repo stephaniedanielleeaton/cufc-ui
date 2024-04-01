@@ -100,7 +100,6 @@ function Nav({ onNavigationClick, userLoggedIn, userProfilePic, handleAuth }) {
             >
               SIGN IN
             </span>
-            {/*<GoogleLogin />*/}
           </div>
           {/* User Profile Icon */}
           {userLoggedIn ? (
