@@ -4,7 +4,6 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
 import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
 import PropTypes from 'prop-types';
-import GoogleLogin from '../../atoms/googlelogin/GoogleLogin.jsx';
 
 function Nav({ onNavigationClick, userLoggedIn, userProfilePic, handleAuth }) {
   const [isOpen, setIsOpen] = useState(false);

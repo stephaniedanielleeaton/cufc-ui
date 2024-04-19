@@ -17,3 +17,4 @@ export { default as TempNav } from './stories/molecules/tempnav/TempNav.jsx';
 export { default as HeroWithFriends } from './stories/molecules/herowithfriends/HeroWithFriends.jsx';
 export { default as AdminMembership } from './stories/molecules/adminmembership/AdminMembership.jsx';
 export { default as AdminMembershipOverride } from './stories/molecules/adminmembershipoverride/AdminMembershipOverride.jsx';
+export { default as PageLoader } from './stories/molecules/pageloader/PageLoader.jsx';

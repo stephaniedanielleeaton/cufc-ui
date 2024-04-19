@@ -20,6 +20,6 @@ declare module 'cufc-ui' {
   export const TempNav: React.ComponentType<any>;
   export const HeroWithFriends: React.ComponentType<any>;
   export const AdminMembership: React.ComponentType<any>;
-
   export const AdminMembershipOverride: React.ComponentType<any>;
+  export const PageLoader: React.ComponentType<any>;
 }
