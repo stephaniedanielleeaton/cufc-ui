@@ -5,7 +5,7 @@ import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
 import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
 import PropTypes from 'prop-types';
 
-function Nav({ onNavigationClick, userLoggedIn, userProfilePic, handleAuth }) {
+function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -90,18 +90,16 @@ function Nav({ onNavigationClick, userLoggedIn, userProfilePic, handleAuth }) {
               DASHBOARD
             </span>
           </div>
-          <div className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4"
-               // onClick={handleAuth}
+          <div
+            className="button flex items-center whitespace-nowrap bg-MediumPink min-h-16 px-4"
+            onClick={() => handleAuth()}
           >
-            <span
-              className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => onNavigationClick('signin')}
-            >
-              SIGN IN
+            <span className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]">
+              {isAuthenticated ? 'SIGN OUT' : 'SIGN IN'}
             </span>
           </div>
           {/* User Profile Icon */}
-          {userLoggedIn ? (
+          {isAuthenticated ? (
             <img
               src={userProfilePic ? userProfilePic : 'placeholder-avatar.jpg'}
               alt="Profile"
@@ -162,6 +160,7 @@ Nav.propTypes = {
   userLoggedIn: PropTypes.bool,
   userProfilePic: PropTypes.string,
   handleAuth: PropTypes.func,
+  isAuthenticated: PropTypes.bool,
 };
 
 export default Nav;
