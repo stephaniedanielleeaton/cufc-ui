@@ -66,7 +66,7 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
 
         {/* Center Content */}
         <div className="w-1/3 absolute inset-x-0 mx-auto text-center p-2">
-          <img src={logoAllWhiteSvg} alt="Logo" className="px-4 max-h-[64px]" />
+          <img src={logoAllWhiteSvg} alt="Logo" className="px-4 max-h-[64px]" onClick={() => onNavigationClick('')} />
         </div>
       </div>
 
@@ -114,7 +114,7 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
       {/* Logo */}
       <div className="hidden md:flex justify-around items-center h-[187px] px-8">
         <div className="flex-none flex justify-center items-center bg-white h-full">
-          <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
+          <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" onClick={() => onNavigationClick('')} />
         </div>
         <nav className="md:w-1/2 lg:w-1/3 flex items-center justify-center space-x-4">
           <div className="button flex items-center whitespace-nowrap">
