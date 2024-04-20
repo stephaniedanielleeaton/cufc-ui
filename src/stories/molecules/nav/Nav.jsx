@@ -106,7 +106,7 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
               className="w-12 h-12 rounded-full mx-4"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-gray-300 m-4"></div>
+            <div className="w-12 h-12 rounded-full bg-gray-300 mx-4"></div>
           )}
         </nav>
       </div>
