@@ -18,3 +18,4 @@ export { default as HeroWithFriends } from './stories/molecules/herowithfriends/
 export { default as AdminMembership } from './stories/molecules/adminmembership/AdminMembership.jsx';
 export { default as AdminMembershipOverride } from './stories/molecules/adminmembershipoverride/AdminMembershipOverride.jsx';
 export { default as PageLoader } from './stories/molecules/pageloader/PageLoader.jsx';
+export { default as UnderConstruction } from './stories/templates/undercontruction/UnderConstruction.jsx';
