@@ -4,7 +4,7 @@ import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import PropTypes from 'prop-types';
 import { calculateValidUntilDate, convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
 
-function AdminMembershipOverride({ member, onSubmit, onNavigationClick }) {
+function AdminMembershipOverride({ member, onSubmit }) {
   const defaultNewRenewalDate = () => {
     return convertUTCDateToYYYYMMDD(
       calculateValidUntilDate(member.membership_renewed_date, member.membership_months_paid)

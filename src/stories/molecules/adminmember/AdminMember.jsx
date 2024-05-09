@@ -5,17 +5,14 @@ import PropTypes from 'prop-types';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 import { convertUTCDateToYYYYMMDD } from '../../../utils/dateUtils.jsx';
 
-function AdminMember({ member, profilePicture, onSubmit }) {
+function AdminMember({ member, onSubmit }) {
   if (!member) return null;
 
   const [memberData, setMemberData] = useState(member);
 
   const displayPicture = () => {
-    if(profilePicture){
-      return profilePicture
-    }
-    return 'src/stories/assets/Lynx/wtaermark.PNG'
-  }
+    return 'src/stories/assets/Lynx/wtaermark.PNG';
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target || e;
@@ -140,12 +137,16 @@ function AdminMember({ member, profilePicture, onSubmit }) {
           {renderContactInputs()}
         </div>
         <div className="w-full px-16 text-center flex justify-around">
-          <button onClick={handleSubmit}
-                  className="tracking-wider border-2 border-black text-sm font-bold my-4 mx-2 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
+          <button
+            onClick={handleSubmit}
+            className="tracking-wider border-2 border-black text-sm font-bold my-4 mx-2 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white"
+          >
             SAVE
           </button>
-          <button onClick={() => {
-          }} className="tracking-wider border-2 border-black text-sm font-bold my-4 mx-2 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white">
+          <button
+            onClick={() => {}}
+            className="tracking-wider border-2 border-black text-sm font-bold my-4 mx-2 px-4 py-2 rounded-none md:w-auto hover:bg-black hover:text-white hover:border-white"
+          >
             CANCEL / RETURN
           </button>
         </div>

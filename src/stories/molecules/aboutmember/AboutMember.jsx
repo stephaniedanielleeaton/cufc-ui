@@ -23,28 +23,6 @@ const formatDate = (date) => {
   return `${month} ${day}, ${year}`;
 };
 
-function calculateValidUntilDate(membershipRenewalDate, months) {
-  if (!membershipRenewalDate) return '';
-
-  let year = membershipRenewalDate.getUTCFullYear();
-  let month = membershipRenewalDate.getUTCMonth();
-  let day = membershipRenewalDate.getUTCDate();
-
-  month += months;
-  year += Math.floor(month / 12);
-  month %= 12;
-
-  if (month < 0) {
-    month += 12;
-    year--;
-  }
-
-  const daysInNewMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
-  day = Math.min(day, daysInNewMonth);
-
-  return new Date(Date.UTC(year, month, day));
-}
-
 function AboutMember({ member }) {
   if (!member) return null;
 
