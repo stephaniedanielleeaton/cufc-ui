@@ -6,9 +6,10 @@ export default {
   component: GoogleLogin,
   tags: ['autodocs'],
 };
-const handleOnNavigationClick = (message) => {
-  console.log(message);
-};
+
+//this isn't be used so I'm remarking it out to not cause linter errors
+// const handleOnNavigationClick = (message) => {
+//   console.log(message);
+// };
 
 export const Default = () => <GoogleLogin />;
-
