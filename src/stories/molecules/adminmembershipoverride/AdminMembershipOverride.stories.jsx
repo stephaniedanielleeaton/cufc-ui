@@ -30,13 +30,13 @@ const defaultMember = {
 };
 
 const onSubmitDefault = (e) => {
-  console.log(e)
-}
+  console.log(e);
+};
 
 const Template = (args) => <AdminMembershipOverride {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   member: defaultMember,
-  onSubmit: onSubmitDefault
+  onSubmit: onSubmitDefault,
 };

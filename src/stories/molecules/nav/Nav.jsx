@@ -24,7 +24,8 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
           </div>
           {/* Mobile DropDown */}
           <div
-            className={`absolute ${isOpen ? 'block' : 'hidden'} left-0 top-full px-4 py-2 rounded-md bg-Navy w-full`}
+            // className={`absolute ${isOpen ? 'block' : 'hidden'} left-0 top-full px-4 py-2 rounded-md bg-Navy w-full`}
+            className={`absolute ${isOpen ? 'block' : 'hidden'} left-0 mt-4 ml-4 px-4 py-4 rounded-md bg-Navy w-1/3 z-50`}
           >
             <a
               href="#"
