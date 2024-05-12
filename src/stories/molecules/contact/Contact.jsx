@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import cellphone from '../../assets/cellphone.svg';
 import addresspin from '../../assets/addresspin.svg';
 import facebook from '../../assets/facebook.svg';
 import instagram from '../../assets/instagram.svg';
@@ -9,7 +8,7 @@ function Contact({ onSubmit }) {
     fullName: '',
     emailAddress: '',
     contactNumber: '',
-    message: ''
+    message: '',
   });
   const [shouldRender, setShouldRender] = useState(false);
 
@@ -17,13 +16,13 @@ function Contact({ onSubmit }) {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShouldRender(true)
+    setShouldRender(true);
     onSubmit(formData);
   };
 
@@ -45,13 +44,13 @@ function Contact({ onSubmit }) {
             {/*</div>*/}
           </div>
           <div className="flex items-center">
-            {/*<div className="mr-4">*/}
-            {/*  <img src={addresspin} alt="Address Icon" className="w-8 h-8" />*/}
-            {/*</div>*/}
-            {/*<div className="block w-full">*/}
-            {/*  <span className="w-full block font-bold">Address</span>*/}
-            {/*  <span className="w-full block">4601 Nickerson Rd, Columbus, OH 43228</span>*/}
-            {/*</div>*/}
+            <div className="mr-4">
+              <img src={addresspin} alt="Address Icon" className="w-8 h-8" />
+            </div>
+            <div className="block w-full">
+              <span className="w-full block font-bold">Address</span>
+              <span className="w-full block">6475 E Main St. #111, Reynoldsburg, OH 43068</span>
+            </div>
           </div>
           <div className="flex items-center">
             <div className="mr-4">
