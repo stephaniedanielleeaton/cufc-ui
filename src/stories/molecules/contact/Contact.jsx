@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import addresspin from '../../assets/addresspin.svg';
-import facebook from '../../assets/facebook.svg';
-import instagram from '../../assets/instagram.svg';
+import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
+import ReCAPTCHA from 'react-google-recaptcha';
 
-function Contact({ onSubmit }) {
+function Contact({ onSubmit, recaptchaSiteKey }) {
   const [formData, setFormData] = useState({
     fullName: '',
     emailAddress: '',
     contactNumber: '',
     message: '',
+    captchaToken: null, // New state to hold the CAPTCHA token
   });
-  const [shouldRender, setShouldRender] = useState(false);
+  const recaptchaRef = useRef();
+  const [emailStatusMessage, setEmailStatusMessage] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,12 +19,30 @@ function Contact({ onSubmit }) {
       ...prevData,
       [name]: value,
     }));
+    setEmailStatusMessage('');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setShouldRender(true);
-    onSubmit(formData);
+    if (!formData.fullName || !formData.emailAddress || !formData.message) {
+      setEmailStatusMessage('Please fill in all fields');
+      return;
+    }
+    try {
+      await onSubmit({ ...formData });
+      setEmailStatusMessage('Email sent!');
+    } catch (error) {
+      setEmailStatusMessage('Error sending email');
+      console.error('Error sending email:', error);
+    }
+  };
+
+  // Handle CAPTCHA token change
+  const handleCaptchaChange = (token) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      captchaToken: token,
+    }));
   };
 
   return (
@@ -34,32 +53,7 @@ function Contact({ onSubmit }) {
           <span className="font-light">
             Have a question? <b>Send us a message.</b>
           </span>
-          <div className="flex items-center">
-            {/*<div className="mr-4">*/}
-            {/*  <img src={cellphone} alt="Phone Icon" className="w-8 h-8" />*/}
-            {/*</div>*/}
-            {/*<div className="block w-full">*/}
-            {/*  <span className="w-full block font-bold">Give Us A Call</span>*/}
-            {/*  <span className="w-full block">513-633-0140</span>*/}
-            {/*</div>*/}
-          </div>
-          <div className="flex items-center">
-            <div className="mr-4">
-              <img src={addresspin} alt="Address Icon" className="w-8 h-8" />
-            </div>
-            <div className="block w-full">
-              <span className="w-full block font-bold">Address</span>
-              <span className="w-full block">6475 E Main St. #111, Reynoldsburg, OH 43068</span>
-            </div>
-          </div>
-          <div className="flex items-center">
-            <div className="mr-4">
-              <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />
-            </div>
-            <div className="mr-4">
-              <img src={instagram} alt="Instagram Logo" className="w-8 h-8" />
-            </div>
-          </div>
+          {/* Add your contact information here */}
         </div>
       </div>
       <div className="md:w-1/2 flex items-center mx-16 my-4">
@@ -95,17 +89,28 @@ function Contact({ onSubmit }) {
             onChange={handleChange}
             className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
           ></textarea>
+          {/* Add reCAPTCHA component */}
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey={recaptchaSiteKey}
+            onChange={handleCaptchaChange}
+          />
           <button
             type="submit"
             className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
           >
             SUBMIT
           </button>
-          {shouldRender && <span className="p-4">Email Sent!</span>}
+          <span className="p-4">{emailStatusMessage}</span>
         </form>
       </div>
     </div>
   );
 }
+
+Contact.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  recaptchaSiteKey: PropTypes.string.isRequired,
+};
 
 export default Contact;

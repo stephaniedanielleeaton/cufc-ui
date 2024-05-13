@@ -29,7 +29,7 @@ function Schedule() {
           <span className="text-white text-xs font-light">6:30pm - 8:30pm</span>
         </div>
         <div className="flex flex-col p-4 rounded-lg md:bg-transparent bg-gray-600">
-          <span className="text-LightPink font-bold text-sm mb-1">Footwork, Thrusting & Weapons</span>
+          <span className="text-LightPink font-bold text-sm mb-1">Footwork & Thrusting Weapons</span>
           <span className="text-white font-bold text-sm">Thursday</span>
           <span className="text-white text-xs font-light">7:00pm - 9:00pm</span>
         </div>

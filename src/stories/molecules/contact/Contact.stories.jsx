@@ -10,6 +10,6 @@ const handleOnNavigationClick = (message) => {
   console.log(message);
 };
 
-//const Template = (args) => <TopNavbar {...args} />;
+const devSiteKey = '6Leo7dkpAAAAAMiK3z8TrcpBOA6K4i8QlteBIKEd';
 
-export const Default = () => <Contact onNavigationClick={handleOnNavigationClick} />;
+export const Default = () => <Contact onNavigationClick={handleOnNavigationClick} recaptchaSiteKey={devSiteKey} />;
