@@ -2,7 +2,7 @@ import React from 'react';
 import CTA from './CTA.jsx';
 
 export default {
-  title: 'Molecules/CTA',
+  title: 'Molecules/homepage/CTA',
   component: CTA,
   tags: ['autodocs'],
 };

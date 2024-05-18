@@ -2,7 +2,7 @@ import React from 'react';
 import HeroWithFriends from './HeroWithFriends.jsx';
 
 export default {
-  title: 'Molecules/HeroWithFriends',
+  title: 'Molecules/homepage/HeroWithFriends',
   component: HeroWithFriends,
   tags: ['autodocs'],
 };

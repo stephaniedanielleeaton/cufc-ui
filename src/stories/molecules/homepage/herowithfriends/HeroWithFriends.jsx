@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '../../assets/meyerwatercolor.png';
+import backgroundImage from '../../../assets/meyerwatercolor.png';
 
 const HeroWithFriends = ({onNavigationClick}) => {
   function renderContent() {

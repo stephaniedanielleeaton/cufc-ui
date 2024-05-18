@@ -2,7 +2,7 @@ import React from 'react';
 import Contact from './Contact.jsx';
 
 export default {
-  title: 'Molecules/Contact',
+  title: 'Molecules/homepage/Contact',
   component: Contact,
   tags: ['autodocs'],
 };

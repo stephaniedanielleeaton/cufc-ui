@@ -1,5 +1,5 @@
 import React from 'react';
-import BaseButton from '../button/BaseButton.jsx';
+import BaseButton from '../../button/BaseButton.jsx';
 
 const Hero = () => {
   function renderContent() {

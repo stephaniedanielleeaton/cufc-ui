@@ -1,9 +1,9 @@
 import React from 'react';
-import Schedule from './Schedule.jsx';
+import Intro from './Intro.jsx';
 
 export default {
-  title: 'Molecules/Schedule',
-  component: Schedule,
+  title: 'Molecules/homepage/Intro',
+  component: Intro,
   tags: ['autodocs'],
 };
 const handleOnNavigationClick = (message) => {
@@ -12,4 +12,4 @@ const handleOnNavigationClick = (message) => {
 
 //const Template = (args) => <TopNavbar {...args} />;
 
-export const Default = () => <Schedule onNavigationClick={handleOnNavigationClick} />;
+export const Default = () => <Intro onNavigationClick={handleOnNavigationClick} />;
