@@ -764,6 +764,10 @@ video {
   height: 1.5rem;
 }
 
+.h-8 {
+  height: 2rem;
+}
+
 .h-\[100px\] {
   height: 100px;
 }
@@ -838,6 +842,10 @@ video {
 
 .w-64 {
   width: 16rem;
+}
+
+.w-8 {
+  width: 2rem;
 }
 
 .w-9\/12 {
@@ -1229,6 +1237,10 @@ video {
 
 .pr-8 {
   padding-right: 2rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
 }
 
 .text-center {

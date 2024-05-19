@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReCAPTCHA from 'react-google-recaptcha';
+import addresspin from '../../../assets/addresspin.svg';
+import facebook from '../../../assets/facebook.svg';
+import instagram from '../../../assets/instagram.svg';
 
 function Contact({ onSubmit, recaptchaSiteKey }) {
   const [formData, setFormData] = useState({
@@ -71,14 +74,14 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
               <span className="w-full block">6475 E Main St. #111, Reynoldsburg, OH 43068</span>
             </div>
           </div>
-          <div className="flex items-center">
-            <div className="mr-4">
-              <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />
-            </div>
-            <div className="mr-4">
-              <img src={instagram} alt="Instagram Logo" className="w-8 h-8" />
-            </div>
-          </div>
+          {/*<div className="flex items-center">*/}
+          {/*  <div className="mr-4">*/}
+          {/*    <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />*/}
+          {/*  </div>*/}
+          {/*  <div className="mr-4">*/}
+          {/*    <img src={instagram} alt="Instagram Logo" className="w-8 h-8" />*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
       </div>
       <div className="md:w-1/2 flex items-center mx-16 my-4">
@@ -115,7 +118,7 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
             className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
           ></textarea>
           {/* Add reCAPTCHA component */}
-          <ReCAPTCHA
+          <ReCAPTCHA className="mb-2"
             ref={recaptchaRef}
             sitekey={recaptchaSiteKey}
             onChange={handleCaptchaChange}
