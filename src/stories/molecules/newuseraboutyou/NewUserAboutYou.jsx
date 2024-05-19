@@ -44,7 +44,7 @@ function NewUserAboutYou({ onSubmit }) {
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      if (!formData[key]) {
+      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName') {
         valid = false;
         newErrors[key] = 'This field is required';
       }
