@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
-import BaseButton from '../button/BaseButton.jsx';
 import SelectBoxGroup from '../selectbox/SelectBoxGroup.jsx';
+import {commonCountries, usStateAbbreviations} from "../../../utils/constants.jsx";
 
 function NewUserAboutYou() {
   const [formData, setFormData] = useState({
@@ -19,13 +19,14 @@ function NewUserAboutYou() {
     country: '',
     phoneNumber: '',
     requestedMembershipType: '',
+    requestedStartDate: '',
   });
 
   const options = [
-    { id: 'nugget', header: 'Beginner Course', description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.", price: '$110' },
-    { id: 'fullMembership', header: 'Full Class Membership', description: 'Membership to the club, access to all regular weekly classes, coaches, social events, and open gym hours at the club site. Recommended if you have done HEMA before.', price: '$110/month' },
+    { id: 'nugget', header: 'Sign Up For The Beginner Course', description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.", price: '$110' },
+    { id: 'fullMembership', header: 'Full Class Membership', description: 'Membership to the club, access to all regular weekly classes, coaches, social events, and open gym hours at the club site. Recommended if you have done HEMA before and would like to join classes.', price: '$110/month' },
     { id: 'socialMembership', header: 'Social Membership', description: 'Membership to the club, access to the site and coaches for Saturdays and Social Events only. Recommended if you have done HEMA before.', price: '$60/month' },
-    { id: 'idkMembership', header: 'Help me decide', description: 'We will contact you and help you choose the best option', price: '' },
+    { id: 'idk', header: 'Help me decide', description: 'We will contact you and help you choose the best option', price: '' },
   ];
 
   const handleChange = (e) => {
@@ -107,7 +108,7 @@ function NewUserAboutYou() {
                 faIcon="faMapPin"
                 name="state"
                 onChange={handleChange}
-                options={['option 1', 'option 2', 'option 3']}
+                options={usStateAbbreviations}
                 placeholder="State"
             />
             <BaseTextInput
@@ -121,7 +122,7 @@ function NewUserAboutYou() {
                 faIcon="faMapPin"
                 name="country"
                 onChange={handleChange}
-                options={['USA']}
+                options={commonCountries}
                 placeholder="Country"
             />
             <BaseTextInput
@@ -132,15 +133,26 @@ function NewUserAboutYou() {
                 value={formData.phoneNumber}
             />
           </div>
-          <div className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-khula font-bold mb-4 text-center">Select Your Membership Type</h1>
-            <div className="flex justify-center">
+          <div className="container mx-auto px-4 py-4">
+            <h1 className="text-xl text-wine font-khula font-bold mb-4 text-center">Membership Options</h1>
+            <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>;
+            <h1 className="font-khula font-bold mb-4 text-center">Select Your Membership Type</h1>
+            <div className="flex justify-center mb-4">
               <SelectBoxGroup
                   options={options}
                   selectedOption={formData.requestedMembershipType}
                   onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
               />
             </div>
+            <h1 className="font-khula font-bold mb-4 text-center mt-2">When would you like to start?</h1>
+            <BaseTextInput
+                faIcon="faCalendar"
+                name="requestedStartDate"
+                type="date"
+                onChange={handleChange}
+                placeholder="Date Of Birth"
+                value={formData.requestedStartDate}
+            />
           </div>
         </form>
         <div className="w-full text-center p-4">

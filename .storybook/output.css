@@ -848,6 +848,10 @@ video {
   width: 100%;
 }
 
+.w-9\/12 {
+  width: 75%;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -989,6 +993,14 @@ video {
   border-bottom-width: 1px;
 }
 
+.border-t {
+  border-top-width: 1px;
+}
+
+.border-t-2 {
+  border-top-width: 2px;
+}
+
 .border-Navy {
   --tw-border-opacity: 1;
   border-color: rgb(24 42 58 / var(--tw-border-opacity));
@@ -1012,6 +1024,11 @@ video {
 .border-white {
   --tw-border-opacity: 1;
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
+}
+
+.border-wine {
+  --tw-border-opacity: 1;
+  border-color: rgb(122 37 63 / var(--tw-border-opacity));
 }
 
 .bg-DeepRed {
