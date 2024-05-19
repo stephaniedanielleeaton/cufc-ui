@@ -22,10 +22,10 @@ function NewUserAboutYou() {
   });
 
   const options = [
-    { id: 'nugget', header: 'Beginner Course', description: 'Sign up to take our beginner\'s course to learn the basics of historical fencing! Recommended if you have never done HEMA before.' },
-    { id: 'fullMembership', header: 'Full Class Membership', description: 'Membership to the club, access to all regular weekly classes, coaches, social events, and open gym hours at the club site. Recommended if you have done HEMA before.' },
-    { id: 'socialMembership', header: 'Social Membership', description: 'Membership to the club, access to the site and coaches for Saturdays and Social Events only. Recommended if you have done HEMA before.' },
-    { id: 'idkMembership', header: 'Help me decide', description: 'We will contact you and help you choose the best option' },
+    { id: 'nugget', header: 'Beginner Course', description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.", price: '$110' },
+    { id: 'fullMembership', header: 'Full Class Membership', description: 'Membership to the club, access to all regular weekly classes, coaches, social events, and open gym hours at the club site. Recommended if you have done HEMA before.', price: '$110/month' },
+    { id: 'socialMembership', header: 'Social Membership', description: 'Membership to the club, access to the site and coaches for Saturdays and Social Events only. Recommended if you have done HEMA before.', price: '$60/month' },
+    { id: 'idkMembership', header: 'Help me decide', description: 'We will contact you and help you choose the best option', price: '' },
   ];
 
   const handleChange = (e) => {
@@ -134,11 +134,13 @@ function NewUserAboutYou() {
           </div>
           <div className="container mx-auto px-4 py-8">
             <h1 className="text-2xl font-khula font-bold mb-4 text-center">Select Your Membership Type</h1>
-            <SelectBoxGroup
-                options={options}
-                selectedOption={formData.requestedMembershipType}
-                onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
-            />
+            <div className="flex justify-center">
+              <SelectBoxGroup
+                  options={options}
+                  selectedOption={formData.requestedMembershipType}
+                  onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
+              />
+            </div>
           </div>
         </form>
         <div className="w-full text-center p-4">
