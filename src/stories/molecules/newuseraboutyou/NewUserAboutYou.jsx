@@ -25,7 +25,7 @@ function NewUserAboutYou({ onSubmit }) {
   const [errors, setErrors] = useState({});
 
   const options = [
-    { id: 'nugget', header: 'Sign Up For The Beginner Course', description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.", price: '$110' },
+    { id: 'nugget', header: 'Sign Up For The Beginner Course', description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.", price: '$110 for full course' },
     { id: 'fullMembership', header: 'Full Class Membership', description: 'Membership to the club, access to all regular weekly classes, coaches, social events, and open gym hours at the club site. Recommended if you have done HEMA before and would like to join classes.', price: '$110/month' },
     { id: 'socialMembership', header: 'Social Membership', description: 'Membership to the club, access to the site and coaches for Saturdays and Social Events only. Recommended if you have done HEMA before.', price: '$60/month' },
     { id: 'idk', header: 'Help me decide', description: 'We will contact you and help you choose the best option', price: '' },
@@ -65,61 +65,63 @@ function NewUserAboutYou({ onSubmit }) {
   return (
       <div className="max-w-screen-md mx-auto">
         <form onSubmit={handleSubmit} className="flex flex-wrap">
-          <div className="p-4 font-khula flex-grow w-full md:w-1/2">
-            <div className="font-bold text-wine">About You</div>
+          <div className="p-4 font-khula flex-grow w-full">
+            <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Join Us</h1>
+            <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
+            <h1 className="font-khula font-bold mb-2 text-center">About You</h1>
             <BaseTextInput
-                name="displayFirstName"
-                onChange={handleChange}
-                placeholder="Preferred First Name"
-                value={formData.displayFirstName}
-                error={errors.displayFirstName}
+              name="displayFirstName"
+              onChange={handleChange}
+              placeholder="Preferred First Name"
+              value={formData.displayFirstName}
+              error={errors.displayFirstName}
             />
             <BaseTextInput
-                name="displayLastName"
-                onChange={handleChange}
-                placeholder="Preferred Last Name"
-                value={formData.displayLastName}
-                error={errors.displayLastName}
+              name="displayLastName"
+              onChange={handleChange}
+              placeholder="Preferred Last Name"
+              value={formData.displayLastName}
+              error={errors.displayLastName}
             />
             <BaseTextInput
-                name="legalFirstName"
-                onChange={handleChange}
-                placeholder="Legal First Name"
-                value={formData.legalFirstName}
-                error={errors.legalFirstName}
+              name="legalFirstName"
+              onChange={handleChange}
+              placeholder="Legal First Name"
+              value={formData.legalFirstName}
+              error={errors.legalFirstName}
             />
             <BaseTextInput
-                name="legalLastName"
-                onChange={handleChange}
-                placeholder="Legal Last Name"
-                value={formData.legalLastName}
-                error={errors.legalLastName}
+              name="legalLastName"
+              onChange={handleChange}
+              placeholder="Legal Last Name"
+              value={formData.legalLastName}
+              error={errors.legalLastName}
             />
             <BaseTextInput
-                faIcon="faEnvelope"
-                name="email"
-                onChange={handleChange}
-                placeholder="Email"
-                value={formData.email}
-                error={errors.email}
+              faIcon="faEnvelope"
+              name="email"
+              onChange={handleChange}
+              placeholder="Email"
+              value={formData.email}
+              error={errors.email}
             />
             <BaseTextInput
-                faIcon="faCalendar"
-                name="dateOfBirth"
-                type="date"
-                onChange={handleChange}
-                placeholder="Date Of Birth"
-                value={formData.dateOfBirth}
-                error={errors.dateOfBirth}
+              faIcon="faCalendar"
+              name="dateOfBirth"
+              type="date"
+              onChange={handleChange}
+              placeholder="Date Of Birth"
+              value={formData.dateOfBirth}
+              error={errors.dateOfBirth}
             />
           </div>
-          <div className="p-4 font-khula flex-grow w-full md:w-1/2">
-            <div className="font-bold text-wine">Address</div>
+          <div className="p-4 font-khula flex-grow w-full">
+            <h1 className="font-khula font-bold mb-2 text-center">Address</h1>
             <BaseTextInput
-                faIcon="faStreetView"
-                name="streetAddress"
-                onChange={handleChange}
-                placeholder="Street Address"
+              faIcon="faStreetView"
+              name="streetAddress"
+              onChange={handleChange}
+              placeholder="Street Address"
                 value={formData.streetAddress}
                 error={errors.streetAddress}
             />
@@ -167,7 +169,7 @@ function NewUserAboutYou({ onSubmit }) {
             />
           </div>
           <div className="container mx-auto px-4 py-4">
-            <h1 className="text-xl text-wine font-khula font-bold mb-4 text-center">Membership Options</h1>
+            <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Membership Options</h1>
             <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
             <h1 className="font-khula font-bold mb-4 text-center">Select Your Membership Type</h1>
             <div className="flex justify-center mb-4">
