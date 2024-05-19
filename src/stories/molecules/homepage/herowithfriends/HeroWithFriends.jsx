@@ -6,7 +6,7 @@ const HeroWithFriends = ({onNavigationClick}) => {
     return (
       <div className="p-4 text-white font-khula relative z-10">
         <h1 className="text-4xl font-bold leading-16 mb-4">Get ready to leap into historical swordsmanship</h1>
-        <button className="tracking-wider border-2 border-white text-sm font-bold px-4 py-2 rounded-none hover:bg-white hover:text-black hover:border-black" onClick={() => onNavigationClick('contact')}> JOIN NOW </button>
+        <button className="tracking-wider border-2 border-white text-sm font-bold px-4 py-2 rounded-none hover:bg-white hover:text-black hover:border-black" onClick={() => onNavigationClick('joinNow')}> JOIN NOW </button>
       </div>
     );
   }

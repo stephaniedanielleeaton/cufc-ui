@@ -19,4 +19,5 @@ export { default as AdminMembership } from './stories/molecules/adminmembership/
 export { default as AdminMembershipOverride } from './stories/molecules/adminmembershipoverride/AdminMembershipOverride.jsx';
 export { default as PageLoader } from './stories/molecules/pageloader/PageLoader.jsx';
 export { default as UnderConstruction } from './stories/templates/undercontruction/UnderConstruction.jsx';
-export { default as NewUserAboutYou } from './stories/molecules/newuseraboutyou/NewUserAboutYou.jsx'
+export { default as NewUserAboutYou } from './stories/molecules/newuseraboutyou/NewUserAboutYou.jsx';
+export { default as SmallHero } from './stories/molecules/smallhero/SmallHero.jsx'

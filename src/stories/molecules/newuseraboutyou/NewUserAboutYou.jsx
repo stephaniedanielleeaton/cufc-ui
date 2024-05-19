@@ -63,7 +63,7 @@ function NewUserAboutYou({ onSubmit }) {
   };
 
   return (
-      <div>
+      <div className="max-w-screen-md mx-auto">
         <form onSubmit={handleSubmit} className="flex flex-wrap">
           <div className="p-4 font-khula flex-grow w-full md:w-1/2">
             <div className="font-bold text-wine">About You</div>

@@ -22,6 +22,8 @@ declare module 'cufc-ui' {
   export const AdminMembership: React.ComponentType<any>;
   export const AdminMembershipOverride: React.ComponentType<any>;
   export const PageLoader: React.ComponentType<any>;
-
   export const UnderConstruction: React.ComponentType<any>;
+  export const NewUserAboutYou: React.ComponentType<any>;
+
+  export const SmallHero: React.ComponentType<any>;
 }
