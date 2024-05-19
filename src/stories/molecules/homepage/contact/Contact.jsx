@@ -53,7 +53,32 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
           <span className="font-light">
             Have a question? <b>Send us a message.</b>
           </span>
-          {/* Add your contact information here */}
+          <div className="flex items-center">
+            {/*<div className="mr-4">*/}
+            {/*  <img src={cellphone} alt="Phone Icon" className="w-8 h-8" />*/}
+            {/*</div>*/}
+            {/*<div className="block w-full">*/}
+            {/*  <span className="w-full block font-bold">Give Us A Call</span>*/}
+            {/*  <span className="w-full block">513-633-0140</span>*/}
+            {/*</div>*/}
+          </div>
+          <div className="flex items-center">
+            <div className="mr-4">
+              <img src={addresspin} alt="Address Icon" className="w-8 h-8" />
+            </div>
+            <div className="block w-full">
+              <span className="w-full block font-bold">Address</span>
+              <span className="w-full block">6475 E Main St. #111, Reynoldsburg, OH 43068</span>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="mr-4">
+              <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />
+            </div>
+            <div className="mr-4">
+              <img src={instagram} alt="Instagram Logo" className="w-8 h-8" />
+            </div>
+          </div>
         </div>
       </div>
       <div className="md:w-1/2 flex items-center mx-16 my-4">
