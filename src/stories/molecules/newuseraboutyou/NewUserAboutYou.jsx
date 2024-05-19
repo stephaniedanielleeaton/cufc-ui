@@ -4,7 +4,7 @@ import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import SelectBoxGroup from '../selectbox/SelectBoxGroup.jsx';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 
-function NewUserAboutYou(onSubmit) {
+function NewUserAboutYou({ onSubmit }) {
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
@@ -58,7 +58,7 @@ function NewUserAboutYou(onSubmit) {
     e.preventDefault();
     if (validateForm()) {
       console.log('Form submitted:', formData);
-      onSubmit(formData);
+      if (onSubmit) onSubmit(formData);
     }
   };
 

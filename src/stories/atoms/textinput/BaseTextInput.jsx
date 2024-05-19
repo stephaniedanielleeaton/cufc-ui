@@ -22,31 +22,32 @@ const iconDefs = [
   { ref: 'none', value: 'none' },
 ];
 
-const BaseTextInput = ({ placeholder, onChange, value, faIcon, name, type }) => {
+const BaseTextInput = ({ placeholder, onChange, value, faIcon, name, type, error }) => {
   const icon = iconDefs.find((entry) => entry.ref === faIcon)?.value;
 
   return (
-    <div className="w-full p-2 text-sm">
-      <div className="flex items-center relative">
-        <input
-          className="w-full border rounded-md pl-10 h-12 p-3 focus:outline-none focus:border-periwinkle"
-          type={type}
-          placeholder={placeholder}
-          onChange={onChange}
-          value={value}
-          name={name} // Pass the name prop to the input
-        />
-        {faIcon !== 'none' ? (
-          <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-            <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
-          </div>
-        ) : null}
+      <div className="w-full mb-2 text-sm">
+        <div className="flex items-center relative">
+          <input
+              className={`w-full border rounded-md pl-10 h-12 p-3 focus:outline-none ${error ? 'border-red-500' : 'focus:border-periwinkle'}`}
+              type={type}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={value}
+              name={name}
+          />
+          {faIcon !== 'none' ? (
+              <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                <FontAwesomeIcon icon={icon} className="w-4 h-4 text-outerSpace inline" />
+              </div>
+          ) : null}
+        </div>
+        <div className="h-4">
+          {error && <p className="text-red-500 text-xs italic">{error}</p>}
+        </div>
       </div>
-    </div>
   );
 };
-
-export default BaseTextInput;
 
 BaseTextInput.propTypes = {
   faIcon: PropTypes.string,
@@ -55,6 +56,7 @@ BaseTextInput.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
   name: PropTypes.string,
+  error: PropTypes.string,
 };
 
 BaseTextInput.defaultProps = {
@@ -64,4 +66,7 @@ BaseTextInput.defaultProps = {
   onChange: () => {},
   value: '',
   name: '',
+  error: '',
 };
+
+export default BaseTextInput;
