@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import SelectBoxGroup from '../selectbox/SelectBoxGroup.jsx';
-import {commonCountries, usStateAbbreviations} from "../../../utils/constants.jsx";
+import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 
-function NewUserAboutYou() {
+function NewUserAboutYou(onSubmit) {
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
@@ -22,6 +22,8 @@ function NewUserAboutYou() {
     requestedStartDate: '',
   });
 
+  const [errors, setErrors] = useState({});
+
   const options = [
     { id: 'nugget', header: 'Sign Up For The Beginner Course', description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.", price: '$110' },
     { id: 'fullMembership', header: 'Full Class Membership', description: 'Membership to the club, access to all regular weekly classes, coaches, social events, and open gym hours at the club site. Recommended if you have done HEMA before and would like to join classes.', price: '$110/month' },
@@ -35,12 +37,29 @@ function NewUserAboutYou() {
       ...prevData,
       [name]: value,
     }));
-    console.log(formData);
+  };
+
+  const validateForm = () => {
+    let valid = true;
+    const newErrors = {};
+
+    Object.keys(formData).forEach((key) => {
+      if (!formData[key]) {
+        valid = false;
+        newErrors[key] = 'This field is required';
+      }
+    });
+
+    setErrors(newErrors);
+    return valid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onSubmit(formData); // Uncomment this line if you have a function to handle form submission
+    if (validateForm()) {
+      console.log('Form submitted:', formData);
+      onSubmit(formData);
+    }
   };
 
   return (
@@ -53,24 +72,28 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 placeholder="Preferred First Name"
                 value={formData.displayFirstName}
+                error={errors.displayFirstName}
             />
             <BaseTextInput
                 name="displayLastName"
                 onChange={handleChange}
                 placeholder="Preferred Last Name"
                 value={formData.displayLastName}
+                error={errors.displayLastName}
             />
             <BaseTextInput
                 name="legalFirstName"
                 onChange={handleChange}
                 placeholder="Legal First Name"
                 value={formData.legalFirstName}
+                error={errors.legalFirstName}
             />
             <BaseTextInput
                 name="legalLastName"
                 onChange={handleChange}
                 placeholder="Legal Last Name"
                 value={formData.legalLastName}
+                error={errors.legalLastName}
             />
             <BaseTextInput
                 faIcon="faEnvelope"
@@ -78,6 +101,7 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 placeholder="Email"
                 value={formData.email}
+                error={errors.email}
             />
             <BaseTextInput
                 faIcon="faCalendar"
@@ -86,6 +110,7 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 placeholder="Date Of Birth"
                 value={formData.dateOfBirth}
+                error={errors.dateOfBirth}
             />
           </div>
           <div className="p-4 font-khula flex-grow w-full md:w-1/2">
@@ -96,6 +121,7 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 placeholder="Street Address"
                 value={formData.streetAddress}
+                error={errors.streetAddress}
             />
             <BaseTextInput
                 faIcon="faCity"
@@ -103,6 +129,7 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 placeholder="City"
                 value={formData.city}
+                error={errors.city}
             />
             <BaseSelect
                 faIcon="faMapPin"
@@ -110,6 +137,8 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 options={usStateAbbreviations}
                 placeholder="State"
+                value={formData.state}
+                error={errors.state}
             />
             <BaseTextInput
                 faIcon="faMapPin"
@@ -117,6 +146,7 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 placeholder="Zipcode"
                 value={formData.zipcode}
+                error={errors.zipcode}
             />
             <BaseSelect
                 faIcon="faMapPin"
@@ -124,6 +154,8 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 options={commonCountries}
                 placeholder="Country"
+                value={formData.country}
+                error={errors.country}
             />
             <BaseTextInput
                 faIcon="faMobilePhone"
@@ -131,11 +163,12 @@ function NewUserAboutYou() {
                 onChange={handleChange}
                 placeholder="Phone Number"
                 value={formData.phoneNumber}
+                error={errors.phoneNumber}
             />
           </div>
           <div className="container mx-auto px-4 py-4">
             <h1 className="text-xl text-wine font-khula font-bold mb-4 text-center">Membership Options</h1>
-            <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>;
+            <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
             <h1 className="font-khula font-bold mb-4 text-center">Select Your Membership Type</h1>
             <div className="flex justify-center mb-4">
               <SelectBoxGroup
@@ -150,17 +183,16 @@ function NewUserAboutYou() {
                 name="requestedStartDate"
                 type="date"
                 onChange={handleChange}
-                placeholder="Date Of Birth"
+                placeholder="Requested Start Date"
                 value={formData.requestedStartDate}
+                error={errors.requestedStartDate}
             />
           </div>
         </form>
         <div className="w-full text-center p-4">
           <button
               type="submit"
-              onClick={() => {
-                // Handle button click
-              }}
+              onClick={handleSubmit}
               className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
           >
             SUBMIT
