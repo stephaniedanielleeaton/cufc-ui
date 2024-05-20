@@ -1,15 +1,9 @@
-<<<<<<< Updated upstream:src/stories/molecules/homepage/contact/Contact.jsx
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReCAPTCHA from 'react-google-recaptcha';
 import addresspin from '../../../assets/addresspin.svg';
 import facebook from '../../../assets/facebook.svg';
 import instagram from '../../../assets/instagram.svg';
-=======
-import React, { useState } from 'react';
-import facebook from '../../assets/facebook.svg';
-import instagram from '../../assets/instagram.svg';
->>>>>>> Stashed changes:src/stories/molecules/contact/Contact.jsx
 
 function Contact({ onSubmit, recaptchaSiteKey }) {
   const [formData, setFormData] = useState({
@@ -17,10 +11,7 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
     emailAddress: '',
     contactNumber: '',
     message: '',
-<<<<<<< Updated upstream:src/stories/molecules/homepage/contact/Contact.jsx
     captchaToken: null, // New state to hold the CAPTCHA token
-=======
->>>>>>> Stashed changes:src/stories/molecules/contact/Contact.jsx
   });
   const recaptchaRef = useRef();
   const [emailStatusMessage, setEmailStatusMessage] = useState('');
@@ -36,7 +27,6 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-<<<<<<< Updated upstream:src/stories/molecules/homepage/contact/Contact.jsx
     if (!formData.fullName || !formData.emailAddress || !formData.message) {
       setEmailStatusMessage('Please fill in all fields');
       return;
@@ -56,10 +46,6 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
       ...prevData,
       captchaToken: token,
     }));
-=======
-    setShouldRender(true);
-    onSubmit(formData);
->>>>>>> Stashed changes:src/stories/molecules/contact/Contact.jsx
   };
 
   return (
@@ -133,9 +119,9 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
           ></textarea>
           {/* Add reCAPTCHA component */}
           <ReCAPTCHA className="mb-2"
-            ref={recaptchaRef}
-            sitekey={recaptchaSiteKey}
-            onChange={handleCaptchaChange}
+                     ref={recaptchaRef}
+                     sitekey={recaptchaSiteKey}
+                     onChange={handleCaptchaChange}
           />
           <button
             type="submit"
