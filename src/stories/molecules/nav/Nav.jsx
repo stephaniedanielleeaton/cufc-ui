@@ -113,7 +113,7 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
       </div>
 
       {/* Logo */}
-      <div className="hidden md:flex justify-around items-center h-[187px] px-8">
+      <div className="hidden md:flex justify-around items-center h-[187px] px-8 bg-white">
         <div className="flex-none flex justify-center items-center bg-white h-full">
           <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" onClick={() => onNavigationClick('')} />
         </div>

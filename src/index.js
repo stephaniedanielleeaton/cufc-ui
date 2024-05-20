@@ -21,3 +21,5 @@ export { default as PageLoader } from './stories/molecules/pageloader/PageLoader
 export { default as UnderConstruction } from './stories/templates/undercontruction/UnderConstruction.jsx';
 export { default as NewUserAboutYou } from './stories/molecules/newuseraboutyou/NewUserAboutYou.jsx';
 export { default as SmallHero } from './stories/molecules/smallhero/SmallHero.jsx'
+export { default as Classes } from './stories/molecules/classes/Classes.jsx'
+export { default as AboutUs } from './stories/molecules/aboutus/AboutUs.jsx'
