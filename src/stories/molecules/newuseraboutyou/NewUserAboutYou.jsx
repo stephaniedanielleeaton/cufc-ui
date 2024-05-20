@@ -22,6 +22,8 @@ function NewUserAboutYou({ onSubmit }) {
     requestedStartDate: '',
   });
 
+  const [emailStatusMessage, setEmailStatusMessage] = useState('');
+
   const [errors, setErrors] = useState({});
 
   const options = [
@@ -37,6 +39,7 @@ function NewUserAboutYou({ onSubmit }) {
       ...prevData,
       [name]: value,
     }));
+    setEmailStatusMessage('');
   };
 
   const validateForm = () => {
@@ -54,21 +57,25 @@ function NewUserAboutYou({ onSubmit }) {
     return valid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Form submitted:', formData);
-      if (onSubmit) onSubmit(formData);
+      try {
+        await onSubmit({ ...formData });
+        setEmailStatusMessage('Email sent! We will reach out to you. :)');
+      } catch (error) {
+        setEmailStatusMessage('Error sending email');
+        console.error('Error sending email:', error);
+      }
     }
   };
 
   return (
-      <div className="max-w-screen-md mx-auto">
+      <div className="max-w-screen-lg mx-auto bg-white p-8">
         <form onSubmit={handleSubmit} className="flex flex-wrap">
           <div className="p-4 font-khula flex-grow w-full">
-            <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Join Us</h1>
+            <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">About You</h1>
             <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
-            <h1 className="font-khula font-bold mb-2 text-center">About You</h1>
             <BaseTextInput
               name="displayFirstName"
               onChange={handleChange}
@@ -193,12 +200,13 @@ function NewUserAboutYou({ onSubmit }) {
         </form>
         <div className="w-full text-center p-4">
           <button
-              type="submit"
-              onClick={handleSubmit}
-              className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
+            type="submit"
+            onClick={handleSubmit}
+            className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
           >
             SUBMIT
           </button>
+          <span className="p-4">{emailStatusMessage}</span>
         </div>
       </div>
   );
