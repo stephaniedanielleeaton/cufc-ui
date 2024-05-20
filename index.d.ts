@@ -26,4 +26,8 @@ declare module 'cufc-ui' {
   export const NewUserAboutYou: React.ComponentType<any>;
 
   export const SmallHero: React.ComponentType<any>;
+
+  export const Classes: React.ComponentType<any>;
+
+  export const AboutUs: React.ComponentType<any>;
 }
