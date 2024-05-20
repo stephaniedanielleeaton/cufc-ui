@@ -2,7 +2,7 @@ import React from 'react';
 
 function AboutUs({ onNavigationClick }) {
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
+    <div className="min-h-screen py-10">
       <h1 className="text-4xl text-wine font-khula font-bold mb-6 text-center">About Columbus United Fencing Club</h1>
       <div className="w-9/12 border-t-2 border-wine mx-auto mb-10"></div>
       <div className="max-w-screen-lg font-khula md:px-20 px-8 bg-white shadow-lg mx-auto rounded-lg py-8">

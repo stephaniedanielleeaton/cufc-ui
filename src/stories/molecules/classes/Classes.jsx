@@ -1,9 +1,9 @@
 import React from 'react';
 
-function SwordFightingClasses({ onNavigationClick }) {
+function Classes({ onNavigationClick }) {
   return (
-    <div>
-      <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Sword Fighting Classes in Columbus, Ohio</h1>
+    <div className="min-h-screen py-10">
+      <h1 className="text-4xl text-wine font-khula font-bold mb-6 text-center">Sword Fighting Classes in Columbus, Ohio</h1>
       <div className="w-9/12 border-t-2 border-wine mx-auto mb-4"></div>
       <div className="max-w-screen-lg font-khula md:px-20 p-4 bg-white">
         <div className="md:mr-4 md:mb-0 px-4">
@@ -50,4 +50,4 @@ function SwordFightingClasses({ onNavigationClick }) {
   );
 }
 
-export default SwordFightingClasses;
+export default Classes;
