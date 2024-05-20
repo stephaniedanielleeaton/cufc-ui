@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import { calculateValidUntilDate, isD } from '../../../utils/dateUtils.jsx';
+import { calculateValidUntilDate } from '../../../utils/dateUtils';
 
 const formatDate = (date) => {
   const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
@@ -44,7 +44,6 @@ const AdminPage = ({ members, onNavigationClick }) => {
           </div>
           <button className="ml-4" onClick={() => onNavigationClick('newmember')}>
             <FontAwesomeIcon icon={faUserPlus} />
-            <i className="fas fa-user-plus"></i>
           </button>
         </div>
 
@@ -52,7 +51,6 @@ const AdminPage = ({ members, onNavigationClick }) => {
           <div className="grid grid-cols-7 font-bold text-sm border-b mb-4 border-black">
             <div className="min-content flex-nowrap">Member</div>
             <div className="min-content flex-nowrap">Subscription Status</div>
-            <div className="min-content flex-nowrap">Plan</div>
             <div className="min-content flex-nowrap">Type</div>
             <div className="min-content flex-nowrap">Last Renewal</div>
             <div className="min-content flex-nowrap">Months Paid</div>
@@ -64,7 +62,7 @@ const AdminPage = ({ members, onNavigationClick }) => {
             return (
               <div
                 key={member._id}
-                className={`grid grid-cols-7 items-center mb-4 cursor-pointer ${
+                className={`grid grid-cols-7 items-center py-2 cursor-pointer border-b ${
                   hoveredMemberId === member._id ? 'bg-gray-200' : ''
                 }`}
                 onMouseEnter={() => setHoveredMemberId(member._id)}
@@ -75,7 +73,6 @@ const AdminPage = ({ members, onNavigationClick }) => {
                   {member.display_first_name} {member.display_last_name}
                 </div>
                 <div className="min-content">{member.subscription_status}</div>
-                <div className="min-content">Monthly</div>
                 <div className="min-content">Regular</div>
                 <div className="min-content">{formatDate(membershipRenewalDate)}</div>
                 <div className="min-content">{member.membership_months_paid}</div>
