@@ -885,6 +885,10 @@ video {
   width: 2rem;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .w-9\/12 {
   width: 75%;
 }
@@ -895,6 +899,14 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-3\/4 {
+  width: 75%;
+}
+
+.min-w-80 {
+  min-width: 20rem;
 }
 
 .max-w-md {
@@ -1166,6 +1178,11 @@ video {
 .bg-wine {
   --tw-bg-opacity: 1;
   background-color: rgb(122 37 63 / var(--tw-bg-opacity));
+}
+
+.bg-Black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-20 {

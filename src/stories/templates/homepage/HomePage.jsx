@@ -14,7 +14,7 @@ const HomePage = () => {
       <Hero />
       <Intro />
       <Schedule />
-      <Contact recaptchaSiteKey={"123"} onSubmit={()=>{}}/>
+      <Contact recaptchaSiteKey={'123'} onSubmit={() => {}} />
       <CTA />
       <Footer />
     </div>
