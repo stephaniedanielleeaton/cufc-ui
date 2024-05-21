@@ -91,6 +91,7 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
           <span className="sr-only">Search</span>
         </button>
       </span>
+
       <div className="grid grid-cols-1 gap-2 w-3/4">
         {filteredMembers.map((user) => (
           <PersonCheckInCard key={user.id} id={user.id} displayName={user.displayName} onCheckIn={handleCheckIn} />

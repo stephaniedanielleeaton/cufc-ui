@@ -13,8 +13,8 @@ const PersonCheckInPage = ({ members, onCheckIn }) => {
   return (
     <>
       <Nav />
-      <div className="person-check-in-page">
-        <h1 className="text-2xl font-bold mb-4">Member Check-In</h1>
+      <div className="person-check-in-page ml-52">
+        <h1 className="text-2xl font-bold mt-2 pl-4 text-deepSeaBlue">Member Check-In</h1>
         <PersonCheckInCardContainer members={members} onCheckIn={handleCheckIn} />
       </div>
       <Footer />

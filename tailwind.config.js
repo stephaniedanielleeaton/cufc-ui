@@ -9,7 +9,7 @@ module.exports = {
         inter: ['Inter', 'sans-serif'],
       },
       boxShadow: {
-        'custom': '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+        custom: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
       },
       colors: {
         deepSeaBlue: '#375A7A',
