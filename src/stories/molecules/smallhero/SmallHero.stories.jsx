@@ -7,6 +7,6 @@ export default {
   tags: ['autodocs'],
 };
 
-const Template = (args) => <SmallHero pageTitle="Join Us" />;
+const Template = () => <SmallHero pageTitle="Join Us" />;
 
 export const Default = Template.bind({});
