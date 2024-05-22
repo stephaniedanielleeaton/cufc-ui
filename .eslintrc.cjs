@@ -1,4 +1,3 @@
-// .eslintrc.cjs
 module.exports = {
   env: {
     browser: true,

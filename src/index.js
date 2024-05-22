@@ -20,6 +20,7 @@ export { default as AdminMembershipOverride } from './stories/molecules/adminmem
 export { default as PageLoader } from './stories/molecules/pageloader/PageLoader.jsx';
 export { default as UnderConstruction } from './stories/templates/undercontruction/UnderConstruction.jsx';
 export { default as NewUserAboutYou } from './stories/molecules/newuseraboutyou/NewUserAboutYou.jsx';
-export { default as SmallHero } from './stories/molecules/smallhero/SmallHero.jsx'
-export { default as Classes } from './stories/molecules/classes/Classes.jsx'
-export { default as AboutUs } from './stories/molecules/aboutus/AboutUs.jsx'
+export { default as SmallHero } from './stories/molecules/smallhero/SmallHero.jsx';
+export { default as Classes } from './stories/molecules/classes/Classes.jsx';
+export { default as AboutUs } from './stories/molecules/aboutus/AboutUs.jsx';
+export { default as CheckInPage } from './stories/pages/checkin/CheckInPage.jsx';
