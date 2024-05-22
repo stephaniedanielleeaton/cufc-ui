@@ -20,28 +20,35 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+    console.log('search time!');
   };
 
   useEffect(() => {
     const debouncedFilter = debounce((search) => {
-      setFilteredMembers(members.filter((member) => member.displayName.toLowerCase().includes(search.toLowerCase())));
+      setFilteredMembers(
+        members.filter((member) =>
+          member.display_first_name
+            .toLowerCase()
+            .includes(search.toLowerCase() || member.display_last_name.toLowerCase().includes(search.toLowerCase()))
+        )
+      );
       console.log('Filtered Users: ', filteredMembers);
     }, 300); // Adjust the debounce delay as needed
 
-    debouncedFilter(searchTerm);
+    searchTerm ? debouncedFilter(searchTerm) : setFilteredMembers(members);
 
     return () => {
       clearTimeout(debouncedFilter);
     };
   }, [searchTerm, members]);
 
-  const handleCheckIn = (id) => {
-    onCheckIn(id);
+  const handleCheckIn = (_id) => {
+    onCheckIn(_id);
   };
 
   return (
     <div className="p-4 bg-white min-h-screen">
-      <span className="flex items-center w-3/4">
+      <span className="flex items-center w-full">
         <div className="relative w-full">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
@@ -92,9 +99,15 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
         </button>
       </span>
 
-      <div className="grid grid-cols-1 gap-2 w-3/4">
+      <div className="grid grid-cols-1 gap-2 w-full">
         {filteredMembers.map((user) => (
-          <PersonCheckInCard key={user.id} id={user.id} displayName={user.displayName} onCheckIn={handleCheckIn} />
+          <PersonCheckInCard
+            key={user._id}
+            id={user._id}
+            displayName={`${user.display_first_name} ${user.display_last_name}`}
+            checkedIn={user.checkedIn}
+            onCheckIn={handleCheckIn}
+          />
         ))}
       </div>
     </div>
@@ -104,8 +117,10 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
 PersonCheckInCardContainer.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      displayName: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+      display_first_name: PropTypes.string.isRequired,
+      display_last_name: PropTypes.string.isRequired,
+      checkedIn: PropTypes.bool.isRequired,
     })
   ).isRequired,
   onCheckIn: PropTypes.func.isRequired,
