@@ -24,10 +24,8 @@ declare module 'cufc-ui' {
   export const PageLoader: React.ComponentType<any>;
   export const UnderConstruction: React.ComponentType<any>;
   export const NewUserAboutYou: React.ComponentType<any>;
-
   export const SmallHero: React.ComponentType<any>;
-
   export const Classes: React.ComponentType<any>;
-
   export const AboutUs: React.ComponentType<any>;
+  export const CheckInPage: React.ComponentType<any>;
 }
