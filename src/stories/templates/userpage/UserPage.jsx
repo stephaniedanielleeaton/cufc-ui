@@ -30,7 +30,7 @@ UserPage.propTypes = {
         state: PropTypes.string.isRequired,
         zipcode: PropTypes.string.isRequired,
         country: PropTypes.string.isRequired,
-      })
+      }),
     }),
     subscription_status: PropTypes.string,
     membership_start_date: PropTypes.string.isRequired,

@@ -14,9 +14,9 @@ const debounce = (func, delay) => {
   };
 };
 
-const PersonCheckInCardContainer = ({ users, onCheckIn }) => {
+const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filteredUsers, setFilteredUsers] = useState(users);
+  const [filteredMembers, setFilteredMembers] = useState(members);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -24,8 +24,8 @@ const PersonCheckInCardContainer = ({ users, onCheckIn }) => {
 
   useEffect(() => {
     const debouncedFilter = debounce((search) => {
-      setFilteredUsers(users.filter((user) => user.displayName.toLowerCase().includes(search.toLowerCase())));
-      console.log('Filtered Users: ', filteredUsers);
+      setFilteredMembers(members.filter((member) => member.displayName.toLowerCase().includes(search.toLowerCase())));
+      console.log('Filtered Users: ', filteredMembers);
     }, 300); // Adjust the debounce delay as needed
 
     debouncedFilter(searchTerm);
@@ -33,7 +33,7 @@ const PersonCheckInCardContainer = ({ users, onCheckIn }) => {
     return () => {
       clearTimeout(debouncedFilter);
     };
-  }, [searchTerm, users]);
+  }, [searchTerm, members]);
 
   const handleCheckIn = (id) => {
     onCheckIn(id);
@@ -41,7 +41,7 @@ const PersonCheckInCardContainer = ({ users, onCheckIn }) => {
 
   return (
     <div className="p-4 bg-white min-h-screen">
-      <span className="flex items-center w-full">
+      <span className="flex items-center w-3/4">
         <div className="relative w-full">
           <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
@@ -91,8 +91,9 @@ const PersonCheckInCardContainer = ({ users, onCheckIn }) => {
           <span className="sr-only">Search</span>
         </button>
       </span>
-      <div className="grid grid-cols-1 gap-2">
-        {filteredUsers.map((user) => (
+
+      <div className="grid grid-cols-1 gap-2 w-3/4">
+        {filteredMembers.map((user) => (
           <PersonCheckInCard key={user.id} id={user.id} displayName={user.displayName} onCheckIn={handleCheckIn} />
         ))}
       </div>
@@ -101,7 +102,7 @@ const PersonCheckInCardContainer = ({ users, onCheckIn }) => {
 };
 
 PersonCheckInCardContainer.propTypes = {
-  users: PropTypes.arrayOf(
+  members: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       displayName: PropTypes.string.isRequired,

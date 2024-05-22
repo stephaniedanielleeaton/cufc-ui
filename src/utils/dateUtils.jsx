@@ -1,4 +1,3 @@
-
 export const formatDate = (date) => {
   if (!date) return ''; // Handle undefined date gracefully
   const months = [
@@ -33,7 +32,7 @@ export const convertUTCDateToYYYYMMDD = (utcDate) => {
   const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Adding 1 because getUTCMonth() returns 0-based index
   const day = String(date.getUTCDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
-}
+};
 
 export const calculateValidUntilDate = (membershipRenewalDate, months) => {
   // Get the year, month, and day of the original date in UTC
@@ -60,7 +59,7 @@ export const calculateValidUntilDate = (membershipRenewalDate, months) => {
 
   // Return the new date in UTC
   return new Date(Date.UTC(year, month, day));
-}
+};
 
 export const isDateInFuture = (date) => {
   const today = new Date();
