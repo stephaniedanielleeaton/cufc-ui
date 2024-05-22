@@ -58,6 +58,13 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
             <a
               href="#"
               className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+              onClick={() => onNavigationClick('classes')}
+            >
+              Classes
+            </a>
+            <a
+              href="#"
+              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
               onClick={() => onNavigationClick('admin')}
             >
               Admin

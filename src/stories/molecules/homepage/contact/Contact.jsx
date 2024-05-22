@@ -1,7 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import ReCAPTCHA from 'react-google-recaptcha';
 import addresspin from '../../../assets/addresspin.svg';
+import facebook from '../../../assets/facebook.svg';
+import instagram from '../../../assets/instagram.svg';
 
 function Contact({ onSubmit, recaptchaSiteKey }) {
   const [formData, setFormData] = useState({
@@ -44,8 +46,6 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
       ...prevData,
       captchaToken: token,
     }));
-    setShouldRender(true);
-    onSubmit(formData);
   };
 
   return (
@@ -118,7 +118,11 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
             className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
           ></textarea>
           {/* Add reCAPTCHA component */}
-          <ReCAPTCHA className="mb-2" ref={recaptchaRef} sitekey={recaptchaSiteKey} onChange={handleCaptchaChange} />
+          <ReCAPTCHA className="mb-2"
+                     ref={recaptchaRef}
+                     sitekey={recaptchaSiteKey}
+                     onChange={handleCaptchaChange}
+          />
           <button
             type="submit"
             className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
