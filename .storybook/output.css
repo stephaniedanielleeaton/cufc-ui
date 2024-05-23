@@ -697,6 +697,11 @@ video {
   margin-bottom: 1rem;
 }
 
+.mx-40 {
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -891,6 +896,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-3\/4 {
+  width: 75%;
 }
 
 .max-w-md {
