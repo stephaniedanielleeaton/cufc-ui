@@ -95,6 +95,7 @@ const AdminPage = ({ members, onNavigationClick }) => {
 };
 
 AdminPage.propTypes = {
+  onNavigationClick: PropTypes.func.isRequired,
   members: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
