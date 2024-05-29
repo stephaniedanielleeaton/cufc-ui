@@ -36,16 +36,16 @@ function NewUserAboutYou({ onSubmit }) {
     },
     {
       id: 'fullMembership',
-      header: 'Full Class Membership',
+      header: 'Full Class Access',
       description:
-        'Membership to the club, access to all regular weekly classes, coaches, social events, and open gym hours at the club site. Recommended if you have done HEMA before and would like to join classes.',
+        'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
       price: '$110/month',
     },
     {
       id: 'socialMembership',
-      header: 'Social Membership',
+      header: 'Saturday Classes',
       description:
-        'Membership to the club, access to the site and coaches for Saturdays and Social Events only. Recommended if you have done HEMA before.',
+        'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
       price: '$65/month',
     },
     {
@@ -201,9 +201,9 @@ function NewUserAboutYou({ onSubmit }) {
           />
         </div>
         <div className="container mx-auto px-4 py-4">
-          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Membership Options</h1>
+          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options Options</h1>
           <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
-          <h1 className="font-khula font-bold mb-4 text-center">Select Your Membership Type</h1>
+          <h1 className="font-khula font-bold mb-4 text-center">Select Which Classes You Would Like to Attend</h1>
           <div className="flex justify-center mb-4">
             <SelectBoxGroup
               options={options}
