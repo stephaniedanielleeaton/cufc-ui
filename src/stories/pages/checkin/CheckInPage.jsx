@@ -11,7 +11,7 @@ const PersonCheckInPage = ({ members, onCheckIn }) => {
   return (
     <div className="flex flex-row justify-center mx-40">
       <div className="w-3/4">
-        <h1 className="text-2xl font-bold mt-2 pl-4 text-deepSeaBlue">Member Check-In</h1>
+        <h1 className="text-2xl font-bold mt-2 pl-4 text-deepSeaBlue">Fencer Check-In</h1>
         <PersonCheckInCardContainer members={members} onCheckIn={handleCheckIn} />
       </div>
     </div>

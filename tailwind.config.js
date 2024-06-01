@@ -19,7 +19,7 @@ module.exports = {
         gunmetal: '#1B2C3C',
         outerSpace: '#464F51',
         ashGray: '#A8B4B7',
-        checkInCardBg: '#FAFBFD',
+        checkInCardBg: '#9E6073',
         hoverDeepSeaBlue: '#45586A',
         hoverLavender: '#E9D6DB',
         hoverWine: '#9E6073',

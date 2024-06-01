@@ -45,7 +45,7 @@ function NewUserAboutYou({ onSubmit }) {
       id: 'socialMembership',
       header: 'Saturday Classes',
       description:
-        'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
+        'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
       price: '$65/month',
     },
     {
