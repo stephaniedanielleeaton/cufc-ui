@@ -866,10 +866,6 @@ video {
   width: 5rem;
 }
 
-.w-3\/4 {
-  width: 75%;
-}
-
 .w-32 {
   width: 8rem;
 }
@@ -900,6 +896,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-11\/12 {
+  width: 91.666667%;
 }
 
 .max-w-md {
@@ -1059,6 +1059,11 @@ video {
   border-top-width: 2px;
 }
 
+.border-DeepRed {
+  --tw-border-opacity: 1;
+  border-color: rgb(81 31 51 / var(--tw-border-opacity));
+}
+
 .border-Navy {
   --tw-border-opacity: 1;
   border-color: rgb(24 42 58 / var(--tw-border-opacity));
@@ -1124,6 +1129,11 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
 .bg-checkInCardBg {
   --tw-bg-opacity: 1;
   background-color: rgb(158 96 115 / var(--tw-bg-opacity));
@@ -1176,11 +1186,6 @@ video {
 .bg-wine {
   --tw-bg-opacity: 1;
   background-color: rgb(122 37 63 / var(--tw-bg-opacity));
-}
-
-.bg-blue-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-20 {
@@ -1417,6 +1422,11 @@ video {
   color: rgb(81 31 51 / var(--tw-text-opacity));
 }
 
+.text-LightGray {
+  --tw-text-opacity: 1;
+  color: rgb(200 203 203 / var(--tw-text-opacity));
+}
+
 .text-LightPink {
   --tw-text-opacity: 1;
   color: rgb(193 135 151 / var(--tw-text-opacity));
@@ -1574,6 +1584,11 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-blue-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
+}
+
 .hover\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
@@ -1612,11 +1627,6 @@ video {
 .hover\:bg-white:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-blue-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-opacity-25:hover {
@@ -1767,5 +1777,9 @@ video {
 @media (min-width: 1024px) {
   .lg\:w-1\/3 {
     width: 33.333333%;
+  }
+
+  .lg\:w-3\/4 {
+    width: 75%;
   }
 }

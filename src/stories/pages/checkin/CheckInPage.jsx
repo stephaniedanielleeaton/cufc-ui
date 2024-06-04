@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import PersonCheckInCardContainer from '../../organisms/containers/personcheckincards/PersonCheckInCardContainer.jsx';
-//import AdminMembership from '../../molecules/adminMembership/AdminMembership.jsx';
 
 const PersonCheckInPage = ({ members, onCheckIn }) => {
   const handleCheckIn = (_id) => {
@@ -9,8 +8,8 @@ const PersonCheckInPage = ({ members, onCheckIn }) => {
   };
 
   return (
-    <div className="flex flex-row justify-center mx-40">
-      <div className="w-3/4">
+    <div className="flex flex-row justify-center w-full">
+      <div className="w-full lg:w-3/4">
         <h1 className="text-2xl font-bold mt-2 pl-4 text-deepSeaBlue">Fencer Check-In</h1>
         <PersonCheckInCardContainer members={members} onCheckIn={handleCheckIn} />
       </div>
