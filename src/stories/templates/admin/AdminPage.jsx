@@ -11,22 +11,30 @@ const formatDate = (date) => {
 };
 
 const formatSubscriptionDate = (status, date) => {
-  const formattedDate = formatDate(date);
-  return status.toLowerCase() === 'active' ? `Since ${formattedDate}` : `On ${formattedDate}`;
+  if (date !== '') {
+    const formattedDate = formatDate(date);
+    return status.toLowerCase() === 'active' ? `Since ${formattedDate}` : `On ${formattedDate}`;
+  }
+  return '';
 };
 
 const formatLastInvoiceDate = (status, date) => {
-  const formattedDate = formatDate(date);
-  if (status.toLowerCase() === 'overdue') {
-    const daysOverdue = Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
-    return `By ${daysOverdue} day${daysOverdue !== 1 ? 's' : ''}`;
+  if (date !== '') {
+    const formattedDate = formatDate(date);
+    if (status.toLowerCase() === 'overdue') {
+      const daysOverdue = Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
+      return `By ${daysOverdue} day${daysOverdue !== 1 ? 's' : ''}`;
+    }
+    if (status.toLowerCase() === 'paid') return formattedDate;
+    if (status.toLowerCase() === 'unpaid') return `Due on ${formattedDate}`;
+    return formattedDate;
   }
-  return status.toLowerCase() === 'paid' ? formattedDate : `On ${formattedDate}`;
+  return '';
 };
 
 const getStatusColor = (status) => {
   if (status.toLowerCase() === 'paid') return 'text-green-500';
-  if (status.toLowerCase() === 'overdue') return 'text-red-500';
+  if (status.toLowerCase() === 'unpaid') return 'text-red-500';
   if (status.toLowerCase() === 'cancelled') return 'text-gray-500';
   return '';
 };
@@ -56,7 +64,10 @@ const AdminPage = ({ members, onNavigationClick }) => {
             <FontAwesomeIcon icon={faSearch} />
           </div>
         </div>
-        <button className="ml-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600" onClick={() => onNavigationClick('newmember')}>
+        <button
+          className="ml-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          onClick={() => onNavigationClick('newmember')}
+        >
           <FontAwesomeIcon icon={faUserPlus} /> Add Member
         </button>
       </div>
@@ -70,9 +81,18 @@ const AdminPage = ({ members, onNavigationClick }) => {
         </div>
 
         {filteredMembers.map((member) => {
-          const { subscription_status, subscription_start_date, plan, last_invoice_status, last_invoice_date, _id, display_first_name, display_last_name } = member;
-          const subscriptionStartDate = new Date(subscription_start_date);
-          const lastInvoiceDate = new Date(last_invoice_date);
+          const {
+            subscription_status,
+            subscription_start_date,
+            last_invoice_status,
+            last_invoice_date,
+            _id,
+            plan,
+            display_first_name,
+            display_last_name,
+          } = member;
+          const subscriptionStartDate = subscription_start_date ? new Date(subscription_start_date) : '';
+          const lastInvoiceDate = last_invoice_date ? new Date(last_invoice_date) : '';
           const lastInvoiceStatusClass = `font-bold text-md ${getStatusColor(last_invoice_status)}`;
 
           return (
