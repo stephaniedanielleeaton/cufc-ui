@@ -3,6 +3,8 @@ import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import SelectBoxGroup from '../selectbox/SelectBoxGroup.jsx';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function NewUserAboutYou({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -20,33 +22,36 @@ function NewUserAboutYou({ onSubmit }) {
     phoneNumber: '',
     requestedMembershipType: '',
     requestedStartDate: '',
+    additionalFamilyMembers: [],
   });
 
   const [emailStatusMessage, setEmailStatusMessage] = useState('');
-
   const [errors, setErrors] = useState({});
 
   const options = [
     {
       id: 'nugget',
       header: 'Sign Up For The Beginner Course',
-      description:
-        "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
+      description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
       price: '$110 for full course',
     },
     {
       id: 'fullMembership',
       header: 'Full Class Access',
-      description:
-        'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
+      description: 'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
       price: '$110/month',
     },
     {
       id: 'socialMembership',
       header: 'Saturday Classes',
-      description:
-        'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
+      description: 'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
       price: '$65/month',
+    },
+    {
+      id: 'familyPlan',
+      header: 'Family Plan',
+      description: 'Sign up for the Family Plan and add additional family members.',
+      price: '$110/month for First Family Member, +$65 for each additional member',
     },
     {
       id: 'idk',
@@ -65,14 +70,44 @@ function NewUserAboutYou({ onSubmit }) {
     setEmailStatusMessage('');
   };
 
+  const handleAddFamilyMember = () => {
+    setFormData((prevData) => ({
+      ...prevData,
+      additionalFamilyMembers: [...prevData.additionalFamilyMembers, { firstName: '', lastName: '', dateOfBirth: '' }],
+    }));
+  };
+
+  const handleRemoveFamilyMember = (index) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      additionalFamilyMembers: prevData.additionalFamilyMembers.filter((_, i) => i !== index),
+    }));
+  };
+
+  const handleFamilyMemberChange = (index, field, value) => {
+    const updatedFamilyMembers = [...formData.additionalFamilyMembers];
+    updatedFamilyMembers[index][field] = value;
+    setFormData((prevData) => ({
+      ...prevData,
+      additionalFamilyMembers: updatedFamilyMembers,
+    }));
+  };
+
   const validateForm = () => {
     let valid = true;
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName') {
+      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers') {
         valid = false;
         newErrors[key] = 'This field is required';
+      }
+    });
+
+    formData.additionalFamilyMembers.forEach((member, index) => {
+      if (!member.firstName || !member.lastName || !member.dateOfBirth) {
+        valid = false;
+        newErrors[`familyMember${index}`] = 'First Name, Last Name, and Date of Birth are required for all family members';
       }
     });
 
@@ -201,7 +236,7 @@ function NewUserAboutYou({ onSubmit }) {
           />
         </div>
         <div className="container mx-auto px-4 py-4">
-          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options Options</h1>
+          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options</h1>
           <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
           <h1 className="font-khula font-bold mb-4 text-center">Select Which Classes You Would Like to Attend</h1>
           <div className="flex justify-center mb-4">
@@ -211,6 +246,42 @@ function NewUserAboutYou({ onSubmit }) {
               onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
             />
           </div>
+          {formData.requestedMembershipType === 'familyPlan' && (
+            <div>
+              <h1 className="font-khula font-bold mb-4 text-center mt-2">Add Family Members</h1>
+              {formData.additionalFamilyMembers.map((member, index) => (
+                <div key={index} className="mb-4">
+                  <BaseTextInput
+                    name={`familyMemberFirstName${index}`}
+                    placeholder="First Name"
+                    value={member.firstName}
+                    onChange={(e) => handleFamilyMemberChange(index, 'firstName', e.target.value)}
+                  />
+                  <BaseTextInput
+                    name={`familyMemberLastName${index}`}
+                    placeholder="Last Name"
+                    value={member.lastName}
+                    onChange={(e) => handleFamilyMemberChange(index, 'lastName', e.target.value)}
+                  />
+                  <BaseTextInput
+                    faIcon="faCalendar"
+                    name={`familyMemberDateOfBirth${index}`}
+                    type="date"
+                    onChange={(e) => handleFamilyMemberChange(index, 'dateOfBirth', e.target.value)}
+                    placeholder="Date of Birth"
+                    value={member.dateOfBirth}
+                    error={errors[`familyMember${index}`]}
+                  />
+                  <button type="button" onClick={() => handleRemoveFamilyMember(index)}>
+                    <FontAwesomeIcon icon={faMinus} className="w-4 h-4 text-outerSpace inline" /> Remove
+                  </button>
+                </div>
+              ))}
+              <button type="button" onClick={handleAddFamilyMember}>
+                <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-outerSpace inline" /> Add Family Member
+              </button>
+            </div>
+          )}
           <h1 className="font-khula font-bold mb-4 text-center mt-2">When would you like to start?</h1>
           <BaseTextInput
             faIcon="faCalendar"
