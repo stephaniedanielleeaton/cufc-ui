@@ -1,8 +1,8 @@
 import React from 'react';
-import NewUserAboutYou from './NewUserAboutYou.jsx';
+import NewUserAboutYou from './NewUserAboutYou';
 
 export default {
-  title: 'Molecules/NewUserAboutYou',
+  title: 'NewUserJourney/NewUserAboutYou',
   component: NewUserAboutYou,
   tags: ['autodocs'],
 };
