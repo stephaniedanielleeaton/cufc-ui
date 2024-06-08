@@ -10,3 +10,9 @@ export default {
 const Template = (args) => <NewUserAboutYou {...args} />;
 
 export const Default = Template.bind({});
+Default.args = {
+  emailStatusMessage: '',
+  onSubmit: async (formData) => {
+    console.log('Form submitted:', formData);
+  },
+};

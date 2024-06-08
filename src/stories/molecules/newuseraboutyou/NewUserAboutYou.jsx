@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import SelectBoxGroup from '../selectbox/SelectBoxGroup.jsx';
@@ -6,7 +7,7 @@ import { commonCountries, usStateAbbreviations } from '../../../utils/constants.
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function NewUserAboutYou({ onSubmit }) {
+function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
@@ -25,7 +26,6 @@ function NewUserAboutYou({ onSubmit }) {
     additionalFamilyMembers: [],
   });
 
-  const [emailStatusMessage, setEmailStatusMessage] = useState('');
   const [errors, setErrors] = useState({});
 
   const options = [
@@ -50,8 +50,8 @@ function NewUserAboutYou({ onSubmit }) {
     {
       id: 'familyPlan',
       header: 'Family Plan',
-      description: 'Sign up for the Family Plan and add additional family members.',
-      price: '$110/month for First Family Member, +$65 for each additional member',
+      description: 'Sign up for the Family Plan and add additional family members. Prices are fore full class access for everyone.',
+      price: '$110 + $65/month for each additional family member',
     },
     {
       id: 'idk',
@@ -67,7 +67,6 @@ function NewUserAboutYou({ onSubmit }) {
       ...prevData,
       [name]: value,
     }));
-    setEmailStatusMessage('');
   };
 
   const handleAddFamilyMember = () => {
@@ -118,13 +117,7 @@ function NewUserAboutYou({ onSubmit }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
-      try {
-        await onSubmit({ ...formData });
-        setEmailStatusMessage('Email sent! We will reach out to you. :)');
-      } catch (error) {
-        setEmailStatusMessage('Error sending email');
-        console.error('Error sending email:', error);
-      }
+      await onSubmit({ ...formData });
     }
   };
 
@@ -277,7 +270,7 @@ function NewUserAboutYou({ onSubmit }) {
                   </button>
                 </div>
               ))}
-              <button type="button" onClick={handleAddFamilyMember}>
+              <button type="button" onClick={handleAddFamilyMember} className="text-green-500">
                 <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-outerSpace inline" /> Add Family Member
               </button>
             </div>
@@ -302,10 +295,19 @@ function NewUserAboutYou({ onSubmit }) {
         >
           SUBMIT
         </button>
-        <span className="p-4">{emailStatusMessage}</span>
+        {emailStatusMessage && (
+          <span className={`p-4 text-${emailStatusMessage.includes('Error') ? 'red-500' : 'black'} `}>
+              {emailStatusMessage}
+            </span>
+        )}
       </div>
     </div>
   );
 }
+
+NewUserAboutYou.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  emailStatusMessage: PropTypes.string,
+};
 
 export default NewUserAboutYou;
