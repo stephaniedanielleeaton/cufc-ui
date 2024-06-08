@@ -7,12 +7,48 @@ import { commonCountries, usStateAbbreviations } from '../../../utils/constants.
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+const options = [
+  {
+    id: 'nugget',
+    header: 'Sign Up For The Beginner Course',
+    description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
+    price: '$110 for full course',
+  },
+  {
+    id: 'fullMembership',
+    header: 'Full Class Access',
+    description: 'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
+    price: '$110/month',
+  },
+  {
+    id: 'socialMembership',
+    header: 'Saturday Classes',
+    description: 'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
+    price: '$65/month',
+  },
+  {
+    id: 'familyPlan',
+    header: 'Family Plan',
+    description: 'Sign up for the Family Plan and add additional family members. Prices are for full class access for everyone.',
+    price: '$110 + $65/month for each additional family member',
+  },
+  {
+    id: 'idk',
+    header: 'Help me decide',
+    description: 'We will contact you and help you choose the best option',
+    price: '',
+  },
+];
+
 function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
+  const [formType, setFormType] = useState(null);
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
     legalFirstName: '',
     legalLastName: '',
+    guardianFirstName: '',
+    guardianLastName: '',
     email: '',
     dateOfBirth: '',
     streetAddress: '',
@@ -28,38 +64,9 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
 
   const [errors, setErrors] = useState({});
 
-  const options = [
-    {
-      id: 'nugget',
-      header: 'Sign Up For The Beginner Course',
-      description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
-      price: '$110 for full course',
-    },
-    {
-      id: 'fullMembership',
-      header: 'Full Class Access',
-      description: 'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
-      price: '$110/month',
-    },
-    {
-      id: 'socialMembership',
-      header: 'Saturday Classes',
-      description: 'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
-      price: '$65/month',
-    },
-    {
-      id: 'familyPlan',
-      header: 'Family Plan',
-      description: 'Sign up for the Family Plan and add additional family members. Prices are fore full class access for everyone.',
-      price: '$110 + $65/month for each additional family member',
-    },
-    {
-      id: 'idk',
-      header: 'Help me decide',
-      description: 'We will contact you and help you choose the best option',
-      price: '',
-    },
-  ];
+  const handleFormTypeSelection = (type) => {
+    setFormType(type);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -121,41 +128,63 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     }
   };
 
+  if (formType === null) {
+    return (
+      <div className="max-w-screen-md mx-auto bg-white p-8 text-center">
+        <h1 className="text-xl text-wine font-khula font-bold mb-4">Who are you signing up?</h1>
+        <button
+          onClick={() => handleFormTypeSelection('adult')}
+          className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black m-2"
+        >
+          I am above 18 and signing up for myself or my family
+        </button>
+        <button
+          onClick={() => handleFormTypeSelection('minor')}
+          className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black m-2"
+        >
+          I am a legal guardian signing up on behalf of a minor
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-screen-lg mx-auto bg-white p-8">
       <form onSubmit={handleSubmit} className="flex flex-wrap">
         <div className="p-4 font-khula flex-grow w-full">
-          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">About You</h1>
+          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">
+            {formType === 'minor' ? "About the Fencer" : "About You"}
+          </h1>
           <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
           <BaseTextInput
             name="displayFirstName"
             onChange={handleChange}
-            placeholder="Preferred First Name"
+            placeholder={formType === 'minor' ? "Fencer's Preferred First Name" : "Preferred First Name"}
             value={formData.displayFirstName}
             error={errors.displayFirstName}
           />
           <BaseTextInput
             name="displayLastName"
             onChange={handleChange}
-            placeholder="Preferred Last Name"
+            placeholder={formType === 'minor' ? "Fencer's Preferred Last Name" : "Preferred Last Name"}
             value={formData.displayLastName}
             error={errors.displayLastName}
           />
           <BaseTextInput
             name="legalFirstName"
             onChange={handleChange}
-            placeholder="Legal First Name"
+            placeholder={formType === 'minor' ? "Fencer's Legal First Name" : "Legal First Name"}
             value={formData.legalFirstName}
             error={errors.legalFirstName}
           />
           <BaseTextInput
             name="legalLastName"
             onChange={handleChange}
-            placeholder="Legal Last Name"
+            placeholder={formType === 'minor' ? "Fencer's Legal Last Name" : "Legal Last Name"}
             value={formData.legalLastName}
             error={errors.legalLastName}
           />
-          <h1 className="font-khula text-sm text-gray-500 pl-10">Date of Birth</h1>
+          <h1 className="font-khula text-sm text-gray-500 pl-10">{formType === 'minor' ? "Fencer's Date of Birth" : "Date of Birth"}</h1>
           <BaseTextInput
             faIcon="faCalendar"
             name="dateOfBirth"
@@ -165,7 +194,30 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
             value={formData.dateOfBirth}
             error={errors.dateOfBirth}
           />
-          <h1 className="font-khula font-bold mb-2 text-center">Contact Info</h1>
+        </div>
+        {formType === 'minor' && (
+          <div className="p-4 font-khula flex-grow w-full">
+            <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Guardian's Information</h1>
+            <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
+            <BaseTextInput
+              name="guardianFirstName"
+              onChange={handleChange}
+              placeholder="Guardian's Legal First Name"
+              value={formData.guardianFirstName}
+              error={errors.guardianFirstName}
+            />
+            <BaseTextInput
+              name="guardianLastName"
+              onChange={handleChange}
+              placeholder="Guardian's Legal Last Name"
+              value={formData.guardianLastName}
+              error={errors.guardianLastName}
+            />
+          </div>
+        )}
+        <div className="p-4 font-khula flex-grow w-full">
+          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Contact Info</h1>
+          <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
           <BaseTextInput
             faIcon="faEnvelope"
             name="email"
@@ -298,7 +350,7 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
         {emailStatusMessage && (
           <span className={`p-4 text-${emailStatusMessage.includes('Error') ? 'red-500' : 'black'} `}>
               {emailStatusMessage}
-            </span>
+          </span>
         )}
       </div>
     </div>
