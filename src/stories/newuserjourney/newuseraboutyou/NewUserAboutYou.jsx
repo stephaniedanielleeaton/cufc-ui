@@ -31,16 +31,40 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     setFormType(type);
   };
 
-  const validateForm = () => {
+  const validateFormSection = () => {
     let valid = true;
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers') {
+      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName') {
         valid = false;
         newErrors[key] = 'This field is required';
       }
     });
+
+    if (formType === 'minor') {
+      if (!formData.guardianFirstName) {
+        valid = false;
+        newErrors.guardianFirstName = 'This field is required';
+      }
+      if (!formData.guardianLastName) {
+        valid = false;
+        newErrors.guardianLastName = 'This field is required';
+      }
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
+  const validateClassOptions = () => {
+    let valid = true;
+    const newErrors = {};
+
+    if (!formData.requestedMembershipType) {
+      valid = false;
+      newErrors.requestedMembershipType = 'This field is required';
+    }
 
     formData.additionalFamilyMembers.forEach((member, index) => {
       if (!member.firstName || !member.lastName || !member.dateOfBirth) {
@@ -54,8 +78,15 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
   };
 
   const handleNext = () => {
-    if (validateForm()) {
+    if (validateFormSection()) {
       setCurrentStep(2);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateClassOptions()) {
+      await onSubmit({ ...formData });
     }
   };
 
@@ -80,13 +111,6 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
       ...prevData,
       additionalFamilyMembers: updatedFamilyMembers,
     }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      await onSubmit({ ...formData });
-    }
   };
 
   if (formType === null) {
