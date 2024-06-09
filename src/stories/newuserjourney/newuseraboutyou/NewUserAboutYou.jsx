@@ -27,9 +27,28 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
   });
 
   const [errors, setErrors] = useState({});
+  const [emailStatus, setEmailStatus] = useState('');
 
   const handleFormTypeSelection = (type) => {
     setFormType(type);
+  };
+
+  const validateClassOptions = () => {
+    let valid = true;
+    const newErrors = {};
+
+    if (!formData.requestedMembershipType) {
+      valid = false;
+      newErrors.requestedMembershipType = 'This field is required';
+    }
+
+    if (formData.requestedMembershipType === 'nugget' && !formData.beginnerCourseStartDate) {
+      valid = false;
+      newErrors.beginnerCourseStartDate = 'Please select a course start date';
+    }
+
+    setErrors(newErrors);
+    return valid;
   };
 
   const validateFormSection = () => {
@@ -54,28 +73,10 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
       }
     }
 
-    setErrors(newErrors);
-    return valid;
-  };
-
-  const validateClassOptions = () => {
-    let valid = true;
-    const newErrors = {};
-
-    if (!formData.requestedMembershipType) {
-      valid = false;
-      newErrors.requestedMembershipType = 'This field is required';
-    }
-
-    if (formData.requestedMembershipType === 'nugget' && !formData.beginnerCourseStartDate) {
-      valid = false;
-      newErrors.beginnerCourseStartDate = 'Please select a course start date';
-    }
-
     formData.additionalFamilyMembers.forEach((member, index) => {
-      if (!member.firstName || !member.lastName || !member.dateOfBirth) {
+      if (!member.firstName || !member.lastName || !member.dateOfBirth || !member.displayFirstName || !member.displayLastName) {
         valid = false;
-        newErrors[`familyMember${index}`] = 'First Name, Last Name, and Date of Birth are required for all family members';
+        newErrors[`familyMember${index}`] = 'First Name, Last Name, Preferred First Name, and Preferred Last Name are required for all family members';
       }
     });
 
@@ -83,23 +84,28 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     return valid;
   };
 
-  const handleNext = () => {
-    if (validateFormSection()) {
+  const handleNextFromClassOptions = () => {
+    if (validateClassOptions()) {
       setCurrentStep(2);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateClassOptions()) {
-      await onSubmit({ ...formData });
+    if (validateFormSection()) {
+      try {
+        await onSubmit({ ...formData });
+        setEmailStatus('Email sent! We will reach out to you. :)');
+      } catch (error) {
+        setEmailStatus('Error Sending Email. :( Tell Steph.');
+      }
     }
   };
 
   const handleAddFamilyMember = () => {
     setFormData((prevData) => ({
       ...prevData,
-      additionalFamilyMembers: [...prevData.additionalFamilyMembers, { firstName: '', lastName: '', dateOfBirth: '' }],
+      additionalFamilyMembers: [...prevData.additionalFamilyMembers, { firstName: '', lastName: '', dateOfBirth: '', displayFirstName: '', displayLastName: '' }],
     }));
   };
 
@@ -140,15 +146,11 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
   }
 
   if (currentStep === 1) {
-    return <FormSection formType={formType} formData={formData} setFormData={setFormData} errors={errors} onNext={handleNext} />;
-  }
-
-  return (
-    <div>
+    return (
       <ClassOptions
         selectedOption={formData.requestedMembershipType}
         onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
-        onNext={handleSubmit}
+        onNext={handleNextFromClassOptions}
         formData={formData}
         setFormData={setFormData}
         errors={errors}
@@ -156,10 +158,25 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
         handleRemoveFamilyMember={handleRemoveFamilyMember}
         handleFamilyMemberChange={handleFamilyMemberChange}
       />
-      {emailStatusMessage && (
+    );
+  }
+
+  return (
+    <div>
+      <FormSection
+        formType={formType}
+        formData={formData}
+        setFormData={setFormData}
+        errors={errors}
+        onNext={handleSubmit}
+        handleAddFamilyMember={handleAddFamilyMember}
+        handleRemoveFamilyMember={handleRemoveFamilyMember}
+        handleFamilyMemberChange={handleFamilyMemberChange}
+      />
+      {emailStatus && (
         <div className="w-full text-center p-4">
-          <span className={`p-4 text-${emailStatusMessage.includes('Error') ? 'red-500' : 'black'} `}>
-            {emailStatusMessage}
+          <span className={`p-4 text-${emailStatus.includes('Error') ? 'red-500' : 'black'} `}>
+            {emailStatus}
           </span>
         </div>
       )}

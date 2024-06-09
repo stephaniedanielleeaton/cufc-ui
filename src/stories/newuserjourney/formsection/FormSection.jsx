@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../atoms/select/BaseSelect.jsx';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function FormSection({ formType, formData, setFormData, errors, onNext }) {
+function FormSection({ formType, formData, setFormData, errors, onNext, handleAddFamilyMember, handleRemoveFamilyMember, handleFamilyMemberChange }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -15,7 +17,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext }) {
 
   return (
     <div className="max-w-screen-lg mx-auto bg-white p-8">
-      <form className="flex flex-wrap">
+      <form onSubmit={onNext} className="flex flex-wrap">
         <div className="p-4 font-khula flex-grow w-full">
           <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">
             {formType === 'minor' ? "About the Fencer" : "About You"}
@@ -81,8 +83,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext }) {
           </div>
         )}
         <div className="p-4 font-khula flex-grow w-full">
-          <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Contact Info</h1>
-          <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
+          <h1 className="font-khula font-bold mb-2 text-center">Contact Info</h1>
           <BaseTextInput
             faIcon="faEnvelope"
             name="email"
@@ -145,13 +146,60 @@ function FormSection({ formType, formData, setFormData, errors, onNext }) {
             error={errors.country}
           />
         </div>
+        {formData.requestedMembershipType === 'familyPlan' && (
+          <div className="p-4 font-khula flex-grow w-full">
+            <h1 className="font-khula font-bold mb-4 text-center mt-2">Add Family Members</h1>
+            {formData.additionalFamilyMembers.map((member, index) => (
+              <div key={index} className="mb-4">
+                <BaseTextInput
+                  name={`familyMemberFirstName${index}`}
+                  placeholder="First Name"
+                  value={member.firstName}
+                  onChange={(e) => handleFamilyMemberChange(index, 'firstName', e.target.value)}
+                />
+                <BaseTextInput
+                  name={`familyMemberLastName${index}`}
+                  placeholder="Last Name"
+                  value={member.lastName}
+                  onChange={(e) => handleFamilyMemberChange(index, 'lastName', e.target.value)}
+                />
+                <BaseTextInput
+                  name={`familyMemberDisplayFirstName${index}`}
+                  placeholder="Preferred First Name"
+                  value={member.displayFirstName}
+                  onChange={(e) => handleFamilyMemberChange(index, 'displayFirstName', e.target.value)}
+                />
+                <BaseTextInput
+                  name={`familyMemberDisplayLastName${index}`}
+                  placeholder="Preferred Last Name"
+                  value={member.displayLastName}
+                  onChange={(e) => handleFamilyMemberChange(index, 'displayLastName', e.target.value)}
+                />
+                <BaseTextInput
+                  faIcon="faCalendar"
+                  name={`familyMemberDateOfBirth${index}`}
+                  type="date"
+                  onChange={(e) => handleFamilyMemberChange(index, 'dateOfBirth', e.target.value)}
+                  placeholder="Date of Birth"
+                  value={member.dateOfBirth}
+                  error={errors[`familyMember${index}`]}
+                />
+                <button type="button" onClick={() => handleRemoveFamilyMember(index)}>
+                  <FontAwesomeIcon icon={faMinus} className="w-4 h-4 text-outerSpace inline" /> Remove
+                </button>
+              </div>
+            ))}
+            <button type="button" onClick={handleAddFamilyMember} className="text-green-500">
+              <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-outerSpace inline" /> Add Family Member
+            </button>
+          </div>
+        )}
         <div className="w-full text-center p-4">
           <button
-            type="button"
-            onClick={onNext}
+            type="submit"
             className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
           >
-            NEXT
+            SUBMIT
           </button>
         </div>
       </form>
@@ -165,6 +213,9 @@ FormSection.propTypes = {
   setFormData: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
   onNext: PropTypes.func.isRequired,
+  handleAddFamilyMember: PropTypes.func.isRequired,
+  handleRemoveFamilyMember: PropTypes.func.isRequired,
+  handleFamilyMemberChange: PropTypes.func.isRequired,
 };
 
 export default FormSection;

@@ -1,8 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const options = [
   {
@@ -36,7 +33,7 @@ const beginnerCourses = [
   { id: 'oct2', date: 'October 2nd' },
 ];
 
-function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData, errors, handleAddFamilyMember, handleRemoveFamilyMember, handleFamilyMemberChange }) {
+function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData, errors }) {
   const courseStartDateRef = useRef(null);
 
   useEffect(() => {
@@ -56,6 +53,7 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData,
     <div className="container mx-auto px-4 py-4">
       <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options</h1>
       <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
+      <h1 className="font-khula font-bold mb-4 text-center">Select Which Classes You Would Like to Attend</h1>
       <div className="flex flex-wrap justify-center mb-4">
         {options.map((option) => (
           <div
@@ -89,48 +87,12 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData,
           </div>
         </div>
       )}
-      {selectedOption === 'familyPlan' && (
-        <div>
-          <h1 className="font-khula font-bold mb-4 text-center mt-2">Add Family Members</h1>
-          {formData.additionalFamilyMembers.map((member, index) => (
-            <div key={index} className="mb-4">
-              <BaseTextInput
-                name={`familyMemberFirstName${index}`}
-                placeholder="First Name"
-                value={member.firstName}
-                onChange={(e) => handleFamilyMemberChange(index, 'firstName', e.target.value)}
-              />
-              <BaseTextInput
-                name={`familyMemberLastName${index}`}
-                placeholder="Last Name"
-                value={member.lastName}
-                onChange={(e) => handleFamilyMemberChange(index, 'lastName', e.target.value)}
-              />
-              <BaseTextInput
-                faIcon="faCalendar"
-                name={`familyMemberDateOfBirth${index}`}
-                type="date"
-                onChange={(e) => handleFamilyMemberChange(index, 'dateOfBirth', e.target.value)}
-                placeholder="Date of Birth"
-                value={member.dateOfBirth}
-                error={errors[`familyMember${index}`]}
-              />
-              <button type="button" onClick={() => handleRemoveFamilyMember(index)}>
-                <FontAwesomeIcon icon={faMinus} className="w-4 h-4 text-outerSpace inline" /> Remove
-              </button>
-            </div>
-          ))}
-          <button type="button" onClick={handleAddFamilyMember} className="text-green-500">
-            <FontAwesomeIcon icon={faPlus} className="w-4 h-4 text-outerSpace inline" /> Add Family Member
-          </button>
-        </div>
-      )}
       <div className="w-full text-center p-4">
         <button
           onClick={onNext}
           className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
         >
-          SUBMIT
+          NEXT
         </button>
       </div>
     </div>
@@ -144,9 +106,6 @@ ClassOptions.propTypes = {
   formData: PropTypes.object.isRequired,
   setFormData: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  handleAddFamilyMember: PropTypes.func.isRequired,
-  handleRemoveFamilyMember: PropTypes.func.isRequired,
-  handleFamilyMemberChange: PropTypes.func.isRequired,
 };
 
 export default ClassOptions;
