@@ -5,29 +5,25 @@ const options = [
   {
     id: 'nugget',
     header: 'Sign Up For The Beginner Course',
-    description:
-      "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
+    description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
     price: '$110 for full course',
   },
   {
     id: 'fullMembership',
     header: 'Full Class Access',
-    description:
-      'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
+    description: 'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
     price: '$110/month',
   },
   {
     id: 'socialMembership',
     header: 'Saturday Classes',
-    description:
-      'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
+    description: 'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
     price: '$65/month',
   },
   {
     id: 'familyPlan',
     header: 'Family Plan',
-    description:
-      'Sign up for the Family Plan and add additional family members. Prices are for full class access for everyone.',
+    description: 'Sign up for the Family Plan and add additional family members. Prices are for full class access for everyone.',
     price: '$110 + $65/month for each additional family member',
   },
 ];
@@ -37,7 +33,7 @@ const beginnerCourses = [
   { id: 'oct2', date: 'October 2nd' },
 ];
 
-function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData }) {
+function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData, errors }) {
   const courseStartDateRef = useRef(null);
 
   useEffect(() => {
@@ -54,7 +50,8 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData 
   };
 
   return (
-    <div className="container mx-auto px-4 py-4">
+    <div className="container mx-auto max-w-screen-lg
+    px-4 py-4">
       <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options</h1>
       <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
       <h1 className="font-khula font-bold mb-4 text-center">Select Which Classes You Would Like to Attend</h1>
@@ -62,7 +59,7 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData 
         {options.map((option) => (
           <div
             key={option.id}
-            className={`m-2 p-4 border-2 ${selectedOption === option.id ? 'border-black' : 'border-gray-300'} rounded-lg cursor-pointer`}
+            className={`m-2 p-4 border-2 ${selectedOption === option.id ? 'border-black' : 'border-gray-300'} rounded-lg cursor-pointer flex-grow max-w-xs`}
             onClick={() => onSelect(option.id)}
           >
             <h2 className="font-bold">{option.header}</h2>
@@ -76,7 +73,7 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData 
           <h1 className="font-khula font-bold mb-4 text-center mt-2">Select Course Start Date</h1>
           <div className="flex flex-wrap justify-center mb-4">
             {beginnerCourses.map((course) => (
-              <div key={course.id} className="m-2 p-4 border-2 border-gray-300 rounded-lg cursor-pointer">
+              <div key={course.id} className="m-2 p-4 border-2 border-gray-300 rounded-lg cursor-pointer flex-grow max-w-xs">
                 <input
                   type="radio"
                   id={course.id}
@@ -85,9 +82,7 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData 
                   checked={formData.beginnerCourseStartDate === course.date}
                   onChange={handleCourseSelect}
                 />
-                <label htmlFor={course.id} className="ml-2">
-                  {course.date}
-                </label>
+                <label htmlFor={course.id} className="ml-2">{course.date}</label>
               </div>
             ))}
           </div>
