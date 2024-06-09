@@ -22,6 +22,7 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     country: '',
     phoneNumber: '',
     requestedMembershipType: '',
+    beginnerCourseStartDate: '',
     additionalFamilyMembers: [],
   });
 
@@ -36,7 +37,7 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName') {
+      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName' && key !== 'beginnerCourseStartDate') {
         valid = false;
         newErrors[key] = 'This field is required';
       }
@@ -64,6 +65,11 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     if (!formData.requestedMembershipType) {
       valid = false;
       newErrors.requestedMembershipType = 'This field is required';
+    }
+
+    if (formData.requestedMembershipType === 'nugget' && !formData.beginnerCourseStartDate) {
+      valid = false;
+      newErrors.beginnerCourseStartDate = 'Please select a course start date';
     }
 
     formData.additionalFamilyMembers.forEach((member, index) => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import BaseTextInput from '../../atoms/textinput/BaseTextInput.jsx';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
@@ -29,20 +29,33 @@ const options = [
     description: 'Sign up for the Family Plan and add additional family members. Prices are for full class access for everyone.',
     price: '$110 + $65/month for each additional family member',
   },
-  {
-    id: 'idk',
-    header: 'Help me decide',
-    description: 'We will contact you and help you choose the best option',
-    price: '',
-  },
+];
+
+const beginnerCourses = [
+  { id: 'aug7', date: 'August 7th' },
+  { id: 'oct2', date: 'October 2nd' },
 ];
 
 function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData, errors, handleAddFamilyMember, handleRemoveFamilyMember, handleFamilyMemberChange }) {
+  const courseStartDateRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedOption === 'nugget' && courseStartDateRef.current) {
+      courseStartDateRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedOption]);
+
+  const handleCourseSelect = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      beginnerCourseStartDate: e.target.value,
+    }));
+  };
+
   return (
     <div className="container mx-auto px-4 py-4">
       <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options</h1>
       <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
-      <h1 className="font-khula font-bold mb-4 text-center">Select Which Classes You Would Like to Attend</h1>
       <div className="flex flex-wrap justify-center mb-4">
         {options.map((option) => (
           <div
@@ -56,6 +69,26 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData,
           </div>
         ))}
       </div>
+      {selectedOption === 'nugget' && (
+        <div ref={courseStartDateRef}>
+          <h1 className="font-khula font-bold mb-4 text-center mt-2">Select Course Start Date</h1>
+          <div className="flex flex-wrap justify-center mb-4">
+            {beginnerCourses.map((course) => (
+              <div key={course.id} className="m-2 p-4 border-2 border-gray-300 rounded-lg cursor-pointer">
+                <input
+                  type="radio"
+                  id={course.id}
+                  name="beginnerCourseStartDate"
+                  value={course.date}
+                  checked={formData.beginnerCourseStartDate === course.date}
+                  onChange={handleCourseSelect}
+                />
+                <label htmlFor={course.id} className="ml-2">{course.date}</label>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       {selectedOption === 'familyPlan' && (
         <div>
           <h1 className="font-khula font-bold mb-4 text-center mt-2">Add Family Members</h1>
