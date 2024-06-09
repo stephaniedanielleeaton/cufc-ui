@@ -5,25 +5,29 @@ const options = [
   {
     id: 'nugget',
     header: 'Sign Up For The Beginner Course',
-    description: "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
+    description:
+      "Sign up to take our beginner's course to learn the basics of historical fencing! Recommended if you have never done HEMA before.",
     price: '$110 for full course',
   },
   {
     id: 'fullMembership',
     header: 'Full Class Access',
-    description: 'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
+    description:
+      'Access to all regular weekly classes. Social events included. Recommended if you have done HEMA before and would like to join classes.',
     price: '$110/month',
   },
   {
     id: 'socialMembership',
     header: 'Saturday Classes',
-    description: 'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
+    description:
+      'Access to the classes and coaches for Saturdays only. Social events included. Recommended if you have done HEMA before.',
     price: '$65/month',
   },
   {
     id: 'familyPlan',
     header: 'Family Plan',
-    description: 'Sign up for the Family Plan and add additional family members. Prices are for full class access for everyone.',
+    description:
+      'Sign up for the Family Plan and add additional family members. Prices are for full class access for everyone.',
     price: '$110 + $65/month for each additional family member',
   },
 ];
@@ -33,7 +37,7 @@ const beginnerCourses = [
   { id: 'oct2', date: 'October 2nd' },
 ];
 
-function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData, errors }) {
+function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData }) {
   const courseStartDateRef = useRef(null);
 
   useEffect(() => {
@@ -81,7 +85,9 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData,
                   checked={formData.beginnerCourseStartDate === course.date}
                   onChange={handleCourseSelect}
                 />
-                <label htmlFor={course.id} className="ml-2">{course.date}</label>
+                <label htmlFor={course.id} className="ml-2">
+                  {course.date}
+                </label>
               </div>
             ))}
           </div>

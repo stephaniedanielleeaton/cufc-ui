@@ -6,7 +6,7 @@ import { commonCountries, usStateAbbreviations } from '../../../utils/constants.
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function FormSection({ formType, formData, setFormData, errors, onNext, handleAddFamilyMember, handleRemoveFamilyMember, handleFamilyMemberChange }) {
+function FormSection({ formType, formData, setFormData, errors, onNext, handleAddFamilyMember, handleRemoveFamilyMember, handleFamilyMemberChange, emailStatusMessage }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -83,7 +83,8 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
           </div>
         )}
         <div className="p-4 font-khula flex-grow w-full">
-          <h1 className="font-khula font-bold mb-2 text-center">Contact Info</h1>
+          <h1 className="font-khula font-bold mb-2 text-center">{formType === 'minor' ? "Guardian's Contact Information" : "Contact Information"}</h1>
+          <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
           <BaseTextInput
             faIcon="faEnvelope"
             name="email"
@@ -103,6 +104,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
         </div>
         <div className="p-4 font-khula flex-grow w-full">
           <h1 className="font-khula font-bold mb-2 text-center">Address</h1>
+          <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
           <BaseTextInput
             faIcon="faStreetView"
             name="streetAddress"
@@ -202,6 +204,13 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             SUBMIT
           </button>
         </div>
+        {emailStatusMessage && (
+          <div className="w-full text-center p-4">
+            <span className={`p-4 text-${emailStatusMessage.includes('Error') ? 'red-500' : 'black'} `}>
+              {emailStatusMessage}
+            </span>
+          </div>
+        )}
       </form>
     </div>
   );
@@ -216,6 +225,7 @@ FormSection.propTypes = {
   handleAddFamilyMember: PropTypes.func.isRequired,
   handleRemoveFamilyMember: PropTypes.func.isRequired,
   handleFamilyMemberChange: PropTypes.func.isRequired,
+  emailStatusMessage: PropTypes.string,
 };
 
 export default FormSection;

@@ -27,7 +27,6 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
   });
 
   const [errors, setErrors] = useState({});
-  const [emailStatus, setEmailStatus] = useState('');
 
   const handleFormTypeSelection = (type) => {
     setFormType(type);
@@ -95,9 +94,8 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     if (validateFormSection()) {
       try {
         await onSubmit({ ...formData });
-        setEmailStatus('Email sent! We will reach out to you. :)');
       } catch (error) {
-        setEmailStatus('Error Sending Email. :( Tell Steph.');
+        setEmailStatusMessage('Error Sending Email. :( Tell Steph.');
       }
     }
   };
@@ -154,9 +152,6 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
         formData={formData}
         setFormData={setFormData}
         errors={errors}
-        handleAddFamilyMember={handleAddFamilyMember}
-        handleRemoveFamilyMember={handleRemoveFamilyMember}
-        handleFamilyMemberChange={handleFamilyMemberChange}
       />
     );
   }
@@ -172,14 +167,8 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
         handleAddFamilyMember={handleAddFamilyMember}
         handleRemoveFamilyMember={handleRemoveFamilyMember}
         handleFamilyMemberChange={handleFamilyMemberChange}
+        emailStatusMessage={emailStatusMessage}
       />
-      {emailStatus && (
-        <div className="w-full text-center p-4">
-          <span className={`p-4 text-${emailStatus.includes('Error') ? 'red-500' : 'black'} `}>
-            {emailStatus}
-          </span>
-        </div>
-      )}
     </div>
   );
 }
