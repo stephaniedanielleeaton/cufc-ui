@@ -28,30 +28,9 @@ const options = [
   },
 ];
 
-const beginnerCourses = [
-  { id: 'aug7', date: 'August 7th' },
-  { id: 'oct2', date: 'October 2nd' },
-];
-
 function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData, errors }) {
-  const courseStartDateRef = useRef(null);
-
-  useEffect(() => {
-    if (selectedOption === 'nugget' && courseStartDateRef.current) {
-      courseStartDateRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [selectedOption]);
-
-  const handleCourseSelect = (e) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      beginnerCourseStartDate: e.target.value,
-    }));
-  };
-
   return (
-    <div className="container mx-auto max-w-screen-lg
-    px-4 py-4">
+    <div className="container mx-auto max-w-screen-lg px-4 py-4">
       <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options</h1>
       <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
       <h1 className="font-khula font-bold mb-4 text-center">Select Which Classes You Would Like to Attend</h1>
@@ -68,26 +47,6 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData,
           </div>
         ))}
       </div>
-      {selectedOption === 'nugget' && (
-        <div ref={courseStartDateRef}>
-          <h1 className="font-khula font-bold mb-4 text-center mt-2">Select Course Start Date</h1>
-          <div className="flex flex-wrap justify-center mb-4">
-            {beginnerCourses.map((course) => (
-              <div key={course.id} className="m-2 p-4 border-2 border-gray-300 rounded-lg cursor-pointer flex-grow max-w-xs">
-                <input
-                  type="radio"
-                  id={course.id}
-                  name="beginnerCourseStartDate"
-                  value={course.date}
-                  checked={formData.beginnerCourseStartDate === course.date}
-                  onChange={handleCourseSelect}
-                />
-                <label htmlFor={course.id} className="ml-2">{course.date}</label>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <div className="w-full text-center p-4">
         <button
           onClick={onNext}

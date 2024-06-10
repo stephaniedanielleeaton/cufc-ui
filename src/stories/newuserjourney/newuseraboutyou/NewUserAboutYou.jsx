@@ -22,7 +22,6 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     country: '',
     phoneNumber: '',
     requestedMembershipType: '',
-    beginnerCourseStartDate: '',
     additionalFamilyMembers: [],
   });
 
@@ -40,12 +39,6 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
       valid = false;
       newErrors.requestedMembershipType = 'This field is required';
     }
-
-    if (formData.requestedMembershipType === 'nugget' && !formData.beginnerCourseStartDate) {
-      valid = false;
-      newErrors.beginnerCourseStartDate = 'Please select a course start date';
-    }
-
     setErrors(newErrors);
     return valid;
   };
@@ -137,8 +130,9 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
           onClick={() => handleFormTypeSelection('minor')}
           className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black m-2"
         >
-          I am a legal guardian signing up on behalf of a minor
+          I am a legal guardian signing up on behalf of a minor*
         </button>
+        <p className="mt-4 text-gray-500 text-xs">*We request you use our contact form to arrange a time to visit the club before signing up a minor. Recommended min of 14 years of age.</p>
       </div>
     );
   }
