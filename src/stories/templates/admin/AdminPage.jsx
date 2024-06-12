@@ -39,6 +39,7 @@ const getStatusColor = (status) => {
   return '';
 };
 
+
 const AdminPage = ({ members, onNavigationClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredMemberId, setHoveredMemberId] = useState(null);
@@ -64,18 +65,17 @@ const AdminPage = ({ members, onNavigationClick }) => {
             <FontAwesomeIcon icon={faSearch} />
           </div>
         </div>
-        <button
-          className="ml-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-          onClick={() => onNavigationClick('newmember')}
-        >
-          <FontAwesomeIcon icon={faUserPlus} /> Add Member
-        </button>
+        {/*<button*/}
+        {/*  className="ml-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"*/}
+        {/*  onClick={() => onNavigationClick('newmember')}*/}
+        {/*>*/}
+        {/*  <FontAwesomeIcon icon={faUserPlus} /> Add Member*/}
+        {/*</button>*/}
       </div>
 
       <div className="mx-auto">
-        <div className="grid grid-cols-4 font-bold text-sm border-b mb-4 border-black">
+        <div className="grid grid-cols-3 font-bold text-sm border-b mb-4 border-black">
           <div className="min-content flex-nowrap">Name</div>
-          <div className="min-content flex-nowrap">Plan</div>
           <div className="min-content flex-nowrap">Subscription Status</div>
           <div className="min-content flex-nowrap">Last Invoice</div>
         </div>
@@ -87,9 +87,9 @@ const AdminPage = ({ members, onNavigationClick }) => {
             last_invoice_status,
             last_invoice_date,
             _id,
-            plan,
             display_first_name,
             display_last_name,
+            role,
           } = member;
           const subscriptionStartDate = subscription_start_date ? new Date(subscription_start_date) : '';
           const lastInvoiceDate = last_invoice_date ? new Date(last_invoice_date) : '';
@@ -98,20 +98,34 @@ const AdminPage = ({ members, onNavigationClick }) => {
           return (
             <div
               key={_id}
-              className={`grid grid-cols-4 items-center py-2 cursor-pointer border-b ${hoveredMemberId === _id ? 'bg-gray-200' : ''}`}
+              className={`grid grid-cols-3 items-center py-2 cursor-pointer border-b ${hoveredMemberId === _id ? 'bg-gray-200' : ''}`}
               onMouseEnter={() => setHoveredMemberId(_id)}
               onMouseLeave={() => setHoveredMemberId(null)}
               onClick={() => onNavigationClick(`admin/member/${_id}`)}
             >
-              <div className="min-content flex items-center">{`${display_first_name} ${display_last_name}`}</div>
-              <div className="min-content">{plan}</div>
-              <div className="min-content">
-                <div className="font-bold text-md">{subscription_status}</div>
-                <div className="text-sm">{formatSubscriptionDate(subscription_status, subscriptionStartDate)}</div>
+              <div className="min-content flex items-center">
+                <div>
+                  {`${display_first_name} ${display_last_name}`}
+                  {role && (role === 'coach' || role === 'admin') && (
+                    <div className="text-sm text-gray-600">{role}</div>
+                  )}
+                </div>
               </div>
               <div className="min-content">
-                <div className={lastInvoiceStatusClass}>{last_invoice_status}</div>
-                <div className="text-sm">{formatLastInvoiceDate(last_invoice_status, lastInvoiceDate)}</div>
+                {role !== 'coach' && (
+                  <>
+                    <div className="font-bold text-md">{subscription_status}</div>
+                    <div className="text-sm">{formatSubscriptionDate(subscription_status, subscriptionStartDate)}</div>
+                  </>
+                )}
+              </div>
+              <div className="min-content">
+                {role !== 'coach' && (
+                  <>
+                    <div className={lastInvoiceStatusClass}>{last_invoice_status}</div>
+                    <div className="text-sm">{formatLastInvoiceDate(last_invoice_status, lastInvoiceDate)}</div>
+                  </>
+                )}
               </div>
             </div>
           );
@@ -128,13 +142,13 @@ AdminPage.propTypes = {
       _id: PropTypes.string.isRequired,
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
-      plan: PropTypes.string.isRequired,
       subscription_status: PropTypes.string,
       subscription_start_date: PropTypes.string,
       last_invoice_status: PropTypes.string,
       last_invoice_date: PropTypes.string,
+      role: PropTypes.string,
     })
-  ),
+  ).isRequired,
 };
 
 export default AdminPage;
