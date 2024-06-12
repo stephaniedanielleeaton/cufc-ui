@@ -21,12 +21,17 @@ const formatSubscriptionDate = (status, date) => {
 const formatLastInvoiceDate = (status, date) => {
   if (date !== '') {
     const formattedDate = formatDate(date);
-    if (status.toLowerCase() === 'overdue') {
+    if (status.toLowerCase() === 'overdue' || status.toLowerCase() === 'unpaid') {
       const daysOverdue = Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
-      return `By ${daysOverdue} day${daysOverdue !== 1 ? 's' : ''}`;
+      if (daysOverdue === 0) {
+        return 'Due today';
+      } else if (daysOverdue === 1) {
+        return 'Due 1 day ago';
+      } else {
+        return `Due ${daysOverdue} days ago`;
+      }
     }
     if (status.toLowerCase() === 'paid') return formattedDate;
-    if (status.toLowerCase() === 'unpaid') return `Due on ${formattedDate}`;
     return formattedDate;
   }
   return '';
@@ -34,7 +39,7 @@ const formatLastInvoiceDate = (status, date) => {
 
 const getStatusColor = (status) => {
   if (status.toLowerCase() === 'paid') return 'text-green-500';
-  if (status.toLowerCase() === 'unpaid') return 'text-red-500';
+  if (status.toLowerCase() === 'unpaid' || status.toLowerCase() === 'overdue') return 'text-red-500';
   if (status.toLowerCase() === 'cancelled') return 'text-gray-500';
   return '';
 };
@@ -49,6 +54,10 @@ const AdminPage = ({ members, onNavigationClick }) => {
   const [hoveredMemberId, setHoveredMemberId] = useState(null);
   const [filterUnpaid, setFilterUnpaid] = useState(false);
   const [filterInactive, setFilterInactive] = useState(false);
+  const [filterCoaches, setFilterCoaches] = useState(false);
+  const [sortOverdue, setSortOverdue] = useState(false);
+
+  const totalMembers = members.length;
 
   const filteredMembers = members.filter((member) => {
     const nameMatch = `${member.display_first_name} ${member.display_last_name}`
@@ -56,12 +65,27 @@ const AdminPage = ({ members, onNavigationClick }) => {
       .includes(searchQuery.toLowerCase());
     const unpaidMatch = !filterUnpaid || member.last_invoice_status.toLowerCase() === 'unpaid';
     const inactiveMatch = !filterInactive || member.subscription_status.toLowerCase() === 'inactive';
-    return nameMatch && unpaidMatch && inactiveMatch;
+    const coachMatch = !filterCoaches || member.role !== 'coach';
+    return nameMatch && unpaidMatch && inactiveMatch && coachMatch;
   });
+
+  const sortedMembers = sortOverdue
+    ? [...filteredMembers].sort((a, b) => {
+      const daysOverdueA = a.last_invoice_status.toLowerCase() === 'unpaid'
+        ? Math.floor((Date.now() - new Date(a.last_invoice_date)) / (1000 * 60 * 60 * 24))
+        : 0;
+      const daysOverdueB = b.last_invoice_status.toLowerCase() === 'unpaid'
+        ? Math.floor((Date.now() - new Date(b.last_invoice_date)) / (1000 * 60 * 60 * 24))
+        : 0;
+      return daysOverdueB - daysOverdueA;
+    })
+    : filteredMembers;
 
   const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
   const handleFilterUnpaidChange = () => setFilterUnpaid(!filterUnpaid);
   const handleFilterInactiveChange = () => setFilterInactive(!filterInactive);
+  const handleFilterCoachesChange = () => setFilterCoaches(!filterCoaches);
+  const handleSortOverdueChange = () => setSortOverdue(!sortOverdue);
 
   return (
     <div className="mx-auto font-khula p-4">
@@ -96,12 +120,34 @@ const AdminPage = ({ members, onNavigationClick }) => {
           />
           <label htmlFor="filterInactive" className="ml-2">Inactive</label>
         </div>
+        <div className="ml-4">
+          <input
+            type="checkbox"
+            id="filterCoaches"
+            checked={filterCoaches}
+            onChange={handleFilterCoachesChange}
+          />
+          <label htmlFor="filterCoaches" className="ml-2">Remove Coaches</label>
+        </div>
+        <div className="ml-4">
+          <input
+            type="checkbox"
+            id="sortOverdue"
+            checked={sortOverdue}
+            onChange={handleSortOverdueChange}
+          />
+          <label htmlFor="sortOverdue" className="ml-2">Sort by Overdue</label>
+        </div>
         {/*<button*/}
         {/*  className="ml-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"*/}
         {/*  onClick={() => onNavigationClick('newmember')}*/}
         {/*>*/}
         {/*  <FontAwesomeIcon icon={faUserPlus} /> Add Member*/}
         {/*</button>*/}
+      </div>
+
+      <div className="mb-4">
+        <div>Total: {sortedMembers.length}</div>
       </div>
 
       <div className="mx-auto">
@@ -111,7 +157,7 @@ const AdminPage = ({ members, onNavigationClick }) => {
           <div className="min-content flex-nowrap">Last Invoice</div>
         </div>
 
-        {filteredMembers.map((member) => {
+        {sortedMembers.map((member) => {
           const {
             subscription_status,
             subscription_start_date,
@@ -158,8 +204,12 @@ const AdminPage = ({ members, onNavigationClick }) => {
               <div className="min-content">
                 {role !== 'coach' && (
                   <>
-                    <div className={lastInvoiceStatusClass}>{last_invoice_status}</div>
-                    <div className="text-sm">{formatLastInvoiceDate(last_invoice_status, lastInvoiceDate)}</div>
+                    <div className={lastInvoiceStatusClass}>
+                      {last_invoice_status.toLowerCase() === 'unpaid' ? 'Overdue' : last_invoice_status}
+                    </div>
+                    <div className="text-sm">
+                      {last_invoice_status.toLowerCase() === 'unpaid' ? formatLastInvoiceDate('overdue', lastInvoiceDate) : formatLastInvoiceDate(last_invoice_status, lastInvoiceDate)}
+                    </div>
                   </>
                 )}
               </div>
