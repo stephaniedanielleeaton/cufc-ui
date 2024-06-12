@@ -39,16 +39,29 @@ const getStatusColor = (status) => {
   return '';
 };
 
+const getRoleClass = (role) => {
+  if (role === 'coach' || role === 'admin') return 'text-gray-500';
+  return 'text-gray-600';
+};
 
 const AdminPage = ({ members, onNavigationClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredMemberId, setHoveredMemberId] = useState(null);
+  const [filterUnpaid, setFilterUnpaid] = useState(false);
+  const [filterInactive, setFilterInactive] = useState(false);
 
-  const filteredMembers = members.filter((member) =>
-    `${member.display_first_name} ${member.display_last_name}`.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredMembers = members.filter((member) => {
+    const nameMatch = `${member.display_first_name} ${member.display_last_name}`
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const unpaidMatch = !filterUnpaid || member.last_invoice_status.toLowerCase() === 'unpaid';
+    const inactiveMatch = !filterInactive || member.subscription_status.toLowerCase() === 'inactive';
+    return nameMatch && unpaidMatch && inactiveMatch;
+  });
 
   const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
+  const handleFilterUnpaidChange = () => setFilterUnpaid(!filterUnpaid);
+  const handleFilterInactiveChange = () => setFilterInactive(!filterInactive);
 
   return (
     <div className="mx-auto font-khula p-4">
@@ -64,6 +77,24 @@ const AdminPage = ({ members, onNavigationClick }) => {
           <div className="absolute left-5 top-1/2 transform -translate-y-1/2">
             <FontAwesomeIcon icon={faSearch} />
           </div>
+        </div>
+        <div className="ml-4">
+          <input
+            type="checkbox"
+            id="filterUnpaid"
+            checked={filterUnpaid}
+            onChange={handleFilterUnpaidChange}
+          />
+          <label htmlFor="filterUnpaid" className="ml-2">Unpaid</label>
+        </div>
+        <div className="ml-4">
+          <input
+            type="checkbox"
+            id="filterInactive"
+            checked={filterInactive}
+            onChange={handleFilterInactiveChange}
+          />
+          <label htmlFor="filterInactive" className="ml-2">Inactive</label>
         </div>
         {/*<button*/}
         {/*  className="ml-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"*/}
@@ -94,11 +125,16 @@ const AdminPage = ({ members, onNavigationClick }) => {
           const subscriptionStartDate = subscription_start_date ? new Date(subscription_start_date) : '';
           const lastInvoiceDate = last_invoice_date ? new Date(last_invoice_date) : '';
           const lastInvoiceStatusClass = `font-bold text-md ${getStatusColor(last_invoice_status)}`;
+          const roleClass = getRoleClass(role);
+          const rowClass =
+            subscription_status.toLowerCase() === 'inactive' && role !== 'coach'
+              ? 'bg-gray-100 text-gray-500'
+              : '';
 
           return (
             <div
               key={_id}
-              className={`grid grid-cols-3 items-center py-2 cursor-pointer border-b ${hoveredMemberId === _id ? 'bg-gray-200' : ''}`}
+              className={`grid grid-cols-3 items-center py-2 cursor-pointer border-b ${hoveredMemberId === _id ? 'bg-gray-200' : ''} ${rowClass}`}
               onMouseEnter={() => setHoveredMemberId(_id)}
               onMouseLeave={() => setHoveredMemberId(null)}
               onClick={() => onNavigationClick(`admin/member/${_id}`)}
@@ -107,7 +143,7 @@ const AdminPage = ({ members, onNavigationClick }) => {
                 <div>
                   {`${display_first_name} ${display_last_name}`}
                   {role && (role === 'coach' || role === 'admin') && (
-                    <div className="text-sm text-gray-600">{role}</div>
+                    <div className={`text-xs ${roleClass}`}>{role}</div>
                   )}
                 </div>
               </div>

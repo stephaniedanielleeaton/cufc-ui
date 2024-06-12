@@ -52,7 +52,10 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
         <div className="flex flex-col space-y-4">
           <span className="font-bold text-2xl text-Navy">Contact Us</span>
           <span className="font-light">
-            Have a question? Like to stop in and see what we do first? <b>Send us a message.</b>
+            Have a question? <b>Send us a message.</b>
+          </span>
+          <span className="font-light">
+            Feel free to schedule a time to visit us and see what we do!
           </span>
           <div className="flex items-center">
             {/*<div className="mr-4">*/}
