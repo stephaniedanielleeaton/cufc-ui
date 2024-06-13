@@ -9,6 +9,11 @@ import PropTypes from 'prop-types';
 function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleNavigationClick = (page) => {
+    onNavigationClick(page);
+    setIsOpen(false);
+  };
+
   return (
     <div>
       {/* Mobile Navigation */}
@@ -36,42 +41,42 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
         <a
           href="#"
           className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-          onClick={() => onNavigationClick('joinnow')}
+          onClick={() => handleNavigationClick('joinnow')}
         >
           Sign Up
         </a>
         <a
           href="#"
           className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-          onClick={() => onNavigationClick('donate')}
+          onClick={() => handleNavigationClick('donate')}
         >
           Donate
         </a>
         <a
           href="#"
           className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-          onClick={() => onNavigationClick('contact')}
+          onClick={() => handleNavigationClick('contact')}
         >
           Contact
         </a>
         <a
           href="#"
           className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-          onClick={() => onNavigationClick('about')}
+          onClick={() => handleNavigationClick('about')}
         >
           About
         </a>
         <a
           href="#"
           className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-          onClick={() => onNavigationClick('classes')}
+          onClick={() => handleNavigationClick('classes')}
         >
           Classes
         </a>
         <a
           href="#"
           className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-          onClick={() => onNavigationClick('admin')}
+          onClick={() => handleNavigationClick('admin')}
         >
           Admin
         </a>
