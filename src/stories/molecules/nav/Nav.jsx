@@ -3,84 +3,90 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
 import logoAllWhiteSvg from '../../assets/LogoAllWhite.svg';
+import prideFlagSvg from '../../assets/LGBTQ+_rainbow_flag_Quasar__Progress__variant.svg';
 import PropTypes from 'prop-types';
 
 function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleNavigationClick = (page) => {
+    onNavigationClick(page);
+    setIsOpen(false);
+  };
+
   return (
     <div>
       {/* Mobile Navigation */}
-      <div className="md:hidden bg-Navy flex items-center h-[70px] min-h-16">
-        <nav>
-          <div>
-            <button
-              type="button"
-              className="inline-flex items-center p-2 rounded-md text-white hover:text-white hover:bg-gray-700"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <FontAwesomeIcon icon={faBars} className="h-6 w-6" />
-            </button>
-          </div>
-          {/* Mobile DropDown */}
-          <div
-            // className={`absolute ${isOpen ? 'block' : 'hidden'} left-0 top-full px-4 py-2 rounded-md bg-Navy w-full`}
-            className={`absolute ${isOpen ? 'block' : 'hidden'} left-0 mt-4 ml-4 px-4 py-4 rounded-md bg-Navy w-1/3 z-50`}
-          >
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => onNavigationClick('signup')}
-            >
-              Sign Up
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => onNavigationClick('donate')}
-            >
-              Donate
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => onNavigationClick('contact')}
-            >
-              Contact
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => onNavigationClick('about')}
-            >
-              About
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => onNavigationClick('classes')}
-            >
-              Classes
-            </a>
-            <a
-              href="#"
-              className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-              onClick={() => onNavigationClick('admin')}
-            >
-              Admin
-            </a>
-          </div>
-        </nav>
+      <div className="md:hidden bg-Navy flex items-center justify-between h-[70px] min-h-16 px-4 relative">
+        <button
+          type="button"
+          className="inline-flex items-center p-2 rounded-md text-white hover:text-white hover:bg-gray-700"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <FontAwesomeIcon icon={faBars} className="h-6 w-6" />
+        </button>
 
         {/* Center Content */}
-        <div className="w-1/3 absolute inset-x-0 mx-auto text-center p-2">
+        <div className="absolute left-1/2 transform -translate-x-1/2">
           <img src={logoAllWhiteSvg} alt="Logo" className="px-4 max-h-[64px]" onClick={() => onNavigationClick('')} />
         </div>
+
+        <img src={prideFlagSvg} alt="Pride Flag" className="h-8 w-8" />
+      </div>
+
+      {/* Mobile DropDown */}
+      <div
+        className={`absolute ${isOpen ? 'block' : 'hidden'} left-0 mt-4 ml-4 px-4 py-4 rounded-md bg-Navy w-1/3 z-50`}
+      >
+        <a
+          href="#"
+          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          onClick={() => handleNavigationClick('joinnow')}
+        >
+          Sign Up
+        </a>
+        <a
+          href="#"
+          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          onClick={() => handleNavigationClick('donate')}
+        >
+          Donate
+        </a>
+        <a
+          href="#"
+          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          onClick={() => handleNavigationClick('contact')}
+        >
+          Contact
+        </a>
+        <a
+          href="#"
+          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          onClick={() => handleNavigationClick('about')}
+        >
+          About
+        </a>
+        <a
+          href="#"
+          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          onClick={() => handleNavigationClick('classes')}
+        >
+          Classes
+        </a>
+        <a
+          href="#"
+          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          onClick={() => handleNavigationClick('admin')}
+        >
+          Admin
+        </a>
       </div>
 
       {/* Desktop Navigation */}
       <div className="hidden md:flex justify-around items-center min-h-16 bg-Navy h-full">
-        <div></div>
+        <div className="flex items-center">
+          <img src={prideFlagSvg} alt="Pride Flag" className="h-8 w-8 mr-4" />
+        </div>
         <nav className="md:w-1/2 lg:w-1/3 flex items-center justify-center text-white">
           <div className="button flex items-center px-4 whitespace-nowrap">
             <span

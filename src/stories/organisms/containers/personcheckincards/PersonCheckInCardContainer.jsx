@@ -20,22 +20,20 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
-    console.log('search time!');
   };
 
   useEffect(() => {
     const debouncedFilter = debounce((search) => {
       setFilteredMembers(
-        members.filter((member) =>
-          member.display_first_name
-            .toLowerCase()
-            .includes(search.toLowerCase() || member.display_last_name.toLowerCase().includes(search.toLowerCase()))
+        members.filter(
+          (member) =>
+            member.display_first_name.toLowerCase().includes(search.toLowerCase()) ||
+            member.display_last_name.toLowerCase().includes(search.toLowerCase())
         )
       );
-      console.log('Filtered Users: ', filteredMembers);
-    }, 300); // Adjust the debounce delay as needed
+    }, 300);
 
-    searchTerm ? debouncedFilter(searchTerm) : setFilteredMembers(members);
+    debouncedFilter(searchTerm);
 
     return () => {
       clearTimeout(debouncedFilter);
@@ -125,4 +123,5 @@ PersonCheckInCardContainer.propTypes = {
   ).isRequired,
   onCheckIn: PropTypes.func.isRequired,
 };
+
 export default PersonCheckInCardContainer;
