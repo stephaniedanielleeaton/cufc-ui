@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
@@ -57,6 +57,21 @@ const AdminPage = ({ members, onNavigationClick }) => {
   const [filterCoaches, setFilterCoaches] = useState(false);
   const [sortOverdue, setSortOverdue] = useState(false);
 
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch('/api/members');
+        const data = await response.json();
+        // Assume setMembers is a function to set members
+        setMembers(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchMembers();
+  }, []);
+
   const totalMembers = members.length;
 
   const filteredMembers = members.filter((member) => {
@@ -89,12 +104,12 @@ const AdminPage = ({ members, onNavigationClick }) => {
 
   return (
     <div className="mx-auto font-khula p-4">
-      <div className="mb-8 mt-4 flex items-center">
-        <div className="flex items-center relative">
+      <div className="mb-8 mt-4 flex items-center flex-wrap">
+        <div className="flex items-center relative flex-grow mb-4 md:mb-0">
           <input
             type="text"
             placeholder="Search by Name"
-            className="ml-2 p-2 border rounded pl-10"
+            className="ml-2 p-2 border rounded pl-10 w-full md:w-auto"
             value={searchQuery}
             onChange={handleSearchInputChange}
           />
@@ -102,48 +117,44 @@ const AdminPage = ({ members, onNavigationClick }) => {
             <FontAwesomeIcon icon={faSearch} />
           </div>
         </div>
-        <div className="ml-4">
-          <input
-            type="checkbox"
-            id="filterUnpaid"
-            checked={filterUnpaid}
-            onChange={handleFilterUnpaidChange}
-          />
-          <label htmlFor="filterUnpaid" className="ml-2">Unpaid</label>
+        <div className="flex items-center flex-wrap space-x-4">
+          <div className="flex items-center mb-4 ml-4 md:mb-0">
+            <input
+              type="checkbox"
+              id="filterUnpaid"
+              checked={filterUnpaid}
+              onChange={handleFilterUnpaidChange}
+            />
+            <label htmlFor="filterUnpaid" className="m-2">Unpaid</label>
+          </div>
+          <div className="flex items-center mb-4 md:mb-0">
+            <input
+              type="checkbox"
+              id="filterInactive"
+              checked={filterInactive}
+              onChange={handleFilterInactiveChange}
+            />
+            <label htmlFor="filterInactive" className="m-2">Inactive</label>
+          </div>
+          <div className="flex items-center mb-4 md:mb-0">
+            <input
+              type="checkbox"
+              id="filterCoaches"
+              checked={filterCoaches}
+              onChange={handleFilterCoachesChange}
+            />
+            <label htmlFor="filterCoaches" className="m-2">Remove Coaches</label>
+          </div>
+          <div className="flex items-center mb-4 md:mb-0">
+            <input
+              type="checkbox"
+              id="sortOverdue"
+              checked={sortOverdue}
+              onChange={handleSortOverdueChange}
+            />
+            <label htmlFor="sortOverdue" className="m-2">Sort by Overdue</label>
+          </div>
         </div>
-        <div className="ml-4">
-          <input
-            type="checkbox"
-            id="filterInactive"
-            checked={filterInactive}
-            onChange={handleFilterInactiveChange}
-          />
-          <label htmlFor="filterInactive" className="ml-2">Inactive</label>
-        </div>
-        <div className="ml-4">
-          <input
-            type="checkbox"
-            id="filterCoaches"
-            checked={filterCoaches}
-            onChange={handleFilterCoachesChange}
-          />
-          <label htmlFor="filterCoaches" className="ml-2">Remove Coaches</label>
-        </div>
-        <div className="ml-4">
-          <input
-            type="checkbox"
-            id="sortOverdue"
-            checked={sortOverdue}
-            onChange={handleSortOverdueChange}
-          />
-          <label htmlFor="sortOverdue" className="ml-2">Sort by Overdue</label>
-        </div>
-        {/*<button*/}
-        {/*  className="ml-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"*/}
-        {/*  onClick={() => onNavigationClick('newmember')}*/}
-        {/*>*/}
-        {/*  <FontAwesomeIcon icon={faUserPlus} /> Add Member*/}
-        {/*</button>*/}
       </div>
 
       <div className="mb-4">
