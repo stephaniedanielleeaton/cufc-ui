@@ -13,6 +13,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
     events: [],
     teamName: '',
     teamMembers: '',
+    clubAffiliation: '', // New field added here
   });
 
   const handleChange = (e) => {
@@ -51,8 +52,8 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
         Additional event fee for <b>Longsword</b> and <b>Sword and Buckler</b> is $20 each.
         <br /><br />
         <b>Team Longsword</b> consists of Teams of 3 competitors. The Team Registration fee of $60 needs to be
-        paid once by any member on the team. All team members competing in Team Longsword need to pay
-        their individual base fee. Please provide team name and names of team members ahead of time.
+        paid once by any member on the team. Please provide team name and names of team members ahead of time.
+        All team members competing in Team Longsword need to pay their individual base admission fee.
       </p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -116,6 +117,16 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
           />
         </div>
         <div>
+          <label className="block mb-2">Club Affiliation</label>
+          <input
+            type="text"
+            name="clubAffiliation"
+            value={formData.clubAffiliation}
+            onChange={handleChange}
+            className="w-full px-3 py-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
           <label className="block mb-2">Are you over 18?</label>
           <input
             type="checkbox"
@@ -129,17 +140,6 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
         <div>
           <label className="block mb-2">Select Events</label>
           <div className="flex flex-col space-y-2">
-            <label>
-              <input
-                type="checkbox"
-                name="events"
-                value="Team Longsword"
-                checked={formData.events.includes('Team Longsword')}
-                onChange={handleEventChange}
-                className="mr-2"
-              />
-              Team Longsword
-            </label>
             <label>
               <input
                 type="checkbox"
@@ -161,6 +161,17 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 className="mr-2"
               />
               Open Sword and Buckler
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="events"
+                value="Team Longsword"
+                checked={formData.events.includes('Team Longsword')}
+                onChange={handleEventChange}
+                className="mr-2"
+              />
+              Team Longsword
             </label>
           </div>
         </div>
