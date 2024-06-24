@@ -1758,9 +1758,19 @@ video {
   border-color: rgb(204 204 255 / var(--tw-border-opacity));
 }
 
+.focus\:border-DeepRed:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(81 31 51 / var(--tw-border-opacity));
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.focus\:ring-DeepRed:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(81 31 51 / var(--tw-ring-opacity));
 }
 
 @media (min-width: 768px) {

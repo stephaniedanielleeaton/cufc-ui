@@ -94,7 +94,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             value={formData.preferredFirstName}
             onChange={handleChange}
             placeholder="Preferred First Name"
-            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
           />
         </div>
         <div className="space-y-2">
@@ -104,7 +104,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             value={formData.preferredLastName}
             onChange={handleChange}
             placeholder="Preferred Last Name"
-            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
           />
         </div>
         <div className="space-y-2">
@@ -114,7 +114,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             value={formData.legalFirstName}
             onChange={handleChange}
             placeholder="Legal First Name"
-            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
           />
         </div>
         <div className="space-y-2">
@@ -124,7 +124,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             value={formData.legalLastName}
             onChange={handleChange}
             placeholder="Legal Last Name"
-            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
           />
         </div>
         <div className="space-y-2">
@@ -134,7 +134,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             value={formData.email}
             onChange={handleChange}
             placeholder="Email"
-            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
           />
         </div>
         <div className="space-y-2">
@@ -144,7 +144,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             value={formData.clubAffiliation}
             onChange={handleChange}
             placeholder="Club Affiliation"
-            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+            className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
           />
         </div>
         <div className="flex items-center space-y-2">
@@ -153,7 +153,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             name="isGuardian"
             checked={formData.isGuardian}
             onChange={handleChange}
-            className="mr-2 h-6 w-6"
+            className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
           />
           <label className="block mb-1 text-sm">I am a guardian signing up on behalf of a minor that is at least 14 years of age</label>
         </div>
@@ -166,7 +166,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 value={formData.guardianFirstName}
                 onChange={handleChange}
                 placeholder="Guardian First Name"
-                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
               />
             </div>
             <div className="space-y-2">
@@ -176,7 +176,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 value={formData.guardianLastName}
                 onChange={handleChange}
                 placeholder="Guardian Last Name"
-                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
               />
             </div>
           </>
@@ -192,7 +192,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 value="Open Longsword"
                 checked={formData.events.includes('Open Longsword')}
                 onChange={handleEventChange}
-                className="mr-2 h-6 w-6"
+                className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
               />
               Open Longsword (+ $20.00)
             </label>
@@ -203,7 +203,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 value="Open Sword and Buckler"
                 checked={formData.events.includes('Open Sword and Buckler')}
                 onChange={handleEventChange}
-                className="mr-2 h-6 w-6"
+                className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
               />
               Open Sword and Buckler (+ $20.00)
             </label>
@@ -214,7 +214,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 value="Team Longsword"
                 checked={formData.events.includes('Team Longsword')}
                 onChange={handleEventChange}
-                className="mr-2 h-6 w-6"
+                className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
               />
               Team Longsword (+ $60.00)
             </label>
@@ -229,7 +229,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 value={formData.teamName}
                 onChange={handleChange}
                 placeholder="Team Name"
-                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
               />
             </div>
             <div className="space-y-2">
@@ -238,7 +238,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
                 value={formData.teamMembers}
                 onChange={handleChange}
                 placeholder="Names of Team Members"
-                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm"
+                className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
               />
             </div>
           </>
