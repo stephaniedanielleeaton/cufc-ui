@@ -74,12 +74,15 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
       <p className="mb-5 text-gray-700 px-5 text-sm">
         It's going to be wet, it's going to be hot, it's going to be Sword Quench 2024!
         Come join us at Columbus United Fencing Club to compete in Open Longsword,
-        Open Sword and Buckler, and Open Team Longsword. Base admission for competitors is $30.
+        Open Sword and Buckler, and Open Team Longsword.
+        <br /><br />
+        Base admission for competitors is $30.
         Additional event fee for <b>Longsword</b> and <b>Sword and Buckler</b> is $20 each.
         <br /><br />
         <b>Team Longsword</b> consists of Teams of 3 competitors. The Team Registration fee of $60 needs to be
-        paid once by any member on the team. Please provide team name and names of team members ahead of time.
-        All team members competing in Team Longsword need to pay their individual base admission fee.
+        paid once by any member on the team*. Please provide team name and names of team members during registration.
+        <br /><br />
+        <span className="text-gray-500 text-xs block">* All team members competing in Team Longsword need to pay their individual base fee.</span>
       </p>
       <form onSubmit={handleSubmit} className="space-y-4 px-5">
         <hr className="border-gray-300 my-8" />
@@ -152,8 +155,7 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             onChange={handleChange}
             className="mr-2 h-6 w-6"
           />
-          <label className="block mb-1 text-sm">I am a guardian signing up on behalf of a minor that is at least 14
-            years of age</label>
+          <label className="block mb-1 text-sm">I am a guardian signing up on behalf of a minor that is at least 14 years of age</label>
         </div>
         {formData.isGuardian && (
           <>
@@ -241,9 +243,9 @@ export default function SwordQuench2024SignUp({ onSubmit }) {
             </div>
           </>
         )}
-        <hr className="border-gray-300 my-16 " />
+        <hr className="border-gray-300 my-16" />
         <div className="flex justify-between font-bold mt-2">
-          <span>Subtotal:</span>
+          <span>Total:</span>
           <span>${totalPrice.toFixed(2)}</span>
         </div>
         <div className="text-center mt-4">
