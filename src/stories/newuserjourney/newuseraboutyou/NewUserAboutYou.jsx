@@ -23,6 +23,7 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     phoneNumber: '',
     requestedMembershipType: '',
     additionalFamilyMembers: [],
+    heardAboutUs: '', // New field
   });
 
   const [errors, setErrors] = useState({});
@@ -48,7 +49,7 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName' && key !== 'beginnerCourseStartDate') {
+      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName' && key !== 'beginnerCourseStartDate' && key !== 'heardAboutUs') {
         valid = false;
         newErrors[key] = 'This field is required';
       }

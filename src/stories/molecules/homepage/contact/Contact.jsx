@@ -1,17 +1,14 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import ReCAPTCHA from 'react-google-recaptcha';
 import addresspin from '../../../assets/addresspin.svg';
 
-function Contact({ onSubmit, recaptchaSiteKey }) {
+function Contact({ onSubmit }) {
   const [formData, setFormData] = useState({
     fullName: '',
     emailAddress: '',
     contactNumber: '',
     message: '',
-    captchaToken: null, // New state to hold the CAPTCHA token
   });
-  const recaptchaRef = useRef();
   const [emailStatusMessage, setEmailStatusMessage] = useState('');
 
   const handleChange = (e) => {
@@ -38,14 +35,6 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
     }
   };
 
-  // Handle CAPTCHA token change
-  const handleCaptchaChange = (token) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      captchaToken: token,
-    }));
-  };
-
   return (
     <div className="flex flex-col md:flex-row font-khula text-sm md:py-16 md:px-16 py-4 px-4 bg-white">
       <div className="md:w-1/2 md:mr-4 md:mb-0 mx-16">
@@ -58,13 +47,6 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
             Feel free to schedule a time to visit us and see what we do!
           </span>
           <div className="flex items-center">
-            {/*<div className="mr-4">*/}
-            {/*  <img src={cellphone} alt="Phone Icon" className="w-8 h-8" />*/}
-            {/*</div>*/}
-            {/*<div className="block w-full">*/}
-            {/*  <span className="w-full block font-bold">Give Us A Call</span>*/}
-            {/*  <span className="w-full block">513-633-0140</span>*/}
-            {/*</div>*/}
           </div>
           <div className="flex items-center">
             <div className="mr-4">
@@ -118,8 +100,6 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
             onChange={handleChange}
             className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
           ></textarea>
-          {/* Add reCAPTCHA component */}
-          <ReCAPTCHA className="mb-2" ref={recaptchaRef} sitekey={recaptchaSiteKey} onChange={handleCaptchaChange} />
           <button
             type="submit"
             className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
@@ -135,7 +115,6 @@ function Contact({ onSubmit, recaptchaSiteKey }) {
 
 Contact.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  recaptchaSiteKey: PropTypes.string.isRequired,
 };
 
 export default Contact;

@@ -2,7 +2,7 @@ export { default as BaseText } from './stories/atoms/text/BaseText';
 export { default as BaseButton } from './stories/molecules/button/BaseButton';
 export { default as BaseSelect } from './stories/atoms/select/BaseSelect.jsx';
 export { default as BaseTextInput } from './stories/atoms/textinput/BaseTextInput.jsx';
-export { default as AdminPage } from './stories/templates/admin/AdminPage.jsx';
+export { default as AdminPage } from './stories/admin/adminpage/AdminPage.jsx';
 export { default as UserPage } from './stories/templates/userpage/UserPage.jsx';
 export { default as AboutMember } from './stories/molecules/aboutmember/AboutMember.jsx';
 export { default as AdminMember } from './stories/molecules/adminmember/AdminMember.jsx';

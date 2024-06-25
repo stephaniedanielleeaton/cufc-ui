@@ -759,10 +759,6 @@ video {
   margin-inline-start: 0.5rem;
 }
 
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -1043,12 +1039,6 @@ video {
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-y-1 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.25rem * var(--tw-space-y-reverse));
-}
-
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1270,6 +1260,10 @@ video {
   padding: 1rem;
 }
 
+.p-6 {
+  padding: 1.5rem;
+}
+
 .p-8 {
   padding: 2rem;
 }
@@ -1358,6 +1352,10 @@ video {
 
 .pl-6 {
   padding-left: 1.5rem;
+}
+
+.pl-8 {
+  padding-left: 2rem;
 }
 
 .pr-8 {
@@ -1753,14 +1751,14 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.focus\:border-periwinkle:focus {
-  --tw-border-opacity: 1;
-  border-color: rgb(204 204 255 / var(--tw-border-opacity));
-}
-
 .focus\:border-DeepRed:focus {
   --tw-border-opacity: 1;
   border-color: rgb(81 31 51 / var(--tw-border-opacity));
+}
+
+.focus\:border-periwinkle:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(204 204 255 / var(--tw-border-opacity));
 }
 
 .focus\:outline-none:focus {

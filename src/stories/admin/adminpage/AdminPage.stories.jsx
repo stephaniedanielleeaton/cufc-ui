@@ -2,7 +2,7 @@ import React from 'react';
 import AdminPage from './AdminPage.jsx';
 
 export default {
-  title: 'Templates/AdminPage',
+  title: 'admin/adminpage/AdminPage',
   component: AdminPage,
   tags: ['autodocs'],
 };

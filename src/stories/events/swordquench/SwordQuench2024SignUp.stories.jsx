@@ -15,4 +15,9 @@ Default.args = {
   onSubmit: (formData) => {
     console.log('Form submitted:', formData);
   },
+  slotsFilled: {
+    longsword: 10,
+    swordAndBuckler: 21,
+    teams: 2,
+  },
 };

@@ -10,6 +10,4 @@ const handleOnNavigationClick = (message) => {
   console.log(message);
 };
 
-const devSiteKey = '6Leo7dkpAAAAAMiK3z8TrcpBOA6K4i8QlteBIKEd';
-
-export const Default = () => <Contact onNavigationClick={handleOnNavigationClick} recaptchaSiteKey={devSiteKey} />;
+export const Default = () => <Contact onSubmit={handleOnNavigationClick}/>;

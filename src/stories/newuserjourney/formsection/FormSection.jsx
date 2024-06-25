@@ -196,6 +196,17 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             </button>
           </div>
         )}
+        <div className="p-4 font-khula flex-grow w-full">
+          <h1 className="font-khula font-bold mb-2 text-center">How did you hear about us?</h1>
+          <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
+          <BaseTextInput
+            name="heardAboutUs"
+            onChange={handleChange}
+            placeholder="Please let us know how you heard about us"
+            value={formData.heardAboutUs}
+            error={errors.heardAboutUs}
+          />
+        </div>
         <div className="w-full text-center p-4">
           <button
             type="submit"
