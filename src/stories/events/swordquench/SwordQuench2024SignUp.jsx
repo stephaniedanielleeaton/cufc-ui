@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import bannerImage from '../../assets/sweatysteppy.png'; // Ensure this path is correct
 
 export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
   const [formData, setFormData] = useState({
@@ -19,6 +20,7 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
 
   const [totalPrice, setTotalPrice] = useState(30);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     let price = 30;
@@ -46,9 +48,7 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
     const { value, checked } = e.target;
     setFormData({
       ...formData,
-      events: checked
-        ? [...formData.events, value]
-        : formData.events.filter((event) => event !== value),
+      events: checked ? [...formData.events, value] : formData.events.filter((event) => event !== value),
     });
   };
 
@@ -81,6 +81,7 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
       setErrors(validationErrors);
     } else {
       setErrors({});
+      setIsLoading(true);
       if (onSubmit) {
         onSubmit(formData);
       }
@@ -91,33 +92,49 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
   const getRemainingSlots = (totalSlots, filledSlots) => totalSlots - filledSlots;
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-6 font-poppins">
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center relative">
+      <div className="absolute inset-0 z-0 bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${bannerImage})`, opacity: 0.1 }}></div>
+      <div className="relative z-10 max-w-md w-full bg-white rounded-lg shadow-lg p-6 font-poppins">
+        <div className="relative mb-8">
+          <img
+            src={bannerImage}
+            alt="Banner"
+            className="w-full h-48 object-cover rounded-t-lg"
+          />
+        </div>
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">Sword Quench 2024</h2>
           <p className="text-xl mb-4">${totalPrice.toFixed(2)}</p>
           <p className="text-sm mb-2">Saturday, August 17, 2024 at 8:00 AM - 8:00 PM EST</p>
           <p className="text-sm">
-            6475 E Main St. #111<br />
+            6475 E Main St. #111
+            <br />
             Reynoldsburg, OH 43068
           </p>
         </div>
         <hr className="border-gray-300 my-8" />
         <p className="mb-5 text-gray-700 px-5 text-sm">
-          It's going to be wet, it's going to be hot, it's going to be Sword Quench 2024!
-          Come join us at Columbus United Fencing Club to compete in Open Longsword,
-          Open Sword and Buckler, and Open Team Longsword.
-          <br /><br />
+          It's going to be wet, it's going to be hot, it's going to be Sword Quench 2024! Come join us at Columbus
+          United Fencing Club to compete in Open Longsword, Open Sword and Buckler, and Open Team Longsword.
+          <br />
+          <br />
           Base admission for competitors is $30.
-          <br /><br />
+          <br />
+          <br />
           <b>Sword and Buckler.</b> Event fee: $20. Registration and Check In cut off: 12pm.
-          <br /><br />
+          <br />
+          <br />
           <b>Longsword.</b> Event fee: $20. Registration and Check In cut off: 9am.
-          <br /><br />
-          <b>Team Longsword</b> consists of Teams of 3 competitors. The Team Registration fee of $60 needs to be
-          paid once by any member on the team*. Please provide team name and names of team members during registration. Registration and Check In cut off: 4pm
-          <br /><br />
-          <span className="text-gray-500 text-xs block">* All team members competing in Team Longsword need to pay their individual base fee.</span>
+          <br />
+          <br />
+          <b>Team Longsword</b> consists of Teams of 3 competitors. The Team Registration fee of $60 needs to be paid
+          once by any member on the team*. Please provide team name and names of team members during registration.
+          Registration and Check In cut off: 4pm
+          <br />
+          <br />
+          <span className="text-gray-500 text-xs block">
+            * All team members competing in Team Longsword need to pay their individual base fee.
+          </span>
         </p>
         <form onSubmit={handleSubmit} className="space-y-4 px-5">
           <hr className="border-gray-300 my-8" />
@@ -193,7 +210,9 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
               onChange={handleChange}
               className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
             />
-            <label className="block mb-1 text-sm">I am a guardian signing up on behalf of a minor that is at least 14 years of age</label>
+            <label className="block mb-1 text-sm">
+              I am a guardian signing up on behalf of a minor that is at least 14 years of age
+            </label>
           </div>
           {formData.isGuardian && (
             <>
@@ -236,7 +255,9 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
                   />
                   Open Longsword (+ $20.00)
                 </label>
-                <span className="text-xs pl-8 font-bold block">{getRemainingSlots(36, slotsFilled.longsword)} slots out of 36 remaining</span>
+                <span className="text-xs pl-8 font-bold block">
+                  {getRemainingSlots(36, slotsFilled.longsword)} slots out of 36 remaining
+                </span>
               </div>
               <div>
                 <label className="flex items-center">
@@ -251,7 +272,9 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
                   />
                   Open Sword and Buckler (+ $20.00)
                 </label>
-                <span className="text-xs pl-8 font-bold block">{getRemainingSlots(21, slotsFilled.swordAndBuckler)} slots out of 21 remaining</span>
+                <span className="text-xs pl-8 font-bold block">
+                  {getRemainingSlots(21, slotsFilled.swordAndBuckler)} slots out of 21 remaining
+                </span>
               </div>
               <div>
                 <label className="flex items-center">
@@ -266,7 +289,9 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
                   />
                   Team Longsword (+ $60.00)
                 </label>
-                <span className="text-xs pl-8 font-bold block">{getRemainingSlots(7, slotsFilled.teams)} slots out of 7 remaining</span>
+                <span className="text-xs pl-8 font-bold block">
+                  {getRemainingSlots(7, slotsFilled.teams)} slots out of 7 remaining
+                </span>
               </div>
             </div>
           </div>
@@ -307,6 +332,7 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
             >
               CHECKOUT
             </button>
+            {isLoading && <p className="text-DeepRed mt-2">Loading...</p>}
           </div>
         </form>
       </div>
