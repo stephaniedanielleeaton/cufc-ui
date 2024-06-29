@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import MemberDetails from '../adminmember/MemberDetails.jsx'; // Import the new component
 
 const formatDate = (date) => {
   const month = String(date.getUTCMonth() + 1).padStart(2, '0');
@@ -49,30 +50,20 @@ const getRoleClass = (role) => {
   return 'text-gray-600';
 };
 
-const AdminPage = ({ members, onNavigationClick }) => {
+const AdminPage = ({ members, onUpdateMember }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hoveredMemberId, setHoveredMemberId] = useState(null);
   const [filterUnpaid, setFilterUnpaid] = useState(false);
   const [filterInactive, setFilterInactive] = useState(false);
   const [filterCoaches, setFilterCoaches] = useState(false);
   const [sortOverdue, setSortOverdue] = useState(false);
+  const [selectedMemberId, setSelectedMemberId] = useState(null);
 
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const response = await fetch('/api/members');
-        const data = await response.json();
-        // Assume setMembers is a function to set members
-        setMembers(data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-
-    fetchMembers();
-  }, []);
-
-  const totalMembers = members.length;
+  const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
+  const handleFilterUnpaidChange = () => setFilterUnpaid(!filterUnpaid);
+  const handleFilterInactiveChange = () => setFilterInactive(!filterInactive);
+  const handleFilterCoachesChange = () => setFilterCoaches(!filterCoaches);
+  const handleSortOverdueChange = () => setSortOverdue(!sortOverdue);
 
   const filteredMembers = members.filter((member) => {
     const nameMatch = `${member.display_first_name} ${member.display_last_name}`
@@ -86,21 +77,21 @@ const AdminPage = ({ members, onNavigationClick }) => {
 
   const sortedMembers = sortOverdue
     ? [...filteredMembers].sort((a, b) => {
-      const daysOverdueA = a.last_invoice_status.toLowerCase() === 'unpaid'
-        ? Math.floor((Date.now() - new Date(a.last_invoice_date)) / (1000 * 60 * 60 * 24))
-        : 0;
-      const daysOverdueB = b.last_invoice_status.toLowerCase() === 'unpaid'
-        ? Math.floor((Date.now() - new Date(b.last_invoice_date)) / (1000 * 60 * 60 * 24))
-        : 0;
-      return daysOverdueB - daysOverdueA;
-    })
+        const daysOverdueA =
+          a.last_invoice_status.toLowerCase() === 'unpaid'
+            ? Math.floor((Date.now() - new Date(a.last_invoice_date)) / (1000 * 60 * 60 * 24))
+            : 0;
+        const daysOverdueB =
+          b.last_invoice_status.toLowerCase() === 'unpaid'
+            ? Math.floor((Date.now() - new Date(b.last_invoice_date)) / (1000 * 60 * 60 * 24))
+            : 0;
+        return daysOverdueB - daysOverdueA;
+      })
     : filteredMembers;
 
-  const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
-  const handleFilterUnpaidChange = () => setFilterUnpaid(!filterUnpaid);
-  const handleFilterInactiveChange = () => setFilterInactive(!filterInactive);
-  const handleFilterCoachesChange = () => setFilterCoaches(!filterCoaches);
-  const handleSortOverdueChange = () => setSortOverdue(!sortOverdue);
+  const handleRowClick = (id) => {
+    setSelectedMemberId(selectedMemberId === id ? null : id);
+  };
 
   return (
     <div className="mx-auto font-khula p-4">
@@ -119,40 +110,28 @@ const AdminPage = ({ members, onNavigationClick }) => {
         </div>
         <div className="flex items-center flex-wrap space-x-4">
           <div className="flex items-center mb-4 ml-4 md:mb-0">
-            <input
-              type="checkbox"
-              id="filterUnpaid"
-              checked={filterUnpaid}
-              onChange={handleFilterUnpaidChange}
-            />
-            <label htmlFor="filterUnpaid" className="m-2">Unpaid</label>
+            <input type="checkbox" id="filterUnpaid" checked={filterUnpaid} onChange={handleFilterUnpaidChange} />
+            <label htmlFor="filterUnpaid" className="m-2">
+              Unpaid
+            </label>
           </div>
           <div className="flex items-center mb-4 md:mb-0">
-            <input
-              type="checkbox"
-              id="filterInactive"
-              checked={filterInactive}
-              onChange={handleFilterInactiveChange}
-            />
-            <label htmlFor="filterInactive" className="m-2">Inactive</label>
+            <input type="checkbox" id="filterInactive" checked={filterInactive} onChange={handleFilterInactiveChange} />
+            <label htmlFor="filterInactive" className="m-2">
+              Inactive
+            </label>
           </div>
           <div className="flex items-center mb-4 md:mb-0">
-            <input
-              type="checkbox"
-              id="filterCoaches"
-              checked={filterCoaches}
-              onChange={handleFilterCoachesChange}
-            />
-            <label htmlFor="filterCoaches" className="m-2">Remove Coaches</label>
+            <input type="checkbox" id="filterCoaches" checked={filterCoaches} onChange={handleFilterCoachesChange} />
+            <label htmlFor="filterCoaches" className="m-2">
+              Remove Coaches
+            </label>
           </div>
           <div className="flex items-center mb-4 md:mb-0">
-            <input
-              type="checkbox"
-              id="sortOverdue"
-              checked={sortOverdue}
-              onChange={handleSortOverdueChange}
-            />
-            <label htmlFor="sortOverdue" className="m-2">Sort by Overdue</label>
+            <input type="checkbox" id="sortOverdue" checked={sortOverdue} onChange={handleSortOverdueChange} />
+            <label htmlFor="sortOverdue" className="m-2">
+              Sort by Overdue
+            </label>
           </div>
         </div>
       </div>
@@ -184,47 +163,55 @@ const AdminPage = ({ members, onNavigationClick }) => {
           const lastInvoiceStatusClass = `font-bold text-md ${getStatusColor(last_invoice_status)}`;
           const roleClass = getRoleClass(role);
           const rowClass =
-            subscription_status.toLowerCase() === 'inactive' && role !== 'coach'
-              ? 'bg-gray-100 text-gray-500'
-              : '';
+            subscription_status.toLowerCase() === 'inactive' && role !== 'coach' ? 'bg-gray-100 text-gray-500' : '';
 
           return (
-            <div
-              key={_id}
-              className={`grid grid-cols-3 items-center py-2 cursor-pointer border-b ${hoveredMemberId === _id ? 'bg-gray-200' : ''} ${rowClass}`}
-              onMouseEnter={() => setHoveredMemberId(_id)}
-              onMouseLeave={() => setHoveredMemberId(null)}
-              onClick={() => onNavigationClick(`admin/member/${_id}`)}
-            >
-              <div className="min-content flex items-center">
-                <div>
-                  {`${display_first_name} ${display_last_name}`}
-                  {role && (role === 'coach' || role === 'admin') && (
-                    <div className={`text-xs ${roleClass}`}>{role}</div>
+            <React.Fragment key={_id}>
+              <div
+                className={`grid grid-cols-3 items-center py-2 cursor-pointer border-b ${hoveredMemberId === _id ? 'bg-gray-200' : ''} ${rowClass}`}
+                onMouseEnter={() => setHoveredMemberId(_id)}
+                onMouseLeave={() => setHoveredMemberId(null)}
+                onClick={() => handleRowClick(_id)}
+              >
+                <div className="min-content flex items-center">
+                  <div>
+                    {`${display_first_name} ${display_last_name}`}
+                    {role && (role === 'coach' || role === 'admin') && (
+                      <div className={`text-xs ${roleClass}`}>{role}</div>
+                    )}
+                  </div>
+                </div>
+                <div className="min-content">
+                  {role !== 'coach' && (
+                    <>
+                      <div className="font-bold text-md">{subscription_status}</div>
+                      <div className="text-sm">
+                        {formatSubscriptionDate(subscription_status, subscriptionStartDate)}
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div className="min-content">
+                  {role !== 'coach' && (
+                    <>
+                      <div className={lastInvoiceStatusClass}>
+                        {last_invoice_status.toLowerCase() === 'unpaid' ? 'Overdue' : last_invoice_status}
+                      </div>
+                      <div className="text-sm">
+                        {last_invoice_status.toLowerCase() === 'unpaid'
+                          ? formatLastInvoiceDate('overdue', lastInvoiceDate)
+                          : formatLastInvoiceDate(last_invoice_status, lastInvoiceDate)}
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
-              <div className="min-content">
-                {role !== 'coach' && (
-                  <>
-                    <div className="font-bold text-md">{subscription_status}</div>
-                    <div className="text-sm">{formatSubscriptionDate(subscription_status, subscriptionStartDate)}</div>
-                  </>
-                )}
-              </div>
-              <div className="min-content">
-                {role !== 'coach' && (
-                  <>
-                    <div className={lastInvoiceStatusClass}>
-                      {last_invoice_status.toLowerCase() === 'unpaid' ? 'Overdue' : last_invoice_status}
-                    </div>
-                    <div className="text-sm">
-                      {last_invoice_status.toLowerCase() === 'unpaid' ? formatLastInvoiceDate('overdue', lastInvoiceDate) : formatLastInvoiceDate(last_invoice_status, lastInvoiceDate)}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
+              {selectedMemberId === _id && (
+                <div className="bg-gray-50 border-b">
+                  <MemberDetails member={member} onUpdate={onUpdateMember} />
+                </div>
+              )}
+            </React.Fragment>
           );
         })}
       </div>
@@ -233,7 +220,7 @@ const AdminPage = ({ members, onNavigationClick }) => {
 };
 
 AdminPage.propTypes = {
-  onNavigationClick: PropTypes.func.isRequired,
+  onUpdateMember: PropTypes.func.isRequired,
   members: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
