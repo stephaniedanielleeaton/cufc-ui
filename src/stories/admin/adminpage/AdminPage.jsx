@@ -224,13 +224,31 @@ AdminPage.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
+      square_customer_id: PropTypes.string,
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
+      personal_info: PropTypes.shape({
+        legal_first_name: PropTypes.string,
+        legal_last_name: PropTypes.string,
+        email: PropTypes.string,
+        phone: PropTypes.string,
+        date_of_birth: PropTypes.instanceOf(Date),
+        address: PropTypes.shape({
+          street: PropTypes.string,
+          city: PropTypes.string,
+          state: PropTypes.string,
+          zip: PropTypes.string,
+          country: PropTypes.string,
+        }),
+      }),
       subscription_status: PropTypes.string,
       subscription_start_date: PropTypes.string,
       last_invoice_status: PropTypes.string,
       last_invoice_date: PropTypes.string,
       role: PropTypes.string,
+      family_members: PropTypes.arrayOf(PropTypes.object),
+      guardian_first_name: PropTypes.string,
+      guardian_last_name: PropTypes.string,
     })
   ).isRequired,
 };
