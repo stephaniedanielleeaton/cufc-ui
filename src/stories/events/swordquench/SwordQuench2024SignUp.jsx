@@ -105,7 +105,7 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">Sword Quench 2024</h2>
           <p className="text-xl mb-4">${totalPrice.toFixed(2)}</p>
-          <p className="text-sm mb-2">Saturday, August 17, 2024 at 8:00 AM - 8:00 PM EST</p>
+          <p className="text-sm mb-2">Saturday, August 10, 2024 at 8:00 AM - 8:00 PM EST</p>
           <p className="text-sm">
             6475 E Main St. #111
             <br />
@@ -121,10 +121,10 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
           Base admission for competitors is $30.
           <br />
           <br />
-          <b>Sword and Buckler.</b> Event fee: $20. Registration and Check In cut off: 12pm.
+          <b>Sword and Buckler.</b> Event fee: $20. Registration and Check In cut off: 9am.
           <br />
           <br />
-          <b>Longsword.</b> Event fee: $20. Registration and Check In cut off: 9am.
+          <b>Longsword.</b> Event fee: $20. Registration and Check In cut off: 12pm.
           <br />
           <br />
           <b>Team Longsword</b> consists of Teams of 3 competitors. The Team Registration fee of $60 needs to be paid
