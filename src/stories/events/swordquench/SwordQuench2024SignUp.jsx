@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import bannerImage from '../../assets/sweatysteppy.png'; // Ensure this path is correct
+import bannerImage from '../../assets/SSQ_promoArt.png';
 
 export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
   const [formData, setFormData] = useState({
@@ -99,7 +99,7 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
           <img
             src={bannerImage}
             alt="Banner"
-            className="w-full h-48 object-cover rounded-t-lg"
+            className="w-full h-full object-cover rounded-t-lg"
           />
         </div>
         <div className="text-center mb-8">
