@@ -132,6 +132,9 @@ export default function SwordQuench2024SignUp({ onSubmit, slotsFilled }) {
           Registration and Check In cut off: 4pm
           <br />
           <br />
+          Lunch is available on site. Smash burgers, side, and drink. Recommended $10 donation to club.
+          <br />
+          <br />
           <span className="text-gray-500 text-xs block">
             * All team members competing in Team Longsword need to pay their individual base fee.
           </span>

@@ -204,7 +204,7 @@ const MemberDetails = ({ member, onUpdate }) => {
           className="p-2 border rounded w-full"
         />
       </div>
-      <button type="submit" className="p-2 bg-blue-500 text-white rounded">Update</button>
+      <button type="submit" className="bg-white text-black text-sm font-bold mx-4 px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black">UPDATE</button>
     </form>
   );
 };

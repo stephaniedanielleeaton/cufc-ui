@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import MemberDetails from '../adminmember/MemberDetails.jsx'; // Import the new component
+import MemberDetails from '../adminmember/MemberDetails.jsx';
 
 const formatDate = (date) => {
   const month = String(date.getUTCMonth() + 1).padStart(2, '0');
