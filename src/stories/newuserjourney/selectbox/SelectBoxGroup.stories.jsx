@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SelectBoxGroup from './SelectBoxGroup.jsx';
 
 export default {
-  title: 'Molecules/SelectBoxGroup',
+  title: 'NewUserJourney/SelectBoxGroup',
   component: SelectBoxGroup,
 };
 

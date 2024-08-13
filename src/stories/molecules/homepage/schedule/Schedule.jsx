@@ -5,7 +5,7 @@ function Schedule() {
       {/* First div */}
       <div className="flex justify-between items-center w-full py-4 mb-6">
         <div>
-          <span className="font-bold text-2xl text-white px-4">Class Schedule</span>
+          <span className="font-bold text-2xl text-white px-4">HEMA Class Schedule</span>
         </div>
         <div>
           {/*<button*/}
