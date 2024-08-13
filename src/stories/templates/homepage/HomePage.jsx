@@ -8,12 +8,13 @@ import Footer from '../../molecules/footer/Footer.jsx';
 import Contact from '../../molecules/homepage/contact/Contact.jsx';
 import CTA from '../../molecules/homepage/calltoaction/CTA.jsx';
 import NuggetCTA from '../../molecules/homepage/nuggetcta/NuggetCTA.jsx';
+import HeroWithFriends from '../../molecules/homepage/herowithfriends/HeroWithFriends.jsx';
 const HomePage = () => {
   return (
     <div>
       <Nav />
-      <Hero />
-      <NuggetCTA/>
+      <HeroWithFriends />
+      <NuggetCTA />
       <Intro />
       <Schedule />
       <Contact recaptchaSiteKey={'123'} onSubmit={() => {}} />
