@@ -7,11 +7,13 @@ import Schedule from '../../molecules/homepage/schedule/Schedule.jsx';
 import Footer from '../../molecules/footer/Footer.jsx';
 import Contact from '../../molecules/homepage/contact/Contact.jsx';
 import CTA from '../../molecules/homepage/calltoaction/CTA.jsx';
+import NuggetCTA from '../../molecules/homepage/nuggetcta/NuggetCTA.jsx';
 const HomePage = () => {
   return (
     <div>
       <Nav />
       <Hero />
+      <NuggetCTA/>
       <Intro />
       <Schedule />
       <Contact recaptchaSiteKey={'123'} onSubmit={() => {}} />
