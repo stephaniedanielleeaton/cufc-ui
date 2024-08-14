@@ -30,7 +30,7 @@ function Classes({ onNavigationClick }) {
               onClick={() => scrollToSection('pricing-options')}
               className="text-blue-600 hover:text-blue-800"
             >
-              What are your prices and options?
+              What Are Your Prices and Options?
             </button>
           </li>
         </ul>
@@ -93,7 +93,7 @@ function Classes({ onNavigationClick }) {
           </div>
         </div>
         <div id="pricing-options" className="mb-10">
-          <h2 className="font-bold text-2xl text-wine mb-4">What are your prices and options?</h2>
+          <h2 className="font-bold text-2xl text-wine mb-4">What Are Your Prices and Options?</h2>
           <p className="font-light text-sm mb-4">
             We offer a range of class and pricing options tailored to suit different needs and experience levels.
           </p>

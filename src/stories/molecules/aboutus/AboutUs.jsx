@@ -36,7 +36,7 @@ function AboutUs({ onNavigationClick }) {
               onClick={() => scrollToSection('how-to-start')}
               className="text-blue-600 hover:text-blue-800"
             >
-              How do I start?
+              How Do I Start?
             </button>
           </li>
         </ul>
@@ -112,7 +112,7 @@ function AboutUs({ onNavigationClick }) {
         </div>
 
         <div id="how-to-start" className="mb-10">
-          <h2 className="font-bold text-2xl text-Navy mb-4">How do I start?</h2>
+          <h2 className="font-bold text-2xl text-Navy mb-4">How Do I Start?</h2>
           <p className="font-light text-sm mb-4">
             Your current level of experience will determine how you begin your journey with us.
           </p>
