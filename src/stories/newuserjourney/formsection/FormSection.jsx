@@ -32,6 +32,18 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
 
         <form onSubmit={onNext} className="space-y-4 mt-8 px-5">
           <hr className="border-gray-300 my-8" />
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              name="isGuardian"
+              checked={formData.isGuardian}
+              onChange={handleCheckboxChange}
+              className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
+            />
+            <label className="block mb-2 text-sm">
+              I am a guardian signing up on behalf of a minor that is at least 16 years of age
+            </label>
+          </div>
           <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">
             {formType === 'minor' ? 'ABOUT THE FENCER' : 'ABOUT YOU'}
           </h3>
@@ -77,7 +89,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             />
             {errors.legalLastName && <p className="text-red-500 text-xs">{errors.legalLastName}</p>}
           </div>
-          <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">
+          <h3 className="block mb-5 font-bold text-sm tracking-wider text-xs text-center">
             DATE OF BIRTH
           </h3>
           <div className="space-y-2">
@@ -90,18 +102,6 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
               className={`w-full px-3 py-2 border ${errors.dateOfBirth ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
             />
             {errors.dateOfBirth && <p className="text-red-500 text-xs">{errors.dateOfBirth}</p>}
-          </div>
-          <div className="flex items-center space-y-2">
-            <input
-              type="checkbox"
-              name="isGuardian"
-              checked={formData.isGuardian}
-              onChange={handleCheckboxChange}
-              className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
-            />
-            <label className="block mb-1 text-sm">
-              I am a guardian signing up on behalf of a minor that is at least 16 years of age
-            </label>
           </div>
           {formData.isGuardian && (
             <>

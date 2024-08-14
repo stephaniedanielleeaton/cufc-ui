@@ -775,6 +775,14 @@ video {
   margin-top: 2rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .block {
   display: block;
 }
@@ -855,6 +863,10 @@ video {
   height: 100vh;
 }
 
+.h-5 {
+  height: 1.25rem;
+}
+
 .max-h-\[64px\] {
   max-height: 64px;
 }
@@ -925,6 +937,10 @@ video {
 
 .w-1\/4 {
   width: 25%;
+}
+
+.w-5 {
+  width: 1.25rem;
 }
 
 .max-w-md {

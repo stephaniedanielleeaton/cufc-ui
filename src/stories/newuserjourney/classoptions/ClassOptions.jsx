@@ -31,26 +31,23 @@ function ClassOptions({ selectedOption, onSelect }) {
         CLASS OPTIONS
       </h3>
       <p className="mb-5 text-gray-700 text-sm">
-        Click HERE for more options about options and pricing.
+        Please see our About page for options and pricing.
       </p>
       {options.map((option) => (
-        <div>
-          <label className="flex items-center">
-            <input
-              type="radio"
-              name="events"
-              checked={selectedOption === option.id}
-              onChange={() => onSelect(option.id)}
-              className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
-            />
-            <span className="text-sm">{option.header}</span>
-          </label>
-          <span className="text-xs pl-8 font-bold block">
-                  {option.price}
-                </span>
+        <div key={option.id} className="flex items-start mb-4">
+          <input
+            type="radio"
+            name="events"
+            checked={selectedOption === option.id}
+            onChange={() => onSelect(option.id)}
+            className="mr-3 h-5 w-5 text-DeepRed border-DeepRed focus:ring-DeepRed mt-1"
+          />
+          <div className="flex flex-col">
+            <span className="text-sm font-medium">{option.header}</span>
+            <span className="text-xs font-bold text-gray-500">{option.price}</span>
+          </div>
         </div>
       ))}
-
     </div>
   );
 }
