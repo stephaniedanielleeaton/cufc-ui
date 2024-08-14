@@ -1,12 +1,49 @@
 import React from 'react';
 
 function AboutUs({ onNavigationClick }) {
+
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen py-10">
       <h1 className="text-4xl text-wine font-khula font-bold mb-6 text-center">About Columbus United Fencing Club</h1>
       <div className="w-9/12 border-t-2 border-wine mx-auto mb-10"></div>
+
+      {/* Table of Contents */}
+      <div className="max-w-screen-lg font-khula md:px-20 px-8 bg-white shadow-lg mx-auto rounded-lg py-8 mb-10">
+        <h2 className="text-2xl text-Navy font-bold mb-4">Table of Contents</h2>
+        <ul className="list-disc pl-6 mb-4">
+          <li className="mb-2">
+            <button
+              onClick={() => scrollToSection('what-is-hema')}
+              className="text-blue-600 hover:text-blue-800"
+            >
+              What is Historical European Martial Arts (HEMA)?
+            </button>
+          </li>
+          <li className="mb-2">
+            <button
+              onClick={() => scrollToSection('why-choose-us')}
+              className="text-blue-600 hover:text-blue-800"
+            >
+              Why Choose Columbus United Fencing Club?
+            </button>
+          </li>
+          <li className="mb-2">
+            <button
+              onClick={() => scrollToSection('how-to-start')}
+              className="text-blue-600 hover:text-blue-800"
+            >
+              How do I start?
+            </button>
+          </li>
+        </ul>
+      </div>
+
       <div className="max-w-screen-lg font-khula md:px-20 px-8 bg-white shadow-lg mx-auto rounded-lg py-8">
-        <div className="mb-10">
+        <div id="what-is-hema" className="mb-10">
           <h2 className="font-bold text-2xl text-Navy mb-4">What is Historical European Martial Arts (HEMA)?</h2>
           <p className="font-light text-sm mb-4">
             Historical European Martial Arts, or HEMA for short, are martial arts from European countries that are no
@@ -34,7 +71,8 @@ function AboutUs({ onNavigationClick }) {
             every class.
           </p>
         </div>
-        <div className="mb-10">
+
+        <div id="why-choose-us" className="mb-10">
           <h2 className="font-bold text-2xl text-Navy mb-4">Why Choose Columbus United Fencing Club?</h2>
           <p className="font-light text-sm mb-4">
             Our club members have joined for many different reasons. Here are a few we commonly hear:
@@ -45,8 +83,7 @@ function AboutUs({ onNavigationClick }) {
               While our lessons don't require members to study advanced techniques directly from the manuscripts,
               there's so much to learn.
               You'll learn the historical context and purpose of various weapons and how they were used, and then
-              practice
-              applying that information through sparring.
+              practice applying that information through sparring.
             </p>
           </div>
           <div className="mb-6">
@@ -73,7 +110,8 @@ function AboutUs({ onNavigationClick }) {
             </p>
           </div>
         </div>
-        <div className="mb-10">
+
+        <div id="how-to-start" className="mb-10">
           <h2 className="font-bold text-2xl text-Navy mb-4">How do I start?</h2>
           <p className="font-light text-sm mb-4">
             Your current level of experience will determine how you begin your journey with us.
@@ -82,11 +120,11 @@ function AboutUs({ onNavigationClick }) {
             <h3 className="font-bold text-wine text-lg mb-2">I'm New</h3>
             <p className="font-light text-sm">
               If you are completely new to HEMA or fencing, please check our our introductory course <button
-                onClick={() => onNavigationClick('intro')}
-                className="text-blue-600 hover:text-blue-800"
-              >
-                here
-              </button>. However, if you would like to watch a class first, let us know when on our <button
+              onClick={() => onNavigationClick('intro')}
+              className="text-blue-600 hover:text-blue-800"
+            >
+              here
+            </button>. However, if you would like to watch a class first, let us know when on our <button
               onClick={() => onNavigationClick('contact')}
               className="text-blue-600 hover:text-blue-800"
             >
@@ -115,9 +153,9 @@ function AboutUs({ onNavigationClick }) {
             </p>
           </div>
         </div>
-        <div>
-          <h2 className="font-bold text-2xl text-Navy mb-4">Interested in Historical Fencing? Contact Us for More
-            Information</h2>
+
+        <div id="contact">
+          <h2 className="font-bold text-2xl text-Navy mb-4">Interested in Historical Fencing? Contact Us for More Information</h2>
           <p className="font-light text-sm">
             To learn more about Columbus United Fencing Club and our program,&nbsp;
             <button
