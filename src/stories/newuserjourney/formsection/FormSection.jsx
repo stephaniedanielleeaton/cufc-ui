@@ -25,7 +25,6 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
     <div className="bg-gray-100 min-h-screen flex items-center justify-center relative">
       <div className="relative z-10 max-w-md w-full bg-white rounded-lg shadow-lg p-6 font-poppins">
 
-        {/* ClassOptions at the top */}
         <ClassOptions
           selectedOption={formData.requestedMembershipType}
           onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
