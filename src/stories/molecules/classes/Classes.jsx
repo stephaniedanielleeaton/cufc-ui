@@ -62,6 +62,49 @@ function Classes({ onNavigationClick }) {
             </p>
           </div>
         </div>
+        <div className="mb-10">
+          <h2 className="font-bold text-2xl text-Navy mb-4">What are your prices and options?</h2>
+          <p className="font-light text-sm mb-4">
+            We offer a range of class and pricing options tailored to suit different needs and experience levels.
+          </p>
+          <div className="mb-6">
+            <h3 className="font-bold text-wine text-lg mb-2">Historical European Martial Arts Fundamentals</h3>
+            <p className="font-light text-sm">
+              Our Beginner Course is perfect for those new to historical fencing, providing a comprehensive introduction
+              to HEMA fundamentals
+              for $110 for the full four week course.
+            </p>
+          </div>
+          <div className="mb-6">
+            <h3 className="font-bold text-wine text-lg mb-2">Full Class Access</h3>
+            <p className="font-light text-sm">
+              or those with prior experience, our Full Class Access option grants unlimited access to all regular weekly
+              classes and social events at $110 per month
+            </p>
+          </div>
+          <div className="mb-6">
+            <h3 className="font-bold text-wine text-lg mb-2">Saturday Classes </h3>
+            <p className="font-light text-sm">
+              If you prefer to focus on sparring and tournament style fencing, the Saturday Classes option offers access
+              to Saturday sessions for $65 per month.
+            </p>
+          </div>
+          <div className="mb-6">
+            <h3 className="font-bold text-wine text-lg mb-2">Family Plan</h3>
+            <p className="font-light text-sm">
+              Families can take advantage of our Family Plan, which includes full class access for one member at $110
+              per month,
+              plus $65 per month for each additional family member.
+            </p>
+          </div>
+          <div className="mb-6">
+            <h3 className="font-bold text-wine text-lg mb-2">Drop In</h3>
+            <p className="font-light text-sm">
+              For those looking to join us occasionally, we also offer a Per Class Drop-In Fee of $20, allowing access
+              to one day of classes.
+            </p>
+          </div>
+        </div>
         <div>
           <h2 className="font-bold text-2xl text-wine mb-4">
             Interested in Historical Fencing? Contact Us for More Information
@@ -69,7 +112,7 @@ function Classes({ onNavigationClick }) {
           <p className="font-light text-sm">
             To learn more about Columbus United Fencing Club and our program,&nbsp;
             <button onClick={() => onNavigationClick('contact')} className="text-blue-600 hover:text-blue-800">
-            contact us
+              contact us
             </button>
             .&nbsp;Alternatively, click&nbsp;
             <button onClick={() => onNavigationClick('joinNow')} className="text-blue-600 hover:text-blue-800">
