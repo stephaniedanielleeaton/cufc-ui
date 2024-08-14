@@ -25,7 +25,7 @@ const HeroWithFriends = ({ onNavigationClick }) => {
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
-        backgroundPosition: '25% 25%'
+        backgroundPosition: '25% 25%',
       }}
     >
       {/* Semi-transparent overlay */}
@@ -40,9 +40,7 @@ const HeroWithFriends = ({ onNavigationClick }) => {
 
       {/* Small and Medium Screen Size */}
       <div className="w-full h-full md:hidden">
-        <div className="flex flex-col justify-center items-center text-center relative z-10">
-          {renderContent()}
-        </div>
+        <div className="flex flex-col justify-center items-center text-center relative z-10">{renderContent()}</div>
       </div>
     </div>
   );
