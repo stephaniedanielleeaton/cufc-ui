@@ -36,53 +36,55 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
 
       {/* Mobile DropDown */}
       <div
-        className={`absolute ${isOpen ? 'block' : 'hidden'} left-0 mt-4 ml-4 px-4 py-4 rounded-md bg-Navy w-1/3 z-50`}
+        className={`fixed top-[80px] left-0 w-full h-full bg-Navy bg-opacity-90 z-50 flex flex-col items-center justify-start space-y-4 transition-all duration-300 pt-20 ${
+          isOpen ? 'block' : 'hidden'
+        }`}
       >
         <a
           href="#"
-          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
-          onClick={() => handleNavigationClick('joinnow')}
+          className="text-white text-xl block"
+          onClick={() => handleNavigationClick('dropin')}
         >
-          Sign Up
+          Drop In
         </a>
         <a
           href="#"
-          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          className="text-white text-xl block"
           onClick={() => handleNavigationClick('donate')}
         >
           Donate
         </a>
         <a
           href="#"
-          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          className="text-white text-xl block"
           onClick={() => handleNavigationClick('contact')}
         >
           Contact
         </a>
         <a
           href="#"
-          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          className="text-white text-xl block"
           onClick={() => handleNavigationClick('about')}
         >
           About
         </a>
         <a
           href="#"
-          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          className="text-white text-xl block"
           onClick={() => handleNavigationClick('classes')}
         >
           Classes
         </a>
         <a
           href="#"
-          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          className="text-white text-xl block"
           onClick={() => handleNavigationClick('events')}
         >
           Events
         </a>
         <a
           href="#"
-          className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base whitespace-nowrap"
+          className="text-white text-xl block"
           onClick={() => handleNavigationClick('admin')}
         >
           Admin

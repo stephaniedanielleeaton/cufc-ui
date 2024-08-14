@@ -25,3 +25,5 @@ export { default as Classes } from './stories/molecules/classes/Classes.jsx';
 export { default as AboutUs } from './stories/molecules/aboutus/AboutUs.jsx';
 export { default as CheckInPage } from './stories/pages/checkin/CheckInPage.jsx';
 export { default as SwordQuench2024SignUp } from './stories/events/swordquench/SwordQuench2024SignUp.jsx';
+export { default as AboutNugget } from './stories/molecules/aboutnugget/AboutNugget.jsx';
+
