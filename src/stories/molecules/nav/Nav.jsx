@@ -100,9 +100,9 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
           <div className="button flex items-center px-4 whitespace-nowrap">
             <span
               className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => onNavigationClick('admin')}
+              onClick={() => onNavigationClick('dropin')}
             >
-              ADMIN
+              DROP IN
             </span>
           </div>
           <div className="button flex items-center px-4 h-full whitespace-nowrap">
@@ -131,6 +131,14 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
           ) : (
             <div className="w-12 h-12 rounded-full bg-gray-300 mx-4"></div>
           )}
+          <div className="button flex items-center px-4 whitespace-nowrap">
+            <span
+              className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
+              onClick={() => onNavigationClick('admin')}
+            >
+              ADMIN
+            </span>
+          </div>
         </nav>
       </div>
 
