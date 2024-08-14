@@ -7,7 +7,7 @@ function NuggetCTA({ onNavigationClick }) {
         <span className=" text-sm tracking-wider">
           Beginner's course enrollment is now open! Learn about our start dates{' '}
           <button
-            onClick={() => onNavigationClick('startDates')}
+            onClick={() => onNavigationClick('intro')}
             className="underline text-white hover:text-gray-300 font-bold tracking-wide"
           >
             HERE
