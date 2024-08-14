@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const options = [
@@ -28,33 +28,32 @@ const options = [
   },
 ];
 
-function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData, errors }) {
+function ClassOptions({ selectedOption, onSelect }) {
   return (
-    <div className="container mx-auto max-w-screen-lg px-4 py-4">
-      <h1 className="text-xl text-wine font-khula font-bold mb-2 text-center">Class Options</h1>
-      <div className="w-9/12 border-t-2 border-wine my-2 mx-auto"></div>
-      <h1 className="font-khula font-bold mb-4 text-center">Select Which Classes You Would Like to Attend</h1>
-      <div className="flex flex-wrap justify-center mb-4">
-        {options.map((option) => (
-          <div
-            key={option.id}
-            className={`m-2 p-4 border-2 ${selectedOption === option.id ? 'border-black' : 'border-gray-300'} rounded-lg cursor-pointer flex-grow max-w-xs`}
-            onClick={() => onSelect(option.id)}
-          >
-            <h2 className="font-bold">{option.header}</h2>
-            <p>{option.description}</p>
-            <p className="font-bold">{option.price}</p>
-          </div>
-        ))}
-      </div>
-      <div className="w-full text-center p-4">
-        <button
-          onClick={onNext}
-          className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
-        >
-          NEXT
-        </button>
-      </div>
+    <div className="space-y-4 px-5">
+      <h2 className="text-3xl font-bold mb-2">Class Options</h2>
+      <p className="mb-5 text-gray-700 text-sm">
+        Please choose from the following membership options that best suits your needs:
+      </p>
+      {options.map((option) => (
+        <div>
+          <label className="flex items-center">
+            <input
+              type="radio"
+              name="events"
+              value="Open Sword and Buckler"
+              checked={selectedOption === option.id}
+              onChange={() => onSelect(option.id)}
+              className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
+            />
+            {option.header}
+          </label>
+          <span className="text-xs pl-8 font-bold block">
+                  {option.price}
+                </span>
+        </div>
+      ))}
+
     </div>
   );
 }
@@ -62,10 +61,6 @@ function ClassOptions({ selectedOption, onSelect, onNext, formData, setFormData,
 ClassOptions.propTypes = {
   selectedOption: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
-  onNext: PropTypes.func.isRequired,
-  formData: PropTypes.object.isRequired,
-  setFormData: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
 };
 
 export default ClassOptions;

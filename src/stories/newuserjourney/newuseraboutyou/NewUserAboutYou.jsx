@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import FormSection from '../formsection/FormSection.jsx';
-import ClassOptions from '../classoptions/ClassOptions.jsx';
 
 function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
-  const [formType, setFormType] = useState(null);
-  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
@@ -23,39 +20,24 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     phoneNumber: '',
     requestedMembershipType: '',
     additionalFamilyMembers: [],
-    heardAboutUs: '', // New field
+    heardAboutUs: '',
+    isGuardian: false,
   });
 
   const [errors, setErrors] = useState({});
-
-  const handleFormTypeSelection = (type) => {
-    setFormType(type);
-  };
-
-  const validateClassOptions = () => {
-    let valid = true;
-    const newErrors = {};
-
-    if (!formData.requestedMembershipType) {
-      valid = false;
-      newErrors.requestedMembershipType = 'This field is required';
-    }
-    setErrors(newErrors);
-    return valid;
-  };
 
   const validateFormSection = () => {
     let valid = true;
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName' && key !== 'beginnerCourseStartDate' && key !== 'heardAboutUs') {
+      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName' && key !== 'heardAboutUs' && key !== 'isGuardian') {
         valid = false;
         newErrors[key] = 'This field is required';
       }
     });
 
-    if (formType === 'minor') {
+    if (formData.isGuardian) {
       if (!formData.guardianFirstName) {
         valid = false;
         newErrors.guardianFirstName = 'This field is required';
@@ -77,19 +59,16 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     return valid;
   };
 
-  const handleNextFromClassOptions = () => {
-    if (validateClassOptions()) {
-      setCurrentStep(2);
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateFormSection()) {
       try {
         await onSubmit({ ...formData });
       } catch (error) {
-        setEmailStatusMessage('Error Sending Email. :( Tell Steph.');
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          submission: 'Error Sending Email. :( Tell Steph.',
+        }));
       }
     }
   };
@@ -117,44 +96,10 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     }));
   };
 
-  if (formType === null) {
-    return (
-      <div className="max-w-screen-md mx-auto bg-white p-8 text-center">
-        <h1 className="text-xl text-wine font-khula font-bold mb-4">Who are you signing up?</h1>
-        <button
-          onClick={() => handleFormTypeSelection('adult')}
-          className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black m-2"
-        >
-          I am above 18 and signing up for myself or my family
-        </button>
-        <button
-          onClick={() => handleFormTypeSelection('minor')}
-          className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black m-2"
-        >
-          I am a legal guardian signing up on behalf of a minor*
-        </button>
-        <p className="mt-4 text-gray-500 text-xs">*We request you use our contact form to arrange a time to visit the club before signing up a minor. Recommended min of 14 years of age.</p>
-      </div>
-    );
-  }
-
-  if (currentStep === 1) {
-    return (
-      <ClassOptions
-        selectedOption={formData.requestedMembershipType}
-        onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
-        onNext={handleNextFromClassOptions}
-        formData={formData}
-        setFormData={setFormData}
-        errors={errors}
-      />
-    );
-  }
-
   return (
     <div>
       <FormSection
-        formType={formType}
+        formType={formData.isGuardian ? 'minor' : 'adult'}
         formData={formData}
         setFormData={setFormData}
         errors={errors}
