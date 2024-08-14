@@ -1,9 +1,9 @@
 import React from 'react';
-import AdminMembershipOverride from './AdminMembershipOverride.jsx';
+import AdminMembership from './AdminMembership.jsx';
 
 export default {
-  title: 'Molecules/AdminMembershipOverride',
-  component: AdminMembershipOverride,
+  title: 'adminmember/AdminMembership',
+  component: AdminMembership,
   tags: ['autodocs'],
 };
 
@@ -29,14 +29,9 @@ const defaultMember = {
   membership_months_paid: '3',
 };
 
-const onSubmitDefault = (e) => {
-  console.log(e);
-};
-
-const Template = (args) => <AdminMembershipOverride {...args} />;
+const Template = (args) => <AdminMembership {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
   member: defaultMember,
-  onSubmit: onSubmitDefault,
 };

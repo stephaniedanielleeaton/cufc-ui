@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import AdminMembership from '../../molecules/adminMembership/AdminMembership.jsx';
-import AdminMember from '../../molecules/adminMember/AdminMember.jsx';
+import AdminMembership from '../../adminmember/adminmembership/AdminMembership.jsx';
+import AdminMember from '../../adminmember/adminmember/AdminMember.jsx';
 
 const UserPage = ({ member }) => {
   return (

@@ -2,7 +2,7 @@ import React from 'react';
 import AdminMember from './AdminMember.jsx';
 
 export default {
-  title: 'Molecules/AdminMember',
+  title: 'adminmember/AdminMember',
   component: AdminMember,
   tags: ['autodocs'],
 };
