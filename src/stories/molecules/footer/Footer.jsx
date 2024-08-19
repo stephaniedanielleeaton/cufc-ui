@@ -1,10 +1,9 @@
 import React from 'react';
 import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
-import facebookSvg from '../../assets/facebook.svg';
+// import facebookSvg from '../../assets/facebook.svg';
 import instagramSvg from '../../assets/instagram.svg';
 
-function Footer() {
-
+function Footer({ instagramLink }) {
   return (
     <div>
       {/* Desktop/Tablet */}
@@ -13,12 +12,14 @@ function Footer() {
           <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px]" />
         </div>
         <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
-          {/*<span className="font-light font-inter">4601 Nickerson Rd, Columbus, OH 43228</span>*/}
+          {/*<span className="font-light font-inter">6475 E Main St. #111, Reynoldsburg, OH 43068</span>*/}
         </div>
         <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
           <div className="flex items-center">
-            <img src={facebookSvg} alt="Facebook Logo" className="w-10 h-10 mr-4" />
-            <img src={instagramSvg} alt="Instagram Logo" className="w-10 h-10" />
+            {/*<img src={facebookSvg} alt="Facebook Logo" className="w-10 h-10 mr-4" />*/}
+            <a href={instagramLink}>
+              <img src={instagramSvg} alt="Instagram Logo" className="w-10 h-10" />
+            </a>
           </div>
         </div>
       </div>
@@ -30,8 +31,10 @@ function Footer() {
         {/*  <span className="font-light font-inter text-xs">Columbus, OH 43228</span>*/}
         {/*</div>*/}
         <div className="flex items-center space-x-2">
-          <img src={facebookSvg} alt="Facebook Logo" className="w-6 h-6" />
-          <img src={instagramSvg} alt="Instagram Logo" className="w-6 h-6" />
+          {/*<img src={facebookSvg} alt="Facebook Logo" className="w-6 h-6" />*/}
+          <a href={instagramLink}>
+            <img src={instagramSvg} alt="Instagram Logo" className="w-6 h-6" />
+          </a>
         </div>
       </div>
       {/* Desktop/Tablet */}
@@ -50,5 +53,9 @@ function Footer() {
     </div>
   );
 }
+
+Footer.propTypes = {
+  instagramLink: String,
+};
 
 export default Footer;

@@ -12,4 +12,4 @@ const handleOnNavigationClick = (message) => {
 
 //const Template = (args) => <TopNavbar {...args} />;
 
-export const Default = () => <Footer onNavigationClick={handleOnNavigationClick} />;
+export const Default = () => <Footer instagramLink="https://www.instagram.com/columbusunited_fencing" />;

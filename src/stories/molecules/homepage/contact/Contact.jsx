@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import addresspin from '../../../assets/addresspin.svg';
+import instagramSvg from '../../../assets/instagram.svg';
 
-function Contact({ onSubmit }) {
+function Contact({ onSubmit, instagramLink }) {
   const [formData, setFormData] = useState({
     fullName: '',
     emailAddress: '',
@@ -43,11 +44,8 @@ function Contact({ onSubmit }) {
           <span className="font-light">
             Have a question? <b>Send us a message.</b>
           </span>
-          <span className="font-light">
-            Feel free to schedule a time to visit us and see what we do!
-          </span>
-          <div className="flex items-center">
-          </div>
+          <span className="font-light">Feel free to schedule a time to visit us and see what we do!</span>
+          <div className="flex items-center"></div>
           <div className="flex items-center">
             <div className="mr-4">
               <img src={addresspin} alt="Address Icon" className="w-8 h-8" />
@@ -57,14 +55,19 @@ function Contact({ onSubmit }) {
               <span className="w-full block">6475 E Main St. #111, Reynoldsburg, OH 43068</span>
             </div>
           </div>
-          {/*<div className="flex items-center">*/}
-          {/*  <div className="mr-4">*/}
-          {/*    <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />*/}
-          {/*  </div>*/}
-          {/*  <div className="mr-4">*/}
-          {/*    <img src={instagram} alt="Instagram Logo" className="w-8 h-8" />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
+          <div className="flex items-center">
+            {/*  <div className="mr-4">*/}
+            {/*    <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />*/}
+            {/*  </div>*/}
+            <div className="mr-4">
+              <a href={instagramLink}>
+                <img src={instagramSvg} alt="Instagram Logo" className="w-8 h-8" />
+              </a>
+            </div>
+            <div className="block w-full">
+              <span className="w-full block">Follow Us On Instagram</span>
+            </div>
+          </div>
         </div>
       </div>
       <div className="md:w-1/2 flex items-center mx-16 my-4">
@@ -115,6 +118,7 @@ function Contact({ onSubmit }) {
 
 Contact.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  instagramLink: String,
 };
 
 export default Contact;
