@@ -12,4 +12,4 @@ const handleOnNavigationClick = (message) => {
 
 //const Template = (args) => <TopNavbar {...args} />;
 
-export const Default = () => <AboutUs onNavigationClick={handleOnNavigationClick} />;
+export const Default = () => <AboutUs onNavigationClick={handleOnNavigationClick} gearRecommendationsLink="https://docs.google.com/document/d/1Bd1PCaTYj1KCHhWPQaLrLd6tD2dKeKakOej86G-ncbQ" />;

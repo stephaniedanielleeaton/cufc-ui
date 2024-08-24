@@ -1,10 +1,14 @@
 import React from 'react';
 
-function AboutUs({ onNavigationClick }) {
+function AboutUs({ onNavigationClick, gearRecommendationsLink }) {
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
   };
+
+  const gearRedirect = () => {
+    window.open(gearRecommendationsLink);
+  }
 
   return (
     <div className="min-h-screen py-10">
@@ -37,6 +41,14 @@ function AboutUs({ onNavigationClick }) {
               className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               How Do I Start?
+            </button>
+          </li>
+          <li className="mb-2 text-left">
+            <button
+              onClick={() => scrollToSection('gear')}
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
+            >
+              What Gear Do You Recommend?
             </button>
           </li>
         </ul>
@@ -119,17 +131,16 @@ function AboutUs({ onNavigationClick }) {
           <div className="mb-6">
             <h3 className="font-bold text-wine text-lg mb-2">I'm New</h3>
             <p className="font-light text-sm">
-              If you are completely new to HEMA or fencing, please check our our introductory course <button
-              onClick={() => onNavigationClick('intro')}
-              className="text-blue-600 hover:text-blue-800"
-            >
-              here
-            </button>. However, if you would like to watch a class first, let us know when on our <button
-              onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800"
-            >
-              contact
-            </button> page.
+              If you are completely new to HEMA or fencing, please check our our introductory course{' '}
+              <button onClick={() => onNavigationClick('intro')} className="text-blue-600 hover:text-blue-800">
+                here
+              </button>
+              . However, if you would like to watch a class first, let us know when on our{' '}
+              <button onClick={() => onNavigationClick('contact')} className="text-blue-600 hover:text-blue-800">
+                contact
+              </button>
+              {' '}
+              page.
             </p>
           </div>
           <div className="mb-6">
@@ -137,25 +148,35 @@ function AboutUs({ onNavigationClick }) {
             <p className="font-light text-sm">
               If you have participated in Historical European Martial Arts before, and you know what you are getting
               yourself into,
-              feel free to use our <button
-              onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800"
-            >
+              feel free to use our
+            <button onClick={() => onNavigationClick('contact')} className="text-blue-600 hover:text-blue-800">
               contact
-            </button> page to let us know when you would like to drop in. We allow fencers with previous experience to
-              drop into a class for free before making a
-              commitment.  See our classes and pricing structure <button
-              onClick={() => onNavigationClick('classes')}
-              className="text-blue-600 hover:text-blue-800"
-            >
+            </button>
+              {' '}
+              page to let us know when you would like to drop in. We allow fencers with previous experience to drop into
+              a class for free before making a commitment. See our classes and pricing structure{' '}
+            <button onClick={() => onNavigationClick('classes')} className="text-blue-600 hover:text-blue-800">
               here
             </button>.
             </p>
           </div>
         </div>
 
+        <div id="gear" className="mb-10">
+          <h2 className="font-bold text-2xl text-Navy mb-4">What gear do you recommend?</h2>
+          <p className="font-light text-sm mb-4">
+            If you are just starting out, we have loaner gear available. When you are ready to purchase your own,
+            you can find our list of recommended gear{' '}
+            <button onClick={gearRedirect} className="text-blue-600 hover:text-blue-800">
+              here
+            </button>.
+          </p>
+        </div>
+
         <div id="contact">
-          <h2 className="font-bold text-2xl text-Navy mb-4">Interested in Historical Fencing? Contact Us for More Information</h2>
+          <h2 className="font-bold text-2xl text-Navy mb-4">
+            Interested in Historical Fencing? Contact Us for More Information
+          </h2>
           <p className="font-light text-sm">
             To learn more about Columbus United Fencing Club and our program,&nbsp;
             <button
