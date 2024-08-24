@@ -1,23 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Nav from '../../molecules/nav/Nav.jsx';
-import Hero from '../../molecules/homepage/hero/Hero.jsx';
-import Intro from '../../molecules/homepage/intro/Intro.jsx';
-import Schedule from '../../molecules/homepage/schedule/Schedule.jsx';
-import Footer from '../../molecules/footer/Footer.jsx';
-import Contact from '../../molecules/homepage/contact/Contact.jsx';
-import CTA from '../../molecules/homepage/calltoaction/CTA.jsx';
-import NuggetCTA from '../../molecules/homepage/nuggetcta/NuggetCTA.jsx';
-import HeroWithFriends from '../../molecules/homepage/herowithfriends/HeroWithFriends.jsx';
+
+import Hero from '../../reusablecomponents/smallhero/SmallHero.jsx';
+import Nav from '../../nav/Nav.jsx';
+import NuggetCTA from '../../pages/homepage/nuggetcta/NuggetCTA.jsx';
+import Intro from '../../pages/homepage/intro/Intro.jsx';
+import Schedule from '../../pages/homepage/schedule/Schedule.jsx';
+import ContactUs from '../../pages/contact/ContactUs.jsx';
+import CTA from '../../pages/homepage/calltoaction/CTA.jsx';
+import Footer from '../../footer/Footer.jsx';
+
 const HomePage = () => {
   return (
     <div>
       <Nav />
-      <HeroWithFriends />
+      <Hero />
       <NuggetCTA />
       <Intro />
       <Schedule />
-      <Contact recaptchaSiteKey={'123'} onSubmit={() => {}} />
+      <ContactUs recaptchaSiteKey={'123'} onSubmit={() => {}} />
       <CTA />
       <Footer />
     </div>

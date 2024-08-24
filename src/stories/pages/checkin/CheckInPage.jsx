@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PersonCheckInCardContainer from '../../organisms/containers/personcheckincards/PersonCheckInCardContainer.jsx';
+import PersonCheckInCardContainer from './personcheckincardcontainer/PersonCheckInCardContainer.jsx';
 
 const PersonCheckInPage = ({ members, onCheckIn }) => {
   const handleCheckIn = (_id) => {
