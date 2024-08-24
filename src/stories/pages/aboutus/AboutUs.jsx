@@ -121,12 +121,12 @@ function AboutUs({ onNavigationClick }) {
             <p className="font-light text-sm">
               If you are completely new to HEMA or fencing, please check our our introductory course <button
               onClick={() => onNavigationClick('intro')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
+              className="text-blue-600 hover:text-blue-800"
             >
               here
             </button>. However, if you would like to watch a class first, let us know when on our <button
               onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
+              className="text-blue-600 hover:text-blue-800"
             >
               contact
             </button> page.
@@ -139,14 +139,14 @@ function AboutUs({ onNavigationClick }) {
               yourself into,
               feel free to use our <button
               onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
+              className="text-blue-600 hover:text-blue-800"
             >
               contact
             </button> page to let us know when you would like to drop in. We allow fencers with previous experience to
               drop into a class for free before making a
               commitment.  See our classes and pricing structure <button
               onClick={() => onNavigationClick('classes')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
+              className="text-blue-600 hover:text-blue-800"
             >
               here
             </button>.
@@ -160,14 +160,14 @@ function AboutUs({ onNavigationClick }) {
             To learn more about Columbus United Fencing Club and our program,&nbsp;
             <button
               onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
+              className="text-blue-600 hover:text-blue-800"
             >
               contact us
             </button>
             .&nbsp;Alternatively, click&nbsp;
             <button
               onClick={() => onNavigationClick('joinNow')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
+              className="text-blue-600 hover:text-blue-800"
             >
               here
             </button>
