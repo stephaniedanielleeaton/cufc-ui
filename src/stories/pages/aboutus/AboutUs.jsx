@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../../footer/Footer.jsx';
 
 function AboutUs({ onNavigationClick, gearRecommendationsLink }) {
 
@@ -199,5 +200,10 @@ function AboutUs({ onNavigationClick, gearRecommendationsLink }) {
     </div>
   );
 }
+
+AboutUs.propTypes = {
+  onNavigationClick: Function,
+  gearRecommendationsLink: String,
+};
 
 export default AboutUs;
