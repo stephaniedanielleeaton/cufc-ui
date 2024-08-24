@@ -11,7 +11,9 @@ const handleOnNavigationClick = (message) => {
 };
 
 export const Default = () => (
-  <ContactUs onSubmit={handleOnNavigationClick}
-             facebookLink="https://www.facebook.com/groups/1148215575202964"
-             instagramLink="https://www.instagram.com/columbusunited_fencing" />
+  <ContactUs
+    onSubmit={handleOnNavigationClick}
+    facebookLink="https://www.facebook.com/groups/1148215575202964"
+    instagramLink="https://www.instagram.com/columbusunited_fencing"
+  />
 );
