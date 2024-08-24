@@ -13,28 +13,28 @@ function AboutUs({ onNavigationClick }) {
 
       {/* Table of Contents */}
       <div className="max-w-screen-lg font-khula md:px-20 px-8 bg-white shadow-lg mx-auto rounded-lg py-8 mb-10">
-        <h2 className="text-2xl text-Navy font-bold mb-4">Table of Contents</h2>
-        <ul className="list-disc pl-6 mb-4">
-          <li className="mb-2">
+        <h2 className="text-2xl text-Navy font-bold mb-4 text-center md:text-left">Table of Contents</h2>
+        <ul className="pl-6 mb-4 list-none md:list-disc">
+          <li className="mb-2 text-left">
             <button
               onClick={() => scrollToSection('what-is-hema')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               What is Historical European Martial Arts (HEMA)?
             </button>
           </li>
-          <li className="mb-2">
+          <li className="mb-2 text-left">
             <button
               onClick={() => scrollToSection('why-choose-us')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               Why Choose Columbus United Fencing Club?
             </button>
           </li>
-          <li className="mb-2">
+          <li className="mb-2 text-left">
             <button
               onClick={() => scrollToSection('how-to-start')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               How Do I Start?
             </button>
@@ -52,7 +52,7 @@ function AboutUs({ onNavigationClick }) {
           <p className="font-light text-sm mb-4">
             Sometimes called historical fencing, HEMA involves fighting with weapons like:
           </p>
-          <ul className="list-disc pl-6 mb-4">
+          <ul className="pl-6 mb-4 list-none md:list-disc">
             <li className="mb-2">Longsword</li>
             <li className="mb-2">Rapier</li>
             <li className="mb-2">Saber (sometimes spelled sabre)</li>
@@ -121,12 +121,12 @@ function AboutUs({ onNavigationClick }) {
             <p className="font-light text-sm">
               If you are completely new to HEMA or fencing, please check our our introductory course <button
               onClick={() => onNavigationClick('intro')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               here
             </button>. However, if you would like to watch a class first, let us know when on our <button
               onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               contact
             </button> page.
@@ -139,14 +139,14 @@ function AboutUs({ onNavigationClick }) {
               yourself into,
               feel free to use our <button
               onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               contact
             </button> page to let us know when you would like to drop in. We allow fencers with previous experience to
               drop into a class for free before making a
               commitment.  See our classes and pricing structure <button
               onClick={() => onNavigationClick('classes')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               here
             </button>.
@@ -160,14 +160,14 @@ function AboutUs({ onNavigationClick }) {
             To learn more about Columbus United Fencing Club and our program,&nbsp;
             <button
               onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               contact us
             </button>
             .&nbsp;Alternatively, click&nbsp;
             <button
               onClick={() => onNavigationClick('joinNow')}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 w-full text-left"
             >
               here
             </button>
