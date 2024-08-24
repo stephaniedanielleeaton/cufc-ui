@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import addresspin from '../../../assets/addresspin.svg';
 import instagramSvg from '../../../assets/instagram.svg';
+import facebookSvg from '../../../assets/facebook.svg'
 
-function Contact({ onSubmit, instagramLink }) {
+function Contact({ onSubmit, instagramLink, facebookLink }) {
   const [formData, setFormData] = useState({
     fullName: '',
     emailAddress: '',
@@ -42,7 +43,7 @@ function Contact({ onSubmit, instagramLink }) {
         <div className="flex flex-col space-y-4">
           <span className="font-bold text-2xl text-Navy">Contact Us</span>
           <span className="font-light">
-            Have a question? <b>Send us a message.</b>
+            Have a question? <b className="font-bold">Send us a message.</b>
           </span>
           <span className="font-light">Feel free to schedule a time to visit us and see what we do!</span>
           <div className="flex items-center"></div>
@@ -56,16 +57,15 @@ function Contact({ onSubmit, instagramLink }) {
             </div>
           </div>
           <div className="flex items-center">
-            {/*  <div className="mr-4">*/}
-            {/*    <img src={facebook} alt="Facebook Logo" className="w-8 h-8" />*/}
-            {/*  </div>*/}
+              <div className="mr-4">
+                <a href={facebookLink}>
+                  <img src={facebookSvg} alt="Facebook Logo" className="w-8 h-8" />
+                </a>
+              </div>
             <div className="mr-4">
               <a href={instagramLink}>
                 <img src={instagramSvg} alt="Instagram Logo" className="w-8 h-8" />
               </a>
-            </div>
-            <div className="block w-full">
-              <span className="w-full block">Follow Us On Instagram</span>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@ function Contact({ onSubmit, instagramLink }) {
         <form className="w-full" onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Full Name"
+            placeholder="Full Name*"
             name="fullName"
             value={formData.fullName}
             onChange={handleChange}
@@ -82,7 +82,7 @@ function Contact({ onSubmit, instagramLink }) {
           />
           <input
             type="email"
-            placeholder="Email Address"
+            placeholder="Email Address*"
             name="emailAddress"
             value={formData.emailAddress}
             onChange={handleChange}
@@ -97,7 +97,7 @@ function Contact({ onSubmit, instagramLink }) {
             className="block w-full border border-gray-300 rounded-md px-4 py-2 mb-4"
           />
           <textarea
-            placeholder="Message"
+            placeholder="Message*"
             name="message"
             value={formData.message}
             onChange={handleChange}
@@ -119,6 +119,7 @@ function Contact({ onSubmit, instagramLink }) {
 Contact.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   instagramLink: String,
+  facebookLink: String,
 };
 
 export default Contact;
