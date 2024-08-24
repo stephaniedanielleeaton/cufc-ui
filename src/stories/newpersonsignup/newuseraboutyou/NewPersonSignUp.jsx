@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 import FormSection from '../formsection/FormSection.jsx';
+import React, { useState } from 'react';
 
-function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
+function NewPersonSignUp({ onSubmit, emailStatusMessage }) {
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
@@ -30,7 +31,17 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     const newErrors = {};
 
     Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'displayFirstName' && key !== 'displayLastName' && key !== 'additionalFamilyMembers' && key !== 'requestedMembershipType' && key !== 'guardianFirstName' && key !== 'guardianLastName' && key !== 'heardAboutUs' && key !== 'isGuardian') {
+      if (
+        !formData[key] &&
+        key !== 'displayFirstName' &&
+        key !== 'displayLastName' &&
+        key !== 'additionalFamilyMembers' &&
+        key !== 'requestedMembershipType' &&
+        key !== 'guardianFirstName' &&
+        key !== 'guardianLastName' &&
+        key !== 'heardAboutUs' &&
+        key !== 'isGuardian'
+      ) {
         valid = false;
         newErrors[key] = 'This field is required';
       }
@@ -48,9 +59,16 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
     }
 
     formData.additionalFamilyMembers.forEach((member, index) => {
-      if (!member.firstName || !member.lastName || !member.dateOfBirth || !member.displayFirstName || !member.displayLastName) {
+      if (
+        !member.firstName ||
+        !member.lastName ||
+        !member.dateOfBirth ||
+        !member.displayFirstName ||
+        !member.displayLastName
+      ) {
         valid = false;
-        newErrors[`familyMember${index}`] = 'First Name, Last Name, Preferred First Name, and Preferred Last Name are required for all family members';
+        newErrors[`familyMember${index}`] =
+          'First Name, Last Name, Preferred First Name, and Preferred Last Name are required for all family members';
       }
     });
 
@@ -75,7 +93,10 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
   const handleAddFamilyMember = () => {
     setFormData((prevData) => ({
       ...prevData,
-      additionalFamilyMembers: [...prevData.additionalFamilyMembers, { firstName: '', lastName: '', dateOfBirth: '', displayFirstName: '', displayLastName: '' }],
+      additionalFamilyMembers: [
+        ...prevData.additionalFamilyMembers,
+        { firstName: '', lastName: '', dateOfBirth: '', displayFirstName: '', displayLastName: '' },
+      ],
     }));
   };
 
@@ -112,9 +133,9 @@ function NewUserAboutYou({ onSubmit, emailStatusMessage }) {
   );
 }
 
-NewUserAboutYou.propTypes = {
+NewPersonSignUp.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   emailStatusMessage: PropTypes.string,
 };
 
-export default NewUserAboutYou;
+export default NewPersonSignUp;

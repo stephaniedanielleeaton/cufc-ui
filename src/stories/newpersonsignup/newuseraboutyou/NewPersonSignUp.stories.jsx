@@ -1,13 +1,13 @@
 import React from 'react';
-import NewUserAboutYou from './NewUserAboutYou';
+import NewPersonSignUp from './NewPersonSignUp.jsx';
 
 export default {
-  title: 'NewUserSignUp/NewUserAboutYou',
-  component: NewUserAboutYou,
+  title: 'NewPersonSignUp/NewPersonSignUp',
+  component: NewPersonSignUp,
   tags: ['autodocs'],
 };
 
-const Template = (args) => <NewUserAboutYou {...args} />;
+const Template = (args) => <NewPersonSignUp {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

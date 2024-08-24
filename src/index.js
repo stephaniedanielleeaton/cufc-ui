@@ -19,11 +19,11 @@ export { default as AdminMembership } from './stories/userdashboard/adminmembers
 export { default as AdminMembershipOverride } from './stories/userdashboard/adminmembershipoverride/AdminMembershipOverride.jsx';
 export { default as PageLoader } from './stories/reusablecomponents/pageloader/PageLoader.jsx';
 export { default as UnderConstruction } from './stories/templates/undercontruction/UnderConstruction.jsx';
-export { default as NewUserAboutYou } from './stories/newusersignup/newuseraboutyou/NewUserAboutYou.jsx';
+export { default as NewUserAboutYou } from './stories/newpersonsignup/newuseraboutyou/NewPersonSignUp.jsx';
 export { default as SmallHero } from './stories/reusablecomponents/smallhero/SmallHero.jsx';
 export { default as Classes } from './stories/pages/classes/Classes.jsx';
 export { default as AboutUs } from './stories/pages/aboutus/AboutUs.jsx';
-export { default as CheckInPage } from './stories/pages/checkin/CheckInPage.jsx';
+export { default as CheckInPage } from './stories/checkin/CheckInPage.jsx';
 export { default as SwordQuench2024SignUp } from './stories/events/swordquench/SwordQuench2024SignUp.jsx';
 export { default as AboutNugget } from './stories/pages/aboutnugget/AboutNugget.jsx';
 export { default as NuggetCTA } from './stories/molecules/homepage/nuggetcta/NuggetCTA.jsx';

@@ -22,6 +22,11 @@ const options = [
     header: 'Family Plan',
     price: '$110 + $65/month for each additional family member',
   },
+  {
+    id: 'dropIn',
+    header: 'I just want to drop in',
+    price: '$20 per class, use drop in button before class',
+  },
 ];
 
 function ClassOptions({ selectedOption, onSelect }) {

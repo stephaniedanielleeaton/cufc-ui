@@ -3,7 +3,7 @@ import React from 'react';
 import MemberDetails from './MemberDetails.jsx';
 
 export default {
-  title: 'admin/adminmember/MemberDetails',
+  title: 'Admin/MemberDetails',
   component: MemberDetails,
 };
 
