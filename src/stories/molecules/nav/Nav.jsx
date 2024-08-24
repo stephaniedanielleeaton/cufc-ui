@@ -36,57 +36,29 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
 
       {/* Mobile DropDown */}
       <div
-        className={`fixed top-[80px] left-0 w-full h-full bg-Navy bg-opacity-90 z-50 flex flex-col items-center justify-start space-y-4 transition-all duration-300 pt-20 ${
+        className={`fixed top-[70px] left-0 w-full h-full bg-Navy bg-opacity-90 z-50 flex flex-col items-center justify-start space-y-4 transition-all duration-300 pt-20 ${
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        <a
-          href="#"
-          className="text-white text-xl block"
-          onClick={() => handleNavigationClick('dropin')}
-        >
+        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('dropin')}>
           Drop In
         </a>
-        <a
-          href="#"
-          className="text-white text-xl block"
-          onClick={() => handleNavigationClick('donate')}
-        >
+        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('donate')}>
           Donate
         </a>
-        <a
-          href="#"
-          className="text-white text-xl block"
-          onClick={() => handleNavigationClick('contact')}
-        >
+        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('contact')}>
           Contact
         </a>
-        <a
-          href="#"
-          className="text-white text-xl block"
-          onClick={() => handleNavigationClick('about')}
-        >
+        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('about')}>
           About
         </a>
-        <a
-          href="#"
-          className="text-white text-xl block"
-          onClick={() => handleNavigationClick('classes')}
-        >
+        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('classes')}>
           Classes
         </a>
-        <a
-          href="#"
-          className="text-white text-xl block"
-          onClick={() => handleNavigationClick('events')}
-        >
+        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('events')}>
           Events
         </a>
-        <a
-          href="#"
-          className="text-white text-xl block"
-          onClick={() => handleNavigationClick('admin')}
-        >
+        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('admin')}>
           Admin
         </a>
       </div>
