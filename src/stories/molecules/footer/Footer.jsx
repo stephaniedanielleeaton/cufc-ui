@@ -1,9 +1,9 @@
 import React from 'react';
 import logoFullColourNavySvg from '../../assets/LogoFullColourNavy.svg';
-// import facebookSvg from '../../assets/facebook.svg';
 import instagramSvg from '../../assets/instagram.svg';
+import facebookSvg from '../../assets/facebook.svg';
 
-function Footer({ instagramLink }) {
+function Footer({ instagramLink, facebookLink }) {
   return (
     <div>
       {/* Desktop/Tablet */}
@@ -16,7 +16,9 @@ function Footer({ instagramLink }) {
         </div>
         <div className="w-1/3 bg-white h-full flex justify-center items-center space-x-4">
           <div className="flex items-center">
-            {/*<img src={facebookSvg} alt="Facebook Logo" className="w-10 h-10 mr-4" />*/}
+            <a href={facebookLink}>
+              <img src={facebookSvg} alt="Facebook Logo" className="w-10 h-10 mr-4" />
+            </a>
             <a href={instagramLink}>
               <img src={instagramSvg} alt="Instagram Logo" className="w-10 h-10" />
             </a>
@@ -31,7 +33,9 @@ function Footer({ instagramLink }) {
         {/*  <span className="font-light font-inter text-xs">Columbus, OH 43228</span>*/}
         {/*</div>*/}
         <div className="flex items-center space-x-2">
-          {/*<img src={facebookSvg} alt="Facebook Logo" className="w-6 h-6" />*/}
+          <a href={facebookLink}>
+            <img src={facebookSvg} alt="Facebook Logo" className="w-6 h-6" />
+          </a>
           <a href={instagramLink}>
             <img src={instagramSvg} alt="Instagram Logo" className="w-6 h-6" />
           </a>
@@ -56,6 +60,7 @@ function Footer({ instagramLink }) {
 
 Footer.propTypes = {
   instagramLink: String,
+  facebookLink: String,
 };
 
 export default Footer;

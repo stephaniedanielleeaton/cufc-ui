@@ -6,10 +6,5 @@ export default {
   component: Footer,
   tags: ['autodocs'],
 };
-const handleOnNavigationClick = (message) => {
-  console.log(message);
-};
 
-//const Template = (args) => <TopNavbar {...args} />;
-
-export const Default = () => <Footer instagramLink="https://www.instagram.com/columbusunited_fencing" />;
+export const Default = () => <Footer handleinstagramLink="https://www.instagram.com/columbusunited_fencing" />;

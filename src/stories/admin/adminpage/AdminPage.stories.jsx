@@ -12,8 +12,8 @@ const handleOnNavigationClick = (message) => {
 };
 
 const handleOnUpdateMember = (member) => {
-  console.log(member)
-}
+  console.log(member);
+};
 
 const Template = (args) => <AdminPage {...args} />;
 

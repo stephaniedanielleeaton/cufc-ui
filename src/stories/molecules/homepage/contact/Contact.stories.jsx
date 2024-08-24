@@ -10,4 +10,6 @@ const handleOnNavigationClick = (message) => {
   console.log(message);
 };
 
-export const Default = () => <Contact onSubmit={handleOnNavigationClick} instagramLink="https://www.instagram.com/columbusunited_fencing"/>;
+export const Default = () => (
+  <Contact onSubmit={handleOnNavigationClick} instagramLink="https://www.instagram.com/columbusunited_fencing" />
+);

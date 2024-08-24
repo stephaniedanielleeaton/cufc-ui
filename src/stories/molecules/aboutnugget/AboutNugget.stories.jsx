@@ -10,5 +10,4 @@ const handleOnNavigationClick = (message) => {
   console.log(message);
 };
 
-
 export const Default = () => <AboutNugget onNavigationClick={handleOnNavigationClick} />;
