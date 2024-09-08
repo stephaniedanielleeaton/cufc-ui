@@ -554,40 +554,6 @@ video {
   --tw-contain-style:  ;
 }
 
-.container {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
 .sr-only {
   position: absolute;
   width: 1px;
@@ -635,10 +601,6 @@ video {
 
 .left-3 {
   left: 0.75rem;
-}
-
-.left-5 {
-  left: 1.25rem;
 }
 
 .start-0 {
@@ -1023,10 +985,6 @@ video {
   flex-wrap: wrap;
 }
 
-.flex-nowrap {
-  flex-wrap: nowrap;
-}
-
 .items-start {
   align-items: flex-start;
 }
@@ -1053,6 +1011,10 @@ video {
 
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .gap-6 {
@@ -1133,6 +1095,11 @@ video {
   border-color: rgb(81 31 51 / var(--tw-border-opacity));
 }
 
+.border-Navy {
+  --tw-border-opacity: 1;
+  border-color: rgb(24 42 58 / var(--tw-border-opacity));
+}
+
 .border-black {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
@@ -1168,6 +1135,11 @@ video {
   background-color: rgb(81 31 51 / var(--tw-bg-opacity));
 }
 
+.bg-LightNavy {
+  --tw-bg-opacity: 1;
+  background-color: rgb(223 232 241 / var(--tw-bg-opacity));
+}
+
 .bg-MediumPink {
   --tw-bg-opacity: 1;
   background-color: rgb(144 79 105 / var(--tw-bg-opacity));
@@ -1196,11 +1168,6 @@ video {
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
-}
-
-.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
 .bg-gray-300 {
@@ -1346,6 +1313,10 @@ video {
 
 .pl-10 {
   padding-left: 2.5rem;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
 }
 
 .pl-4 {
@@ -1629,15 +1600,6 @@ video {
   line-height: 1.25rem;
 }
 
-.checked\:border-transparent:checked {
-  border-color: transparent;
-}
-
-.checked\:bg-deepSeaBlue:checked {
-  --tw-bg-opacity: 1;
-  background-color: rgb(55 90 122 / var(--tw-bg-opacity));
-}
-
 .hover\:border-black:hover {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
@@ -1706,12 +1668,6 @@ video {
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-}
-
-.focus\:ring-2:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
 .focus\:ring-DeepRed:focus {

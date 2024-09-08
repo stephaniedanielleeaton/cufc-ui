@@ -38,6 +38,8 @@ module.exports = {
         LightGray: '#C8CBCB',
         Black: '#000',
         TextBlack: '#212223',
+        // New Inspired
+        LightNavy: '#DFE8F1',
       },
       google: {
         'text-gray': '#3c4043',
