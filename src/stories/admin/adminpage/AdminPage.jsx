@@ -57,6 +57,7 @@ const AdminPage = ({ members, onUpdateMember }) => {
   const [filterInactive, setFilterInactive] = useState(false);
   const [filterCoaches, setFilterCoaches] = useState(false);
   const [sortOverdue, setSortOverdue] = useState(false);
+  const [filterCheckedIn, setFilterCheckedIn] = useState(false); // New filter for checked-in members
   const [selectedMemberId, setSelectedMemberId] = useState(null);
 
   const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
@@ -64,6 +65,7 @@ const AdminPage = ({ members, onUpdateMember }) => {
   const handleFilterInactiveChange = () => setFilterInactive(!filterInactive);
   const handleFilterCoachesChange = () => setFilterCoaches(!filterCoaches);
   const handleSortOverdueChange = () => setSortOverdue(!sortOverdue);
+  const handleFilterCheckedInChange = () => setFilterCheckedIn(!filterCheckedIn); // Handle checked-in filter
 
   const filteredMembers = members.filter((member) => {
     const nameMatch = `${member.display_first_name} ${member.display_last_name}`
@@ -72,21 +74,22 @@ const AdminPage = ({ members, onUpdateMember }) => {
     const unpaidMatch = !filterUnpaid || member.last_invoice_status.toLowerCase() === 'unpaid';
     const inactiveMatch = !filterInactive || member.subscription_status.toLowerCase() === 'inactive';
     const coachMatch = !filterCoaches || member.role !== 'coach';
-    return nameMatch && unpaidMatch && inactiveMatch && coachMatch;
+    const checkedInMatch = !filterCheckedIn || member.checkedIn === true; // Apply checked-in filter
+    return nameMatch && unpaidMatch && inactiveMatch && coachMatch && checkedInMatch;
   });
 
   const sortedMembers = sortOverdue
     ? [...filteredMembers].sort((a, b) => {
-        const daysOverdueA =
-          a.last_invoice_status.toLowerCase() === 'unpaid'
-            ? Math.floor((Date.now() - new Date(a.last_invoice_date)) / (1000 * 60 * 60 * 24))
-            : 0;
-        const daysOverdueB =
-          b.last_invoice_status.toLowerCase() === 'unpaid'
-            ? Math.floor((Date.now() - new Date(b.last_invoice_date)) / (1000 * 60 * 60 * 24))
-            : 0;
-        return daysOverdueB - daysOverdueA;
-      })
+      const daysOverdueA =
+        a.last_invoice_status.toLowerCase() === 'unpaid'
+          ? Math.floor((Date.now() - new Date(a.last_invoice_date)) / (1000 * 60 * 60 * 24))
+          : 0;
+      const daysOverdueB =
+        b.last_invoice_status.toLowerCase() === 'unpaid'
+          ? Math.floor((Date.now() - new Date(b.last_invoice_date)) / (1000 * 60 * 60 * 24))
+          : 0;
+      return daysOverdueB - daysOverdueA;
+    })
     : filteredMembers;
 
   const handleRowClick = (id) => {
@@ -131,6 +134,12 @@ const AdminPage = ({ members, onUpdateMember }) => {
             <input type="checkbox" id="sortOverdue" checked={sortOverdue} onChange={handleSortOverdueChange} />
             <label htmlFor="sortOverdue" className="m-2">
               Sort by Overdue
+            </label>
+          </div>
+          <div className="flex items-center mb-4 md:mb-0">
+            <input type="checkbox" id="filterCheckedIn" checked={filterCheckedIn} onChange={handleFilterCheckedInChange} />
+            <label htmlFor="filterCheckedIn" className="m-2">
+              Show Checked In Members
             </label>
           </div>
         </div>
@@ -224,31 +233,14 @@ AdminPage.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      square_customer_id: PropTypes.string,
+      checkedIn: PropTypes.bool, // Make sure to use PropTypes.bool for checkedIn
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
-      personal_info: PropTypes.shape({
-        legal_first_name: PropTypes.string,
-        legal_last_name: PropTypes.string,
-        email: PropTypes.string,
-        phone: PropTypes.string,
-        date_of_birth: PropTypes.instanceOf(Date),
-        address: PropTypes.shape({
-          street: PropTypes.string,
-          city: PropTypes.string,
-          state: PropTypes.string,
-          zip: PropTypes.string,
-          country: PropTypes.string,
-        }),
-      }),
-      subscription_status: PropTypes.string,
-      subscription_start_date: PropTypes.string,
       last_invoice_status: PropTypes.string,
       last_invoice_date: PropTypes.string,
+      subscription_status: PropTypes.string,
+      subscription_start_date: PropTypes.string,
       role: PropTypes.string,
-      family_members: PropTypes.arrayOf(PropTypes.object),
-      guardian_first_name: PropTypes.string,
-      guardian_last_name: PropTypes.string,
     })
   ).isRequired,
 };

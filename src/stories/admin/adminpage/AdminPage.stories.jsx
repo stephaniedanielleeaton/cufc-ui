@@ -380,7 +380,7 @@ DefaultView.args = {
       last_invoice_status: 'PAID',
       last_invoice_date: '2024-06-01T17:45:45.000Z',
       role: 'student',
-      checkedIn: false,
+      checkedIn: true,
     },
     {
       _id: '6659387f0dfd58118f776658',
@@ -644,7 +644,7 @@ DefaultView.args = {
       last_invoice_status: 'PAID',
       last_invoice_date: '2024-05-28T11:31:19.000Z',
       role: 'admin',
-      checkedIn: false,
+      checkedIn: true,
     },
     {
       _id: '665e1c840edbb21b1089e2dc',
