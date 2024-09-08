@@ -233,7 +233,7 @@ AdminPage.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      checkedIn: PropTypes.bool, // Make sure to use PropTypes.bool for checkedIn
+      checkedIn: PropTypes.bool,
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
       last_invoice_status: PropTypes.string,
