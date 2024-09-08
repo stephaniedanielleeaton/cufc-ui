@@ -115,7 +115,8 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
           <b>Saber.</b> Event fee: AMOUNT. Registration and Check In cut off: TIME.
           <br />
           <br />
-          <b>Marginalised Genders Longsword.</b>
+          <b>Marginalised Genders Longsword.</b> This event is open to trans and cis women, trans men, non-binary people,
+          intersex people, and any other gender expansive people who are often underrepresented in HEMA.
           Registration and Check In cut off: TIME
           <br />
           <br />

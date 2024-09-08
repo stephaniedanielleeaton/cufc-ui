@@ -1,5 +1,5 @@
 /*
-! tailwindcss v3.4.3 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.10 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -1535,6 +1535,10 @@ video {
   text-decoration-line: underline;
 }
 
+.accent-deepSeaBlue {
+  accent-color: #375A7A;
+}
+
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -1589,6 +1593,15 @@ video {
 .placeholder\:text-sm::placeholder {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.checked\:border-transparent:checked {
+  border-color: transparent;
+}
+
+.checked\:bg-deepSeaBlue:checked {
+  --tw-bg-opacity: 1;
+  background-color: rgb(55 90 122 / var(--tw-bg-opacity));
 }
 
 .hover\:border-black:hover {
@@ -1661,9 +1674,20 @@ video {
   outline-offset: 2px;
 }
 
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
 .focus\:ring-DeepRed:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(81 31 51 / var(--tw-ring-opacity));
+}
+
+.focus\:ring-deepSeaBlue:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(55 90 122 / var(--tw-ring-opacity));
 }
 
 @media (min-width: 768px) {
