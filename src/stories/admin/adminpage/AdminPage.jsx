@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import MemberDetails from '../adminmemberdetails/MemberDetails.jsx';
 
 // Helper Functions
@@ -10,30 +12,10 @@ const formatDate = (date) => {
   return `${month}/${day}/${year}`;
 };
 
-const formatSubscriptionDate = (status, date) => {
-  if (date !== '') {
-    const formattedDate = formatDate(new Date(date));
-    return status.toLowerCase() === 'active' ? `Since ${formattedDate}` : `On ${formattedDate}`;
-  }
-  return '';
-};
-
-const formatLastInvoiceDate = (status, date) => {
-  if (date !== '') {
-    const formattedDate = formatDate(new Date(date));
-    if (status.toLowerCase() === 'overdue' || status.toLowerCase() === 'unpaid') {
-      const daysOverdue = Math.floor((Date.now() - new Date(date)) / (1000 * 60 * 60 * 24));
-      return daysOverdue === 0 ? 'Due today' : `Due ${daysOverdue} days ago`;
-    }
-    return formattedDate;
-  }
-  return '';
-};
-
-const getStatusColor = (status) => {
-  if (status.toLowerCase() === 'paid') return 'text-green-500';
-  if (status.toLowerCase() === 'unpaid' || status.toLowerCase() === 'overdue') return 'text-red-500';
-  return '';
+const getStatusIcon = (status) => {
+  return status.toLowerCase() === 'paid'
+    ? <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />
+    : <FontAwesomeIcon icon={faExclamationCircle} className="text-red-500" />;
 };
 
 const getRoleClass = (role) => {
@@ -48,46 +30,39 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     display_last_name,
     subscription_status,
     last_invoice_status,
-    last_invoice_date,
-    subscription_start_date,
-    role,
   } = member;
 
-  const lastInvoiceStatusClass = `font-bold text-md ${getStatusColor(last_invoice_status)}`;
-  const roleClass = getRoleClass(role);
-  const rowClass =
-    subscription_status.toLowerCase() === 'inactive' && role !== 'coach' ? 'bg-gray-100 text-gray-500' : '';
-
-  // Apply light blue background and dark blue border if the card is selected
-  const selectedClass = isSelected
-    ? 'bg-LightNavy border-Navy' // Apply custom light blue and dark blue styles
-    : 'bg-white';
+  const selectedClass = isSelected ? 'bg-LightNavy border-Navy' : 'bg-white';
 
   return (
     <div
-      className={`grid grid-cols-3 items-center gap-4 p-4 shadow-md rounded-lg cursor-pointer mt-4 border hover:border-hoverWine ${selectedClass} ${rowClass}`}
+      className={`p-4 shadow-md rounded-lg cursor-pointer mt-4 border hover:border-hoverWine ${selectedClass}`}
       onClick={onClick}
     >
-      {/* Column 1: Name and Role */}
-      <div className="flex flex-col">
+      {/* For small screens: display only the name and status icon */}
+      <div className="flex justify-between sm:hidden">
         <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
-        {role && (role === 'coach' || role === 'admin') && <div className={`text-xs ${roleClass}`}>{role}</div>}
+        <div>{getStatusIcon(last_invoice_status)}</div>
       </div>
 
-      {/* Column 2: Subscription Status */}
-      <div className="flex flex-col">
-        <div className="font-bold">Subscription Status:</div>
-        <div className="text-md">{subscription_status}</div>
-        <div className="text-sm">{formatSubscriptionDate(subscription_status, subscription_start_date)}</div>
-      </div>
-
-      {/* Column 3: Last Invoice Status */}
-      <div className="flex flex-col">
-        <div className="font-bold">Last Invoice Status:</div>
-        <div className={lastInvoiceStatusClass}>
-          {last_invoice_status.toLowerCase() === 'unpaid' ? 'Overdue' : last_invoice_status}
+      {/* For large screens: display full details */}
+      <div className="hidden sm:grid sm:grid-cols-3 gap-4">
+        {/* Column 1: Name and Role */}
+        <div className="flex flex-col">
+          <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
         </div>
-        <div className="text-sm">{formatLastInvoiceDate(last_invoice_status, last_invoice_date)}</div>
+
+        {/* Column 2: Subscription Status */}
+        <div className="flex flex-col">
+          <div className="font-bold">Subscription Status:</div>
+          <div className="text-md">{subscription_status}</div>
+        </div>
+
+        {/* Column 3: Last Invoice Status */}
+        <div className="flex flex-col">
+          <div className="font-bold">Last Invoice Status:</div>
+          <div className="text-md">{last_invoice_status}</div>
+        </div>
       </div>
     </div>
   );
@@ -99,9 +74,6 @@ MemberRowCard.propTypes = {
     display_last_name: PropTypes.string.isRequired,
     subscription_status: PropTypes.string.isRequired,
     last_invoice_status: PropTypes.string.isRequired,
-    last_invoice_date: PropTypes.string,
-    subscription_start_date: PropTypes.string,
-    role: PropTypes.string,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
