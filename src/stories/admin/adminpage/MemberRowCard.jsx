@@ -4,13 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 // Helper Functions
-const getStatusIcon = (status, role) => {
+const getStatusIcon = (subscriptionStatus, lastInvoiceStatus, role) => {
+  // Do not display any icon for coaches
   if (role === 'coach') {
-    return <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />;
+    return null;
   }
-  return status.toLowerCase() === 'paid'
-    ? <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />
-    : <FontAwesomeIcon icon={faExclamationCircle} className="text-red-500" />;
+
+  // Show an exclamation mark if the subscription is inactive or the last invoice is unpaid
+  if (subscriptionStatus.toLowerCase() === 'inactive' || lastInvoiceStatus.toLowerCase() === 'unpaid') {
+    return <FontAwesomeIcon icon={faExclamationCircle} className="text-red-500" />;
+  }
+
+  // Otherwise, return the check circle for paid invoices and active subscriptions
+  return <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />;
 };
 
 const calculateDaysOverdue = (lastInvoiceDate, status) => {
@@ -46,7 +52,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
       {/* For small screens: display only the name and status icon */}
       <div className="flex justify-between sm:hidden">
         <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
-        <div>{getStatusIcon(last_invoice_status, role)}</div>
+        <div>{getStatusIcon(subscription_status, last_invoice_status, role)}</div>
       </div>
 
       {/* For large screens: display full details */}
@@ -83,7 +89,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
 
         {/* Column 4: Status Icon (takes 1 column, aligned right) */}
         <div className="sm:col-span-1 flex justify-end">
-          {getStatusIcon(last_invoice_status, role)}
+          {getStatusIcon(subscription_status, last_invoice_status, role)}
         </div>
       </div>
     </div>

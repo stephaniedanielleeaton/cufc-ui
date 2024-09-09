@@ -2800,7 +2800,7 @@ DefaultView.args = {
           ],
         },
       ],
-      subscription_status: 'ACTIVE',
+      subscription_status: 'INACTIVE',
       subscription_start_date: '2024-06-01',
       square_invoices: [
         {
