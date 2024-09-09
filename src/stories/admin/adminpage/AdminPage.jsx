@@ -18,9 +18,15 @@ const getStatusIcon = (status) => {
     : <FontAwesomeIcon icon={faExclamationCircle} className="text-red-500" />;
 };
 
-const getRoleClass = (role) => {
-  if (role === 'coach' || role === 'admin') return 'text-gray-500';
-  return 'text-gray-600';
+const calculateDaysOverdue = (lastInvoiceDate, status) => {
+  if (status.toLowerCase() === 'unpaid') {
+    const dueDate = new Date(lastInvoiceDate);
+    const currentDate = new Date();
+    const timeDiff = currentDate - dueDate;
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    return daysDiff > 0 ? `${daysDiff} days overdue` : 'Due today';
+  }
+  return '';
 };
 
 // Member Row Card Component
@@ -30,7 +36,11 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     display_last_name,
     subscription_status,
     last_invoice_status,
+    last_invoice_date,
+    role,
   } = member;
+
+  const daysOverdue = calculateDaysOverdue(last_invoice_date, last_invoice_status);
 
   const selectedClass = isSelected ? 'bg-LightNavy border-Navy' : 'bg-white';
 
@@ -50,6 +60,8 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
         {/* Column 1: Name and Role */}
         <div className="flex flex-col">
           <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
+          {/* Display the role under the name in smaller, grey text */}
+          <div className="text-sm text-gray-500">{role}</div>
         </div>
 
         {/* Column 2: Subscription Status */}
@@ -61,22 +73,19 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
         {/* Column 3: Last Invoice Status */}
         <div className="flex flex-col">
           <div className="font-bold">Last Invoice Status:</div>
-          <div className="text-md">{last_invoice_status}</div>
+          <div className="text-md">
+            {last_invoice_status.toLowerCase() === 'unpaid' ? (
+              <span className="text-red-600">{daysOverdue}</span>
+            ) : last_invoice_status.toLowerCase() === 'no_invoices' ? (
+              'No Invoices'
+            ) : (
+              last_invoice_status
+            )}
+          </div>
         </div>
       </div>
     </div>
   );
-};
-
-MemberRowCard.propTypes = {
-  member: PropTypes.shape({
-    display_first_name: PropTypes.string.isRequired,
-    display_last_name: PropTypes.string.isRequired,
-    subscription_status: PropTypes.string.isRequired,
-    last_invoice_status: PropTypes.string.isRequired,
-  }).isRequired,
-  onClick: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool.isRequired,
 };
 
 // Main Admin Page Component
@@ -110,7 +119,7 @@ const AdminPage = ({ members, onUpdateMember }) => {
       }
 
       if (filterCoaches) {
-        filtered = filtered.filter((member) => member.role !== 'coach');
+        filtered = filtered.filter((member) => member.role === 'coach');
       }
 
       if (filterCheckedIn) {
@@ -206,66 +215,66 @@ const AdminPage = ({ members, onUpdateMember }) => {
         </button>
       </div>
 
-      <div className="flex items-center flex-wrap space-x-4">
-        <div className="flex items-center mb-4 ml-4 md:mb-0">
-          <input type="checkbox" id="filterUnpaid" checked={filterUnpaid} onChange={handleFilterUnpaidChange} />
-          <label htmlFor="filterUnpaid" className="m-2">
-            Unpaid
-          </label>
-        </div>
-        <div className="flex items-center mb-4 md:mb-0">
-          <input type="checkbox" id="filterInactive" checked={filterInactive} onChange={handleFilterInactiveChange} />
-          <label htmlFor="filterInactive" className="m-2">
-            Inactive
-          </label>
-        </div>
-        <div className="flex items-center mb-4 md:mb-0">
-          <input type="checkbox" id="filterCoaches" checked={filterCoaches} onChange={handleFilterCoachesChange} />
-          <label htmlFor="filterCoaches" className="m-2">
-            Remove Coaches
-          </label>
-        </div>
-        <div className="flex items-center mb-4 md:mb-0">
+      {/* Filter Checkboxes */}
+      <div className="flex flex-wrap mb-4 space-x-4">
+        <label>
           <input
             type="checkbox"
-            id="sortOverdue"
+            checked={filterUnpaid}
+            onChange={handleFilterUnpaidChange}
+            className="mr-2"
+          />
+          Show Unpaid
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={filterInactive}
+            onChange={handleFilterInactiveChange}
+            className="mr-2"
+          />
+          Show Inactive
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={filterCoaches}
+            onChange={handleFilterCoachesChange}
+            className="mr-2"
+          />
+          Show Coaches
+        </label>
+        <label>
+          <input
+            type="checkbox"
             checked={sortOverdue}
             onChange={handleSortOverdueChange}
+            className="mr-2"
           />
-          <label htmlFor="sortOverdue" className="m-2">
-            Sort by Overdue
-          </label>
-        </div>
-        <div className="flex items-center mb-4 md:mb-0">
+          Sort by Overdue
+        </label>
+        <label>
           <input
             type="checkbox"
-            id="filterCheckedIn"
             checked={filterCheckedIn}
             onChange={handleFilterCheckedInChange}
+            className="mr-2"
           />
-          <label htmlFor="filterCheckedIn" className="m-2">
-            Show Checked In Members
-          </label>
-        </div>
+          Show Checked In
+        </label>
       </div>
 
-      <div className="mb-4">
-        <div>Total: {filteredMembers.length}</div>
-      </div>
-
-      {/* Member Cards */}
       <div className="grid grid-cols-1 gap-4">
         {filteredMembers.map((member) => (
-          <React.Fragment key={member._id}>
+          <React.Fragment key={member.id}>
             <MemberRowCard
               member={member}
-              onClick={() => handleRowClick(member._id)}
-              isSelected={selectedMemberId === member._id}
+              onClick={() => handleRowClick(member.id)}
+              isSelected={selectedMemberId === member.id}
             />
-            {/* Show member details when the card is clicked */}
-            {selectedMemberId === member._id && (
-              <div className="bg-gray-50 border-b p-4">
-                <MemberDetails member={member} onUpdate={handleUpdateMember} />
+            {selectedMemberId === member.id && (
+              <div className="my-4">
+                <MemberDetails member={member} onUpdateMember={handleUpdateMember} />
               </div>
             )}
           </React.Fragment>
@@ -278,13 +287,14 @@ const AdminPage = ({ members, onUpdateMember }) => {
 AdminPage.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      checkedIn: PropTypes.bool,
+      id: PropTypes.number.isRequired,
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
-      last_invoice_status: PropTypes.string,
-      subscription_status: PropTypes.string,
+      subscription_status: PropTypes.string.isRequired,
+      last_invoice_status: PropTypes.string.isRequired,
+      last_invoice_date: PropTypes.string.isRequired,
       role: PropTypes.string,
+      checkedIn: PropTypes.bool,
     })
   ).isRequired,
   onUpdateMember: PropTypes.func.isRequired,

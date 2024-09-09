@@ -172,7 +172,7 @@ const MemberDetails = ({ member, onUpdate }) => {
           <option value="">Select Role</option>
           <option value="admin">Admin</option>
           <option value="coach">Coach</option>
-          <option value="member">Member</option>
+          <option value="student">Student</option>
         </select>
       </div>
       <div className="mb-4">
