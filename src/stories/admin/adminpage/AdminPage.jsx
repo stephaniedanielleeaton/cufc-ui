@@ -27,15 +27,19 @@ const AdminPage = ({ members, onUpdateMember }) => {
       let filtered = members;
 
       if (filterUnpaid) {
-        filtered = filtered.filter((member) => member.last_invoice_status.toLowerCase() === 'unpaid');
+        filtered = filtered.filter(
+          (member) =>
+            member.last_invoice_status.toLowerCase() === 'unpaid' ||
+            member.subscription_status.toLowerCase() !== 'active'
+        );
       }
 
       if (filterInactive) {
-        filtered = filtered.filter((member) => member.subscription_status.toLowerCase() === 'inactive');
+        filtered = filtered.filter((member) => member.subscription_status.toLowerCase() !== 'inactive');
       }
 
       if (filterCoaches) {
-        filtered = filtered.filter((member) => member.role === 'coach');
+        filtered = filtered.filter((member) => member.role !== 'coach');
       }
 
       if (filterCheckedIn) {
@@ -74,12 +78,11 @@ const AdminPage = ({ members, onUpdateMember }) => {
     } else {
       setSelectedMemberId(id);
     }
-    console.log(selectedMemberId);
   };
 
   const handleUpdateMember = (updatedMember) => {
     onUpdateMember(updatedMember);
-    setSelectedMemberId(null);
+    setSelectedMemberId(null); // Close the member details after update
   };
 
   return (
@@ -124,12 +127,12 @@ const AdminPage = ({ members, onUpdateMember }) => {
 AdminPage.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      display_first_name: PropTypes.string.isRequired,
-      display_last_name: PropTypes.string.isRequired,
-      subscription_status: PropTypes.string.isRequired,
-      last_invoice_status: PropTypes.string.isRequired,
-      last_invoice_date: PropTypes.string.isRequired,
+      _id: PropTypes.string.isRequired,
+      display_first_name: PropTypes.string,
+      display_last_name: PropTypes.string,
+      subscription_status: PropTypes.string,
+      last_invoice_status: PropTypes.string,
+      last_invoice_date: PropTypes.string,
       role: PropTypes.string,
       checkedIn: PropTypes.bool,
     })

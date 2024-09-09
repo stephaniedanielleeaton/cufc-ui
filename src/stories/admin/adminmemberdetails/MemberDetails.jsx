@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const MemberDetails = ({ member, onUpdate }) => {
+const MemberDetails = ({ member, onUpdateMember }) => {
   const [memberData, setMemberData] = useState({ ...member });
 
   const handleChange = (e) => {
@@ -26,7 +26,7 @@ const MemberDetails = ({ member, onUpdate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdate(memberData);
+    onUpdateMember(memberData); // Trigger update and close details
   };
 
   return (
@@ -204,7 +204,9 @@ const MemberDetails = ({ member, onUpdate }) => {
           className="p-2 border rounded w-full"
         />
       </div>
-      <button type="submit" className="bg-white text-black text-sm font-bold mx-4 px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black">UPDATE</button>
+      <button type="submit" className="bg-white text-black text-sm font-bold mx-4 px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black">
+        UPDATE
+      </button>
     </form>
   );
 };

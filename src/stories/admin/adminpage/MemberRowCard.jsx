@@ -25,7 +25,7 @@ const calculateDaysOverdue = (lastInvoiceDate, status) => {
     const currentDate = new Date();
     const timeDiff = currentDate - dueDate;
     const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    return daysDiff > 0 ? `${daysDiff} days overdue` : 'Due today';
+    return daysDiff > 0 ? `Due ${daysDiff} days ago` : 'Due today';
   }
   return '';
 };
@@ -46,7 +46,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
 
   return (
     <div
-      className={`p-4 shadow-md rounded-lg cursor-pointer mt-4 border hover:border-hoverWine ${selectedClass}`}
+      className={`p-4 font-khula shadow-md rounded-lg cursor-pointer mt-4 border hover:border-hoverWine ${selectedClass}`}
       onClick={onClick}
     >
       {/* For small screens: display only the name and status icon */}
@@ -66,18 +66,24 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
         {/* Column 2: Subscription Status (takes 3 columns, hidden for coaches) */}
         {role !== 'coach' && (
           <div className="sm:col-span-3 flex flex-col">
-            <div className="font-bold">Subscription Status:</div>
-            <div className="text-md">{subscription_status}</div>
+            <div className="font-bold text-sm">Subscription Status:</div>
+            <div className="text-md">
+              {subscription_status.toLowerCase() === 'inactive' ? (
+                'No active subscription'
+              ) : (
+                subscription_status
+              )}
+            </div>
           </div>
         )}
 
         {/* Column 3: Last Invoice Status (takes 3 columns, hidden for coaches) */}
         {role !== 'coach' && (
           <div className="sm:col-span-3 flex flex-col">
-            <div className="font-bold">Last Invoice Status:</div>
+            <div className="font-bold text-sm">Last Invoice Status:</div>
             <div className="text-md">
               {last_invoice_status.toLowerCase() === 'unpaid' ? (
-                <span className="text-red-600">{daysOverdue}</span>
+                <span>{daysOverdue}</span>
               ) : last_invoice_status.toLowerCase() === 'no_invoices' ? (
                 'No Invoices'
               ) : (

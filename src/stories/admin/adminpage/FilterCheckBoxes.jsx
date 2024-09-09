@@ -16,7 +16,7 @@ const FilterCheckboxes = ({
   <div className="flex flex-wrap gap-y-2 items-start mb-4">
     <label className="mr-8 flex items-center">
       <input type="checkbox" checked={filterUnpaid} onChange={onFilterUnpaidChange} />
-      <span className="ml-2">Show Unpaid</span>
+      <span className="ml-2">Show Alerted</span>
     </label>
     <label className="mr-8 flex items-center">
       <input type="checkbox" checked={filterInactive} onChange={onFilterInactiveChange} />
