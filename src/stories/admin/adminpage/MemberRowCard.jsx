@@ -3,19 +3,13 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
-// Helper Functions
 const getStatusIcon = (subscriptionStatus, lastInvoiceStatus, role) => {
-  // Do not display any icon for coaches
   if (role === 'coach') {
     return null;
   }
-
-  // Show an exclamation mark if the subscription is inactive or the last invoice is unpaid
   if (subscriptionStatus.toLowerCase() === 'inactive' || lastInvoiceStatus.toLowerCase() === 'unpaid') {
     return <FontAwesomeIcon icon={faExclamationCircle} className="text-red-500" />;
   }
-
-  // Otherwise, return the check circle for paid invoices and active subscriptions
   return <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />;
 };
 
