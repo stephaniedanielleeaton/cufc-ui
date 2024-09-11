@@ -24,6 +24,13 @@ const calculateDaysOverdue = (lastInvoiceDate, status) => {
   return '';
 };
 
+// Helper function to format the date to "Month Day, Year"
+const formatCheckInDate = (dateString) => {
+  if (!dateString) return 'Never';
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+};
+
 const MemberRowCard = ({ member, onClick, isSelected }) => {
   const {
     display_first_name,
@@ -32,6 +39,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     last_invoice_status,
     last_invoice_date,
     role,
+    lastCheckIn, // New prop for the last check-in date
   } = member;
 
   const daysOverdue = calculateDaysOverdue(last_invoice_date, last_invoice_status);
@@ -40,7 +48,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
 
   const getStatusMessage = () => {
     if (role.toLowerCase() === 'coach') {
-      return '';
+      return 'coach';
     }
     if (subscription_status.toLowerCase() === 'inactive') {
       return 'No Active Subscription';
@@ -69,15 +77,15 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
 
       {/* For large screens: display full details */}
       <div className="hidden sm:grid sm:grid-cols-12 gap-4 items-center">
-        {/* Column 1: Name and Role (takes 5 columns) */}
-        <div className="sm:col-span-5 flex flex-col">
+        {/* Column 1: Name and Role (takes 4 columns) */}
+        <div className="sm:col-span-4 flex flex-col">
           <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
           <div className="text-sm text-gray-500">{role}</div>
         </div>
 
-        {/* Column 2: Subscription Status (takes 3 columns, hidden for coaches) */}
+        {/* Column 2: Subscription Status (takes 2 columns, hidden for coaches) */}
         {role !== 'coach' && (
-          <div className="sm:col-span-3 flex flex-col">
+          <div className="sm:col-span-2 flex flex-col">
             <div className="font-bold text-sm">Subscription Status:</div>
             <div className="text-md">
               {subscription_status.toLowerCase() === 'inactive' ? (
@@ -89,9 +97,9 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
           </div>
         )}
 
-        {/* Column 3: Last Invoice Status (takes 3 columns, hidden for coaches) */}
+        {/* Column 3: Last Invoice Status (takes 2 columns, hidden for coaches) */}
         {role !== 'coach' && (
-          <div className="sm:col-span-3 flex flex-col">
+          <div className="sm:col-span-2 flex flex-col">
             <div className="font-bold text-sm">Last Invoice Status:</div>
             <div className="text-md">
               {last_invoice_status.toLowerCase() === 'unpaid' ? (
@@ -105,7 +113,13 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
           </div>
         )}
 
-        {/* Column 4: Status Icon (takes 1 column, aligned right) */}
+        {/* Column 4: Last Check-In (takes 2 columns) */}
+        <div className="sm:col-span-2 flex flex-col">
+          <div className="font-bold text-sm">Last Check-In:</div>
+          <div className="text-md">{formatCheckInDate(lastCheckIn)}</div>
+        </div>
+
+        {/* Column 5: Status Icon (takes 1 column, aligned right) */}
         <div className="sm:col-span-1 flex justify-end">
           {getStatusIcon(subscription_status, last_invoice_status, role)}
         </div>
@@ -122,6 +136,7 @@ MemberRowCard.propTypes = {
     last_invoice_status: PropTypes.string,
     last_invoice_date: PropTypes.string,
     role: PropTypes.string.isRequired,
+    lastCheckIn: PropTypes.string, // Add the lastCheckIn prop here
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
