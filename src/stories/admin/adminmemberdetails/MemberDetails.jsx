@@ -175,15 +175,15 @@ const MemberDetails = ({ member, onUpdateMember }) => {
           <option value="student">Student</option>
         </select>
       </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Family Members</label>
-        <textarea
-          name="family_members"
-          value={JSON.stringify(memberData.family_members || [])}
-          onChange={handleChange}
-          className="p-2 border rounded w-full"
-        />
-      </div>
+      {/*<div className="mb-4">*/}
+      {/*  <label className="block text-gray-700">Family Members</label>*/}
+      {/*  <textarea*/}
+      {/*    name="family_members"*/}
+      {/*    value={JSON.stringify(memberData.family_members || [])}*/}
+      {/*    onChange={handleChange}*/}
+      {/*    className="p-2 border rounded w-full"*/}
+      {/*  />*/}
+      {/*</div>*/}
       <div className="mb-4">
         <label className="block text-gray-700">Guardian First Name</label>
         <input
