@@ -18,10 +18,10 @@ const FilterCheckboxes = ({
       <input type="checkbox" checked={filterUnpaid} onChange={onFilterUnpaidChange} />
       <span className="ml-2">Show Alerted</span>
     </label>
-    <label className="mr-8 flex items-center">
-      <input type="checkbox" checked={filterInactive} onChange={onFilterInactiveChange} />
-      <span className="ml-2">Remove Inactive</span>
-    </label>
+    {/*<label className="mr-8 flex items-center">*/}
+    {/*  <input type="checkbox" checked={filterInactive} onChange={onFilterInactiveChange} />*/}
+    {/*  <span className="ml-2">Remove Inactive</span>*/}
+    {/*</label>*/}
     <label className="mr-8 flex items-center">
       <input type="checkbox" checked={filterCoaches} onChange={onFilterCoachesChange} />
       <span className="ml-2">Remove Coaches</span>

@@ -25,7 +25,7 @@ const calculateDaysOverdue = (lastInvoiceDate, status) => {
     const currentDate = new Date();
     const timeDiff = currentDate - dueDate;
     const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    return daysDiff > 0 ? `Due ${daysDiff} days ago` : 'Due today';
+    return daysDiff > 0 ? `Over due ${daysDiff} days` : 'Due today';
   }
   return '';
 };
@@ -44,16 +44,34 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
 
   const selectedClass = isSelected ? 'bg-LightNavy border-Navy' : 'bg-white';
 
+  const getStatusMessage = () => {
+    if (role.toLowerCase() === 'coach') {
+      return '';
+    }
+    if (subscription_status.toLowerCase() === 'inactive') {
+      return 'No Active Subscription';
+    }
+    if (last_invoice_status.toLowerCase() === 'unpaid') {
+      return daysOverdue;
+    }
+    return '';
+  };
+
   return (
     <div
       className={`p-4 font-khula shadow-md rounded-lg cursor-pointer mt-4 border hover:border-hoverWine ${selectedClass}`}
       onClick={onClick}
     >
-      {/* For small screens: display only the name and status icon */}
+      {/* For small screens: display name, status icon, and status message */}
       <div className="flex justify-between sm:hidden">
         <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
         <div>{getStatusIcon(subscription_status, last_invoice_status, role)}</div>
       </div>
+      {getStatusMessage() && (
+        <div className="text-sm text-gray-500 sm:hidden">
+          {getStatusMessage()}
+        </div>
+      )}
 
       {/* For large screens: display full details */}
       <div className="hidden sm:grid sm:grid-cols-12 gap-4 items-center">
