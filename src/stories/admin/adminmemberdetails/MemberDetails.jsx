@@ -31,6 +31,20 @@ const MemberDetails = ({ member, onUpdateMember }) => {
     onUpdateMember(memberData); // Trigger update and close details
   };
 
+  const calculateAge = (dateOfBirth) => {
+    if (!dateOfBirth) return null;
+    const dob = new Date(dateOfBirth);
+    const today = new Date();
+    const age = today.getFullYear() - dob.getFullYear();
+    const monthDifference = today.getMonth() - dob.getMonth();
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dob.getDate())) {
+      return age - 1;
+    }
+    return age;
+  };
+
+  const memberAge = calculateAge(memberData.personal_info?.date_of_birth);
+
   return (
     <form onSubmit={handleSubmit} className="p-4">
       <div className="mb-4">
@@ -190,26 +204,32 @@ const MemberDetails = ({ member, onUpdateMember }) => {
         </label>
       </div>
 
-      <div className="mb-4">
-        <label className="block text-gray-700">Guardian First Name</label>
-        <input
-          type="text"
-          name="guardian_first_name"
-          value={memberData.guardian_first_name || ''}
-          onChange={handleChange}
-          className="p-2 border rounded w-full"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700">Guardian Last Name</label>
-        <input
-          type="text"
-          name="guardian_last_name"
-          value={memberData.guardian_last_name || ''}
-          onChange={handleChange}
-          className="p-2 border rounded w-full"
-        />
-      </div>
+      {/* Show Guardian Fields only if member is under 18 or no age listed */}
+      {(!memberAge || memberAge < 18) && (
+        <>
+          <div className="mb-4">
+            <label className="block text-gray-700">Guardian First Name</label>
+            <input
+              type="text"
+              name="guardian_first_name"
+              value={memberData.guardian_first_name || ''}
+              onChange={handleChange}
+              className="p-2 border rounded w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Guardian Last Name</label>
+            <input
+              type="text"
+              name="guardian_last_name"
+              value={memberData.guardian_last_name || ''}
+              onChange={handleChange}
+              className="p-2 border rounded w-full"
+            />
+          </div>
+        </>
+      )}
+
       <button
         type="submit"
         className="bg-white text-black text-sm font-bold mx-4 px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
