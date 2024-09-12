@@ -106,7 +106,11 @@ const MemberDetails = ({ member, onUpdateMember }) => {
         <input
           type="date"
           name="personal_info.date_of_birth"
-          value={memberData.personal_info?.date_of_birth ? new Date(memberData.personal_info.date_of_birth).toISOString().split('T')[0] : ''}
+          value={
+            memberData.personal_info?.date_of_birth
+              ? new Date(memberData.personal_info.date_of_birth).toISOString().split('T')[0]
+              : ''
+          }
           onChange={handleChange}
           className="p-2 border rounded w-full"
         />
@@ -163,12 +167,7 @@ const MemberDetails = ({ member, onUpdateMember }) => {
       </div>
       <div className="mb-4">
         <label className="block text-gray-700">Role</label>
-        <select
-          name="role"
-          value={memberData.role}
-          onChange={handleChange}
-          className="p-2 border rounded w-full"
-        >
+        <select name="role" value={memberData.role} onChange={handleChange} className="p-2 border rounded w-full">
           <option value="">Select Role</option>
           <option value="admin">Admin</option>
           <option value="coach">Coach</option>
@@ -204,7 +203,10 @@ const MemberDetails = ({ member, onUpdateMember }) => {
           className="p-2 border rounded w-full"
         />
       </div>
-      <button type="submit" className="bg-white text-black text-sm font-bold mx-4 px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black">
+      <button
+        type="submit"
+        className="bg-white text-black text-sm font-bold mx-4 px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
+      >
         UPDATE
       </button>
     </form>

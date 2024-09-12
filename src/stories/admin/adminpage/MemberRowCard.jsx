@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faExclamationCircle, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 
 const getStatusIcon = (subscriptionStatus, lastInvoiceStatus, role) => {
   if (role === 'coach') {
@@ -13,13 +13,26 @@ const getStatusIcon = (subscriptionStatus, lastInvoiceStatus, role) => {
   return <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />;
 };
 
+const getWaiverIcon = (isWaiverOnFile) => {
+  if (!isWaiverOnFile) {
+    return (
+      <FontAwesomeIcon
+        icon={faFileAlt}
+        className="text-red-500"
+        title="No waiver on file"
+      />
+    );
+  }
+  return null; // Don't show anything if waiver is on file
+};
+
 const calculateDaysOverdue = (lastInvoiceDate, status) => {
   if (status.toLowerCase() === 'unpaid') {
     const dueDate = new Date(lastInvoiceDate);
     const currentDate = new Date();
     const timeDiff = currentDate - dueDate;
     const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    return daysDiff > 0 ? `Over due ${daysDiff} days` : 'Due today';
+    return daysDiff > 0 ? `Overdue ${daysDiff} days` : 'Due today';
   }
   return '';
 };
@@ -40,6 +53,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     last_invoice_date,
     role,
     lastCheckInDate,
+    isWaiverOnFile,
   } = member;
 
   const daysOverdue = calculateDaysOverdue(last_invoice_date, last_invoice_status);
@@ -47,16 +61,21 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
   const selectedClass = isSelected ? 'bg-LightNavy border-Navy' : 'bg-white';
 
   const getStatusMessage = () => {
+    let message = '';
     if (role.toLowerCase() === 'coach') {
-      return 'coach';
+      message = 'coach';
+    } else if (subscription_status.toLowerCase() === 'inactive') {
+      message = 'No Active Subscription';
+    } else if (last_invoice_status.toLowerCase() === 'unpaid') {
+      message = daysOverdue;
     }
-    if (subscription_status.toLowerCase() === 'inactive') {
-      return 'No Active Subscription';
+
+    // Add "No waiver on file" if waiver is not on file
+    if (!isWaiverOnFile) {
+      message += message ? ' | No waiver on file' : 'No waiver on file';
     }
-    if (last_invoice_status.toLowerCase() === 'unpaid') {
-      return daysOverdue;
-    }
-    return '';
+
+    return message;
   };
 
   return (
@@ -67,7 +86,10 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
       {/* For small screens: display name, status icon, and status message */}
       <div className="flex justify-between sm:hidden">
         <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
-        <div>{getStatusIcon(subscription_status, last_invoice_status, role)}</div>
+        <div className="flex items-center space-x-2">
+          {getStatusIcon(subscription_status, last_invoice_status, role)}
+          {getWaiverIcon(isWaiverOnFile)}
+        </div>
       </div>
       {getStatusMessage() && (
         <div className="text-sm text-gray-500 sm:hidden">
@@ -77,41 +99,37 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
 
       {/* For large screens: display full details */}
       <div className="hidden sm:grid sm:grid-cols-12 gap-4 items-center">
-        {/* Column 1: Name and Role (takes 4 columns) */}
-        <div className="sm:col-span-4 flex flex-col">
+        {/* Column 1: Name and Role (takes 3 columns instead of 4) */}
+        <div className="sm:col-span-3 flex flex-col">
           <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
           <div className="text-sm text-gray-500">{role}</div>
         </div>
 
-        {/* Column 2: Subscription Status (takes 2 columns, hidden for coaches) */}
-        {role !== 'coach' && (
-          <div className="sm:col-span-2 flex flex-col">
-            <div className="font-bold text-sm">Subscription Status:</div>
-            <div className="text-md">
-              {subscription_status.toLowerCase() === 'inactive' ? (
-                'No active subscription'
-              ) : (
-                subscription_status
-              )}
-            </div>
+        {/* Column 2: Subscription Status (takes 3 columns instead of 2) */}
+        <div className={`sm:col-span-3 flex flex-col ${role === 'coach' ? 'hidden' : ''}`}>
+          <div className="font-bold text-sm">Subscription Status:</div>
+          <div className="text-md">
+            {subscription_status.toLowerCase() === 'inactive' ? (
+              'No active subscription'
+            ) : (
+              subscription_status
+            )}
           </div>
-        )}
+        </div>
 
-        {/* Column 3: Last Invoice Status (takes 2 columns, hidden for coaches) */}
-        {role !== 'coach' && (
-          <div className="sm:col-span-2 flex flex-col">
-            <div className="font-bold text-sm">Last Invoice Status:</div>
-            <div className="text-md">
-              {last_invoice_status.toLowerCase() === 'unpaid' ? (
-                <span>{daysOverdue}</span>
-              ) : last_invoice_status.toLowerCase() === 'no_invoices' ? (
-                'No Invoices'
-              ) : (
-                last_invoice_status
-              )}
-            </div>
+        {/* Column 3: Last Invoice Status (takes 3 columns instead of 2) */}
+        <div className={`sm:col-span-3 flex flex-col ${role === 'coach' ? 'hidden' : ''}`}>
+          <div className="font-bold text-sm">Last Invoice Status:</div>
+          <div className="text-md">
+            {last_invoice_status.toLowerCase() === 'unpaid' ? (
+              <span>{daysOverdue}</span>
+            ) : last_invoice_status.toLowerCase() === 'no_invoices' ? (
+              'No Invoices'
+            ) : (
+              last_invoice_status
+            )}
           </div>
-        )}
+        </div>
 
         {/* Column 4: Last Check-In (takes 2 columns) */}
         <div className="sm:col-span-2 flex flex-col">
@@ -119,9 +137,11 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
           <div className="text-md">{formatCheckInDate(lastCheckInDate)}</div>
         </div>
 
-        {/* Column 5: Status Icon (takes 1 column, aligned right) */}
-        <div className="sm:col-span-1 flex justify-end">
-          {getStatusIcon(subscription_status, last_invoice_status, role)}
+        {/* Column 5: Status and Waiver Icons (takes 1 column, aligned right) */}
+        <div className="sm:col-span-1 flex justify-end space-x-2">
+          {/* Show waiver icon only if waiver is not on file */}
+          {role === 'coach' ? getWaiverIcon(isWaiverOnFile) : getStatusIcon(subscription_status, last_invoice_status, role)}
+          {role !== 'coach' && getWaiverIcon(isWaiverOnFile)}
         </div>
       </div>
     </div>
@@ -137,6 +157,7 @@ MemberRowCard.propTypes = {
     last_invoice_date: PropTypes.string,
     role: PropTypes.string.isRequired,
     lastCheckInDate: PropTypes.string,
+    isWaiverOnFile: PropTypes.bool.isRequired,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
