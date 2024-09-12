@@ -135,7 +135,7 @@ AdminPage.propTypes = {
       last_invoice_date: PropTypes.string,
       role: PropTypes.string,
       checkedIn: PropTypes.bool,
-      lastCheckIn: PropTypes.string,
+      lastCheckInDate: PropTypes.string,
     })
   ).isRequired,
   onUpdateMember: PropTypes.func.isRequired,

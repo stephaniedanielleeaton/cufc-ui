@@ -39,7 +39,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     last_invoice_status,
     last_invoice_date,
     role,
-    lastCheckIn, // New prop for the last check-in date
+    lastCheckInDate,
   } = member;
 
   const daysOverdue = calculateDaysOverdue(last_invoice_date, last_invoice_status);
@@ -116,7 +116,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
         {/* Column 4: Last Check-In (takes 2 columns) */}
         <div className="sm:col-span-2 flex flex-col">
           <div className="font-bold text-sm">Last Check-In:</div>
-          <div className="text-md">{formatCheckInDate(lastCheckIn)}</div>
+          <div className="text-md">{formatCheckInDate(lastCheckInDate)}</div>
         </div>
 
         {/* Column 5: Status Icon (takes 1 column, aligned right) */}
@@ -136,7 +136,7 @@ MemberRowCard.propTypes = {
     last_invoice_status: PropTypes.string,
     last_invoice_date: PropTypes.string,
     role: PropTypes.string.isRequired,
-    lastCheckIn: PropTypes.string, // Add the lastCheckIn prop here
+    lastCheckInDate: PropTypes.string,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,
