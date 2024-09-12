@@ -5,7 +5,9 @@ const MemberDetails = ({ member, onUpdateMember }) => {
   const [memberData, setMemberData] = useState({ ...member });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, type, checked, value } = e.target;
+    const inputValue = type === 'checkbox' ? checked : value;
+
     const keys = name.split('.');
 
     if (keys.length > 1) {
@@ -13,13 +15,13 @@ const MemberDetails = ({ member, onUpdateMember }) => {
         ...prevData,
         [keys[0]]: {
           ...prevData[keys[0]],
-          [keys[1]]: value,
+          [keys[1]]: inputValue,
         },
       }));
     } else {
       setMemberData((prevData) => ({
         ...prevData,
-        [name]: value,
+        [name]: inputValue,
       }));
     }
   };
@@ -174,15 +176,21 @@ const MemberDetails = ({ member, onUpdateMember }) => {
           <option value="student">Student</option>
         </select>
       </div>
-      {/*<div className="mb-4">*/}
-      {/*  <label className="block text-gray-700">Family Members</label>*/}
-      {/*  <textarea*/}
-      {/*    name="family_members"*/}
-      {/*    value={JSON.stringify(memberData.family_members || [])}*/}
-      {/*    onChange={handleChange}*/}
-      {/*    className="p-2 border rounded w-full"*/}
-      {/*  />*/}
-      {/*</div>*/}
+
+      {/* Checkbox for isWaiverOnFile */}
+      <div className="mb-4">
+        <label className="block text-gray-700">
+          <input
+            type="checkbox"
+            name="isWaiverOnFile"
+            checked={memberData.isWaiverOnFile || false}
+            onChange={handleChange}
+            className="mr-2"
+          />
+          Waiver on File
+        </label>
+      </div>
+
       <div className="mb-4">
         <label className="block text-gray-700">Guardian First Name</label>
         <input
@@ -241,8 +249,9 @@ MemberDetails.propTypes = {
     family_members: PropTypes.arrayOf(PropTypes.object),
     guardian_first_name: PropTypes.string,
     guardian_last_name: PropTypes.string,
+    isWaiverOnFile: PropTypes.bool,
   }).isRequired,
-  onUpdate: PropTypes.func.isRequired,
+  onUpdateMember: PropTypes.func.isRequired,
 };
 
 export default MemberDetails;
