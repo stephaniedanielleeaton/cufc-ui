@@ -177,13 +177,12 @@ const MemberDetails = ({ member, onUpdateMember }) => {
         </select>
       </div>
 
-      {/* Checkbox for isWaiverOnFile */}
       <div className="mb-4">
         <label className="block text-gray-700">
           <input
             type="checkbox"
-            name="isWaiverOnFile"
-            checked={memberData.isWaiverOnFile || false}
+            name="is_waiver_on_file"
+            checked={memberData.is_waiver_on_file || false}
             onChange={handleChange}
             className="mr-2"
           />
@@ -249,7 +248,7 @@ MemberDetails.propTypes = {
     family_members: PropTypes.arrayOf(PropTypes.object),
     guardian_first_name: PropTypes.string,
     guardian_last_name: PropTypes.string,
-    isWaiverOnFile: PropTypes.bool,
+    is_waiver_on_file: PropTypes.bool,
   }).isRequired,
   onUpdateMember: PropTypes.func.isRequired,
 };

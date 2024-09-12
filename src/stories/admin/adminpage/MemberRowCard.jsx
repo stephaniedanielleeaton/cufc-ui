@@ -13,8 +13,8 @@ const getStatusIcon = (subscriptionStatus, lastInvoiceStatus, role) => {
   return <FontAwesomeIcon icon={faCheckCircle} className="text-green-500" />;
 };
 
-const getWaiverIcon = (isWaiverOnFile) => {
-  if (!isWaiverOnFile) {
+const getWaiverIcon = (is_waiver_on_file) => {
+  if (!is_waiver_on_file) {
     return (
       <FontAwesomeIcon
         icon={faFileAlt}
@@ -53,7 +53,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     last_invoice_date,
     role,
     lastCheckInDate,
-    isWaiverOnFile,
+    is_waiver_on_file,
   } = member;
 
   const daysOverdue = calculateDaysOverdue(last_invoice_date, last_invoice_status);
@@ -71,7 +71,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     }
 
     // Add "No waiver on file" if waiver is not on file
-    if (!isWaiverOnFile) {
+    if (!is_waiver_on_file) {
       message += message ? ' | No waiver on file' : 'No waiver on file';
     }
 
@@ -88,7 +88,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
         <div className="text-lg font-bold">{`${display_first_name} ${display_last_name}`}</div>
         <div className="flex items-center space-x-2">
           {getStatusIcon(subscription_status, last_invoice_status, role)}
-          {getWaiverIcon(isWaiverOnFile)}
+          {getWaiverIcon(is_waiver_on_file)}
         </div>
       </div>
       {getStatusMessage() && (
@@ -140,8 +140,8 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
         {/* Column 5: Status and Waiver Icons (takes 1 column, aligned right) */}
         <div className="sm:col-span-1 flex justify-end space-x-2">
           {/* Show waiver icon only if waiver is not on file */}
-          {role === 'coach' ? getWaiverIcon(isWaiverOnFile) : getStatusIcon(subscription_status, last_invoice_status, role)}
-          {role !== 'coach' && getWaiverIcon(isWaiverOnFile)}
+          {role === 'coach' ? getWaiverIcon(is_waiver_on_file) : getStatusIcon(subscription_status, last_invoice_status, role)}
+          {role !== 'coach' && getWaiverIcon(is_waiver_on_file)}
         </div>
       </div>
     </div>
@@ -157,7 +157,7 @@ MemberRowCard.propTypes = {
     last_invoice_date: PropTypes.string,
     role: PropTypes.string.isRequired,
     lastCheckInDate: PropTypes.string,
-    isWaiverOnFile: PropTypes.bool.isRequired,
+    is_waiver_on_file: PropTypes.bool.isRequired,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   isSelected: PropTypes.bool.isRequired,

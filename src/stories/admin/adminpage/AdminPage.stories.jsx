@@ -2863,7 +2863,7 @@ DefaultView.args = {
       last_invoice_date: '2024-06-02T00:32:13.000Z',
       role: 'student',
       checkedIn: false,
-      isWaiverOnFile: true,
+      is_waiver_on_file: true,
     },
   ],
 };
