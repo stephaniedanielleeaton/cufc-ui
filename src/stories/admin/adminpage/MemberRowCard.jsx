@@ -65,7 +65,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     if (role.toLowerCase() === 'coach') {
       message = 'coach';
     } else if (subscription_status.toLowerCase() === 'inactive') {
-      message = 'No Active Subscription';
+      message = 'Not enrolled in an monthly plan';
     } else if (last_invoice_status.toLowerCase() === 'unpaid') {
       message = daysOverdue;
     }
@@ -105,19 +105,22 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
         </div>
 
         {/* Column 2: Subscription Status (takes 3 columns instead of 2) */}
-        <div className={`sm:col-span-3 flex flex-col ${role === 'coach' ? 'hidden' : ''}`}>
+        <div className={`sm:col-span-3 flex flex-col`}>
+          <div className={`${role === 'coach' ? 'hidden' : ''}`}>
           <div className="font-bold text-sm">Subscription Status:</div>
           <div className="text-md">
             {subscription_status.toLowerCase() === 'inactive' ? (
-              'No active subscription'
+              'Not enrolled in an monthly plan'
             ) : (
               subscription_status
             )}
           </div>
+          </div>
         </div>
 
         {/* Column 3: Last Invoice Status (takes 3 columns instead of 2) */}
-        <div className={`sm:col-span-3 flex flex-col ${role === 'coach' ? 'hidden' : ''}`}>
+        <div className={`sm:col-span-3 flex flex-col`}>
+          <div className={`${role === 'coach' ? 'hidden' : ''}`}>
           <div className="font-bold text-sm">Last Invoice Status:</div>
           <div className="text-md">
             {last_invoice_status.toLowerCase() === 'unpaid' ? (
@@ -127,6 +130,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
             ) : (
               last_invoice_status
             )}
+          </div>
           </div>
         </div>
 
