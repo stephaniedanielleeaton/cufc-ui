@@ -5,7 +5,7 @@ import MemberDetails from '../adminmemberdetails/MemberDetails.jsx';
 import SearchBox from './SearchBox';
 import FilterCheckboxes from './FilterCheckboxes';
 
-const AdminPage = ({ members, onUpdateMember }) => {
+const AdminPage = ({ members, onUpdateMember, onDeleteMember }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterAlerted, setFilterAlerted] = useState(false);
   const [filterInactive, setFilterInactive] = useState(false);
@@ -85,7 +85,7 @@ const AdminPage = ({ members, onUpdateMember }) => {
 
   const handleUpdateMember = (updatedMember) => {
     onUpdateMember(updatedMember);
-    setSelectedMemberId(null); // Close the member details after update
+    setSelectedMemberId(null);
     if (memberRefs.current[updatedMember._id]) {
       memberRefs.current[updatedMember._id].scrollIntoView({ behavior: 'smooth' });
     }
@@ -123,7 +123,7 @@ const AdminPage = ({ members, onUpdateMember }) => {
             />
             {selectedMemberId === member._id && (
               <div className="my-4">
-                <MemberDetails member={member} onUpdateMember={handleUpdateMember} />
+                <MemberDetails member={member} onUpdateMember={handleUpdateMember} onDeleteMember={onDeleteMember} />
               </div>
             )}
           </div>
