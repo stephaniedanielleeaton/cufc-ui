@@ -42,6 +42,7 @@ DefaultView.args = {
           country: 'United States',
         },
       },
+      is_waiver_on_file: true,
       square_subscriptions: [
         {
           id: '3abf4390-479b-4506-ab17-f86128dcd7e8',

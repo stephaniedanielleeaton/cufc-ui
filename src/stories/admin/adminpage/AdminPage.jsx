@@ -7,7 +7,7 @@ import FilterCheckboxes from './FilterCheckboxes';
 
 const AdminPage = ({ members, onUpdateMember }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filterUnpaid, setFilterUnpaid] = useState(false);
+  const [filterAlerted, setFilterAlerted] = useState(false);
   const [filterInactive, setFilterInactive] = useState(false);
   const [filterCoaches, setFilterCoaches] = useState(false);
   const [sortOverdue, setSortOverdue] = useState(false);
@@ -18,7 +18,7 @@ const AdminPage = ({ members, onUpdateMember }) => {
   const memberRefs = useRef({}); // To store the ref for each member card
 
   const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
-  const handleFilterUnpaidChange = () => setFilterUnpaid(!filterUnpaid);
+  const handleFilterAlertedChange = () => setFilterAlerted(!filterAlerted);
   const handleFilterInactiveChange = () => setFilterInactive(!filterInactive);
   const handleFilterCoachesChange = () => setFilterCoaches(!filterCoaches);
   const handleSortOverdueChange = () => setSortOverdue(!sortOverdue);
@@ -28,11 +28,12 @@ const AdminPage = ({ members, onUpdateMember }) => {
     const filterMembers = () => {
       let filtered = members;
 
-      if (filterUnpaid) {
+      if (filterAlerted) {
         filtered = filtered.filter(
           (member) =>
             member.last_invoice_status.toLowerCase() === 'unpaid' ||
-            member.subscription_status.toLowerCase() !== 'active'
+            member.subscription_status.toLowerCase() !== 'active' ||
+            !member.is_waiver_on_file
         );
       }
 
@@ -72,7 +73,7 @@ const AdminPage = ({ members, onUpdateMember }) => {
     };
 
     filterMembers();
-  }, [members, filterUnpaid, filterInactive, filterCoaches, sortOverdue, filterCheckedIn, searchQuery]);
+  }, [members, filterAlerted, filterInactive, filterCoaches, sortOverdue, filterCheckedIn, searchQuery]);
 
   const handleRowClick = (id) => {
     if (selectedMemberId === id) {
@@ -97,12 +98,12 @@ const AdminPage = ({ members, onUpdateMember }) => {
       </div>
 
       <FilterCheckboxes
-        filterUnpaid={filterUnpaid}
+        filterAlerted={filterAlerted}
         filterInactive={filterInactive}
         filterCoaches={filterCoaches}
         sortOverdue={sortOverdue}
         filterCheckedIn={filterCheckedIn}
-        onFilterUnpaidChange={handleFilterUnpaidChange}
+        onFilterAlertedChange={handleFilterAlertedChange}
         onFilterInactiveChange={handleFilterInactiveChange}
         onFilterCoachesChange={handleFilterCoachesChange}
         onSortOverdueChange={handleSortOverdueChange}

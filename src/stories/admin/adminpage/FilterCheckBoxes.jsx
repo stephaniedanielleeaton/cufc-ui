@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const FilterCheckboxes = ({
-  filterUnpaid,
+  filterAlerted,
   filterInactive,
   filterCoaches,
   sortOverdue,
   filterCheckedIn,
-  onFilterUnpaidChange,
+  onFilterAlertedChange,
   onFilterInactiveChange,
   onFilterCoachesChange,
   onSortOverdueChange,
@@ -15,7 +15,7 @@ const FilterCheckboxes = ({
 }) => (
   <div className="flex flex-wrap gap-y-2 items-start mb-4">
     <label className="mr-8 flex items-center">
-      <input type="checkbox" checked={filterUnpaid} onChange={onFilterUnpaidChange} />
+      <input type="checkbox" checked={filterAlerted} onChange={onFilterAlertedChange} />
       <span className="ml-2">Show Alerted</span>
     </label>
     {/*<label className="mr-8 flex items-center">*/}
