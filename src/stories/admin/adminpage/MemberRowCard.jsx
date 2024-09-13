@@ -120,8 +120,8 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
 
         {/* Column 3: Last Invoice Status (takes 3 columns instead of 2) */}
         <div className={`sm:col-span-3 flex flex-col`}>
-          <div className={`${role === 'coach' ? 'hidden' : ''}`}>
-          <div className="font-bold text-sm">Last Invoice Status:</div>
+          <div className={`${role === 'coach' ? 'hidden' : ''} ${last_invoice_status.toLowerCase() === 'no_invoices' ? 'hidden' : ''}`}>
+            <div className="font-bold text-sm">Last Invoice Status:</div>
           <div className="text-md">
             {last_invoice_status.toLowerCase() === 'unpaid' ? (
               <span>{daysOverdue}</span>
