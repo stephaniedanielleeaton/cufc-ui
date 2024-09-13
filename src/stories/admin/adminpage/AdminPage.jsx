@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import MemberRowCard from './MemberRowCard';
 import MemberDetails from '../adminmemberdetails/MemberDetails.jsx';
@@ -14,6 +14,8 @@ const AdminPage = ({ members, onUpdateMember }) => {
   const [filterCheckedIn, setFilterCheckedIn] = useState(false);
   const [filteredMembers, setFilteredMembers] = useState(members);
   const [selectedMemberId, setSelectedMemberId] = useState(null);
+
+  const memberRefs = useRef({}); // To store the ref for each member card
 
   const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
   const handleFilterUnpaidChange = () => setFilterUnpaid(!filterUnpaid);
@@ -83,6 +85,9 @@ const AdminPage = ({ members, onUpdateMember }) => {
   const handleUpdateMember = (updatedMember) => {
     onUpdateMember(updatedMember);
     setSelectedMemberId(null); // Close the member details after update
+    if (memberRefs.current[updatedMember._id]) {
+      memberRefs.current[updatedMember._id].scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -106,7 +111,10 @@ const AdminPage = ({ members, onUpdateMember }) => {
 
       <div className="grid grid-cols-1 gap-2">
         {filteredMembers.map((member) => (
-          <div key={member._id}>
+          <div
+            key={member._id}
+            ref={(el) => (memberRefs.current[member._id] = el)} // Attach the ref to each member card
+          >
             <MemberRowCard
               member={member}
               onClick={() => handleRowClick(member._id)}
