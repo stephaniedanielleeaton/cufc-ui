@@ -200,8 +200,22 @@ const MemberDetails = ({ member, onUpdateMember }) => {
             onChange={handleChange}
             className="mr-2"
           />
-          Waiver on File. <a className="text-blue-600 underline" href="https://drive.google.com/drive/folders/1DXwPUSE1tVTiyCIsDPEYRzLjdKuVV5Yy?usp=sharing">Waiver Repository</a>
+          Waiver on File.{' '}
+          <a className="text-blue-600 underline" href="https://drive.google.com/drive/folders/1DXwPUSE1tVTiyCIsDPEYRzLjdKuVV5Yy?usp=sharing">
+            Waiver Repository
+          </a>
         </label>
+      </div>
+
+      {/* Notes field */}
+      <div className="mb-4">
+        <label className="block text-gray-700">Notes</label>
+        <textarea
+          name="notes"
+          value={memberData.notes || ''}
+          onChange={handleChange}
+          className="p-2 border rounded w-full"
+        />
       </div>
 
       {/* Show Guardian Fields only if member is under 18 or no age listed */}
@@ -269,6 +283,7 @@ MemberDetails.propTypes = {
     guardian_first_name: PropTypes.string,
     guardian_last_name: PropTypes.string,
     is_waiver_on_file: PropTypes.bool,
+    notes: PropTypes.string, // Added notes field
   }).isRequired,
   onUpdateMember: PropTypes.func.isRequired,
 };

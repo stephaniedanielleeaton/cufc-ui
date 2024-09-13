@@ -48,7 +48,7 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     role,
     lastCheckInDate,
     is_waiver_on_file,
-    notes, // New notes field
+    notes,
   } = member;
 
   const daysOverdue = calculateDaysOverdue(last_invoice_date, last_invoice_status);
