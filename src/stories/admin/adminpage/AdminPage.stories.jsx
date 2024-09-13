@@ -2864,6 +2864,7 @@ DefaultView.args = {
       role: 'student',
       checkedIn: false,
       is_waiver_on_file: true,
+      notes: "hi"
     },
   ],
 };
