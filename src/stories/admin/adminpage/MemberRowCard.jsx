@@ -70,7 +70,6 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
       message = daysOverdue;
     }
 
-    // Add "No waiver on file" if waiver is not on file
     if (!is_waiver_on_file) {
       message += message ? ' | No waiver on file' : 'No waiver on file';
     }

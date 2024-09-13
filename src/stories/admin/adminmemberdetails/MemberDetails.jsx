@@ -200,7 +200,7 @@ const MemberDetails = ({ member, onUpdateMember }) => {
             onChange={handleChange}
             className="mr-2"
           />
-          Waiver on File
+          Waiver on File. <a className="text-blue-600 underline" href="https://drive.google.com/drive/folders/1DXwPUSE1tVTiyCIsDPEYRzLjdKuVV5Yy?usp=sharing">Waiver Repository</a>
         </label>
       </div>
 
