@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ClassOptions from '../classoptions/ClassOptions.jsx'; // Import ClassOptions component
-import BaseTextInput from '../../reusablecomponents/textinput/BaseTextInput.jsx';
 import BaseSelect from '../../reusablecomponents/select/BaseSelect.jsx';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 
-function FormSection({ formType, formData, setFormData, errors, onNext, handleAddFamilyMember, handleRemoveFamilyMember, handleFamilyMemberChange, emailStatusMessage }) {
+function FormSection({
+                       formType,
+                       formData,
+                       setFormData,
+                       errors,
+                       onNext,
+                       handleAddFamilyMember,
+                       handleRemoveFamilyMember,
+                       handleFamilyMemberChange,
+                       emailStatusMessage,
+                     }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [buttonText, setButtonText] = useState('SUBMIT'); // Default button text
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -21,17 +33,35 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true); // Disable button after it's clicked
+
+    // Check if the selected membership type is drop-in or redirect
+    if (formData.requestedMembershipType === 'dropIn') {
+      setButtonText('SUBMITTED');
+    } else {
+      setButtonText('LOADING...');
+    }
+
+    // Simulate form submission or call the actual `onNext` function
+    await onNext();
+
+    // Re-enable the button (optional, depending on your app logic)
+    // setIsSubmitting(false);
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center relative">
       <div className="relative z-10 max-w-md w-full bg-white rounded-lg shadow-lg p-6 font-poppins">
-
         <ClassOptions
           selectedOption={formData.requestedMembershipType}
           onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
         />
 
-        <form onSubmit={onNext} className="space-y-4 mt-8 px-5">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-8 px-5">
           <hr className="border-gray-300 my-8" />
+
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -44,54 +74,59 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
               I am a guardian signing up on behalf of a minor that is at least 16 years of age
             </label>
           </div>
+
           <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">
             {formType === 'minor' ? 'ABOUT THE FENCER' : 'ABOUT YOU'}
           </h3>
+
           <div className="space-y-2">
             <input
               type="text"
               name="displayFirstName"
               value={formData.displayFirstName}
               onChange={handleChange}
-              placeholder={formType === 'minor' ? 'Fencer\'s Preferred First Name' : 'Preferred First Name'}
+              placeholder={formType === 'minor' ? "Fencer's Preferred First Name" : 'Preferred First Name'}
               className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
             />
           </div>
+
           <div className="space-y-2">
             <input
               type="text"
               name="displayLastName"
               value={formData.displayLastName}
               onChange={handleChange}
-              placeholder={formType === 'minor' ? 'Fencer\'s Preferred Last Name' : 'Preferred Last Name'}
+              placeholder={formType === 'minor' ? "Fencer's Preferred Last Name" : 'Preferred Last Name'}
               className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
             />
           </div>
+
           <div className="space-y-2">
             <input
               type="text"
               name="legalFirstName"
               value={formData.legalFirstName}
               onChange={handleChange}
-              placeholder={formType === 'minor' ? 'Fencer\'s Legal First Name' : 'Legal First Name'}
+              placeholder={formType === 'minor' ? "Fencer's Legal First Name" : 'Legal First Name'}
               className={`w-full px-3 py-2 border ${errors.legalFirstName ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
             />
             {errors.legalFirstName && <p className="text-red-500 text-xs">{errors.legalFirstName}</p>}
           </div>
+
           <div className="space-y-2">
             <input
               type="text"
               name="legalLastName"
               value={formData.legalLastName}
               onChange={handleChange}
-              placeholder={formType === 'minor' ? 'Fencer\'s Legal Last Name' : 'Legal Last Name'}
+              placeholder={formType === 'minor' ? "Fencer's Legal Last Name" : 'Legal Last Name'}
               className={`w-full px-3 py-2 border ${errors.legalLastName ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
             />
             {errors.legalLastName && <p className="text-red-500 text-xs">{errors.legalLastName}</p>}
           </div>
-          <h3 className="block mb-5 font-bold text-sm tracking-wider text-xs text-center">
-            DATE OF BIRTH
-          </h3>
+
+          <h3 className="block mb-5 font-bold text-sm tracking-wider text-xs text-center">DATE OF BIRTH</h3>
+
           <div className="space-y-2">
             <input
               type="date"
@@ -103,6 +138,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             />
             {errors.dateOfBirth && <p className="text-red-500 text-xs">{errors.dateOfBirth}</p>}
           </div>
+
           {formData.isGuardian && (
             <>
               <div className="space-y-2">
@@ -115,6 +151,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
                   className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
                 />
               </div>
+
               <div className="space-y-2">
                 <input
                   type="text"
@@ -127,9 +164,9 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
               </div>
             </>
           )}
-          <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">
-            CONTACT INFORMATION
-          </h3>
+
+          <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">CONTACT INFORMATION</h3>
+
           <div className="space-y-2">
             <input
               type="text"
@@ -141,6 +178,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             />
             {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
           </div>
+
           <div className="space-y-2">
             <input
               type="text"
@@ -152,9 +190,9 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             />
             {errors.phoneNumber && <p className="text-red-500 text-xs">{errors.phoneNumber}</p>}
           </div>
-          <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">
-            ADDRESS
-          </h3>
+
+          <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">ADDRESS</h3>
+
           <div className="space-y-2">
             <input
               type="text"
@@ -166,6 +204,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             />
             {errors.streetAddress && <p className="text-red-500 text-xs">{errors.streetAddress}</p>}
           </div>
+
           <div className="space-y-2">
             <input
               type="text"
@@ -177,6 +216,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             />
             {errors.city && <p className="text-red-500 text-xs">{errors.city}</p>}
           </div>
+
           <div className="space-y-2">
             <BaseSelect
               faIcon="faMapPin"
@@ -189,6 +229,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
               error={errors.state}
             />
           </div>
+
           <div className="space-y-2">
             <input
               type="text"
@@ -200,6 +241,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
             />
             {errors.zipcode && <p className="text-red-500 text-xs">{errors.zipcode}</p>}
           </div>
+
           <div className="space-y-2">
             <BaseSelect
               faIcon="faMapPin"
@@ -212,6 +254,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
               error={errors.country}
             />
           </div>
+
           {formData.requestedMembershipType === 'familyPlan' && (
             <div className="space-y-2 mt-8">
               <h3 className="font-extrabold text-sm tracking-wider text-xs text-center">ADD FAMILY MEMBERS</h3>
@@ -257,10 +300,12 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
                     value={member.dateOfBirth}
                     className={`w-full px-3 py-2 border ${errors[`familyMember${index}`] ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
                   />
-                  {errors[`familyMember${index}`] &&
-                    <p className="text-red-500 text-xs">{errors[`familyMember${index}`]}</p>}
-                  <button type="button" onClick={() => handleRemoveFamilyMember(index)}
-                          className="text-red-500 text-xs">
+                  {errors[`familyMember${index}`] && <p className="text-red-500 text-xs">{errors[`familyMember${index}`]}</p>}
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveFamilyMember(index)}
+                    className="text-red-500 text-xs"
+                  >
                     Remove -
                   </button>
                   <hr className="border-gray-300 my-4 w-1/2 mx-auto" />
@@ -271,6 +316,7 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
               </button>
             </div>
           )}
+
           <div className="space-y-2 mt-8">
             <h3 className="font-extrabold text-sm tracking-wider text-xs text-center">HOW DID YOU HEAR ABOUT US?</h3>
             <input
@@ -282,14 +328,17 @@ function FormSection({ formType, formData, setFormData, errors, onNext, handleAd
               className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
             />
           </div>
+
           <div className="text-center mt-4">
             <button
               type="submit"
-              className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
+              className={`bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={isSubmitting} // Disable the button when submitting
             >
-              SUBMIT
+              {buttonText} {/* Display dynamic button text */}
             </button>
           </div>
+
           {emailStatusMessage && (
             <div className="text-center mt-4">
               <p className={`text-${emailStatusMessage.includes('Error') ? 'red-500' : 'black'} text-xs`}>

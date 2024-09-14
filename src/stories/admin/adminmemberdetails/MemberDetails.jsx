@@ -29,11 +29,12 @@ const MemberDetails = ({ member, onUpdateMember, onDeleteMember }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateMember(memberData); // Trigger update and close details
+    onUpdateMember(memberData);
   };
 
   const handleDelete = () => {
-    onDeleteMember(member._id); // Call the delete function with member ID
+    setShowDeleteConfirm(false);
+    onDeleteMember(member._id);
   };
 
   const calculateAge = (dateOfBirth) => {
