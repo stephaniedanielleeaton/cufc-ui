@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ClassOptions from '../classoptions/ClassOptions.jsx'; // Import ClassOptions component
 import BaseSelect from '../../reusablecomponents/select/BaseSelect.jsx';
 import { commonCountries, usStateAbbreviations } from '../../../utils/constants.jsx';
 
 function FormSection({
-                       formType,
-                       formData,
-                       setFormData,
-                       errors,
-                       onNext,
-                       handleAddFamilyMember,
-                       handleRemoveFamilyMember,
-                       handleFamilyMemberChange,
-                       emailStatusMessage,
-                     }) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [buttonText, setButtonText] = useState('SUBMIT'); // Default button text
-
+  formType,
+  formData,
+  setFormData,
+  errors,
+  onNext,
+  handleAddFamilyMember,
+  handleRemoveFamilyMember,
+  handleFamilyMemberChange,
+  emailStatusMessage,
+  buttonText,
+  buttonDisabled,
+}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -33,24 +32,6 @@ function FormSection({
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true); // Disable button after it's clicked
-
-    // Check if the selected membership type is drop-in or redirect
-    if (formData.requestedMembershipType === 'dropIn') {
-      setButtonText('SUBMITTED');
-    } else {
-      setButtonText('LOADING...');
-    }
-
-    // Simulate form submission or call the actual `onNext` function
-    await onNext();
-
-    // Re-enable the button (optional, depending on your app logic)
-    // setIsSubmitting(false);
-  };
-
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center relative">
       <div className="relative z-10 max-w-md w-full bg-white rounded-lg shadow-lg p-6 font-poppins">
@@ -59,9 +40,8 @@ function FormSection({
           onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
         />
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-8 px-5">
+        <form onSubmit={onNext} className="space-y-4 mt-8 px-5">
           <hr className="border-gray-300 my-8" />
-
           <div className="flex items-center">
             <input
               type="checkbox"
@@ -74,11 +54,9 @@ function FormSection({
               I am a guardian signing up on behalf of a minor that is at least 16 years of age
             </label>
           </div>
-
           <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">
             {formType === 'minor' ? 'ABOUT THE FENCER' : 'ABOUT YOU'}
           </h3>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -89,7 +67,6 @@ function FormSection({
               className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
             />
           </div>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -100,7 +77,6 @@ function FormSection({
               className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
             />
           </div>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -112,7 +88,6 @@ function FormSection({
             />
             {errors.legalFirstName && <p className="text-red-500 text-xs">{errors.legalFirstName}</p>}
           </div>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -124,9 +99,7 @@ function FormSection({
             />
             {errors.legalLastName && <p className="text-red-500 text-xs">{errors.legalLastName}</p>}
           </div>
-
           <h3 className="block mb-5 font-bold text-sm tracking-wider text-xs text-center">DATE OF BIRTH</h3>
-
           <div className="space-y-2">
             <input
               type="date"
@@ -138,7 +111,6 @@ function FormSection({
             />
             {errors.dateOfBirth && <p className="text-red-500 text-xs">{errors.dateOfBirth}</p>}
           </div>
-
           {formData.isGuardian && (
             <>
               <div className="space-y-2">
@@ -151,7 +123,6 @@ function FormSection({
                   className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
                 />
               </div>
-
               <div className="space-y-2">
                 <input
                   type="text"
@@ -164,9 +135,7 @@ function FormSection({
               </div>
             </>
           )}
-
           <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">CONTACT INFORMATION</h3>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -178,7 +147,6 @@ function FormSection({
             />
             {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
           </div>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -190,9 +158,7 @@ function FormSection({
             />
             {errors.phoneNumber && <p className="text-red-500 text-xs">{errors.phoneNumber}</p>}
           </div>
-
           <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs text-center">ADDRESS</h3>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -204,7 +170,6 @@ function FormSection({
             />
             {errors.streetAddress && <p className="text-red-500 text-xs">{errors.streetAddress}</p>}
           </div>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -216,7 +181,6 @@ function FormSection({
             />
             {errors.city && <p className="text-red-500 text-xs">{errors.city}</p>}
           </div>
-
           <div className="space-y-2">
             <BaseSelect
               faIcon="faMapPin"
@@ -229,7 +193,6 @@ function FormSection({
               error={errors.state}
             />
           </div>
-
           <div className="space-y-2">
             <input
               type="text"
@@ -241,7 +204,6 @@ function FormSection({
             />
             {errors.zipcode && <p className="text-red-500 text-xs">{errors.zipcode}</p>}
           </div>
-
           <div className="space-y-2">
             <BaseSelect
               faIcon="faMapPin"
@@ -254,7 +216,6 @@ function FormSection({
               error={errors.country}
             />
           </div>
-
           {formData.requestedMembershipType === 'familyPlan' && (
             <div className="space-y-2 mt-8">
               <h3 className="font-extrabold text-sm tracking-wider text-xs text-center">ADD FAMILY MEMBERS</h3>
@@ -300,7 +261,9 @@ function FormSection({
                     value={member.dateOfBirth}
                     className={`w-full px-3 py-2 border ${errors[`familyMember${index}`] ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
                   />
-                  {errors[`familyMember${index}`] && <p className="text-red-500 text-xs">{errors[`familyMember${index}`]}</p>}
+                  {errors[`familyMember${index}`] && (
+                    <p className="text-red-500 text-xs">{errors[`familyMember${index}`]}</p>
+                  )}
                   <button
                     type="button"
                     onClick={() => handleRemoveFamilyMember(index)}
@@ -316,7 +279,6 @@ function FormSection({
               </button>
             </div>
           )}
-
           <div className="space-y-2 mt-8">
             <h3 className="font-extrabold text-sm tracking-wider text-xs text-center">HOW DID YOU HEAR ABOUT US?</h3>
             <input
@@ -328,17 +290,15 @@ function FormSection({
               className="w-full px-3 py-2 border border-gray-300 rounded placeholder:text-sm focus:border-DeepRed"
             />
           </div>
-
           <div className="text-center mt-4">
             <button
               type="submit"
-              className={`bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
-              disabled={isSubmitting} // Disable the button when submitting
+              disabled={buttonDisabled}
+              className="bg-white text-black text-sm font-bold px-4 py-2 hover:bg-black hover:text-white hover:border-white border-2 border-black"
             >
-              {buttonText} {/* Display dynamic button text */}
+              {buttonText}
             </button>
           </div>
-
           {emailStatusMessage && (
             <div className="text-center mt-4">
               <p className={`text-${emailStatusMessage.includes('Error') ? 'red-500' : 'black'} text-xs`}>
@@ -362,6 +322,8 @@ FormSection.propTypes = {
   handleRemoveFamilyMember: PropTypes.func.isRequired,
   handleFamilyMemberChange: PropTypes.func.isRequired,
   emailStatusMessage: PropTypes.string,
+  buttonText: PropTypes.string,
+  buttonDisabled: PropTypes.bool,
 };
 
 export default FormSection;

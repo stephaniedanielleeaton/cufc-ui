@@ -25,6 +25,8 @@ function NewPersonSignUp({ onSubmit, emailStatusMessage }) {
   });
 
   const [errors, setErrors] = useState({});
+  const [buttonText, setButtonText] = useState('SUBMIT');
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const validateFormSection = () => {
     let valid = true;
@@ -87,6 +89,12 @@ function NewPersonSignUp({ onSubmit, emailStatusMessage }) {
           submission: 'Error Sending Email. :( Tell Steph.',
         }));
       }
+      if (formData.requestedMembershipType === 'dropIn') {
+        setButtonText('Thank you for signing up! Please use the drop in button');
+      } else {
+        setButtonText('LOADING...');
+      }
+      setButtonDisabled(true);
     }
   };
 
@@ -128,6 +136,8 @@ function NewPersonSignUp({ onSubmit, emailStatusMessage }) {
         handleRemoveFamilyMember={handleRemoveFamilyMember}
         handleFamilyMemberChange={handleFamilyMemberChange}
         emailStatusMessage={emailStatusMessage}
+        buttonText={buttonText}
+        buttonDisabled={buttonDisabled}
       />
     </div>
   );
