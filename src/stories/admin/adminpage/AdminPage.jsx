@@ -148,6 +148,7 @@ AdminPage.propTypes = {
     })
   ).isRequired,
   onUpdateMember: PropTypes.func.isRequired,
+  onDeleteMember: PropTypes.func,
 };
 
 export default AdminPage;

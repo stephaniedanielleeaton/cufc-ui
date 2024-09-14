@@ -68,6 +68,9 @@ const MemberRowCard = ({ member, onClick, isSelected }) => {
     if (!is_waiver_on_file) {
       message += message ? ' | No waiver on file' : 'No waiver on file';
     }
+    if (notes) {
+      message += message ? ' | ' + notes : notes;
+    }
 
     return message;
   };
