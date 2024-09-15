@@ -5,6 +5,7 @@ import {
 } from 'recharts';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { parseISO, format } from 'date-fns';
 
 // Function to generate an array of dates between two dates, filling missing ones with count 0
 const generateDateRangeWithZeroCounts = (data, startDate, endDate) => {
@@ -26,11 +27,10 @@ const generateDateRangeWithZeroCounts = (data, startDate, endDate) => {
   return result;
 };
 
-// Function to get the day of the week from a date string
+// Function to get the day of the week from a date string using date-fns
 const getDayOfWeek = (dateString) => {
-  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-  const date = new Date(dateString);
-  return days[date.getDay()];
+  const date = parseISO(dateString); // Parse the ISO date string
+  return format(date, 'EEEE'); // Format the parsed date to show the day of the week
 };
 
 // Tailwind classes are used for styling
