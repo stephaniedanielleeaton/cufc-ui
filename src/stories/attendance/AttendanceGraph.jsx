@@ -1,12 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
 } from 'recharts';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+// Function to generate an array of dates between two dates, filling missing ones with count 0
+const generateDateRangeWithZeroCounts = (data, startDate, endDate) => {
+  const result = [];
+  let currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    const dateString = currentDate.toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+    const foundEntry = data.find(entry => entry._id === dateString);
+
+    result.push({
+      _id: dateString,
+      count: foundEntry ? foundEntry.count : 0 // If date not found in original data, set count to 0
+    });
+
+    currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+  }
+
+  return result;
+};
+
+// Function to get the day of the week from a date string
+const getDayOfWeek = (dateString) => {
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const date = new Date(dateString);
+  return days[date.getDay()];
+};
 
 // Tailwind classes are used for styling
 const AttendanceGraph = ({ data }) => {
-  const [monthsToShow, setMonthsToShow] = useState(3); // Default to showing 3 months
+  // Initialize startDate to be 3 months before today's date
+  const [startDate, setStartDate] = useState(() => {
+    const date = new Date();
+    date.setMonth(date.getMonth() - 3); // Set the date to 3 months ago
+    return date;
+  });
+
+  // Initialize endDate to today
+  const [endDate, setEndDate] = useState(new Date());
+
   const [sortedData, setSortedData] = useState([]);
 
   useEffect(() => {
@@ -15,16 +53,39 @@ const AttendanceGraph = ({ data }) => {
     setSortedData(sorted);
   }, [data]);
 
-  // Helper function to check if a date is within the range of months
-  const isDateWithinRange = (dateString, months) => {
+  // Helper function to check if a date is within the range of startDate and endDate
+  const isDateWithinRange = (dateString) => {
     const entryDate = new Date(dateString);
-    const cutoffDate = new Date();
-    cutoffDate.setMonth(cutoffDate.getMonth() - months);
-    return entryDate >= cutoffDate;
+    return entryDate >= startDate && entryDate <= endDate;
   };
 
-  // Filter data based on the selected number of months
-  const filteredData = sortedData.filter((entry) => isDateWithinRange(entry._id, monthsToShow));
+  // Filter data based on the selected date range
+  const filteredData = sortedData.filter((entry) => isDateWithinRange(entry._id));
+
+  // Generate the full date range with zero counts for missing dates
+  const fullDataWithZeros = generateDateRangeWithZeroCounts(filteredData, startDate, endDate);
+
+  // Helper function to set date range using buttons
+  const setDateRange = (monthsAgo) => {
+    const start = new Date();
+    start.setMonth(start.getMonth() - monthsAgo);
+    setStartDate(start);
+    setEndDate(new Date()); // Set endDate to today
+  };
+
+  // Custom tooltip to display the day of the week and the date
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      const dayOfWeek = getDayOfWeek(label); // Get day of the week for the hovered date
+      return (
+        <div className="bg-white p-2 shadow-lg rounded">
+          <p>{`${dayOfWeek}, ${label}`}</p>
+          <p>{`Count: ${payload[0].value}`}</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="p-6 bg-white rounded shadow-lg">
@@ -33,35 +94,59 @@ const AttendanceGraph = ({ data }) => {
       {/* Buttons to adjust date range */}
       <div className="flex space-x-2 mb-4">
         <button
-          className={`px-4 py-2 bg-blue-500 text-white rounded ${monthsToShow === 1 && 'bg-blue-700'}`}
-          onClick={() => setMonthsToShow(1)}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+          onClick={() => setDateRange(1)}
         >
           Last 1 Month
         </button>
         <button
-          className={`px-4 py-2 bg-blue-500 text-white rounded ${monthsToShow === 3 && 'bg-blue-700'}`}
-          onClick={() => setMonthsToShow(3)}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+          onClick={() => setDateRange(3)}
         >
           Last 3 Months
         </button>
         <button
-          className={`px-4 py-2 bg-blue-500 text-white rounded ${monthsToShow === 6 && 'bg-blue-700'}`}
-          onClick={() => setMonthsToShow(6)}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+          onClick={() => setDateRange(6)}
         >
           Last 6 Months
         </button>
         <button
-          className={`px-4 py-2 bg-blue-500 text-white rounded ${monthsToShow === 12 && 'bg-blue-700'}`}
-          onClick={() => setMonthsToShow(12)}
+          className="px-4 py-2 bg-blue-500 text-white rounded"
+          onClick={() => setDateRange(12)}
         >
           Last 12 Months
         </button>
       </div>
 
-      {/* Graph */}
+      {/* Date Pickers */}
+      <div className="flex space-x-4 mb-4">
+        <div>
+          <label className="block text-sm font-bold mb-2">Start Date</label>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            className="border rounded p-2"
+            maxDate={new Date()} // Prevent selecting a future start date
+          />
+        </div>
+
+        <div>
+          <label className="block text-sm font-bold mb-2">End Date</label>
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            className="border rounded p-2"
+            minDate={startDate} // Prevent selecting an end date before the start date
+            maxDate={new Date()} // End date cannot be in the future
+          />
+        </div>
+      </div>
+
+      {/* Bar Graph */}
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart
-          data={filteredData}
+        <BarChart
+          data={fullDataWithZeros}
           margin={{
             top: 10, right: 30, left: 0, bottom: 0,
           }}
@@ -69,10 +154,10 @@ const AttendanceGraph = ({ data }) => {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="_id" tickFormatter={(str) => str.slice(5)} />
           <YAxis />
-          <Tooltip />
+          <Tooltip content={<CustomTooltip />} />
           <Legend />
-          <Line type="monotone" dataKey="count" stroke="#8884d8" activeDot={{ r: 8 }} />
-        </LineChart>
+          <Bar dataKey="count" fill="#8884d8" />
+        </BarChart>
       </ResponsiveContainer>
     </div>
   );
