@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend,
@@ -7,6 +7,13 @@ import {
 // Tailwind classes are used for styling
 const AttendanceGraph = ({ data }) => {
   const [monthsToShow, setMonthsToShow] = useState(3); // Default to showing 3 months
+  const [sortedData, setSortedData] = useState([]);
+
+  useEffect(() => {
+    // Sort data by date in ascending order (older dates on the left)
+    const sorted = [...data].sort((a, b) => new Date(a._id) - new Date(b._id));
+    setSortedData(sorted);
+  }, [data]);
 
   // Helper function to check if a date is within the range of months
   const isDateWithinRange = (dateString, months) => {
@@ -17,7 +24,7 @@ const AttendanceGraph = ({ data }) => {
   };
 
   // Filter data based on the selected number of months
-  const filteredData = data.filter((entry) => isDateWithinRange(entry._id, monthsToShow));
+  const filteredData = sortedData.filter((entry) => isDateWithinRange(entry._id, monthsToShow));
 
   return (
     <div className="p-6 bg-white rounded shadow-lg">
