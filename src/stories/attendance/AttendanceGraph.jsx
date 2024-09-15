@@ -94,30 +94,31 @@ const AttendanceGraph = ({ data }) => {
       {/* Buttons to adjust date range */}
       <div className="flex space-x-2 mb-4">
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 border border-gray-800 text-gray-800 rounded hover:bg-gray-200 transition"
           onClick={() => setDateRange(1)}
         >
           Last 1 Month
         </button>
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 border border-gray-800 text-gray-800 rounded hover:bg-gray-200 transition"
           onClick={() => setDateRange(3)}
         >
           Last 3 Months
         </button>
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 border border-gray-800 text-gray-800 rounded hover:bg-gray-200 transition"
           onClick={() => setDateRange(6)}
         >
           Last 6 Months
         </button>
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 border border-gray-800 text-gray-800 rounded hover:bg-gray-200 transition"
           onClick={() => setDateRange(12)}
         >
           Last 12 Months
         </button>
       </div>
+
 
       {/* Date Pickers */}
       <div className="flex space-x-4 mb-4">
