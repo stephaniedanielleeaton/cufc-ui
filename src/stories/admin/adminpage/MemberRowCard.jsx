@@ -17,7 +17,7 @@ const getWaiverIcon = (is_waiver_on_file) => {
   if (!is_waiver_on_file) {
     return <FontAwesomeIcon icon={faFileAlt} className="text-red-500" title="No waiver on file" />;
   }
-  return null; // Don't show anything if waiver is on file
+  return null;
 };
 
 const calculateDaysOverdue = (lastInvoiceDate, status) => {
