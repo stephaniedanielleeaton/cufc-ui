@@ -23,12 +23,12 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    let price = 0;
+    let price = 40;
     if (formData.events.includes('Open Longsword')) {
-      price += 0;
+      price += 20;
     }
     if (formData.events.includes('Open Saber')) {
-      price += 0;
+      price += 20;
     }
     if (formData.events.includes('Marginalised Genders Longsword')) {
       price += 0;
@@ -91,7 +91,7 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">Scioto Open 2024</h2>
           <p className="text-xl mb-4">${totalPrice.toFixed(2)}</p>
-          <p className="text-sm mb-2">TIME</p>
+          <p className="text-sm mb-2">November 16th to 17th, 2024</p>
           <p className="text-sm">
             6475 E Main St. #111
             <br />
@@ -104,20 +104,21 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
           United Fencing Club to compete in Longsword Divisions A and B, Open Saber, and Open Marginalised Genders Longsword.
           <br />
           <br />
-          Base admission for competitors is AMOUNT.
+          Base admission for competitors is $40.
           <br />
           <br />
-          <b>Longsword Divisions A and B.</b> Event fee: AMOUNT. Registration and Check In cut off: TIME. Fencers are being
+          <b>Longsword Divisions A and B.</b> Event fee: $20. Registration and Check In cut off: November 16th, 9am. Fencers are being
           asked to sign up for Longsword, through which they will be sorted in A and B based on the HEMA Ratings
           of the fencers present.
           <br />
           <br />
-          <b>Saber.</b> Event fee: AMOUNT. Registration and Check In cut off: TIME.
+          <b>Saber.</b> Event fee: $20. Registration and Check In cut off: November 17th, 12pm.
           <br />
           <br />
           <b>Marginalised Genders Longsword.</b> This event is open to trans and cis women, trans men, non-binary people,
-          intersex people, and any other gender expansive people who are often underrepresented in HEMA.
-          Registration and Check In cut off: TIME
+          intersex people, and any other gender expansive people who are often underrepresented in HEMA. There is no additional
+          event fee.
+          Registration and Check In cut off: November 17th, 9am.
           <br />
           <br />
         </p>
@@ -238,7 +239,7 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
                     disabled={getRemainingSlots(72, slotsFilled.longsword) === 0}
                     className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
                   />
-                  Open Longsword (+ $MONEY)
+                  Open Longsword (+ $20)
                 </label>
                 <span className="text-xs pl-8 font-bold block">
                   {getRemainingSlots(72, slotsFilled.longsword)} slots out of 72 remaining
@@ -255,7 +256,7 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
                     disabled={getRemainingSlots(36, slotsFilled.saber) === 0}
                     className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
                   />
-                  Open Saber (+ $MONEY)
+                  Open Saber (+ $20)
                 </label>
                 <span className="text-xs pl-8 font-bold block">
                   {getRemainingSlots(36, slotsFilled.saber)} slots out of 36 remaining
@@ -272,10 +273,10 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
                     disabled={getRemainingSlots(36, slotsFilled.mgLongsword) === 0}
                     className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
                   />
-                  Marginalised Genders Longsword (+ $MONEY)
+                  Marginalised Genders Longsword
                 </label>
                 <span className="text-xs pl-8 font-bold block">
-                  {getRemainingSlots(7, slotsFilled.mgLongsword)} slots out of 36 remaining
+                  {getRemainingSlots(7, slotsFilled.mgLongsword)} slots out of 28 remaining
                 </span>
               </div>
             </div>
