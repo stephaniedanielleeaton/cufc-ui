@@ -6,7 +6,7 @@ import SearchBox from './SearchBox';
 import FilterCheckboxes from './FilterCheckboxes';
 import AttendanceGraph from '../../attendance/AttendanceGraph.jsx'; // Assuming AttendanceGraph is in the same folder
 
-const AdminPage = ({ members, onUpdateMember, onDeleteMember }) => {
+const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregate }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterAlerted, setFilterAlerted] = useState(false);
   const [filterInactive, setFilterInactive] = useState(false);
@@ -163,7 +163,7 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember }) => {
           </div>
         </>
       ) : (
-        <AttendanceGraph data={members} /> // Assuming AttendanceGraph component expects `data` as a prop
+        <AttendanceGraph data={attendanceAggregate} />
       )}
     </div>
   );
@@ -185,6 +185,12 @@ AdminPage.propTypes = {
   ).isRequired,
   onUpdateMember: PropTypes.func.isRequired,
   onDeleteMember: PropTypes.func,
+  attendanceAggregate: PropTypes.arrayOf(
+    PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+    })
+  ),
 };
 
 export default AdminPage;
