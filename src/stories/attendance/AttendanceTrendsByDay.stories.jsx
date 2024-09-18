@@ -2,7 +2,7 @@ import React from 'react';
 import AttendanceTrendsByDay from './AttendanceTrendsByDay';
 
 export default {
-  title: 'AttendanceTrendsByDay',
+  title: 'Attendance/AttendanceTrendsByDay',
   component: AttendanceTrendsByDay,
 };
 
