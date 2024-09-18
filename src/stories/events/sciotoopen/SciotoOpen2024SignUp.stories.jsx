@@ -16,6 +16,6 @@ Default.args = {
   slotsFilled: {
     longsword: 10,
     saber: 21,
-    mgLongsword: 2,
+    mg: 2,
   },
 };

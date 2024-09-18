@@ -270,13 +270,13 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
                     value="Marginalised Genders Longsword"
                     checked={formData.events.includes('Marginalised Genders Longsword')}
                     onChange={handleEventChange}
-                    disabled={getRemainingSlots(36, slotsFilled.mgLongsword) === 0}
+                    disabled={getRemainingSlots(28, slotsFilled.mg) === 0}
                     className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
                   />
                   Marginalised Genders Longsword
                 </label>
                 <span className="text-xs pl-8 font-bold block">
-                  {getRemainingSlots(7, slotsFilled.mgLongsword)} slots out of 28 remaining
+                  {getRemainingSlots(28, slotsFilled.mg)} slots out of 28 remaining
                 </span>
               </div>
             </div>
@@ -306,6 +306,6 @@ SciotoOpen2024SignUp.propTypes = {
   slotsFilled: PropTypes.shape({
     longsword: PropTypes.number.isRequired,
     saber: PropTypes.number.isRequired,
-    mgLongsword: PropTypes.number.isRequired,
+    mg: PropTypes.number.isRequired,
   }).isRequired,
 };
