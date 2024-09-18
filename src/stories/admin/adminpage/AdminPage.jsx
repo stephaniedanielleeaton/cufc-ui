@@ -4,6 +4,7 @@ import MemberRowCard from './MemberRowCard';
 import MemberDetails from '../adminmemberdetails/MemberDetails.jsx';
 import SearchBox from './SearchBox';
 import FilterCheckboxes from './FilterCheckboxes';
+import AttendanceGraph from '../../attendance/AttendanceGraph.jsx'; // Assuming AttendanceGraph is in the same folder
 
 const AdminPage = ({ members, onUpdateMember, onDeleteMember }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -14,6 +15,7 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember }) => {
   const [filterCheckedIn, setFilterCheckedIn] = useState(false);
   const [filteredMembers, setFilteredMembers] = useState(members);
   const [selectedMemberId, setSelectedMemberId] = useState(null);
+  const [activeTab, setActiveTab] = useState('Members'); // State to track the selected tab
 
   const memberRefs = useRef({}); // To store the ref for each member card
 
@@ -93,42 +95,76 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember }) => {
 
   return (
     <div className="mx-auto font-khula p-4">
-      <div className="mb-2 mt-4 flex items-center flex-wrap">
-        <SearchBox searchQuery={searchQuery} onSearchChange={handleSearchInputChange} />
-      </div>
-
-      <FilterCheckboxes
-        filterAlerted={filterAlerted}
-        filterInactive={filterInactive}
-        filterCoaches={filterCoaches}
-        sortOverdue={sortOverdue}
-        filterCheckedIn={filterCheckedIn}
-        onFilterAlertedChange={handleFilterAlertedChange}
-        onFilterInactiveChange={handleFilterInactiveChange}
-        onFilterCoachesChange={handleFilterCoachesChange}
-        onSortOverdueChange={handleSortOverdueChange}
-        onFilterCheckedInChange={handleFilterCheckedInChange}
-      />
-
-      <div className="grid grid-cols-1 gap-2">
-        {filteredMembers.map((member) => (
-          <div
-            key={member._id}
-            ref={(el) => (memberRefs.current[member._id] = el)} // Attach the ref to each member card
+      {/* Tabs for Members and Attendance */}
+      <div className="relative mb-4 w-full h-12 bg-gray-300 rounded-lg">
+        <div
+          className={`absolute top-0 bottom-0 left-0 h-full rounded-md bg-MediumPink transition-all duration-300 ${
+            activeTab === 'Members' ? 'left-0 w-1/2' : 'left-1/2 w-1/2'
+          }`}
+        ></div>
+        <div className="relative flex justify-between items-center h-full text-gray-800">
+          <button
+            className={`w-1/2 text-center z-10 font-bold ${
+              activeTab === 'Members' ? 'text-white' : 'text-gray-600'
+            }`}
+            onClick={() => setActiveTab('Members')}
           >
-            <MemberRowCard
-              member={member}
-              onClick={() => handleRowClick(member._id)}
-              isSelected={selectedMemberId === member._id}
-            />
-            {selectedMemberId === member._id && (
-              <div className="my-4">
-                <MemberDetails member={member} onUpdateMember={handleUpdateMember} onDeleteMember={onDeleteMember} />
-              </div>
-            )}
-          </div>
-        ))}
+            Members
+          </button>
+          <button
+            className={`w-1/2 text-center z-10 font-bold ${
+              activeTab === 'Attendance' ? 'text-white' : 'text-gray-600'
+            }`}
+            onClick={() => setActiveTab('Attendance')}
+          >
+            Attendance
+          </button>
+        </div>
       </div>
+
+      {/* Conditional Rendering based on the selected tab */}
+      {activeTab === 'Members' ? (
+        <>
+          <div className="mb-2 mt-4 flex items-center flex-wrap">
+            <SearchBox searchQuery={searchQuery} onSearchChange={handleSearchInputChange} />
+          </div>
+
+          <FilterCheckboxes
+            filterAlerted={filterAlerted}
+            filterInactive={filterInactive}
+            filterCoaches={filterCoaches}
+            sortOverdue={sortOverdue}
+            filterCheckedIn={filterCheckedIn}
+            onFilterAlertedChange={handleFilterAlertedChange}
+            onFilterInactiveChange={handleFilterInactiveChange}
+            onFilterCoachesChange={handleFilterCoachesChange}
+            onSortOverdueChange={handleSortOverdueChange}
+            onFilterCheckedInChange={handleFilterCheckedInChange}
+          />
+
+          <div className="grid grid-cols-1 gap-2">
+            {filteredMembers.map((member) => (
+              <div
+                key={member._id}
+                ref={(el) => (memberRefs.current[member._id] = el)} // Attach the ref to each member card
+              >
+                <MemberRowCard
+                  member={member}
+                  onClick={() => handleRowClick(member._id)}
+                  isSelected={selectedMemberId === member._id}
+                />
+                {selectedMemberId === member._id && (
+                  <div className="my-4">
+                    <MemberDetails member={member} onUpdateMember={handleUpdateMember} onDeleteMember={onDeleteMember} />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <AttendanceGraph data={members} /> // Assuming AttendanceGraph component expects `data` as a prop
+      )}
     </div>
   );
 };
