@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import bannerImage from '../../assets/SSQ_promoArt.png';
+import bannerImage from '../../assets/sciotosketch.webp';
 
 export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
   const [formData, setFormData] = useState({
@@ -85,12 +85,12 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center relative">
-      <div className="relative z-10 max-w-md w-full bg-white rounded-lg shadow-lg p-6 font-poppins">
+      <div className="relative z-10 max-w-md w-full bg-white rounded-lg shadow-lg p-4 font-poppins">
         <div className="relative mb-8">
+          <img src={bannerImage} alt="Banner" className="w-full h-full object-cover rounded-t-lg" />
         </div>
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">Scioto Open 2024</h2>
-          <p className="text-xl mb-4">${totalPrice.toFixed(2)}</p>
           <p className="text-sm mb-2">November 16th to 17th, 2024</p>
           <p className="text-sm">
             6475 E Main St. #111
@@ -100,26 +100,45 @@ export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
         </div>
         <hr className="border-gray-300 my-8" />
         <p className="mb-5 text-gray-700 px-5 text-sm">
-          Welcome to Scioto Open 2024! Come join us at Columbus
-          United Fencing Club to compete in Longsword Divisions A and B, Open Saber, and Open Marginalised Genders Longsword.
+          Welcome to Scioto Open 2024! Come join us at Columbus United Fencing Club to compete in Longsword Divisions A
+          and B, Open Saber, and Open Marginalized Genders Longsword.
           <br />
           <br />
-          Base admission for competitors is $40.
+          Base admission for competitors is $40
           <br />
           <br />
-          <b>Longsword Divisions A and B.</b> Event fee: $20. Registration and Check In cut off: November 16th, 9am. Fencers are being
-          asked to sign up for Longsword, through which they will be sorted in A and B based on the HEMA Ratings
-          of the fencers present.
+          <u>
+            <b>Longsword Divisions A and B:</b>
+          </u>
+          <ul className="list-disc list-outside ml-5">
+            <li>Event fee: $20.</li>
+            <li>Registration and Check In cut off: November 16th, 9am.</li>
+            <li>
+              Fencers are being asked to sign up for Longsword, through which they will be sorted in A and B based on
+              the HEMA Ratings of the fencers present.
+            </li>
+          </ul>
           <br />
+          <u>
+            <b>Saber:</b>
+          </u>
+          <ul className="list-disc list-outside ml-5">
+            <li>Event fee: $20</li>
+            <li>Registration and Check In cut off: November 17th, 12pm.</li>
+          </ul>
           <br />
-          <b>Saber.</b> Event fee: $20. Registration and Check In cut off: November 17th, 12pm.
-          <br />
-          <br />
-          <b>Marginalised Genders Longsword.</b> This event is open to trans and cis women, trans men, non-binary people,
-          intersex people, and any other gender expansive people who are often underrepresented in HEMA. There is no additional
-          event fee.
-          Registration and Check In cut off: November 17th, 9am.
-          <br />
+          <u>
+            <b>Marginalized Genders Longsword:</b>{' '}
+          </u>
+          <ul className="list-disc list-outside ml-5">
+            <b><li>There is no additional event fee.</li></b>
+            <li>Registration and Check In cut off: November 17th, 9am.</li>
+            <li>
+              {' '}
+              This event is open to trans and cis women, trans men, non-binary people, intersex people, and any other
+              gender expansive people who are often underrepresented in HEMA.
+            </li>
+          </ul>
           <br />
         </p>
         <form onSubmit={handleSubmit} className="space-y-4 px-5">
