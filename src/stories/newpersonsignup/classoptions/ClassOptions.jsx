@@ -36,7 +36,7 @@ function ClassOptions({ selectedOption, onSelect }) {
         CLASS OPTIONS
       </h3>
       <p className="mb-5 text-gray-700 text-sm">
-        Please see our About page for options and pricing.
+        Please see our Classes page for options and pricing.
       </p>
       {options.map((option) => (
         <div key={option.id} className="flex items-start mb-4">

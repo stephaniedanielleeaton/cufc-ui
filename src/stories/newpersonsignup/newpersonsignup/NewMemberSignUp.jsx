@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import FormSection from '../formsection/FormSection.jsx';
 import React, { useState } from 'react';
 
-function NewPersonSignUp({ onSubmit, emailStatusMessage }) {
+function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
   const [formData, setFormData] = useState({
     displayFirstName: '',
     displayLastName: '',
@@ -143,9 +143,9 @@ function NewPersonSignUp({ onSubmit, emailStatusMessage }) {
   );
 }
 
-NewPersonSignUp.propTypes = {
+NewMemberSignUp.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   emailStatusMessage: PropTypes.string,
 };
 
-export default NewPersonSignUp;
+export default NewMemberSignUp;
