@@ -4,9 +4,11 @@ import MemberRowCard from './MemberRowCard';
 import MemberDetails from '../adminmemberdetails/MemberDetails.jsx';
 import SearchBox from './SearchBox';
 import FilterCheckboxes from './FilterCheckboxes';
-import AttendanceGraph from '../../attendance/AttendanceGraph.jsx'; // Assuming AttendanceGraph is in the same folder
+import AttendanceGraph from '../../attendance/AttendanceGraph.jsx';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregate }) => {
+const AdminPage = ({ members, onUpdateMember, onDeleteMember, onAddMember, attendanceAggregate }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterAlerted, setFilterAlerted] = useState(false);
   const [filterInactive, setFilterInactive] = useState(false);
@@ -15,9 +17,10 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregat
   const [filterCheckedIn, setFilterCheckedIn] = useState(false);
   const [filteredMembers, setFilteredMembers] = useState(members);
   const [selectedMemberId, setSelectedMemberId] = useState(null);
-  const [activeTab, setActiveTab] = useState('Members'); // State to track the selected tab
+  const [addMemberMode, setAddMemberMode] = useState(false);
+  const [activeTab, setActiveTab] = useState('Members');
 
-  const memberRefs = useRef({}); // To store the ref for each member card
+  const memberRefs = useRef({});
 
   const handleSearchInputChange = (e) => setSearchQuery(e.target.value);
   const handleFilterAlertedChange = () => setFilterAlerted(!filterAlerted);
@@ -35,7 +38,7 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregat
           (member) =>
             member.last_invoice_status.toLowerCase() === 'unpaid' ||
             member.subscription_status.toLowerCase() !== 'active' ||
-            !member.is_waiver_on_file
+            !member.is_waiver_on_file && member.role !== 'coach'
         );
       }
 
@@ -83,11 +86,18 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregat
     } else {
       setSelectedMemberId(id);
     }
+    setAddMemberMode(false);
+  };
+
+  const handleAddMemberClick = () => {
+    setAddMemberMode(!addMemberMode);
+    setSelectedMemberId(null);
   };
 
   const handleUpdateMember = (updatedMember) => {
     onUpdateMember(updatedMember);
     setSelectedMemberId(null);
+    setAddMemberMode(false);
     if (memberRefs.current[updatedMember._id]) {
       memberRefs.current[updatedMember._id].scrollIntoView({ behavior: 'smooth' });
     }
@@ -95,7 +105,6 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregat
 
   return (
     <div className="mx-auto font-khula p-4">
-      {/* Tabs for Members and Attendance */}
       <div className="relative mb-4 w-full h-12 bg-gray-300 rounded-lg">
         <div
           className={`absolute top-0 bottom-0 left-0 h-full rounded-md bg-MediumPink transition-all duration-300 ${
@@ -122,11 +131,19 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregat
         </div>
       </div>
 
-      {/* Conditional Rendering based on the selected tab */}
       {activeTab === 'Members' ? (
         <>
-          <div className="mb-2 mt-4 flex items-center flex-wrap">
+          <div className="mb-2 mt-4 flex items-center justify-between">
             <SearchBox searchQuery={searchQuery} onSearchChange={handleSearchInputChange} />
+            <button
+              onClick={handleAddMemberClick}
+              className={`relative w-36 text-center z-10 font-bold px-4 py-2 rounded-lg transition-all duration-300 ${
+                addMemberMode ? 'bg-MediumPink text-white' : 'bg-gray-300 text-gray-600'
+              } hover:bg-gray-400 hover:text-white`}
+              style={{ marginLeft: '1rem' }}
+            >
+              <FontAwesomeIcon icon={faPlus} className="mr-2" /> Add
+            </button>
           </div>
 
           <FilterCheckboxes
@@ -143,10 +160,16 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, attendanceAggregat
           />
 
           <div className="grid grid-cols-1 gap-2">
+            {addMemberMode && (
+              <div className="my-4">
+                <MemberDetails member={{}} onUpdateMember={onAddMember} />
+              </div>
+            )}
+
             {filteredMembers.map((member) => (
               <div
                 key={member._id}
-                ref={(el) => (memberRefs.current[member._id] = el)} // Attach the ref to each member card
+                ref={(el) => (memberRefs.current[member._id] = el)}
               >
                 <MemberRowCard
                   member={member}
@@ -185,6 +208,7 @@ AdminPage.propTypes = {
   ).isRequired,
   onUpdateMember: PropTypes.func.isRequired,
   onDeleteMember: PropTypes.func,
+  onAddMember: PropTypes.func.isRequired,
   attendanceAggregate: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,

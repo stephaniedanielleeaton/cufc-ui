@@ -38,12 +38,10 @@ const FilterCheckboxes = ({
 );
 
 FilterCheckboxes.propTypes = {
-  filterUnpaid: PropTypes.bool.isRequired,
   filterInactive: PropTypes.bool.isRequired,
   filterCoaches: PropTypes.bool.isRequired,
   sortOverdue: PropTypes.bool.isRequired,
   filterCheckedIn: PropTypes.bool.isRequired,
-  onFilterUnpaidChange: PropTypes.func.isRequired,
   onFilterInactiveChange: PropTypes.func.isRequired,
   onFilterCoachesChange: PropTypes.func.isRequired,
   onSortOverdueChange: PropTypes.func.isRequired,
