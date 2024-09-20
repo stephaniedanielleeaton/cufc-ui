@@ -58,6 +58,9 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
         <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('events')}>
           Events
         </a>
+        <a href="#" className="text-white text-xl block" onClick={() => handleAuth()}>
+          {isAuthenticated ? 'Sign Out' : 'Sign In'}
+        </a>
         <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('admin')}>
           Admin
         </a>

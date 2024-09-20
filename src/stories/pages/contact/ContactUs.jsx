@@ -118,8 +118,8 @@ function ContactUs({ onSubmit, instagramLink, facebookLink }) {
 
 ContactUs.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  instagramLink: String,
-  facebookLink: String,
+  instagramLink: PropTypes.string,
+  facebookLink: PropTypes.string,
 };
 
 export default ContactUs;

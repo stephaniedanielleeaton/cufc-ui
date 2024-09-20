@@ -2,6 +2,7 @@ import React from 'react';
 import logoFullColourNavySvg from '../assets/LogoFullColourNavy.svg';
 import instagramSvg from '../assets/instagram.svg';
 import facebookSvg from '../assets/facebook.svg';
+import PropTypes from 'prop-types';
 
 function Footer({ instagramLink, facebookLink }) {
   return (
@@ -59,8 +60,8 @@ function Footer({ instagramLink, facebookLink }) {
 }
 
 Footer.propTypes = {
-  instagramLink: String,
-  facebookLink: String,
+  instagramLink: PropTypes.string,
+  facebookLink: PropTypes.string
 };
 
 export default Footer;
