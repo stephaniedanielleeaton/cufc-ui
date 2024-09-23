@@ -6,7 +6,7 @@ import logoAllWhiteSvg from '../assets/LogoAllWhite.svg';
 import prideFlagSvg from '../assets/LGBTQ+_rainbow_flag_Quasar__Progress__variant.svg';
 import PropTypes from 'prop-types';
 
-function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth }) {
+function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, isAdmin }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleNavigationClick = (page) => {
@@ -61,9 +61,10 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
         <a href="#" className="text-white text-xl block" onClick={() => handleAuth()}>
           {isAuthenticated ? 'Sign Out' : 'Sign In'}
         </a>
-        <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('admin')}>
+        {isAdmin ? (
+          <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('admin')}>
           Admin
-        </a>
+        </a>) : ''}
       </div>
 
       {/* Desktop Navigation */}
@@ -107,12 +108,16 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth })
             <div className="w-12 h-12 rounded-full bg-gray-300 mx-4"></div>
           )}
           <div className="button flex items-center px-4 whitespace-nowrap">
-            <span
-              className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
-              onClick={() => onNavigationClick('admin')}
-            >
-              ADMIN
-            </span>
+            {isAdmin ? (
+              <span
+                className="font-Khula font-normal text-base hover:text-MediumGray tracking-[2.4px]"
+                onClick={() => onNavigationClick('admin')}
+              >
+                ADMIN
+              </span>
+            ) : (
+              ''
+            )}
           </div>
         </nav>
       </div>
@@ -167,6 +172,7 @@ Nav.propTypes = {
   userProfilePic: PropTypes.string,
   handleAuth: PropTypes.func,
   isAuthenticated: PropTypes.bool,
+  isAdmin: PropTypes.bool,
 };
 
 export default Nav;

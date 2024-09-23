@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SearchBox = ({ searchQuery, onSearchChange }) => (
-  <div className="relative w-full md:w-auto flex-grow mb-4 md:mb-0">
+  <div className="relative w-full md:w-auto flex-grow">
     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
       <svg
         className="w-4 h-4 text-hoverOuterSpace"
@@ -23,7 +23,7 @@ const SearchBox = ({ searchQuery, onSearchChange }) => (
     <input
       type="text"
       id="simple-search"
-      className="border border-deepSeaBlue text-hoverOuterSpace text-sm rounded-lg block w-full pl-10 p-2.5 focus:outline-none"
+      className="border border-deepSeaBlue text-hoverOuterSpace text-sm rounded-lg block w-full pl-10 py-2 h-10 focus:outline-none"
       placeholder="Search by Name"
       value={searchQuery}
       onChange={onSearchChange}

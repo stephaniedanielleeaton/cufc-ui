@@ -1,7 +1,7 @@
 export { default as BaseButton } from './stories/reusablecomponents/button/BaseButton';
 export { default as BaseSelect } from './stories/reusablecomponents/select/BaseSelect.jsx';
 export { default as BaseTextInput } from './stories/reusablecomponents/textinput/BaseTextInput.jsx';
-export { default as AdminPage } from './stories/admin/adminpage/AdminPage.jsx';
+export { default as AdminPage } from './stories/admin/AdminPage.jsx';
 export { default as CTA } from './stories/pages/homepage/calltoaction/CTA.jsx';
 export { default as ContactUs } from './stories/pages/contact/ContactUs.jsx'
 export { default as Footer } from './stories/footer/Footer.jsx';
@@ -10,7 +10,7 @@ export { default as Intro } from './stories/pages/homepage/intro/Intro.jsx';
 export { default as Nav } from './stories/nav/Nav.jsx';
 export { default as Schedule } from './stories/pages/homepage/schedule/Schedule.jsx';
 export { default as PageLoader } from './stories/reusablecomponents/pageloader/PageLoader.jsx';
-export { default as NewPersonSignUp } from './stories/newpersonsignup/newpersonsignup/NewPersonSignUp.jsx';
+export { default as NewMemberSignUp } from './stories/newmembersignup/newpersonsignup/NewMemberSignUp.jsx';
 export { default as SmallHero } from './stories/reusablecomponents/smallhero/SmallHero.jsx';
 export { default as Classes } from './stories/pages/classes/Classes.jsx';
 export { default as AboutUs } from './stories/pages/aboutus/AboutUs.jsx';
