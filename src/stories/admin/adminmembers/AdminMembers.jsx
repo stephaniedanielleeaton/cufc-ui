@@ -32,13 +32,13 @@ const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) 
       let filtered = members;
 
       if (filterAlerted) {
-        filtered = filtered.filter(
-          (member) =>
-            !member.is_waiver_on_file &&
-            member.role !== 'coach' &&
-            (member.last_invoice_status.toLowerCase() === 'unpaid' ||
-              member.subscription_status.toLowerCase() !== 'active')
-        );
+        filtered = filtered.filter((member) => {
+          const isWaiverOnFile = !member.is_waiver_on_file; // true if waiver is false or null
+          const isUnpaid = member.last_invoice_status.toLowerCase() === 'unpaid';
+          const isNotActive = member.subscription_status.toLowerCase() !== 'active';
+          const isNotCoach = member.role !== 'coach'; // exclude coaches
+          return isNotCoach && (isUnpaid || isNotActive || isWaiverOnFile);
+        });
       }
 
       if (filterInactive) {

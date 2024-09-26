@@ -274,6 +274,7 @@ DefaultView.args = {
       role: 'admin',
       checkedIn: false,
       lastCheckInDate: '2024-09-06T16:30:00Z',
+      is_waiver_on_file: true
     },
     {
       _id: '6653a9d72c69de37c98e1972',
