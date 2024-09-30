@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import bannerImage from '../../assets/sciotosketch.webp';
+import bannerImage from '../../assets/SciotoOpen_KeyArt.webp';
 
 export default function SciotoOpen2024SignUp({ onSubmit, slotsFilled }) {
   const [formData, setFormData] = useState({
