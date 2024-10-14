@@ -2,56 +2,57 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import PersonCheckInCard from '../cards/PersonCheckInCard.jsx';
 
-const debounce = (func, delay) => {
-  let timeoutId;
-  return function (...args) {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
-    timeoutId = setTimeout(() => {
-      func(...args);
-    }, delay);
-  };
+const isWithinLastTwoMonths = (lastCheckInDate) => {
+  const twoMonthsAgo = new Date();
+  twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
+
+  if (!lastCheckInDate) {
+    return false;
+  }
+
+  const lastCheckIn = new Date(lastCheckInDate);
+  return lastCheckIn >= twoMonthsAgo;
 };
 
 const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterCheckedIn, setFilterCheckedIn] = useState(false);
+  const [showAllMembers, setShowAllMembers] = useState(false);
+  const [showCurrentlyCheckedIn, setShowCurrentlyCheckedIn] = useState(false);
   const [filteredMembers, setFilteredMembers] = useState(members);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const handleFilterCheckedIn = () => {
-    setFilterCheckedIn(!filterCheckedIn);
+  const handleShowAllMembersToggle = () => {
+    setShowAllMembers(!showAllMembers);
+  };
+
+  const handleShowCurrentlyCheckedInToggle = () => {
+    setShowCurrentlyCheckedIn(!showCurrentlyCheckedIn);
   };
 
   useEffect(() => {
-    const debouncedFilter = debounce((search) => {
-      let filtered = members;
+    let filtered = members;
 
-      // Apply "Show Only Checked In Members" filter
-      if (filterCheckedIn) {
-        filtered = filtered.filter((member) => member.checkedIn === true);
-      }
+    if (!showAllMembers) {
+      filtered = filtered.filter((member) => isWithinLastTwoMonths(member.lastCheckInDate));
+    }
 
-      // Apply search term filter
+    if (showCurrentlyCheckedIn) {
+      filtered = filtered.filter((member) => member.checkedIn);
+    }
+
+    if (searchTerm) {
       filtered = filtered.filter(
         (member) =>
-          member.display_first_name.toLowerCase().includes(search.toLowerCase()) ||
-          member.display_last_name.toLowerCase().includes(search.toLowerCase())
+          member.display_first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          member.display_last_name.toLowerCase().includes(searchTerm.toLowerCase())
       );
+    }
 
-      setFilteredMembers(filtered);
-    }, 300);
-
-    debouncedFilter(searchTerm);
-
-    return () => {
-      clearTimeout(debouncedFilter);
-    };
-  }, [searchTerm, members, filterCheckedIn]);
+    setFilteredMembers(filtered);
+  }, [searchTerm, members, showAllMembers, showCurrentlyCheckedIn]);
 
   const handleCheckIn = (_id) => {
     onCheckIn(_id);
@@ -88,45 +89,37 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
               onChange={handleSearch}
             />
           </div>
-          <button
-            type="submit"
-            className="p-2.5 ms-2 text-sm font-medium text-white bg-deepSeaBlue rounded-lg border border-deepSeaBlue"
-          >
-            <svg
-              className="w-4 h-4"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-            <span className="sr-only">Search</span>
-          </button>
         </span>
+      </div>
 
-        {/* Filter Checkbox - Right aligned with checkbox after the label */}
+      <div className="flex items-center mb-4 space-x-12">
         <div className="flex items-center">
-          <label className="mr-2 text-md" htmlFor="filterCheckedIn">
-            Show Only Checked In Members
-          </label>
           <input
             type="checkbox"
-            id="filterCheckedIn"
-            checked={filterCheckedIn}
-            onChange={handleFilterCheckedIn}
+            id="showAllMembers"
+            checked={showAllMembers}
+            onChange={handleShowAllMembersToggle}
             className="h-6 w-6 text-deepSeaBlue border-gray-300 focus:ring-deepSeaBlue accent-deepSeaBlue"
           />
+          <label className="ml-2 text-md" htmlFor="showAllMembers">
+            Show All Fencers
+          </label>
+        </div>
+
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="showCurrentlyCheckedIn"
+            checked={showCurrentlyCheckedIn}
+            onChange={handleShowCurrentlyCheckedInToggle}
+            className="h-6 w-6 text-deepSeaBlue border-gray-300 focus:ring-deepSeaBlue accent-deepSeaBlue"
+          />
+          <label className="ml-2 text-md" htmlFor="showCurrentlyCheckedIn">
+            Show Only Currently Checked-In
+          </label>
         </div>
       </div>
 
-      {/* Displaying Filtered Members */}
       <div className="grid grid-cols-1 gap-2 w-full mt-4">
         {filteredMembers.map((user) => (
           <PersonCheckInCard
@@ -149,6 +142,7 @@ PersonCheckInCardContainer.propTypes = {
       display_first_name: PropTypes.string.isRequired,
       display_last_name: PropTypes.string.isRequired,
       checkedIn: PropTypes.bool.isRequired,
+      lastCheckInDate: PropTypes.string,
     })
   ).isRequired,
   onCheckIn: PropTypes.func.isRequired,
