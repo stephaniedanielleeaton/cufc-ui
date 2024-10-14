@@ -13,11 +13,6 @@ const options = [
     price: '$110/month',
   },
   {
-    id: 'socialMembership',
-    header: 'Saturday Classes',
-    price: '$65/month',
-  },
-  {
     id: 'familyPlan',
     header: 'Family Plan',
     price: '$110 + $65/month for each additional family member',
@@ -25,7 +20,7 @@ const options = [
   {
     id: 'dropIn',
     header: 'I just want to drop in',
-    price: '$20 per class, use drop in button before class',
+    price: '$20 per class, drop in fees due on day of class',
   },
 ];
 
