@@ -41,12 +41,12 @@ function AboutNugget({ onNavigationClick }) {
           </ul>
           <div className="mb-10">
             <h2 className="font-bold text-2xl text-Navy mb-4">Upcoming Start Dates:</h2>
-            <ul className="list-disc pl-6 text-sm">
-              <li className="mb-2">October 2, 2024</li>
-              <li className="mb-2">January 8, 2025</li>
-              <li className="mb-2">March 5, 2025</li>
-              <li className="mb-2">May 7, 2025</li>
-            </ul>
+              <div>Reach out on our <button
+                onClick={() => onNavigationClick('contact')}
+                className="text-blue-600 hover:text-blue-800"
+              >
+                Contact Page
+              </button> to let us know you are interested, and we can keep you updated when we finalise our 2025 start dates.</div>
           </div>
           <p className="text-lg text-Navy font-bold mb-4">
             What gear do I need?

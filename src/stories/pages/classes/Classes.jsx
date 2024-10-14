@@ -106,17 +106,10 @@ function Classes({ onNavigationClick }) {
             </p>
           </div>
           <div className="mb-6">
-            <h3 className="font-bold text-Navy text-lg mb-2">Full Class Access</h3>
+            <h3 className="font-bold text-Navy text-lg mb-2">Monthly Class Access</h3>
             <p className="font-light text-sm">
               For those with prior experience, our Full Class Access option grants unlimited access to all regular weekly
               classes and social events at $110 per month.
-            </p>
-          </div>
-          <div className="mb-6">
-            <h3 className="font-bold text-Navy text-lg mb-2">Saturday Classes</h3>
-            <p className="font-light text-sm">
-              If you prefer to focus on sparring and tournament style fencing, the Saturday Classes option offers access
-              to Saturday sessions for $65 per month.
             </p>
           </div>
           <div className="mb-6">
