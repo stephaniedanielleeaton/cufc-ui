@@ -92,51 +92,52 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">Lynx Cup 2025</h2>
           <p className="text-sm mb-2">February 14th to 16th, 2025</p>
+          <p className="text-sm mb-2">Welcome to Lynx Cup 2025! Columbus United Fencing Club is proud to bring together our experienced 
+          judges and event staff to host our largest and most exciting event of the year.</p>
         </div>
         <hr className="border-gray-300 my-8" />
-        <p className="mb-5 text-gray-700 px-5 text-sm">
-          
-          Welcome to Lynx Cup 2025! Columbus United Fencing Club is proud to bring together our experienced 
-          judges and event staff to host our largest and most exciting event of the year.
-        
-          <br />
-          <br />
+        <p className="mb-5 text-gray-700 text-sm">
           <div className="font-bold text-lg">Pricing</div>
           <b>Before January 15th, 2025:</b>
-          <br/>
-           Base admission $45. Event fee $45 per event.
+          <ul className="ml-6">
+            <li>Base Admission: $45</li>
+            <li>Event Fee: $45/event</li>
+          </ul>
+          <b>On and After January 15th, 2025:</b>
+          <ul className="ml-6">
+            <li>Base Admission: $50</li>
+            <li>Event Fee: $50/event</li>
+          </ul>
           <br />
-          <br />
-          <b>On After January 15th, 2025:</b>
-          <br/>
-           Base admission $45. Event fee $45 per event.
-          <br />
-          <br />
-          Registration cut off for each event is at the start of Check In.
-          <br />
-          <br />
+          <div className='text-xs font-italic'>Registration cut off for each event is at the start of check In.</div>
+          <hr className="border-gray-300 my-8" />
           <div className="font-bold text-lg">Events and Schedule</div>
           <br/>
           <div className="font-bold text-md">Friday, Feb 14th</div>
-          <ul className="list-disc list-outside ml-5">
-            <li>Noon. Open Saber</li>
-            <li>4pm. Longsword Division C</li>
-          </ul>
-          <div className="font-bold text-md">Saturday, Feb 15th</div>
-          <ul className="list-disc list-outside ml-5">
-            <li>9am. Longsword B</li>
-            <li>Noon. Longsword A</li>
-          </ul>
-          <div className="font-bold text-md">Sunday, Feb 16th</div>
-          <ul className="list-disc list-outside ml-5">
-            <li>9am. Marginalized Gender Longsword*</li>
-            <li>Noon. Rapier And Dagger</li>
-            <li>Noon. Sword and Buckler</li>
+          <ul className="ml-6">
+            <li>Noon: Open Saber</li>
+            <li>4pm: Longsword C</li>
           </ul>
           <br/>
-          <div>*There is no additional fee for Marginalized Genders Longsword. This event is open to trans and cis women, trans men, non-binary people, intersex people, and any other
-          gender expansive people who are often underrepresented in HEMA.</div>
-          <br />
+          <div className="font-bold text-md">Saturday, Feb 15th</div>
+          <ul className="ml-6">
+            <li>9am: Longsword B</li>
+            <li>Noon: Longsword A</li>
+          </ul>
+          <br/>
+          <div className="font-bold text-md">Sunday, Feb 16th</div>
+          <ul className="ml-6">
+            <li>9am: Marginalized Gender Longsword*</li>
+            <li>Noon: Rapier And Dagger</li>
+            <li>Noon: Sword and Buckler</li>
+          </ul>
+          <br/>
+          <p className="text-xs font-italic">
+          *MG Longsword: No additional fee. Open to trans and cis women, trans men, 
+          non-binary people, intersex people, and other gender expansive people 
+          underrepresented in HEMA.
+        </p>
+          <hr className="border-gray-300 my-8" />
           <div className="font-bold text-lg">Location</div>
           <p className="text-sm">
             6475 E Main St. #111
