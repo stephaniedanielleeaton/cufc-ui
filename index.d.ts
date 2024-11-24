@@ -25,6 +25,7 @@ declare module 'cufc-ui' {
   export const SwordQuench2024SignUp: React.ComponentType<any>;
   export const AboutNugget: React.ComponentType<any>;
   export const NuggetCTA: React.ComponentType<any>;
+  export const LynxCup2025SignUp: React.ComponentType<any>;
 
   export const SciotoOpen2024SignUp: React.ComponentType<any>;
 }

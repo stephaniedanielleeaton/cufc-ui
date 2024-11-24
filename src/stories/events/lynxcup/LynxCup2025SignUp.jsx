@@ -109,51 +109,52 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
           <h2 className="text-3xl font-bold mb-2">Lynx Cup 2025</h2>
           <p className="text-sm mb-2">February 14th to 16th, 2025</p>
         </div>
-        <p className="text-sm mb-2">Welcome to Lynx Cup 2025! Columbus United Fencing Club is proud to bring together our best 
+        <p className="text-sm mb-2">Welcome to Lynx Cup 2025! Columbus United Fencing Club is proud to bring together our best
           judges and event staff to host our largest and most exciting event of the year.</p>
         <hr className="border-gray-300 my-6" />
         <p className="mb-5 text-gray-700 text-sm px-5">
           <div className="font-bold text-lg">Pricing</div>
-          <br/>
+          <br />
           <div className="font-bold">Before January 15th, 2025:</div>
           <ul className="ml-6">
             <li>Admission: $45 + $45 per event</li>
           </ul>
           <b>On and After January 15th, 2025:</b>
           <ul className="ml-6">
-          <li>Admission: $50 + $50 per event</li>
+            <li>Admission: $50 + $50 per event</li>
           </ul>
           <br />
           <div className='italic'>Registration cut off for each event is at the start of check In.</div>
           <hr className="border-gray-300 my-6" />
           <div className="font-bold text-lg">Events and Schedule</div>
-          <br/>
+          <br />
           <div className="font-bold text-md">Friday, Feb 14th</div>
           <ul className="ml-6">
             <li>Noon: Open Saber</li>
             <li>4pm: Longsword C</li>
           </ul>
-          <br/>
+          <br />
           <div className="font-bold text-md">Saturday, Feb 15th</div>
           <ul className="ml-6">
             <li>9am: Longsword B</li>
             <li>Noon: Longsword A</li>
           </ul>
-          <br/>
+          <br />
           <div className="font-bold text-md">Sunday, Feb 16th</div>
           <ul className="ml-6">
             <li>9am: Marginalized Gender Longsword*</li>
             <li>Noon: Rapier And Dagger</li>
             <li>Noon: Sword and Buckler</li>
           </ul>
-          <br/>
+          <br />
           <p className="italic">
-          *No additional fee. Open to trans and cis women, trans men, 
-          non-binary people, intersex people, and other gender expansive people 
-          underrepresented in HEMA.
-        </p>
+            *No additional fee. Open to trans and cis women, trans men,
+            non-binary people, intersex people, and other gender expansive people
+            underrepresented in HEMA.
+          </p>
           <hr className="border-gray-300 my-6" />
           <div className="font-bold text-lg">Location</div>
+          <br />
           <p className="text-sm">
             6475 E Main St. #111
             <br />
@@ -161,20 +162,29 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
           </p>
           <hr className="border-gray-300 my-6" />
           <div className="font-bold text-lg">Additional Information</div>
-          <br/>
-          <b>Longsword Divisions</b>
           <br />
-          <div className="ml-6">Division A is required for any fencer with a Longsword HEMA Rating above 1400. Longsword C is recommended if you have never competed before, 
-          or if you typically get knocked out in the first round of brackets.</div>
-          <br/>
-          Rules Document
-          <br/>
-           Join our event Discord!
-        
+          <a
+            href="https://docs.google.com/document/d/1OCO9HWgbHWwNWjFPBvSD-7wLcVh8c8WnEH6laKAXSx0/edit"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline hover:text-blue-700"
+          >
+            Link To Rules
+          </a>
+          <br />
+          <a
+            href="https://discord.gg/A6n5dWzq"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline hover:text-blue-700"
+          >
+            Join our event Discord!
+          </a>
         </p>
-        
         <form onSubmit={handleSubmit} className="space-y-4 px-5">
+       
           <hr className="border-gray-300 my-8" />
+          <div className="font-bold text-lg">Registration</div>
           <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs">ABOUT YOU</h3>
           <div className="space-y-2">
             <input
@@ -286,80 +296,80 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
             </>
           )}
           <hr className="border-gray-300 my-8" />
-          <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs">SELECT EVENTS</h3>
           <div className="space-y-6">
-  {/* Longsword Selection */}
-  <div>
-    <h4 className="text-lg font-bold">Open Longsword Selection (Choose One)</h4>
-    <div className="p-4 rounded-md shadow-inner">
-      {[
-        { name: 'Open Longsword A', slots: slotsFilled.longswordA },
-        { name: 'Open Longsword B', slots: slotsFilled.longswordB },
-        { name: 'Open Longsword C', slots: slotsFilled.longswordC },
-      ].map((longswordEvent) => (
-        <div
-          key={longswordEvent.name}
-          className={`flex items-center p-2 ${
-            isLongswordSelected && !formData.events.includes(longswordEvent.name)
-              ? 'opacity-50'
-              : ''
-          }`}
-        >
-          <label className="flex items-center w-full">
-            <input
-              type="checkbox"
-              name="events"
-              value={longswordEvent.name}
-              checked={formData.events.includes(longswordEvent.name)}
-              onChange={handleEventChange}
-              disabled={
-                isLongswordSelected &&
-                !formData.events.includes(longswordEvent.name) ||
-                getRemainingSlots(28, longswordEvent.slots) === 0
-              }
-              className="mr-3 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
-            />
-            <span className="text-sm">{longswordEvent.name}</span>
-          </label>
-          <span className="text-xs pl-8 font-bold block">
-            {getRemainingSlots(28, longswordEvent.slots)} slots out of 28 remaining
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
+            {/* Longsword Selection */}
+            <div>
+              <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs">OPEN LONGSWORD (Choose One)</h3>
+              <div className="ml-6 text-sm">Division A is required for any fencer with a Longsword HEMA Rating above 1400. Longsword C is recommended if you have never competed before,
+                or if you typically get knocked out in the first round of brackets.</div>
+              <div className="p-4 rounded-md shadow-inner">
+                {[
+                  { name: 'Open Longsword A', slots: slotsFilled.longswordA },
+                  { name: 'Open Longsword B', slots: slotsFilled.longswordB },
+                  { name: 'Open Longsword C', slots: slotsFilled.longswordC },
+                ].map((longswordEvent) => (
+                  <div
+                    key={longswordEvent.name}
+                    className={`flex items-center p-2 ${isLongswordSelected && !formData.events.includes(longswordEvent.name)
+                        ? 'opacity-50'
+                        : ''
+                      }`}
+                  >
+                    <label className="flex items-center w-full">
+                      <input
+                        type="checkbox"
+                        name="events"
+                        value={longswordEvent.name}
+                        checked={formData.events.includes(longswordEvent.name)}
+                        onChange={handleEventChange}
+                        disabled={
+                          isLongswordSelected &&
+                          !formData.events.includes(longswordEvent.name) ||
+                          getRemainingSlots(28, longswordEvent.slots) === 0
+                        }
+                        className="mr-3 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
+                      />
+                      <span className="text-sm">{longswordEvent.name}</span>
+                    </label>
+                    <span className="text-xs pl-8 font-bold block">
+                      {getRemainingSlots(28, longswordEvent.slots)} slots out of 28 remaining
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-  {/* Other Events */}
-  <div>
-    <h4 className="text-lg font-bold mb-2">Other Events</h4>
-    <div className="space-y-4">
-      {[
-        { name: 'Open Saber', slots: slotsFilled.saber },
-        { name: 'Open Rapier and Dagger', slots: slotsFilled.rapier },
-        { name: 'Open Sword and Buckler', slots: slotsFilled.swordBuckler },
-        { name: 'Marginalized Genders Longsword', slots: slotsFilled.mg },
-      ].map((event) => (
-        <div key={event.name}>
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              name="events"
-              value={event.name}
-              checked={formData.events.includes(event.name)}
-              onChange={handleEventChange}
-              disabled={getRemainingSlots(36, event.slots) === 0}
-              className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
-            />
-            {event.name}
-          </label>
-          <span className="text-xs pl-8 font-bold block">
-            {getRemainingSlots(36, event.slots)} slots out of 36 remaining
-          </span>
-        </div>
-      ))}
-    </div>
-  </div>
-</div>
+            {/* Other Events */}
+            <div>
+            <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs">OTHER EVENTS</h3>
+              <div className="space-y-4">
+                {[
+                  { name: 'Open Saber', slots: slotsFilled.saber },
+                  { name: 'Open Rapier and Dagger', slots: slotsFilled.rapier },
+                  { name: 'Open Sword and Buckler', slots: slotsFilled.swordBuckler },
+                  { name: 'Marginalized Genders Longsword', slots: slotsFilled.mg },
+                ].map((event) => (
+                  <div key={event.name}>
+                    <label className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name="events"
+                        value={event.name}
+                        checked={formData.events.includes(event.name)}
+                        onChange={handleEventChange}
+                        disabled={getRemainingSlots(28, event.slots) === 0}
+                        className="mr-2 h-6 w-6 text-DeepRed border-DeepRed focus:ring-DeepRed"
+                      />
+                      {event.name}
+                    </label>
+                    <span className="text-xs pl-8 font-bold block">
+                      {getRemainingSlots(28, event.slots)} slots out of 28 remaining
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
           <hr className="border-gray-300 my-16" />
           <div className="flex justify-between font-bold mt-2">
             <span>Total:</span>

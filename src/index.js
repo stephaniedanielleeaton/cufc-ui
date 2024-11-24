@@ -19,3 +19,4 @@ export { default as SwordQuench2024SignUp } from './stories/events/swordquench/S
 export { default as AboutNugget } from './stories/pages/aboutnugget/AboutNugget.jsx';
 export { default as NuggetCTA } from './stories/pages/homepage/nuggetcta/NuggetCTA.jsx';
 export { default as SciotoOpen2024SignUp } from './stories/events/sciotoopen/SciotoOpen2024SignUp.jsx';
+export { default as LynxCup2025SignUp } from './stories/events/lynxcup/LynxCup2025SignUp.jsx';
