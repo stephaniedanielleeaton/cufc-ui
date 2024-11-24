@@ -19,17 +19,16 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
     phoneNumber: '',
   });
 
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(45);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    const basePrice = 45;
-    let price = 0;
+    let price = 45;
 
     formData.events.forEach((event) => {
       if (event !== 'Marginalized Genders Longsword') {
-        price += basePrice;
+        price += 45;
       }
     });
 
