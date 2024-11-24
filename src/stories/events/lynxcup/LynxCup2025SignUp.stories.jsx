@@ -14,8 +14,12 @@ Default.args = {
     console.log('Form submitted:', formData);
   },
   slotsFilled: {
-    longsword: 10,
+    longswordA: 10,
+    longswordB: 15,
+    longswordC: 8,
     saber: 21,
+    rapier: 12,
+    swordBuckler: 6,
     mg: 2,
   },
 };
