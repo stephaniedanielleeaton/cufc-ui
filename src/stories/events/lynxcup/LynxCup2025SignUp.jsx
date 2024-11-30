@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import bannerImage from '../../assets/MascotFullColor.svg';
+import bannerImage from '../../assets/LynxCup2025_keyart.png';
 
 export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
   const [formData, setFormData] = useState({
@@ -100,6 +100,14 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center relative">
+      {/* Background image div - only visible on larger screens */}
+      <div 
+        className="hidden lg:block fixed inset-0 bg-cover bg-center bg-fixed bg-no-repeat opacity-10"
+        style={{ 
+          backgroundImage: `url(${bannerImage})`,
+          backgroundPosition: '50% 50%'
+        }}
+      />
       <div className="relative z-10 max-w-md w-full bg-white rounded-lg shadow-lg p-4 font-poppins">
         <div className="relative mb-8">
           <img src={bannerImage} alt="Banner" className="w-full h-full object-cover rounded-t-lg" />
@@ -123,7 +131,7 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
             <li>Admission: $50 + $50 per event</li>
           </ul>
           <br />
-          <div className='italic'>Registration cut off for each event is at the start of check In.</div>
+          <div className='italic'>Registration cut off for each event is Febuary 7th, 2025.</div>
           <hr className="border-gray-300 my-6" />
           <div className="font-bold text-lg">Events and Schedule</div>
           <br />
@@ -298,14 +306,15 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
           <div className="space-y-6">
             {/* Longsword Selection */}
             <div>
-              <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs">OPEN LONGSWORD (Choose One)</h3>
+              <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs">LONGSWORD (Choose One)</h3>
               <div className="ml-6 text-sm">Division A is required for any fencer with a Longsword HEMA Rating above 1400. Longsword C is recommended if you have never competed before,
-                or if you typically get knocked out in the first round of brackets.</div>
+                or if you typically get knocked out in the first round of brackets. Final fencer
+                placement may be changed at the discretion of the Event Organizer.</div> 
               <div className="p-4 rounded-md shadow-inner">
                 {[
-                  { name: 'Open Longsword A', slots: slotsFilled.longswordA },
-                  { name: 'Open Longsword B', slots: slotsFilled.longswordB },
-                  { name: 'Open Longsword C', slots: slotsFilled.longswordC },
+                  { name: 'Longsword A', slots: slotsFilled.longswordA },
+                  { name: 'Longsword B', slots: slotsFilled.longswordB },
+                  { name: 'Longsword C', slots: slotsFilled.longswordC },
                 ].map((longswordEvent) => (
                   <div
                     key={longswordEvent.name}
