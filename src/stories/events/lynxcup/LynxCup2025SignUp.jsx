@@ -143,8 +143,8 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
           <br />
           <div className="font-bold text-md">Saturday, Feb 15th</div>
           <ul className="ml-6">
-            <li>9am: Longsword B</li>
-            <li>Noon: Longsword A</li>
+            <li>9am: Longsword A</li>
+            <li>Noon: Longsword B</li>
           </ul>
           <br />
           <div className="font-bold text-md">Sunday, Feb 16th</div>
