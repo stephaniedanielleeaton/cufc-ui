@@ -45,7 +45,7 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
 
   const handleEventChange = (e) => {
     const { value, checked } = e.target;
-    const longswordEvents = ['Open Longsword A', 'Open Longsword B', 'Open Longsword C'];
+    const longswordEvents = ['Open Longsword Div 1', 'Open Longsword Div 2', 'Open Longsword Div 3'];
 
     if (longswordEvents.includes(value)) {
       // If a longsword event is selected, remove any other longsword event
@@ -95,7 +95,7 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
 
   const getRemainingSlots = (totalSlots, filledSlots) => totalSlots - filledSlots;
   const isLongswordSelected = formData.events.some((event) =>
-    ['Open Longsword A', 'Open Longsword B', 'Open Longsword C'].includes(event)
+    ['Open Longsword Div 1', 'Open Longsword Div 2', 'Open Longsword Div 3'].includes(event)
   );
 
   return (
@@ -138,13 +138,13 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
           <div className="font-bold text-md">Friday, Feb 14th</div>
           <ul className="ml-6">
             <li>Noon: Open Saber</li>
-            <li>4pm: Longsword C</li>
+            <li>4pm: Longsword Div 3</li>
           </ul>
           <br />
           <div className="font-bold text-md">Saturday, Feb 15th</div>
           <ul className="ml-6">
-            <li>9am: Longsword A</li>
-            <li>Noon: Longsword B</li>
+            <li>9am: Longsword Div 1</li>
+            <li>Noon: Longsword Div 2</li>
           </ul>
           <br />
           <div className="font-bold text-md">Sunday, Feb 16th</div>
@@ -307,14 +307,14 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
             {/* Longsword Selection */}
             <div>
               <h3 className="block mb-5 font-extrabold text-sm tracking-wider text-xs">LONGSWORD (Choose One)</h3>
-              <div className="ml-6 text-sm">Division A is required for any fencer with a Longsword HEMA Rating above 1400. Longsword C is recommended if you have never competed before,
+              <div className="ml-6 text-sm">Division 1 is required for any fencer with a Longsword HEMA Rating above 1400. Longsword Div 3 is recommended if you have never competed before,
                 or if you typically get knocked out in the first round of brackets. Final fencer
                 placement may be changed at the discretion of the Event Organizer.</div> 
               <div className="p-4 rounded-md shadow-inner">
                 {[
-                  { name: 'Longsword A', slots: slotsFilled.longswordA },
-                  { name: 'Longsword B', slots: slotsFilled.longswordB },
-                  { name: 'Longsword C', slots: slotsFilled.longswordC },
+                  { name: 'Open Longsword Div 1', slots: slotsFilled.longsword1 },
+                  { name: 'Open Longsword Div 2', slots: slotsFilled.longsword2 },
+                  { name: 'Open Longsword Div 3', slots: slotsFilled.longsword3 },
                 ].map((longswordEvent) => (
                   <div
                     key={longswordEvent.name}
@@ -401,8 +401,12 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
 LynxCup2025SignUp.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   slotsFilled: PropTypes.shape({
-    longsword: PropTypes.number.isRequired,
-    saber: PropTypes.number.isRequired,
-    mg: PropTypes.number.isRequired,
+    longsword1: PropTypes.number,
+    longsword2: PropTypes.number,
+    longsword3: PropTypes.number,
+    saber: PropTypes.number,
+    mg: PropTypes.number,
+    rapier: PropTypes.number,
+    swordBuckler: PropTypes.number,
   }).isRequired,
 };
