@@ -63,8 +63,11 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
         </a>
         {isAdmin ? (
           <a href="#" className="text-white text-xl block" onClick={() => handleNavigationClick('admin')}>
-          Admin
-        </a>) : ''}
+            Admin
+          </a>
+        ) : (
+          ''
+        )}
       </div>
 
       {/* Desktop Navigation */}

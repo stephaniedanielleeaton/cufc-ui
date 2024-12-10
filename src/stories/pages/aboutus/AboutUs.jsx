@@ -12,6 +12,33 @@ function AboutUs({ onNavigationClick, gearRecommendationsLink }) {
 
   return (
     <div className="min-h-screen py-10 bg-gray-50">
+      {/* Top Navigation */}
+      <nav className="bg-white shadow-md mb-12">
+        <div className="max-w-screen-lg mx-auto px-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center py-4 space-y-2 sm:space-y-0">
+            <button
+              onClick={() => onNavigationClick('intro')}
+              className="px-6 py-2 text-Navy hover:text-wine transition-colors font-semibold mx-4 flex items-center"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+              HEMA Fundamentals Course
+            </button>
+            <div className="h-4 border-r border-gray-300 hidden sm:block"></div>
+            <button
+              onClick={() => onNavigationClick('classes')}
+              className="px-6 py-2 text-Navy hover:text-wine transition-colors font-semibold mx-4 flex items-center"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Class Schedule & Pricing
+            </button>
+          </div>
+        </div>
+      </nav>
+
       {/* Header Section */}
       <header className="text-center mb-12">
         <h1 className="text-5xl text-wine font-khula font-bold mb-4">

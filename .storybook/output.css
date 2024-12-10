@@ -1167,6 +1167,10 @@ video {
   border-left-width: 2px;
 }
 
+.border-r {
+  border-right-width: 1px;
+}
+
 .border-t-2 {
   border-top-width: 2px;
 }
@@ -1861,6 +1865,11 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.hover\:text-wine:hover {
+  --tw-text-opacity: 1;
+  color: rgb(122 37 63 / var(--tw-text-opacity));
+}
+
 .hover\:text-wine\/80:hover {
   color: rgb(122 37 63 / 0.8);
 }
@@ -1908,6 +1917,10 @@ video {
     grid-column: span 3 / span 3;
   }
 
+  .sm\:block {
+    display: block;
+  }
+
   .sm\:grid {
     display: grid;
   }
@@ -1922,6 +1935,10 @@ video {
 
   .sm\:grid-cols-12 {
     grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
   }
 
   .sm\:flex-nowrap {
