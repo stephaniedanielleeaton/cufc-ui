@@ -8,7 +8,7 @@ function CTA({onNavigationClick}) {
       </div>
       <div className="md:w-1/3 flex items-center justify-center md:justify-start mx-16">
         <button
-          className="tracking-wider border-2 border-white text-sm font-bold my-4 px-4 py-2 rounded-none md:w-auto hover:bg-white hover:text-black hover:border-black"
+          className="tracking-wider bg-MediumPink text-white text-lg font-bold px-8 py-3 rounded-lg transition-all duration-300 hover:bg-MediumPink/90 hover:scale-105 shadow-lg"
           onClick={() => onNavigationClick('joinNow')}
         >
           JOIN NOW

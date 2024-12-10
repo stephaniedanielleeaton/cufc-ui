@@ -1,42 +1,62 @@
 import React from 'react';
-function Schedule() {
-  return (
-    <div className="w-full font-khula bg-Navy px-20 py-8">
-      {/* First div */}
-      <div className="flex justify-between items-center w-full py-4 mb-6">
-        <div>
-          <span className="font-bold text-2xl text-white px-4">HEMA Class Schedule</span>
-        </div>
-        <div>
-          {/*<button*/}
-          {/*  className="tracking-wider border-2 border-white text-white text-xs font-bold px-4 py-2 rounded-none md:w-auto hover:bg-white hover:text-black hover:border-black">*/}
-          {/*  SEE EVENTS*/}
-          {/*</button>*/}
-        </div>
-      </div>
 
-      {/* Schedule Entries */}
-      <div className="w-full grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="flex flex-col p-4 rounded-lg md:bg-transparent bg-gray-600">
-          <span className="text-LightPink font-bold text-sm mb-1">Saber</span>
-          <span className="text-white font-bold text-sm">Monday</span>
-          <span className="text-white text-xs font-light">7:00pm - 9:00pm</span>
+function Schedule() {
+  const scheduleItems = [
+    {
+      discipline: 'Saber',
+      day: 'Monday',
+      time: '7:00pm - 9:00pm',
+    },
+    {
+      discipline: 'Longsword',
+      subtitle: '(Beginner & Open Class)',
+      day: 'Wednesday',
+      time: '6:30pm - 8:30pm',
+    },
+    {
+      discipline: 'Footwork & Thrusting Weapons',
+      day: 'Thursday',
+      time: '7:00pm - 9:00pm',
+    },
+    {
+      discipline: 'Open Floor',
+      day: 'Saturday',
+      time: '11:00am - 1:00pm',
+    },
+  ];
+
+  return (
+    <div className="bg-Navy">
+      <div className="container mx-auto px-6 py-16 md:py-24">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-12">
+          <div className="space-y-2">
+            <h2 className="font-bold text-3xl md:text-4xl text-white">HEMA Class Schedule</h2>
+            <p className="text-gray-300">Join us for regular training sessions throughout the week</p>
+          </div>
         </div>
-        <div className="flex flex-col p-4 rounded-lg md:bg-transparent bg-gray-600">
-          <span className="text-LightPink font-bold text-sm mb-1">Longsword</span>
-          <span className="text-LightPink font-bold text-sm mb-1">(Beginner & Open Class)</span>
-          <span className="text-white font-bold text-sm">Wednesday</span>
-          <span className="text-white text-xs font-light">6:30pm - 8:30pm</span>
-        </div>
-        <div className="flex flex-col p-4 rounded-lg md:bg-transparent bg-gray-600">
-          <span className="text-LightPink font-bold text-sm mb-1">Footwork & Thrusting Weapons</span>
-          <span className="text-white font-bold text-sm">Thursday</span>
-          <span className="text-white text-xs font-light">7:00pm - 9:00pm</span>
-        </div>
-        <div className="flex flex-col p-4 rounded-lg md:bg-transparent bg-gray-600">
-          <span className="text-LightPink font-bold text-sm mb-1">Open Floor</span>
-          <span className="text-white font-bold text-sm">Saturday</span>
-          <span className="text-white text-xs font-light">11:00am - 1:00pm</span>
+
+        {/* Schedule Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {scheduleItems.map((item, index) => (
+            <div 
+              key={index}
+              className="bg-Navy-light/20 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:scale-105"
+            >
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <h3 className="text-LightPink font-bold text-lg">{item.discipline}</h3>
+                  {item.subtitle && (
+                    <p className="text-LightPink/90 text-sm">{item.subtitle}</p>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  <p className="text-white font-bold">{item.day}</p>
+                  <p className="text-gray-300 text-sm">{item.time}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
