@@ -1054,6 +1054,10 @@ video {
   gap: 0.5rem;
 }
 
+.gap-3 {
+  gap: 0.75rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
@@ -1814,6 +1818,10 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-wine\/10:hover {
+  background-color: rgb(122 37 63 / 0.1);
+}
+
 .hover\:bg-wine\/90:hover {
   background-color: rgb(122 37 63 / 0.9);
 }
@@ -1853,6 +1861,10 @@ video {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.hover\:text-wine\/80:hover {
+  color: rgb(122 37 63 / 0.8);
+}
+
 .focus\:border-DeepRed:focus {
   --tw-border-opacity: 1;
   border-color: rgb(81 31 51 / var(--tw-border-opacity));
@@ -1876,6 +1888,11 @@ video {
 .focus\:ring-deepSeaBlue:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(55 90 122 / var(--tw-ring-opacity));
+}
+
+.group:hover .group-hover\:text-wine {
+  --tw-text-opacity: 1;
+  color: rgb(122 37 63 / var(--tw-text-opacity));
 }
 
 @media (min-width: 640px) {
@@ -1967,8 +1984,8 @@ video {
     width: auto;
   }
 
-  .md\:list-disc {
-    list-style-type: disc;
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .md\:grid-cols-4 {
@@ -1989,6 +2006,10 @@ video {
 
   .md\:bg-transparent {
     background-color: transparent;
+  }
+
+  .md\:p-12 {
+    padding: 3rem;
   }
 
   .md\:p-20 {
@@ -2013,10 +2034,6 @@ video {
   .md\:py-16 {
     padding-top: 4rem;
     padding-bottom: 4rem;
-  }
-
-  .md\:text-left {
-    text-align: left;
   }
 }
 

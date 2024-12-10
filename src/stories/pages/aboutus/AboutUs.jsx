@@ -2,7 +2,6 @@ import React from 'react';
 import Footer from '../../footer/Footer.jsx';
 
 function AboutUs({ onNavigationClick, gearRecommendationsLink }) {
-
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
   };
@@ -12,190 +11,199 @@ function AboutUs({ onNavigationClick, gearRecommendationsLink }) {
   }
 
   return (
-    <div className="min-h-screen py-10">
-      <h1 className="text-4xl text-wine font-khula font-bold mb-6 text-center">About Columbus United Fencing Club</h1>
-      <div className="w-9/12 border-t-2 border-wine mx-auto mb-10"></div>
+    <div className="min-h-screen py-10 bg-gray-50">
+      {/* Header Section */}
+      <header className="text-center mb-12">
+        <h1 className="text-5xl text-wine font-khula font-bold mb-4">
+          Columbus United Fencing Club
+        </h1>
+        <div className="w-32 h-1 bg-wine mx-auto"></div>
+      </header>
 
-      {/* Table of Contents */}
-      <div className="max-w-screen-lg font-khula md:px-20 px-8 bg-white shadow-lg mx-auto rounded-lg py-8 mb-10">
-        <h2 className="text-2xl text-Navy font-bold mb-4 text-center md:text-left">Table of Contents</h2>
-        <ul className="pl-6 mb-4 list-none md:list-disc">
-          <li className="mb-2 text-left">
-            <button
-              onClick={() => scrollToSection('what-is-hema')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
-            >
-              What is Historical European Martial Arts (HEMA)?
-            </button>
-          </li>
-          <li className="mb-2 text-left">
-            <button
-              onClick={() => scrollToSection('why-choose-us')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
-            >
-              Why Choose Columbus United Fencing Club?
-            </button>
-          </li>
-          <li className="mb-2 text-left">
-            <button
-              onClick={() => scrollToSection('how-to-start')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
-            >
-              How Do I Start?
-            </button>
-          </li>
-          <li className="mb-2 text-left">
-            <button
-              onClick={() => scrollToSection('gear')}
-              className="text-blue-600 hover:text-blue-800 w-full text-left"
-            >
-              What Gear Do You Recommend?
-            </button>
-          </li>
-        </ul>
-      </div>
-
-      <div className="max-w-screen-lg font-khula md:px-20 px-8 bg-white shadow-lg mx-auto rounded-lg py-8">
-        <div id="what-is-hema" className="mb-10">
-          <h2 className="font-bold text-2xl text-Navy mb-4">What is Historical European Martial Arts (HEMA)?</h2>
-          <p className="font-light text-sm mb-4">
-            Historical European Martial Arts, or HEMA for short, are martial arts from European countries that are no
-            longer used in modern times.
-          </p>
-          <p className="font-light text-sm mb-4">
-            Sometimes called historical fencing, HEMA involves fighting with weapons like:
-          </p>
-          <ul className="pl-6 mb-4 list-none md:list-disc">
-            <li className="mb-2">Longsword</li>
-            <li className="mb-2">Rapier</li>
-            <li className="mb-2">Saber (sometimes spelled sabre)</li>
-            <li className="mb-2">Dagger</li>
-            <li className="mb-2">Arming sword and buckler (a small shield)</li>
-            <li className="mb-2">Smallsword</li>
-            <li className="mb-2">Staff</li>
-          </ul>
-          <p className="font-light text-sm mb-4">
-            Unlike live-action roleplaying (LARP), HEMA is based on a handful of surviving fencing instruction manuals
-            and manuscripts written in the late Middle Ages and Renaissance periods.
-          </p>
-          <p className="font-light text-sm">
-            Our coaches have studied the works of German fencing masters Johannes Liechtenauer and Joachim Meyer and
-            Italian master Fiore dei Liberi for over a decade and pass on the knowledge of centuries-old traditions in
-            every class.
-          </p>
-        </div>
-
-        <div id="why-choose-us" className="mb-10">
-          <h2 className="font-bold text-2xl text-Navy mb-4">Why Choose Columbus United Fencing Club?</h2>
-          <p className="font-light text-sm mb-4">
-            Our club members have joined for many different reasons. Here are a few we commonly hear:
-          </p>
-          <div className="mb-6">
-            <h3 className="font-bold text-wine text-lg mb-2">To Learn</h3>
-            <p className="font-light text-sm">
-              While our lessons don't require members to study advanced techniques directly from the manuscripts,
-              there's so much to learn.
-              You'll learn the historical context and purpose of various weapons and how they were used, and then
-              practice applying that information through sparring.
-            </p>
-          </div>
-          <div className="mb-6">
-            <h3 className="font-bold text-wine text-lg mb-2">To Get Active (with Swords!)</h3>
-            <p className="font-light text-sm">
-              Several of our members have joined with little to no athletic background—just a desire to exercise and an
-              interest in swords!
-            </p>
-          </div>
-          <div className="mb-6">
-            <h3 className="font-bold text-wine text-lg mb-2">To Make New Friends</h3>
-            <p className="font-light text-sm">
-              Columbus United Fencing Club strives to provide an inclusive environment for all who enter through our
-              doors. This makes it relatively easy to find a group of friends who support you
-              and your endeavors, in and outside of the school itself.
-            </p>
-          </div>
-          <div className="mb-6">
-            <h3 className="font-bold text-wine text-lg mb-2">To Have Fun</h3>
-            <p className="font-light text-sm">
-              Whether you want to compete in tournament events or translate what you've learned in training to
-              choreography, you'll find there are no wrong ways to have fun at Columbus United
-              Fencing Club.
-            </p>
-          </div>
-        </div>
-
-        <div id="how-to-start" className="mb-10">
-          <h2 className="font-bold text-2xl text-Navy mb-4">How Do I Start?</h2>
-          <p className="font-light text-sm mb-4">
-            Your current level of experience will determine how you begin your journey with us.
-          </p>
-          <div className="mb-6">
-            <h3 className="font-bold text-wine text-lg mb-2">I'm New</h3>
-            <p className="font-light text-sm">
-              If you are completely new to HEMA or fencing, please check our our introductory course{' '}
-              <button onClick={() => onNavigationClick('intro')} className="text-blue-600 hover:text-blue-800">
-                here
+      <div className="max-w-screen-lg mx-auto px-4">
+        {/* Table of Contents */}
+        <section className="mb-12 bg-white shadow-xl rounded-xl p-8">
+          <h2 className="text-3xl font-bold text-Navy mb-6 text-center">Quick Navigation</h2>
+          <nav className="grid md:grid-cols-2 gap-4">
+            {[
+              { id: 'what-is-hema', title: 'What is HEMA?' },
+              { id: 'why-choose-us', title: 'Why Choose Us?' },
+              { id: 'how-to-start', title: 'Getting Started' },
+              { id: 'gear', title: 'Recommended Gear' }
+            ].map(({ id, title }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className="p-4 text-left rounded-lg bg-gray-50 hover:bg-wine/10 transition-colors group"
+              >
+                <span className="font-semibold text-Navy group-hover:text-wine transition-colors">{title}</span>
               </button>
-              . However, if you would like to watch a class first, let us know when on our{' '}
-              <button onClick={() => onNavigationClick('contact')} className="text-blue-600 hover:text-blue-800">
-                contact
+            ))}
+          </nav>
+        </section>
+
+        {/* Main Content */}
+        <main className="bg-white shadow-xl rounded-xl p-8 md:p-12">
+          {/* What is HEMA Section */}
+          <section id="what-is-hema" className="mb-16">
+            <h2 className="text-3xl font-bold text-Navy mb-6">What is Historical European Martial Arts?</h2>
+            <div className="space-y-6 text-gray-700">
+              <p className="leading-relaxed">
+                Historical European Martial Arts, or HEMA for short, are martial arts from European countries that are no
+                longer used in modern times.
+              </p>
+              <div>
+                <p className="mb-4">Sometimes called historical fencing, HEMA involves fighting with weapons like:</p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {[
+                    'Longsword',
+                    'Rapier',
+                    'Saber',
+                    'Dagger',
+                    'Arming sword and buckler',
+                    'Smallsword',
+                    'Staff'
+                  ].map((weapon, index) => (
+                    <div key={index} className="flex items-center space-x-2 bg-gray-50 p-3 rounded">
+                      <span className="text-wine">•</span>
+                      <span>{weapon}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <p className="leading-relaxed">
+                Unlike live-action roleplaying (LARP), HEMA is based on surviving fencing instruction manuals
+                and manuscripts written in the late Middle Ages and Renaissance periods.
+              </p>
+              <p className="leading-relaxed">
+                Our coaches have studied the works of German fencing masters Johannes Liechtenauer and Joachim Meyer and
+                Italian master Fiore dei Liberi for over a decade and pass on the knowledge of centuries-old traditions in
+                every class.
+              </p>
+            </div>
+          </section>
+
+          {/* Why Choose Us Section */}
+          <section id="why-choose-us" className="mb-16">
+            <h2 className="text-3xl font-bold text-Navy mb-6">Why Choose Columbus United Fencing Club?</h2>
+            <p className="text-gray-700 mb-8">
+              Our club members have joined for many different reasons. Here are a few we commonly hear:
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              {[
+                {
+                  title: 'To Learn',
+                  content: 'While our lessons don\'t require members to study advanced techniques directly from the manuscripts, there\'s so much to learn. You\'ll learn the historical context and purpose of various weapons and how they were used, and then practice applying that information through sparring.'
+                },
+                {
+                  title: 'To Get Active (with Swords!)',
+                  content: 'Several of our members have joined with little to no athletic background—just a desire to exercise and an interest in swords!'
+                },
+                {
+                  title: 'To Make New Friends',
+                  content: 'Columbus United Fencing Club strives to provide an inclusive environment for all who enter through our doors. This makes it relatively easy to find a group of friends who support you and your endeavors, in and outside of the school itself.'
+                },
+                {
+                  title: 'To Have Fun',
+                  content: 'Whether you want to compete in tournament events or translate what you\'ve learned in training to choreography, you\'ll find there are no wrong ways to have fun at Columbus United Fencing Club.'
+                }
+              ].map(({ title, content }, index) => (
+                <div key={index} className="bg-gray-50 p-6 rounded-lg">
+                  <h3 className="font-bold text-wine text-xl mb-3">{title}</h3>
+                  <p className="text-gray-700">{content}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* How to Start Section */}
+          <section id="how-to-start" className="mb-16">
+            <h2 className="text-3xl font-bold text-Navy mb-6">How Do I Start?</h2>
+            <p className="text-gray-700 mb-8">
+              Your current level of experience will determine how you begin your journey with us.
+            </p>
+            <div className="space-y-6">
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="font-bold text-wine text-xl mb-3">I'm New to HEMA</h3>
+                <p className="text-gray-700">
+                  If you are completely new to HEMA or fencing, check out our{' '}
+                  <button 
+                    onClick={() => onNavigationClick('intro')} 
+                    className="text-wine hover:text-wine/80 font-medium"
+                  >
+                    introductory course
+                  </button>. 
+                  Want to watch a class first? Let us know on our{' '}
+                  <button 
+                    onClick={() => onNavigationClick('contact')} 
+                    className="text-wine hover:text-wine/80 font-medium"
+                  >
+                    contact page
+                  </button>.
+                </p>
+              </div>
+              
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="font-bold text-wine text-xl mb-3">I've Done This Before &#128526;</h3>
+                <p className="text-gray-700">
+                  If you have HEMA experience, you're welcome to{' '}
+                  <button 
+                    onClick={() => onNavigationClick('contact')} 
+                    className="text-wine hover:text-wine/80 font-medium"
+                  >
+                    contact us
+                  </button>
+                  {' '}to arrange a free drop-in class. View our{' '}
+                  <button 
+                    onClick={() => onNavigationClick('classes')} 
+                    className="text-wine hover:text-wine/80 font-medium"
+                  >
+                    classes and pricing
+                  </button>
+                  {' '}for more details.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Gear Section */}
+          <section id="gear" className="mb-16">
+            <h2 className="text-3xl font-bold text-Navy mb-6">What Gear Do You Recommend?</h2>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <p className="text-gray-700">
+                We provide loaner gear for new students. When you're ready to purchase your own equipment, check out our{' '}
+                <button 
+                  onClick={gearRedirect} 
+                  className="text-wine hover:text-wine/80 font-medium"
+                >
+                  recommended gear list
+                </button>.
+              </p>
+            </div>
+          </section>
+
+          {/* Call to Action Section */}
+          <section className="bg-Navy/5 p-8 rounded-lg text-center">
+            <h2 className="text-3xl font-bold text-Navy mb-4">Ready to Begin Your Journey?</h2>
+            <p className="mb-6 text-gray-700">
+              Take your first step into the world of Historical European Martial Arts
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                onClick={() => onNavigationClick('contact')}
+                className="inline-block bg-white border-2 border-wine text-wine px-8 py-2 rounded-lg font-semibold hover:bg-wine/10 transition-colors w-full sm:w-auto"
+              >
+                Contact Us
               </button>
-              {' '}
-              page.
-            </p>
-          </div>
-          <div className="mb-6">
-            <h3 className="font-bold text-wine text-lg mb-2">I've done this before &#128526;</h3>
-            <p className="font-light text-sm">
-              If you have participated in Historical European Martial Arts before, and you know what you are getting
-              yourself into,
-              feel free to use our
-            <button onClick={() => onNavigationClick('contact')} className="text-blue-600 hover:text-blue-800">
-              contact
-            </button>
-              {' '}
-              page to let us know when you would like to drop in. We allow fencers with previous experience to drop into
-              a class for free before making a commitment. See our classes and pricing structure{' '}
-            <button onClick={() => onNavigationClick('classes')} className="text-blue-600 hover:text-blue-800">
-              here
-            </button>.
-            </p>
-          </div>
-        </div>
-
-        <div id="gear" className="mb-10">
-          <h2 className="font-bold text-2xl text-Navy mb-4">What gear do you recommend?</h2>
-          <p className="font-light text-sm mb-4">
-            If you are just starting out, we have loaner gear available. When you are ready to purchase your own,
-            you can find our list of recommended gear{' '}
-            <button onClick={gearRedirect} className="text-blue-600 hover:text-blue-800">
-              here
-            </button>.
-          </p>
-        </div>
-
-        <div id="contact">
-          <h2 className="font-bold text-2xl text-Navy mb-4">
-            Interested in Historical Fencing? Contact Us for More Information
-          </h2>
-          <p className="font-light text-sm">
-            To learn more about Columbus United Fencing Club and our program,&nbsp;
-            <button
-              onClick={() => onNavigationClick('contact')}
-              className="text-blue-600 hover:text-blue-800"
-            >
-              contact us
-            </button>
-            .&nbsp;Alternatively, click&nbsp;
-            <button
-              onClick={() => onNavigationClick('joinNow')}
-              className="text-blue-600 hover:text-blue-800"
-            >
-              here
-            </button>
-            &nbsp;to sign up today.
-          </p>
-        </div>
+              <button
+                onClick={() => onNavigationClick('joinNow')}
+                className="inline-block bg-wine text-white px-8 py-2 rounded-lg font-semibold hover:bg-wine/90 transition-colors w-full sm:w-auto"
+              >
+                Join Now
+              </button>
+            </div>
+          </section>
+        </main>
       </div>
     </div>
   );
