@@ -29,7 +29,11 @@ module.exports = {
         inputGray: '#F7F8F8',
         periwinkle: '#CCCCFF',
         // New Stuff
-        Navy: '#182A3A',
+        Navy: {
+          DEFAULT: '#182A3A',
+          dark: '#0F1B26',
+          light: '#1F3A52'
+        },
         DeepRed: '#511F33',
         MediumPink: '#904F69',
         LightPink: '#C18797',
