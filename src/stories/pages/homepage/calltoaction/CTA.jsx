@@ -2,17 +2,25 @@ import React from 'react';
 
 function CTA({onNavigationClick}) {
   return (
-    <div className="flex flex-col md:flex-row font-khula bg-DeepRed text-white py-12">
-      <div className="md:w-2/3 md:mr-4 md:mb-0 mx-16 flex items-center justify-center">
-        <span className="font-bold text-2xl my-4 px-4 py-2">Ready to become a member?</span>
-      </div>
-      <div className="md:w-1/3 flex items-center justify-center md:justify-start mx-16">
-        <button
-          className="tracking-wider bg-MediumPink text-white text-lg font-bold px-8 py-3 rounded-lg transition-all duration-300 hover:bg-MediumPink/90 hover:scale-105 shadow-lg"
-          onClick={() => onNavigationClick('joinNow')}
-        >
-          JOIN NOW
-        </button>
+    <div className="bg-DeepRed relative overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute inset-0 bg-MediumPink/10 -skew-y-3"></div>
+      
+      <div className="relative container mx-auto flex flex-col md:flex-row items-center justify-between py-16 px-6">
+        <div className="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
+          <h2 className="font-bold text-3xl md:text-4xl text-white mb-4">Ready to Begin Your Journey?</h2>
+          <p className="text-white/80 text-lg">Join our community of passionate HEMA practitioners</p>
+        </div>
+        <div className="md:w-auto">
+          <button
+            className="bg-MediumPink/90 backdrop-blur-sm text-white text-lg font-bold px-8 py-4 rounded-xl 
+                     transition-all duration-300 hover:bg-MediumPink hover:scale-105 shadow-lg
+                     border border-LightPink/20"
+            onClick={() => onNavigationClick('joinNow')}
+          >
+            JOIN NOW
+          </button>
+        </div>
       </div>
     </div>
   );

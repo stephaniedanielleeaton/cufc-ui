@@ -31,24 +31,23 @@ const options = [
 const ClassOptions = ({ selectedOption, onSelect }) => {
   return (
     <div className="space-y-8">
-      {/* Quick Links */}
-      <div className="bg-Navy/5 rounded-lg p-4">
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
+      {/* Quick Links - Mobile Optimized */}
+      <div className="bg-Navy/5 rounded-lg">
+        <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-Navy/10">
           <a
             href="/classes"
-            className="text-Navy hover:text-MediumPink font-semibold transition-colors flex items-center gap-2"
+            className="flex items-center justify-center gap-2 p-4 text-Navy hover:text-MediumPink font-semibold transition-colors hover:bg-Navy/5"
           >
-            View Classes & Pricing
+            <span>View Classes & Pricing</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </a>
-          <span className="hidden sm:inline text-gray-400">|</span>
           <a
             href="/fundamentals"
-            className="text-Navy hover:text-MediumPink font-semibold transition-colors flex items-center gap-2"
+            className="flex items-center justify-center gap-2 p-4 text-Navy hover:text-MediumPink font-semibold transition-colors hover:bg-Navy/5"
           >
-            Learn About HEMA Fundamentals
+            <span>Learn About HEMA Fundamentals</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
