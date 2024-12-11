@@ -1,23 +1,35 @@
 {
   "name": "cufc-ui",
   "private": false,
-  "version": "0.2.37",
+  "version": "0.2.41",
   "main": "dist/cufc-ui.es.js",
-  "styles": ".storybook/output.css",
+  "style": "dist/output.css",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/cufc-ui.es.js",
+      "types": "./index.d.ts"
+    },
+    "./styles/output.css": "./dist/output.css"
+  },
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
   "description": "UI components for Cufc",
   "type": "module",
   "scripts": {
     "build": "vite build",
     "build-storybook": "npm run build-tailwind && storybook build",
-    "build-tailwind": "tailwindcss -i ./.storybook/tailwind.css -o ./.storybook/output.css --watch",
+    "build-tailwind": "tailwindcss -i ./.storybook/tailwind.css -o ./dist/output.css",
     "storybook": "concurrently \"npm run watch:tailwind\" \"npm run watch:storybook\"",
     "watch:storybook": "storybook dev -p 6006",
-    "watch:tailwind": "tailwindcss build ./tailwind/tailwind.css -o ./tailwind/output.css --watch",
+    "watch:tailwind": "tailwindcss build ./tailwind/tailwind.css -o ./dist/output.css --watch",
     "test": "npx vitest",
     "test:coverage": "npx vitest run --coverage",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm run build && npm run build-tailwind"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.5.1",

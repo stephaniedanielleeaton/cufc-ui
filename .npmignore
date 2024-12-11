@@ -1,0 +1,22 @@
+# Source files
+src/
+.storybook/
+stories/
+
+# Config files
+.eslintrc*
+.prettierrc
+.babelrc
+vite.config.js
+tailwind.config.js
+postcss.config.js
+
+# Development files
+node_modules/
+coverage/
+*.test.*
+*.spec.*
+storybook-static/
+
+# Don't ignore dist folder
+!dist/
