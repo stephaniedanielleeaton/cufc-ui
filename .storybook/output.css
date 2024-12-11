@@ -673,6 +673,10 @@ video {
   z-index: 50;
 }
 
+.m-8 {
+  margin: 2rem;
+}
+
 .-mx-4 {
   margin-left: -1rem;
   margin-right: -1rem;
@@ -2336,6 +2340,10 @@ video {
 
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:justify-start {
+    justify-content: flex-start;
   }
 
   .md\:justify-end {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Hero from '../../reusablecomponents/smallhero/SmallHero.jsx';
+import Hero from '../../pages/homepage/hero/Hero.jsx';
 import Nav from '../../nav/Nav.jsx';
 import NuggetCTA from '../../pages/homepage/nuggetcta/NuggetCTA.jsx';
 import Intro from '../../pages/homepage/intro/Intro.jsx';
@@ -9,15 +9,17 @@ import Schedule from '../../pages/homepage/schedule/Schedule.jsx';
 import ContactUs from '../../pages/contact/ContactUs.jsx';
 import CTA from '../../pages/homepage/calltoaction/CTA.jsx';
 import Footer from '../../footer/Footer.jsx';
+import UpcomingStartDates from '../../pages/aboutnugget/components/UpcomingStartDates.jsx';
 
-const HomePage = () => {
+const HomePage = ({ onNavigationClick }) => {
   return (
     <div>
-      <Nav />
+      <Nav onNavigationClick={onNavigationClick} />
       <Hero />
-      <NuggetCTA />
-      <Intro />
+      <NuggetCTA onNavigationClick={onNavigationClick} />
+      <Intro onNavigationClick={onNavigationClick} />
       <Schedule />
+      <UpcomingStartDates onNavigationClick={onNavigationClick} />
       <ContactUs recaptchaSiteKey={'123'} onSubmit={() => {}} />
       <CTA />
       <Footer />
@@ -26,23 +28,7 @@ const HomePage = () => {
 };
 
 HomePage.propTypes = {
-  imageOptions: PropTypes.shape({
-    src: PropTypes.any, // Adjust according to the expected type
-    alt: PropTypes.string,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    objectFit: PropTypes.string,
-    objectPosition: PropTypes.string,
-  }),
-  buttonTexts: PropTypes.arrayOf(PropTypes.string),
-  textContents: PropTypes.arrayOf(
-    PropTypes.shape({
-      header: PropTypes.string,
-      body: PropTypes.string,
-    })
-  ),
-  contactButtonText: PropTypes.string,
+  onNavigationClick: PropTypes.func
 };
-
-HomePage.defaultProps = {};
 
 export default HomePage;

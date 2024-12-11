@@ -4,17 +4,19 @@ import backgroundImage from '../../../assets/meyerwatercolor.png';
 const Hero = ({ onNavigationClick }) => {
   function renderContent() {
     return (
-      <div className="p-4 text-white font-khula relative z-10">
+      <div className="p-4 text-white font-khula relative z-10 text-left md:text-left text-center">
         <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-8">
           <span className="md:hidden">Columbus's Premier<br />HEMA Club</span>
           <span className="hidden md:inline">Columbus Ohio's<br />Premier HEMA Club</span>
         </h1>
-        <button
-          className="tracking-wider bg-wine text-white text-lg font-bold px-8 py-3 rounded-lg transition-all duration-300 hover:bg-wine/90 hover:scale-105 shadow-lg"
-          onClick={() => onNavigationClick('joinNow')}
-        >
-          JOIN NOW
-        </button>
+        <div className="flex justify-center md:justify-start">
+          <button
+            className="tracking-wider bg-wine text-white text-lg font-bold px-8 py-3 rounded-lg transition-all duration-300 hover:bg-wine/90 hover:scale-105 shadow-lg"
+            onClick={() => onNavigationClick('joinNow')}
+          >
+            JOIN NOW
+          </button>
+        </div>
       </div>
     );
   }

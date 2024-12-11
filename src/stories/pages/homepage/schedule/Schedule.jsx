@@ -51,7 +51,16 @@ function Schedule() {
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <h2 className="font-bold text-3xl md:text-4xl text-white mb-4">HEMA Class Schedule</h2>
-          <p className="text-gray-300">Join us for our regular training sessions throughout the week</p>
+          <p className="text-gray-300 mb-4">Join us for our regular training sessions throughout the week</p>
+          <a 
+            href="/classes" 
+            className="inline-flex items-center gap-2 text-LightPink hover:text-MediumPink transition-colors font-semibold"
+          >
+            Learn more about our classes
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
 
         {/* Weekly Schedule */}
