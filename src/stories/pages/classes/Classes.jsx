@@ -85,7 +85,7 @@ function Classes({ onNavigationClick }) {
                   Lender gear provided.
                 </p>
                 <button 
-                  onClick={() => onNavigationClick('aboutnugget')}
+                  onClick={() => onNavigationClick('intro')}
                   className="text-Navy hover:text-wine transition-colors font-semibold flex items-center"
                 >
                   Learn more about the course →
@@ -187,7 +187,6 @@ function Classes({ onNavigationClick }) {
           </section>
         </main>
       </div>
-      <Footer />
     </div>
   );
 }
