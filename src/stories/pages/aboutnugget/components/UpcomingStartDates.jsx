@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 function UpcomingStartDates({ onNavigationClick }) {
   return (
-    <section className="m-8 bg-gray-50 p-8 rounded-lg">
-      <h2 className="text-3xl font-bold text-Navy mb-6">Upcoming Start Dates for New Fencers</h2>
-      <div className="space-y-8">
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <div className="flex items-center mb-3">
-            <span className="text-xl font-bold text-Navy">January 9th, 2025</span>
-            <span className="text-wine ml-4 px-3 py-1 bg-wine/10 rounded-full text-sm">Thursday evenings</span>
+    <section className="m-4 md:m-8 bg-gray-50 p-4 md:p-8 rounded-lg">
+      <h2 className="text-2xl md:text-3xl font-bold text-Navy mb-6">Upcoming Start Dates for New Fencers</h2>
+      <div className="space-y-6 md:space-y-8">
+        <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
+          <div className="flex flex-wrap items-start gap-2 mb-3">
+            <span className="text-lg md:text-xl font-bold text-Navy">January 9th, 2025</span>
+            <span className="text-wine px-3 py-1 bg-wine/10 rounded-full text-sm">Thursday evenings</span>
           </div>
           <div className="pl-4 border-l-2 border-wine/30">
             <p className="text-gray-700">Meeting every Thursday at 7:00pm for four weeks</p>
@@ -26,10 +26,10 @@ function UpcomingStartDates({ onNavigationClick }) {
           </div>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-sm">
-          <div className="flex items-center mb-3">
-            <span className="text-xl font-bold text-Navy">February 22nd, 2025</span>
-            <span className="text-wine ml-4 px-3 py-1 bg-wine/10 rounded-full text-sm">Saturday mornings</span>
+        <div className="bg-white p-4 md:p-6 rounded-lg shadow-sm">
+          <div className="flex flex-wrap items-start gap-2 mb-3">
+            <span className="text-lg md:text-xl font-bold text-Navy">February 22nd, 2025</span>
+            <span className="text-wine px-3 py-1 bg-wine/10 rounded-full text-sm">Saturday mornings</span>
           </div>
           <div className="pl-4 border-l-2 border-wine/30">
             <p className="text-gray-700">Meeting every Saturday at 10:00am for four weeks</p>
