@@ -40,9 +40,6 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('dropin')}>
-          Drop In
-        </a>
         <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('donate')}>
           Donate
         </a>
@@ -58,9 +55,18 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
         <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('events')}>
           Events
         </a>
-        <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleAuth()}>
-          {isAuthenticated ? 'Sign Out' : 'Sign In'}
-        </a>
+        <div className="relative w-full text-center">
+          <div className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 inline-block border border-LightPink mb-0.5">Current Students Only</div>
+          <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('dropin')}>
+            Drop In
+          </a>
+        </div>
+        <div className="relative w-full text-center mt-4">
+          <div className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 inline-block border border-LightPink mb-0.5">Admin</div>
+          <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleAuth()}>
+            {isAuthenticated ? 'Sign Out' : 'Sign In'}
+          </a>
+        </div>
         {isAdmin ? (
           <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('admin')}>
             Admin
@@ -76,29 +82,24 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
           <img src={prideFlagSvg} alt="Pride Flag" className="h-8 w-8 mr-4" />
         </div>
         <nav className="md:w-1/2 lg:w-1/3 flex items-center justify-center text-white">
-          <div className="button flex items-center px-4 whitespace-nowrap">
-            <span
-              className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
-              onClick={() => onNavigationClick('dropin')}
-            >
-              DROP IN
-            </span>
+          <div className="button flex flex-col items-center px-4 whitespace-nowrap">
+            <span className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 whitespace-nowrap border border-LightPink mb-0.5">Current Students Only</span>
+            <div className="flex items-center justify-center h-16">
+              <span
+                className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
+                onClick={() => onNavigationClick('dropin')}
+              >
+                DROP IN
+              </span>
+            </div>
           </div>
-          <div className="button flex items-center px-4 h-full whitespace-nowrap">
-            <span
-              className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
-              onClick={() => onNavigationClick('dashboard')}
-            >
-              DASHBOARD
-            </span>
-          </div>
-          <div
-            className="button flex items-center whitespace-nowrap bg-Navy-light/30 backdrop-blur-sm min-h-16 px-4 hover:bg-Navy-light/40 transition-colors cursor-pointer"
-            onClick={() => handleAuth()}
-          >
-            <span className="font-Khula font-normal text-base tracking-[2.4px]">
-              {isAuthenticated ? 'SIGN OUT' : 'SIGN IN'}
-            </span>
+          <div className="button flex flex-col items-center px-4 whitespace-nowrap bg-Navy-light/30 backdrop-blur-sm hover:bg-Navy-light/40 transition-colors cursor-pointer" onClick={() => handleAuth()}>
+            <span className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 whitespace-nowrap border border-LightPink mb-0.5">Admin</span>
+            <div className="flex items-center justify-center h-16">
+              <span className="font-Khula font-normal text-base tracking-[2.4px]">
+                {isAuthenticated ? 'SIGN OUT' : 'SIGN IN'}
+              </span>
+            </div>
           </div>
           {/* User Profile Icon */}
           {isAuthenticated ? (
@@ -110,18 +111,18 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
           ) : (
             <div className="w-12 h-12 rounded-full bg-Navy-light/30 mx-4"></div>
           )}
-          <div className="button flex items-center px-4 whitespace-nowrap">
-            {isAdmin ? (
+          {isAdmin ? (
+            <div className="button flex items-center px-4 whitespace-nowrap">
               <span
                 className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
                 onClick={() => onNavigationClick('admin')}
               >
                 ADMIN
               </span>
-            ) : (
-              ''
-            )}
-          </div>
+            </div>
+          ) : (
+            ''
+          )}
         </nav>
       </div>
 
