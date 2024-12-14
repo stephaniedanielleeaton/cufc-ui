@@ -2,9 +2,10 @@ import PropTypes from 'prop-types';
 import FormSection from '../formsection/FormSection.jsx';
 import React, { useState } from 'react';
 import LoadingPopup from '../../components/LoadingPopup';
+import SuccessPopup from '../../components/SuccessPopup';
 
 function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     displayFirstName: '',
     displayLastName: '',
     legalFirstName: '',
@@ -23,12 +24,14 @@ function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
     additionalFamilyMembers: [],
     heardAboutUs: '',
     isGuardian: false,
-  });
+  };
 
-  const [errors, setErrors] = useState({});
-  const [buttonText, setButtonText] = useState('SUBMIT');
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
+  const [status, setStatus] = useState({
+    loading: false,
+    success: false,
+    errors: {},
+  });
 
   const validateFormSection = () => {
     let valid = true;
@@ -76,34 +79,41 @@ function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
       }
     });
 
-    setErrors(newErrors);
-    return valid;
+    return { valid, errors: newErrors };
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (validateFormSection()) {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const { valid, errors } = validateFormSection();
+
+    if (valid) {
+      setStatus((prev) => ({ ...prev, loading: true, errors: {} }));
+
       try {
-        setShowPopup(true);
-        setButtonText('LOADING...');
-        setButtonDisabled(true);
-        
-        await onSubmit({ ...formData });
-        
         if (formData.requestedMembershipType === 'dropIn') {
-          setButtonText('Thank you for signing up! Please use the drop in button');
-          setShowPopup(false);
+          setStatus((prev) => ({ ...prev, loading: false, success: true }));
+        } else {
+          await onSubmit({ ...formData });
+
+          if (formData.requestedMembershipType === 'dropIn') {
+            setStatus((prev) => ({ ...prev, loading: false, success: true }));
+          }
         }
       } catch (error) {
-        setShowPopup(false);
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          submission: 'Error Sending Email. :( Tell Steph.',
+        setStatus((prev) => ({
+          ...prev,
+          loading: false,
+          errors: { submit: 'Failed to submit form. Please try again.' },
         }));
-        setButtonText('SUBMIT');
-        setButtonDisabled(false);
       }
+    } else {
+      setStatus((prev) => ({ ...prev, errors }));
     }
+  };
+
+  const handleCloseSuccess = () => {
+    setStatus((prev) => ({ ...prev, success: false }));
+    setFormData(initialFormData);
   };
 
   const handleAddFamilyMember = () => {
@@ -134,19 +144,24 @@ function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
 
   return (
     <div>
-      <LoadingPopup isOpen={showPopup} />
+      <LoadingPopup isOpen={status.loading} />
+      <SuccessPopup
+        isOpen={status.success}
+        message="Thank you! Please use the Drop In Payment option to pay when you arrive for class."
+        onClose={handleCloseSuccess}
+      />
       <FormSection
         formType={formData.isGuardian ? 'minor' : 'adult'}
         formData={formData}
         setFormData={setFormData}
-        errors={errors}
+        errors={status.errors}
         onNext={handleSubmit}
         handleAddFamilyMember={handleAddFamilyMember}
         handleRemoveFamilyMember={handleRemoveFamilyMember}
         handleFamilyMemberChange={handleFamilyMemberChange}
         emailStatusMessage={emailStatusMessage}
-        buttonText={buttonText}
-        buttonDisabled={buttonDisabled}
+        buttonText={status.loading ? 'LOADING...' : 'SUBMIT'}
+        buttonDisabled={status.loading}
       />
     </div>
   );
