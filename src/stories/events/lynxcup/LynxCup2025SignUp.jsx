@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import bannerImage from '../../assets/LynxCup2025_keyart.png';
+import LoadingPopup from '../../components/LoadingPopup';
 
 export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
   const [formData, setFormData] = useState({
@@ -20,8 +21,13 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
   });
 
   const [totalPrice, setTotalPrice] = useState(45);
-  const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [popupVisible, setPopupVisible] = useState(false);
+
+  const [status, setStatus] = useState({
+    errors: {},
+    isLoading: false,
+    showPopup: false,
+  });
 
   useEffect(() => {
     let price = 45;
@@ -75,21 +81,28 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
     if (!formData.email) {
       newErrors.email = 'Email is required';
     }
+    if (!formData.phoneNumber) {
+      newErrors.phoneNumber = 'Phone Number is required';
+    }
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+      setStatus({ ...status, errors: validationErrors });
     } else {
-      setErrors({});
-      setIsLoading(true);
-      if (onSubmit) {
-        onSubmit(formData);
+      setStatus({ ...status, errors: {} });
+      setStatus({ ...status, isLoading: true });
+      setStatus({ ...status, showPopup: true });
+      try {
+        await onSubmit(formData);
+      } catch (error) {
+        console.error(error);
+        setStatus({ ...status, showPopup: false });
+        setStatus({ ...status, isLoading: false });
       }
-      console.log(formData);
     }
   };
 
@@ -100,6 +113,7 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center relative">
+      <LoadingPopup isOpen={status.showPopup} />
       {/* Background image div - only visible on larger screens */}
       <div 
         className="hidden lg:block fixed inset-0 bg-cover bg-center bg-fixed bg-no-repeat opacity-10"
@@ -220,9 +234,9 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
               value={formData.legalFirstName}
               onChange={handleChange}
               placeholder="Legal First Name"
-              className={`w-full px-3 py-2 border ${errors.legalFirstName ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
+              className={`w-full px-3 py-2 border ${status.errors.legalFirstName ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
             />
-            {errors.legalFirstName && <p className="text-red-500 text-xs">{errors.legalFirstName}</p>}
+            {status.errors.legalFirstName && <p className="text-red-500 text-xs">{status.errors.legalFirstName}</p>}
           </div>
           <div className="space-y-2">
             <input
@@ -231,9 +245,9 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
               value={formData.legalLastName}
               onChange={handleChange}
               placeholder="Legal Last Name"
-              className={`w-full px-3 py-2 border ${errors.legalLastName ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
+              className={`w-full px-3 py-2 border ${status.errors.legalLastName ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
             />
-            {errors.legalLastName && <p className="text-red-500 text-xs">{errors.legalLastName}</p>}
+            {status.errors.legalLastName && <p className="text-red-500 text-xs">{status.errors.legalLastName}</p>}
           </div>
           <div className="space-y-2">
             <input
@@ -242,19 +256,20 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
               value={formData.email}
               onChange={handleChange}
               placeholder="Email"
-              className={`w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
+              className={`w-full px-3 py-2 border ${status.errors.email ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
             />
-            {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
+            {status.errors.email && <p className="text-red-500 text-xs">{status.errors.email}</p>}
           </div>
           <div className="space-y-2">
             <input
-              type="phone"
-              name="phone"
+              type="tel"
+              name="phoneNumber"
               value={formData.phoneNumber}
               onChange={handleChange}
               placeholder="Phone Number"
-              className={`w-full px-3 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
+              className={`w-full px-3 py-2 border ${status.errors.phoneNumber ? 'border-red-500' : 'border-gray-300'} rounded placeholder:text-sm focus:border-DeepRed`}
             />
+            {status.errors.phoneNumber && <p className="text-red-500 text-xs">{status.errors.phoneNumber}</p>}
           </div>
           <div className="space-y-2">
             <input
@@ -390,7 +405,7 @@ export default function LynxCup2025SignUp({ onSubmit, slotsFilled }) {
             >
               CHECKOUT
             </button>
-            {isLoading && <p className="text-DeepRed mt-2">Loading...</p>}
+            {status.isLoading && <p className="text-DeepRed mt-2">Loading...</p>}
           </div>
         </form>
       </div>

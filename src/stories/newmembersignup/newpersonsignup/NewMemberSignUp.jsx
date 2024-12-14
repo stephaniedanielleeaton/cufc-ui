@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import FormSection from '../formsection/FormSection.jsx';
 import React, { useState } from 'react';
+import LoadingPopup from '../../components/LoadingPopup';
 
 function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
   const [formData, setFormData] = useState({
@@ -27,6 +28,7 @@ function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
   const [errors, setErrors] = useState({});
   const [buttonText, setButtonText] = useState('SUBMIT');
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
   const validateFormSection = () => {
     let valid = true;
@@ -82,19 +84,25 @@ function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
     e.preventDefault();
     if (validateFormSection()) {
       try {
+        setShowPopup(true);
+        setButtonText('LOADING...');
+        setButtonDisabled(true);
+        
         await onSubmit({ ...formData });
+        
+        if (formData.requestedMembershipType === 'dropIn') {
+          setButtonText('Thank you for signing up! Please use the drop in button');
+          setShowPopup(false);
+        }
       } catch (error) {
+        setShowPopup(false);
         setErrors((prevErrors) => ({
           ...prevErrors,
           submission: 'Error Sending Email. :( Tell Steph.',
         }));
+        setButtonText('SUBMIT');
+        setButtonDisabled(false);
       }
-      if (formData.requestedMembershipType === 'dropIn') {
-        setButtonText('Thank you for signing up! Please use the drop in button');
-      } else {
-        setButtonText('LOADING...');
-      }
-      setButtonDisabled(true);
     }
   };
 
@@ -126,6 +134,7 @@ function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
 
   return (
     <div>
+      <LoadingPopup isOpen={showPopup} />
       <FormSection
         formType={formData.isGuardian ? 'minor' : 'adult'}
         formData={formData}
