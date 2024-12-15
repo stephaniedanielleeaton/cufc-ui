@@ -40,8 +40,8 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
           isOpen ? 'block' : 'hidden'
         }`}
       >
-        <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('donate')}>
-          Donate
+        <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('intro')}>
+          Get Started
         </a>
         <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('contact')}>
           Contact
@@ -54,6 +54,9 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
         </a>
         <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('events')}>
           Events
+        </a>
+        <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('donate')}>
+          Donate
         </a>
         <div className="relative w-full text-center">
           <div className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 inline-block border border-LightPink mb-0.5">Current Students Only</div>
@@ -132,6 +135,12 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
           <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px] cursor-pointer" onClick={() => onNavigationClick('')} />
         </div>
         <nav className="md:w-1/2 lg:w-1/3 flex items-center justify-center space-x-8">
+          <span
+            className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer whitespace-nowrap"
+            onClick={() => onNavigationClick('intro')}
+          >
+            GET STARTED
+          </span>
           <span
             className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
             onClick={() => onNavigationClick('about')}
