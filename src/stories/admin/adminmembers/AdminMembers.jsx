@@ -4,8 +4,8 @@ import MemberRowCard from './MemberRowCard';
 import MemberDetails from './adminmemberdetails/MemberDetails.jsx';
 import SearchBox from '../SearchBox.jsx';
 import FilterCheckboxes from './FilterCheckboxes';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,10 +33,10 @@ const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) 
 
       if (filterAlerted) {
         filtered = filtered.filter((member) => {
-          const isWaiverOnFile = !member.is_waiver_on_file; // true if waiver is false or null
+          const isWaiverOnFile = !member.is_waiver_on_file;
           const isUnpaid = member.last_invoice_status.toLowerCase() === 'unpaid';
           const isNotActive = member.subscription_status.toLowerCase() !== 'active';
-          const isNotCoach = member.role !== 'coach'; // exclude coaches
+          const isNotCoach = member.role !== 'coach';
           return isNotCoach && (isUnpaid || isNotActive || isWaiverOnFile);
         });
       }
@@ -103,19 +103,33 @@ const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) 
   };
 
   return (
-    <>
-      <div className="mb-2 mt-2 flex items-center justify-between">
-        <SearchBox searchQuery={searchQuery} onSearchChange={handleSearchInputChange} />
+    <div>
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+        <div className="relative flex-1 max-w-md">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <FontAwesomeIcon icon={faSearch} className="text-gray-400" />
+          </div>
+          <SearchBox 
+            searchQuery={searchQuery} 
+            onSearchChange={handleSearchInputChange}
+            className="pl-10 w-full"
+          />
+        </div>
         <button
           onClick={handleAddMemberClick}
-          className={`relative text-center z-10 font-bold px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap ${
-            addMemberMode ? 'bg-MediumPink text-white' : 'bg-gray-300 text-gray-600'
-          } hover:bg-gray-400 hover:text-white ml-4`}
+          className={`inline-flex items-center px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 ${
+            addMemberMode
+              ? 'bg-MediumPink text-white'
+              : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+          }`}
         >
-          <FontAwesomeIcon icon={faPlus} className="mr-2" /> Add
+          <FontAwesomeIcon icon={faPlus} className={`mr-2 ${addMemberMode ? 'text-white' : 'text-gray-400'}`} />
+          Add Member
         </button>
       </div>
 
+      {/* Filters */}
       <FilterCheckboxes
         filterAlerted={filterAlerted}
         filterInactive={filterInactive}
@@ -129,13 +143,16 @@ const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) 
         onFilterCheckedInChange={handleFilterCheckedInChange}
       />
 
-      <div className="grid grid-cols-1 gap-2">
-        {addMemberMode && (
-          <div className="my-4">
-            <MemberDetails member={{}} onUpdateMember={onAddMember} />
-          </div>
-        )}
+      {/* Add Member Form */}
+      {addMemberMode && (
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Add New Member</h3>
+          <MemberDetails member={{}} onUpdateMember={onAddMember} />
+        </div>
+      )}
 
+      {/* Members List */}
+      <div className="space-y-4">
         {filteredMembers.map((member) => (
           <div key={member._id} ref={(el) => (memberRefs.current[member._id] = el)}>
             <MemberRowCard
@@ -144,7 +161,7 @@ const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) 
               isSelected={selectedMemberId === member._id}
             />
             {selectedMemberId === member._id && (
-              <div className="my-4">
+              <div className="mt-4">
                 <MemberDetails
                   member={member}
                   onUpdateMember={handleUpdateMember}
@@ -155,7 +172,7 @@ const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) 
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

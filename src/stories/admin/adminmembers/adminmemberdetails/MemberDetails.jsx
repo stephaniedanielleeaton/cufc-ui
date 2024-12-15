@@ -338,7 +338,7 @@ MemberDetails.propTypes = {
       legal_last_name: PropTypes.string,
       email: PropTypes.string,
       phone: PropTypes.string,
-      date_of_birth: PropTypes.instanceOf(Date),
+      date_of_birth: PropTypes.string,
       address: PropTypes.shape({
         street: PropTypes.string,
         city: PropTypes.string,
