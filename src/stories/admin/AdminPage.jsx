@@ -4,6 +4,7 @@ import AttendanceGraph from '../attendance/AttendanceGraph.jsx';
 import MembersSection from './adminmembers/AdminMembers.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faChartLine, faUserCheck, faUserTie, faHistory } from '@fortawesome/free-solid-svg-icons';
+import { subMonths, isAfter } from 'date-fns';
 
 const AdminPage = ({ members, onUpdateMember, onDeleteMember, onAddMember, attendanceAggregate }) => {
   const [activeTab, setActiveTab] = useState('Members');
@@ -110,3 +111,18 @@ AdminPage.propTypes = {
 };
 
 export default AdminPage;
+
+<style>
+  {`
+    .toggle-checkbox:checked {
+      right: 0;
+      border-color: #1a365d;
+    }
+    .toggle-checkbox:checked + .toggle-label {
+      background-color: #1a365d;
+    }
+    .toggle-label {
+      transition: background-color 0.2s ease-in-out;
+    }
+  `}
+</style>

@@ -6,6 +6,7 @@ import {
   faUserTie,
   faClock,
   faCheckCircle,
+  faUserClock,
 } from '@fortawesome/free-solid-svg-icons';
 
 const FilterCheckbox = ({ checked, onChange, icon, label, className = '' }) => (
@@ -30,14 +31,22 @@ const FilterCheckboxes = ({
   filterCoaches,
   sortOverdue,
   filterCheckedIn,
+  filterInactive,
   onFilterAlertedChange,
   onFilterCoachesChange,
   onSortOverdueChange,
   onFilterCheckedInChange,
+  onFilterInactiveChange,
 }) => (
   <div className="bg-gray-50 rounded-lg p-4 mb-6">
     <div className="text-sm font-medium text-gray-500 mb-3">Filters</div>
     <div className="flex flex-wrap gap-2">
+      <FilterCheckbox
+        checked={filterInactive}
+        onChange={onFilterInactiveChange}
+        icon={faUserClock}
+        label="Active Only"
+      />
       <FilterCheckbox
         checked={filterAlerted}
         onChange={onFilterAlertedChange}
@@ -71,10 +80,12 @@ FilterCheckboxes.propTypes = {
   filterCoaches: PropTypes.bool.isRequired,
   sortOverdue: PropTypes.bool.isRequired,
   filterCheckedIn: PropTypes.bool.isRequired,
+  filterInactive: PropTypes.bool.isRequired,
   onFilterAlertedChange: PropTypes.func.isRequired,
   onFilterCoachesChange: PropTypes.func.isRequired,
   onSortOverdueChange: PropTypes.func.isRequired,
   onFilterCheckedInChange: PropTypes.func.isRequired,
+  onFilterInactiveChange: PropTypes.func.isRequired,
 };
 
 export default FilterCheckboxes;
