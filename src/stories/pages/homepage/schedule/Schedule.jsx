@@ -9,7 +9,6 @@ function Schedule() {
     },
     {
       discipline: 'Longsword',
-      subtitle: '(Beginner & Open Class)',
       day: 'Wednesday',
       time: '6:30pm - 8:30pm',
     },
@@ -19,9 +18,21 @@ function Schedule() {
       time: '7:00pm - 9:00pm',
     },
     {
+      discipline: 'Longsword Fundamentals',
+      day: 'Saturday',
+      time: '10:00am - 11:30am',
+      subtitle: '(Starting in Early 2025)',
+    },
+    {
       discipline: 'Open Floor',
       day: 'Saturday',
       time: '11:00am - 1:00pm',
+    },
+    {
+      discipline: 'Marginalized Gender Open Floor Brunch',
+      day: 'Sunday',
+      time: 'Variable',
+      subtitle: '(Check Discord for schedule)',
     },
   ];
 

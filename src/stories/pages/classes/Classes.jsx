@@ -52,7 +52,6 @@ function Classes({ onNavigationClick }) {
             {[
               { id: 'regular-class-offerings', title: 'Class Schedule' },
               { id: 'pricing-options', title: 'Pricing & Options' },
-              { id: 'hema-fundamentals', title: 'HEMA Fundamentals' },
               { id: 'contact', title: 'Get Started' }
             ].map(({ id, title }) => (
               <button
