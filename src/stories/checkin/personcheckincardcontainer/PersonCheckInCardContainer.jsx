@@ -14,14 +14,20 @@ const isWithinLastTwoMonths = (lastCheckInDate) => {
   return lastCheckIn >= twoMonthsAgo;
 };
 
+const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+
 const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showAllMembers, setShowAllMembers] = useState(false);
   const [showCurrentlyCheckedIn, setShowCurrentlyCheckedIn] = useState(false);
   const [filteredMembers, setFilteredMembers] = useState(members);
+  const [selectedLetter, setSelectedLetter] = useState('');
+
+  const totalCheckedIn = members.filter(member => member.checkedIn).length;
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
+    setSelectedLetter(''); // Clear letter filter when searching
   };
 
   const handleShowAllMembersToggle = () => {
@@ -30,6 +36,16 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
 
   const handleShowCurrentlyCheckedInToggle = () => {
     setShowCurrentlyCheckedIn(!showCurrentlyCheckedIn);
+  };
+
+  const handleLetterClick = (letter) => {
+    console.log('Letter clicked:', letter, 'Previous selected:', selectedLetter);
+    if (selectedLetter === letter) {
+      setSelectedLetter(''); // Clear filter if clicking the same letter
+    } else {
+      setSelectedLetter(letter);
+      setSearchTerm(''); // Clear search when filtering by letter
+    }
   };
 
   useEffect(() => {
@@ -51,12 +67,26 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
       );
     }
 
+    if (selectedLetter) {
+      filtered = filtered.filter(
+        (member) => member.display_last_name.charAt(0).toUpperCase() === selectedLetter
+      );
+    }
+
+    // Sort members by last name
+    filtered = filtered.sort((a, b) => 
+      a.display_last_name.localeCompare(b.display_last_name)
+    );
+
     setFilteredMembers(filtered);
-  }, [searchTerm, members, showAllMembers, showCurrentlyCheckedIn]);
+  }, [searchTerm, members, showAllMembers, showCurrentlyCheckedIn, selectedLetter]);
 
   const handleCheckIn = (_id) => {
     onCheckIn(_id);
   };
+
+  // Get available letters (letters that have members)
+  const availableLetters = [...new Set(members.map(m => m.display_last_name.charAt(0).toUpperCase()))];
 
   return (
     <div className="p-4 bg-white min-h-screen">
@@ -92,43 +122,78 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
         </span>
       </div>
 
-      <div className="flex items-center mb-4 space-x-12">
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="showAllMembers"
-            checked={showAllMembers}
-            onChange={handleShowAllMembersToggle}
-            className="h-6 w-6 text-deepSeaBlue border-gray-300 focus:ring-deepSeaBlue accent-deepSeaBlue"
-          />
-          <label className="ml-2 text-md" htmlFor="showAllMembers">
-            Show All Fencers
-          </label>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-12">
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="showAllMembers"
+              checked={showAllMembers}
+              onChange={handleShowAllMembersToggle}
+              className="h-6 w-6 text-deepSeaBlue border-gray-300 focus:ring-deepSeaBlue accent-deepSeaBlue"
+            />
+            <label className="ml-2 text-md" htmlFor="showAllMembers">
+              Show All Fencers
+            </label>
+          </div>
+
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="showCurrentlyCheckedIn"
+              checked={showCurrentlyCheckedIn}
+              onChange={handleShowCurrentlyCheckedInToggle}
+              className="h-6 w-6 text-deepSeaBlue border-gray-300 focus:ring-deepSeaBlue accent-deepSeaBlue"
+            />
+            <label className="ml-2 text-md" htmlFor="showCurrentlyCheckedIn">
+              Show Only Currently Checked-In
+            </label>
+          </div>
         </div>
 
         <div className="flex items-center">
-          <input
-            type="checkbox"
-            id="showCurrentlyCheckedIn"
-            checked={showCurrentlyCheckedIn}
-            onChange={handleShowCurrentlyCheckedInToggle}
-            className="h-6 w-6 text-deepSeaBlue border-gray-300 focus:ring-deepSeaBlue accent-deepSeaBlue"
-          />
-          <label className="ml-2 text-md" htmlFor="showCurrentlyCheckedIn">
-            Show Only Currently Checked-In
-          </label>
+          <div className="text-sm font-medium text-gray-600">Total Checked In:</div>
+          <div className="ml-2 text-lg font-semibold text-deepSeaBlue">{totalCheckedIn}</div>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-2 w-full mt-4">
-        {filteredMembers.map((user) => (
-          <PersonCheckInCard
-            key={user._id}
-            id={user._id}
-            displayName={`${user.display_first_name} ${user.display_last_name}`}
-            checkedIn={user.checkedIn}
-            onCheckIn={handleCheckIn}
-          />
+      <div className="flex flex-wrap gap-3 mb-6">
+        {ALPHABET.map((letter) => {
+          const isAvailable = availableLetters.includes(letter);
+          const isSelected = selectedLetter === letter;
+          return (
+            <button
+              key={letter}
+              onClick={() => handleLetterClick(letter)}
+              disabled={!isAvailable}
+              className={`
+                w-16 h-14 rounded-lg text-2xl font-medium 
+                transition-all duration-200 ease-in-out
+                ${isSelected 
+                  ? 'bg-Navy text-white font-bold shadow-md' 
+                  : isAvailable 
+                    ? 'bg-gray-100 text-gray-600 hover:bg-gray-200' 
+                    : 'bg-gray-50 text-gray-300 cursor-not-allowed'}
+              `}
+            >
+              {letter}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="grid grid-cols-1 gap-3 mt-4">
+        {filteredMembers.map((user, index) => (
+          <div key={user._id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+            <PersonCheckInCard
+              key={user._id}
+              id={user._id}
+              lastName={user.display_last_name}
+              firstName={user.display_first_name}
+              checkedIn={user.checkedIn}
+              onCheckIn={handleCheckIn}
+            />
+          </div>
         ))}
       </div>
     </div>
