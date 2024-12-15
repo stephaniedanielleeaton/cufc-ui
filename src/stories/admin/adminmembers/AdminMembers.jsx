@@ -116,9 +116,7 @@ const AdminMembers = ({ members, onUpdateMember, onDeleteMember, onAddMember }) 
       if (filterInactive) {
         const twoMonthsAgo = subMonths(new Date(), 2);
         filtered = filtered.filter((member) => {
-          const lastCheckIn = member.checkins && member.checkins.length > 0
-            ? new Date(member.checkins[member.checkins.length - 1])
-            : null;
+          const lastCheckIn = member.lastCheckInDate ? new Date(member.lastCheckInDate) : null;
           return lastCheckIn && isAfter(lastCheckIn, twoMonthsAgo);
         });
       }

@@ -244,7 +244,7 @@ DefaultView.args = {
       last_invoice_date: '2024-06-01T17:33:54.000Z',
       role: 'student',
       checkedIn: false,
-      lastCheckInDate: '2024-09-05T00:47:09.274Z',
+      lastCheckInDate: '2024-12-05T00:47:09.274Z',
     },
     {
       _id: '66562f140dfd58118f418246',
