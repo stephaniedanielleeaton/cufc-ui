@@ -20,3 +20,4 @@ export const Schedule: FC<Props>;
 export const SciotoOpen2024SignUp: FC<Props>;
 export const LynxCup2025SignUp: FC<Props>;
 export const UpcomingStartDates: FC<Props>;
+export const LoadingPopup: FC<{ isOpen: boolean; message?: string }>;

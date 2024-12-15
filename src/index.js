@@ -9,7 +9,7 @@ export { default as Hero } from './stories/pages/homepage/hero/Hero.jsx';
 export { default as Intro } from './stories/pages/homepage/intro/Intro.jsx';
 export { default as Nav } from './stories/nav/Nav.jsx';
 export { default as Schedule } from './stories/pages/homepage/schedule/Schedule.jsx';
-export { default as PageLoader } from './stories/reusablecomponents/pageloader/PageLoader.jsx';
+export { default as LoadingPopup } from './stories/components/LoadingPopup';
 export { default as NewMemberSignUp } from './stories/newmembersignup/newpersonsignup/NewMemberSignUp.jsx';
 export { default as SmallHero } from './stories/reusablecomponents/smallhero/SmallHero.jsx';
 export { default as Classes } from './stories/pages/classes/Classes.jsx';

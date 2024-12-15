@@ -16,7 +16,7 @@ declare module 'cufc-ui' {
   export const Intro: React.ComponentType<any>;
   export const Nav: React.ComponentType<any>;
   export const Schedule: React.ComponentType<any>;
-  export const PageLoader: React.ComponentType<any>;
+  export const LoadingPopup: React.ComponentType<any>;
   export const NewMemberSignUp: React.ComponentType<any>;
   export const SmallHero: React.ComponentType<any>;
   export const Classes: React.ComponentType<any>;

@@ -144,7 +144,7 @@ function NewMemberSignUp({ onSubmit, emailStatusMessage }) {
 
   return (
     <div>
-      <LoadingPopup isOpen={status.loading} />
+      <LoadingPopup isOpen={status.loading} message="Redirecting to Check Out" />
       <SuccessPopup
         isOpen={status.success}
         message="Thank you! Please use the Drop In Payment option to pay when you arrive for class."
