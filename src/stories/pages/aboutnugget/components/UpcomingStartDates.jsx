@@ -12,7 +12,7 @@ function UpcomingStartDates({ onNavigationClick }) {
             <span className="text-wine px-3 py-1 bg-wine/10 rounded-full text-sm">Thursday evenings</span>
           </div>
           <div className="pl-4 border-l-2 border-wine/30">
-            <p className="text-gray-700">Meeting every Thursday at 7:00pm for four weeks</p>
+            <p className="text-gray-700">Meeting every Thursday at 7:00pm to 8:30pmfor four weeks</p>
             <p className="text-Navy font-medium mb-4">Fundamentals of HEMA through Rapier</p>
             <button
               onClick={() => onNavigationClick('joinNow')}
@@ -32,7 +32,7 @@ function UpcomingStartDates({ onNavigationClick }) {
             <span className="text-wine px-3 py-1 bg-wine/10 rounded-full text-sm">Saturday mornings</span>
           </div>
           <div className="pl-4 border-l-2 border-wine/30">
-            <p className="text-gray-700">Meeting every Saturday at 10:00am for four weeks</p>
+            <p className="text-gray-700">Meeting every Saturday at 10:00am to 11:30am for four weeks</p>
             <p className="text-Navy font-medium mb-4">Fundamentals of HEMA through Longsword</p>
             <button
               onClick={() => onNavigationClick('joinNow')}
