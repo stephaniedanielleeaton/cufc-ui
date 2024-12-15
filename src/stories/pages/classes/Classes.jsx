@@ -131,6 +131,15 @@ function Classes({ onNavigationClick }) {
                   Explore sword and buckler, messer, and more! Ask our coaches about upcoming special sessions.
                 </p>
               </div>
+
+              <div className="bg-gray-50 p-6 rounded-lg">
+                <h3 className="font-bold text-xl text-Navy mb-2">Marginalized Gender Open Floor Brunch</h3>
+                <p className="text-wine font-semibold mb-2">Sundays - Various Times</p>
+                <p className="text-gray-700">
+                  A welcoming and open-ended training environment for women, trans men, non-binary, and intersex club members. 
+                  Receive additional training and social support to help overcome gender-based cultural disparities common in martial arts communities.
+                </p>
+              </div>
             </div>
           </section>
 
