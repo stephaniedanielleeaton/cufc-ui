@@ -5,8 +5,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
   const [selectedList, setSelectedList] = useState('');
-  const [customEmails, setCustomEmails] = useState('');
-  const [useCustomList, setUseCustomList] = useState(false);
+  const [additionalEmails, setAdditionalEmails] = useState('');
   const [isPromotional, setIsPromotional] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSent, setIsSent] = useState(false);
@@ -18,11 +17,17 @@ function EmailSender({ onSend, recipientLists = [] }) {
     }
     setIsLoading(true);
     try {
+      // Get additional emails as array
+      const extraEmails = additionalEmails
+        .split(',')
+        .map(email => email.trim())
+        .filter(email => email !== '');
+
       await onSend({
         subject,
         message,
-        recipientList: useCustomList ? null : selectedList,
-        customEmails: useCustomList ? customEmails.split(',').map(email => email.trim()) : null,
+        selectedList,
+        additionalEmails: extraEmails,
         isPromotional
       });
       setIsSent(true);
@@ -30,8 +35,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
       setSubject('');
       setMessage('');
       setSelectedList('');
-      setCustomEmails('');
-      setUseCustomList(false);
+      setAdditionalEmails('');
       setIsPromotional(null);
     } catch (error) {
       console.error('Error sending email:', error);
@@ -53,77 +57,82 @@ function EmailSender({ onSend, recipientLists = [] }) {
         </div>  
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Recipient Selection */}
+          {/* Recipients Section */}
           <div>
             <label className="block text-sm font-medium text-Navy mb-2">
-              Select Recipients
+              Recipients
             </label>
             <div className="space-y-4">
-              {/* Predefined Lists Radio */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="use-predefined"
-                  name="listType"
-                  checked={!useCustomList}
-                  onChange={() => setUseCustomList(false)}
-                  className="w-4 h-4 text-Navy border-gray-300 focus:ring-Navy"
-                  required
-                />
-                <label htmlFor="use-predefined" className="text-sm text-gray-700">
-                  Use predefined list
+              {/* Predefined List Selection */}
+              <div>
+                <label htmlFor="recipientList" className="block text-sm font-medium text-gray-700 mb-1">
+                  {isPromotional ? 'Promotional Email Recipients' : 'Choose a recipient list (optional)'}
+                  {isPromotional && <span className="text-red-500 ml-1">*</span>}
                 </label>
-              </div>
-
-              {/* Predefined List Dropdown */}
-              {!useCustomList && (
                 <select
                   id="recipientList"
                   value={selectedList}
                   onChange={(e) => setSelectedList(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy"
-                  required
+                  className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy ${
+                    isPromotional && !selectedList ? 'border-red-500' : ''
+                  }`}
+                  required={isPromotional}
                 >
-                  <option value="">Choose a recipient list...</option>
-                  {recipientLists.map((list) => (
-                    <option key={list.id} value={list.id}>
-                      {list.name} ({list.count} recipients)
-                    </option>
-                  ))}
+                  {isPromotional ? (
+                    <>
+                      <option value="">Select promotional subscribers list</option>
+                      {recipientLists
+                        .filter(list => list.id === 'promotional')
+                        .map((list) => (
+                          <option key={list.id} value={list.id}>
+                            {list.name} ({list.count} recipients)
+                          </option>
+                        ))}
+                    </>
+                  ) : (
+                    <>
+                      <option value="">No predefined list</option>
+                      {recipientLists
+                        .filter(list => list.id !== 'promotional')
+                        .map((list) => (
+                          <option key={list.id} value={list.id}>
+                            {list.name} ({list.count} recipients)
+                          </option>
+                        ))}
+                    </>
+                  )}
                 </select>
-              )}
-
-              {/* Custom List Radio */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="use-custom"
-                  name="listType"
-                  checked={useCustomList}
-                  onChange={() => setUseCustomList(true)}
-                  className="w-4 h-4 text-Navy border-gray-300 focus:ring-Navy"
-                  required
-                />
-                <label htmlFor="use-custom" className="text-sm text-gray-700">
-                  Enter custom email list
-                </label>
+                {isPromotional && !selectedList && (
+                  <p className="mt-1 text-sm text-red-500">
+                    Promotional emails can only be sent to subscribed members
+                  </p>
+                )}
               </div>
 
-              {/* Custom Email List Input */}
-              {useCustomList && (
+              {/* Additional Emails Input */}
+              {!isPromotional && (
                 <div>
+                  <label htmlFor="additionalEmails" className="block text-sm font-medium text-gray-700 mb-1">
+                    Additional email addresses
+                    {!selectedList && <span className="text-red-500 ml-1">*</span>}
+                  </label>
                   <textarea
-                    id="customEmails"
-                    value={customEmails}
-                    onChange={(e) => setCustomEmails(e.target.value)}
+                    id="additionalEmails"
+                    value={additionalEmails}
+                    onChange={(e) => setAdditionalEmails(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy"
                     rows={3}
-                    placeholder="Enter email addresses separated by commas"
-                    required={useCustomList}
+                    placeholder="Enter additional email addresses separated by commas"
+                    required={!selectedList}
                   />
                   <p className="mt-1 text-xs text-gray-500">
                     Enter email addresses separated by commas (e.g., email1@example.com, email2@example.com)
                   </p>
+                  {additionalEmails && (
+                    <p className="mt-1 text-xs text-gray-600">
+                      Additional recipients: {additionalEmails.split(',').filter(email => email.trim()).length}
+                    </p>
+                  )}
                 </div>
               )}
             </div>
@@ -161,7 +170,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
             />
           </div>
 
-          {/* Promotional Email Selection */}
+          {/* Email Type Selection */}
           <div>
             <label className="block text-sm font-medium text-Navy mb-2">
               Email Type
@@ -241,6 +250,7 @@ EmailSender.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       count: PropTypes.number.isRequired,
+      emails: PropTypes.arrayOf(PropTypes.string).isRequired,
     })
   ),
 };
