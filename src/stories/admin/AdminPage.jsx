@@ -30,27 +30,35 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, onAddMember, atten
       id: 'promotional', 
       name: 'Promotional Subscribers', 
       count: members.filter(m => m.promotional_consent === true).length,
-      emails: members.filter(m => m.promotional_consent === true).map(m => m.email)
+      emails: members.filter(m => m.promotional_consent === true).map(m => m.personal_info.email)
     },
     { 
       id: 'all', 
       name: 'All Members', 
       count: members.length,
-      emails: members.map(m => m.email)
+      emails: members.map(m => m.personal_info.email)
     },
     { 
       id: 'active', 
       name: 'Active Members', 
       count: stats.active,
-      emails: members.filter(m => m.subscription_status.toLowerCase() === 'active').map(m => m.email)
+      emails: members.filter(m => m.subscription_status.toLowerCase() === 'active').map(m => m.personal_info.email)
     },
     { 
       id: 'coaches', 
       name: 'Coaches', 
       count: stats.coaches,
-      emails: members.filter(m => m.role === 'coach').map(m => m.email)
+      emails: members.filter(m => m.role === 'coach').map(m => m.personal_info.email)
     }
   ];
+
+  console.log('AdminPage - Recipient Lists:', recipientLists.map(list => ({
+    id: list.id,
+    name: list.name,
+    count: list.count,
+    emailCount: list.emails.length,
+    sampleEmails: list.emails.slice(0, 3) // Show first 3 emails as sample
+  })));
 
   return (
     <div className="min-h-screen bg-gray-50">

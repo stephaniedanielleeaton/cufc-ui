@@ -126,7 +126,19 @@ function EmailSender({ onSend, recipientLists = [] }) {
                 <select
                   id="recipientList"
                   value={selectedList}
-                  onChange={(e) => setSelectedList(e.target.value)}
+                  onChange={(e) => {
+                    const newSelectedList = e.target.value;
+                    setSelectedList(newSelectedList);
+                    if (newSelectedList) {
+                      const selectedListData = recipientLists.find(list => list.id === newSelectedList);
+                      console.log('Selected List:', {
+                        id: selectedListData.id,
+                        name: selectedListData.name,
+                        count: selectedListData.count,
+                        emails: selectedListData.emails
+                      });
+                    }
+                  }}
                   className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy ${
                     isPromotional && !selectedList ? 'border-red-500' : ''
                   }`}
