@@ -49,14 +49,68 @@ function EmailSender({ onSend, recipientLists = [] }) {
       <h2 className="text-xl font-bold text-Navy mb-6">Send Email</h2>
       
       {isSent ? (
-        <div className="bg-green-50 text-green-700 p-4 rounded-lg mb-6 flex items-center gap-2">
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          <span>Email sent successfully!</span>
-        </div>  
+        <div className="space-y-4">
+          <div className="bg-green-50 text-green-700 p-4 rounded-lg mb-6 flex items-center gap-2">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Email sent successfully!</span>
+          </div>
+          <div className="flex justify-center">
+            <button
+              onClick={() => setIsSent(false)}
+              className="px-6 py-3 font-bold rounded-lg transition-all duration-300 shadow-md flex items-center gap-2
+                bg-Navy text-white hover:bg-Navy/90 hover:scale-105"
+            >
+              <span>Send Another Email</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+          </div>
+        </div>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Email Type Selection */}
+          <div>
+            <label className="block text-sm font-medium text-Navy mb-2">
+              Email Type
+              <span className="text-red-500 ml-1">*</span>
+            </label>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  id="promotional-yes"
+                  name="isPromotional"
+                  checked={isPromotional === true}
+                  onChange={() => setIsPromotional(true)}
+                  className="w-4 h-4 text-Navy border-gray-300 focus:ring-Navy"
+                  required
+                />
+                <label htmlFor="promotional-yes" className="text-sm text-gray-700">
+                  This is a promotional email
+                  <span className="ml-1 text-xs text-gray-500"> (Will include unsubscribe option)</span>
+                </label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  id="promotional-no"
+                  name="isPromotional"
+                  checked={isPromotional === false}
+                  onChange={() => setIsPromotional(false)}
+                  className="w-4 h-4 text-Navy border-gray-300 focus:ring-Navy"
+                  required
+                />
+                <label htmlFor="promotional-no" className="text-sm text-gray-700">
+                  This is a transactional/informational email
+                  <span className="ml-1 text-xs text-gray-500"> (e.g., class cancellations, updates)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
           {/* Recipients Section */}
           <div>
             <label className="block text-sm font-medium text-Navy mb-2">
@@ -168,46 +222,6 @@ function EmailSender({ onSend, recipientLists = [] }) {
               placeholder="Enter your message here..."
               required
             />
-          </div>
-
-          {/* Email Type Selection */}
-          <div>
-            <label className="block text-sm font-medium text-Navy mb-2">
-              Email Type
-              <span className="text-red-500 ml-1">*</span>
-            </label>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="promotional-yes"
-                  name="isPromotional"
-                  checked={isPromotional === true}
-                  onChange={() => setIsPromotional(true)}
-                  className="w-4 h-4 text-Navy border-gray-300 focus:ring-Navy"
-                  required
-                />
-                <label htmlFor="promotional-yes" className="text-sm text-gray-700">
-                  This is a promotional email
-                  <span className="ml-1 text-xs text-gray-500"> (Will include unsubscribe option)</span>
-                </label>
-              </div>
-              <div className="flex items-center gap-2">
-                <input
-                  type="radio"
-                  id="promotional-no"
-                  name="isPromotional"
-                  checked={isPromotional === false}
-                  onChange={() => setIsPromotional(false)}
-                  className="w-4 h-4 text-Navy border-gray-300 focus:ring-Navy"
-                  required
-                />
-                <label htmlFor="promotional-no" className="text-sm text-gray-700">
-                  This is a transactional/informational email
-                  <span className="ml-1 text-xs text-gray-500"> (e.g., class cancellations, updates)</span>
-                </label>
-              </div>
-            </div>
           </div>
 
           {/* Submit Button */}

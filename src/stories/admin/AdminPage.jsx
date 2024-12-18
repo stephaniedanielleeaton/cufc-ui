@@ -49,12 +49,6 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, onAddMember, atten
       name: 'Coaches', 
       count: stats.coaches,
       emails: members.filter(m => m.role === 'coach').map(m => m.email)
-    },
-    { 
-      id: 'recent', 
-      name: 'Recently Active Members', 
-      count: stats.recentlyCheckedIn,
-      emails: members.filter(m => isWithinLastTwoMonths(m.lastCheckInDate)).map(m => m.email)
     }
   ];
 

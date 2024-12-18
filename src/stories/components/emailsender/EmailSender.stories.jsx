@@ -3,6 +3,12 @@ import EmailSender from './EmailSender';
 
 const mockRecipientLists = [
   {
+    id: 'promotional',
+    name: 'Promotional Subscribers',
+    count: 50,
+    emails: Array(50).fill().map((_, i) => `promo${i + 1}@example.com`)
+  },
+  {
     id: 'all',
     name: 'All Members',
     count: 150,
@@ -46,9 +52,9 @@ export const Default = {
         <div className="bg-gray-50 p-4 rounded-lg">
           <h3 className="font-medium text-gray-900 mb-2">Try these scenarios:</h3>
           <ol className="list-decimal ml-5 space-y-2 text-sm text-gray-600">
-            <li>Select "All Members" from the dropdown - notice the additional emails field is optional</li>
-            <li>Clear the dropdown and add some manual emails - notice the field becomes required</li>
-            <li>Select a list AND add some additional emails - both will be included</li>
+            <li>Select "Promotional Email" - notice only promotional subscribers are available</li>
+            <li>Select "Transactional Email" - notice all lists except promotional are available</li>
+            <li>For transactional emails, try selecting a list AND adding additional emails</li>
             <li>Try submitting without selecting an email type - notice the validation</li>
           </ol>
         </div>
