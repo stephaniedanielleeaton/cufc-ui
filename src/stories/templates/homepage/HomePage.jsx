@@ -10,6 +10,7 @@ import ContactUs from '../../pages/contact/ContactUs.jsx';
 import CTA from '../../pages/homepage/calltoaction/CTA.jsx';
 import Footer from '../../footer/Footer.jsx';
 import UpcomingStartDates from '../../pages/aboutnugget/components/UpcomingStartDates.jsx';
+import NotificationSignup from '../../components/notificationsignup/NotificationSignup.jsx';
 
 const HomePage = ({ onNavigationClick }) => {
   return (
@@ -20,6 +21,7 @@ const HomePage = ({ onNavigationClick }) => {
       <Intro onNavigationClick={onNavigationClick} />
       <Schedule />
       <UpcomingStartDates onNavigationClick={onNavigationClick} />
+      <NotificationSignup variant="cta" onSubmit={() => {}} />
       <ContactUs recaptchaSiteKey={'123'} onSubmit={() => {}} />
       <CTA />
       <Footer />

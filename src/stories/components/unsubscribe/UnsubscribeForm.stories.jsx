@@ -1,8 +1,8 @@
-import NotificationSignup from './NotificationSignup';
+import UnsubscribeForm from './UnsubscribeForm';
 
 export default {
-  title: 'Components/NotificationSignup',
-  component: NotificationSignup,
+  title: 'Components/UnsubscribeForm',
+  component: UnsubscribeForm,
 };
 
 export const Default = {
@@ -10,7 +10,7 @@ export const Default = {
     onSubmit: async (email) => {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log('Email submitted:', email);
+      console.log('Unsubscribe request for:', email);
     },
   },
 };

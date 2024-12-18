@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function NotificationSignup({ onSubmit }) {
+function UnsubscribeForm({ onSubmit }) {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -13,20 +13,20 @@ function NotificationSignup({ onSubmit }) {
       await onSubmit(email);
       setIsSubmitted(true);
     } catch (error) {
-      console.error('Error submitting email:', error);
+      console.error('Error unsubscribing:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full rounded-xl bg-gray-100/50 text-Navy py-10 md:py-12 px-6 md:px-12">
+    <div className="w-full rounded-xl bg-gray-100/50 text-Navy py-8 md:py-10 px-6 md:px-10">
       <div className="max-w-2xl mx-auto">
         <h3 className="text-lg font-bold mb-2">
-          Stay Updated
+          Unsubscribe from Updates
         </h3>
         <p className="text-sm text-Navy/80 mb-4">
-          Sign up to receive notifications about upcoming class dates and events.
+          Enter your email address below to unsubscribe from class notifications.
         </p>
         
         {isSubmitted ? (
@@ -35,7 +35,7 @@ function NotificationSignup({ onSubmit }) {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span className="text-sm">Thank you! We'll keep you updated about new class dates.</span>
+              <span className="text-sm">You have been successfully unsubscribed from our mailing list.</span>
             </div>
           </div>
         ) : (
@@ -67,13 +67,13 @@ function NotificationSignup({ onSubmit }) {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                   </svg>
-                  <span>Submitting...</span>
+                  <span>Processing...</span>
                 </>
               ) : (
                 <>
-                  <span>Notify Me</span>
+                  <span>Unsubscribe</span>
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                   </svg>
                 </>
               )}
@@ -85,8 +85,8 @@ function NotificationSignup({ onSubmit }) {
   );
 }
 
-NotificationSignup.propTypes = {
+UnsubscribeForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
 
-export default NotificationSignup;
+export default UnsubscribeForm;

@@ -1,6 +1,7 @@
 import React from 'react';
 import imageSrc from '../../assets/longswordcrop.jpg';
 import UpcomingStartDates from './components/UpcomingStartDates';
+import NotificationSignup from '../../components/notificationsignup/NotificationSignup';
 
 function AboutNugget({ onNavigationClick }) {
   return (
@@ -55,6 +56,11 @@ function AboutNugget({ onNavigationClick }) {
 
           {/* Class Schedule Section */}
           <UpcomingStartDates onNavigationClick={onNavigationClick} />
+
+          {/* Notification Signup */}
+          <section className="mb-16">
+            <NotificationSignup onSubmit={() => {}} />
+          </section>
 
           {/* Equipment Section */}
           <section className="mb-16">
