@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Intro({onNavigationClick}) {
   return (
@@ -39,5 +40,9 @@ function Intro({onNavigationClick}) {
     </div>
   );
 }
+
+Intro.propTypes = {
+  onNavigationClick: PropTypes.func.isRequired,
+};
 
 export default Intro;

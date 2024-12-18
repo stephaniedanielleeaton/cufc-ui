@@ -13,7 +13,7 @@ function UpcomingStartDates({ onNavigationClick }) {
           </div>
           <div className="pl-4 border-l-2 border-wine/30">
             <p className="text-gray-700">Meeting every Thursday at 7:00pm to 8:30pmfor four weeks</p>
-            <p className="text-Navy font-medium mb-4">Fundamentals of HEMA through Rapier</p>
+            <p className="text-Navy font-medium mb-4">Introduction to HEMA through Rapier</p>
             <button
               onClick={() => onNavigationClick('joinNow')}
               className="px-4 py-2 bg-Navy text-white rounded-lg hover:bg-Navy/90 transition-colors font-semibold text-sm flex items-center gap-2"
@@ -33,7 +33,7 @@ function UpcomingStartDates({ onNavigationClick }) {
           </div>
           <div className="pl-4 border-l-2 border-wine/30">
             <p className="text-gray-700">Meeting every Saturday at 10:00am to 11:30am for four weeks</p>
-            <p className="text-Navy font-medium mb-4">Fundamentals of HEMA through Longsword</p>
+            <p className="text-Navy font-medium mb-4">Introduction to HEMA through Longsword</p>
             <button
               onClick={() => onNavigationClick('joinNow')}
               className="px-4 py-2 bg-Navy text-white rounded-lg hover:bg-Navy/90 transition-colors font-semibold text-sm flex items-center gap-2"

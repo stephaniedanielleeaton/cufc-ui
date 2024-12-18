@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const options = [
   {
     id: 'nugget',
-    header: 'Introduction to HEMA Fundamentals Course',
+    header: 'Introduction to HEMA Course',
     price: '$110  (Select date at checkout)',
     description: 'Perfect for beginners looking to start their HEMA journey',
   },
@@ -44,10 +44,10 @@ const ClassOptions = ({ selectedOption, onSelect }) => {
             </svg>
           </a>
           <a
-            href="/fundamentals"
+            href="/intro"
             className="flex items-center justify-center gap-2 p-4 text-Navy hover:text-MediumPink font-semibold transition-colors hover:bg-Navy/5"
           >
-            <span>Learn About HEMA Fundamentals</span>
+            <span>Learn About Getting Started</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

@@ -19,7 +19,7 @@ function Classes({ onNavigationClick }) {
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
               </svg>
-              HEMA Fundamentals Course
+              Introduction to HEMA Course
             </button>
             <div className="h-4 border-r border-gray-300 hidden sm:block"></div>
             <button
@@ -77,7 +77,7 @@ function Classes({ onNavigationClick }) {
 
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-bold text-xl text-Navy mb-2">HEMA Fundamentals</h3>
+                <h3 className="font-bold text-xl text-Navy mb-2">Introduction to HEMA</h3>
                 <p className="text-wine font-semibold mb-2">Schedule varies - see course details</p>
                 <p className="text-gray-700 mb-3">
                   Perfect for beginners! Learn basic footwork, form, and technique over 4 weeks.
@@ -155,7 +155,7 @@ function Classes({ onNavigationClick }) {
             <h2 className="text-3xl font-bold text-Navy mb-6">Pricing & Options</h2>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gray-50 p-6 rounded-lg">
-                <h3 className="font-bold text-xl text-Navy mb-2">HEMA Fundamentals Course</h3>
+                <h3 className="font-bold text-xl text-Navy mb-2">Introduction to HEMA Course</h3>
                 <p className="text-3xl font-bold text-wine mb-4">$110</p>
                 <p className="text-gray-700">Complete 4-week beginner course with provided equipment</p>
               </div>
