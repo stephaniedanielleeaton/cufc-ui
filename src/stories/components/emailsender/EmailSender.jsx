@@ -42,7 +42,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
 
   return (
     <div className="w-full rounded-xl bg-white shadow-md p-6">
-      <h2 className="text-xl font-bold text-Navy mb-6">Send Email to Members</h2>
+      <h2 className="text-xl font-bold text-Navy mb-6">Send Email</h2>
       
       {isSent ? (
         <div className="bg-green-50 text-green-700 p-4 rounded-lg mb-6 flex items-center gap-2">
@@ -50,7 +50,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
           <span>Email sent successfully!</span>
-        </div>
+        </div>  
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Recipient Selection */}
