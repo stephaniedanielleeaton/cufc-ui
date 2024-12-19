@@ -13,8 +13,7 @@ const AdminPage = ({
   onAddMember, 
   attendanceAggregate, 
   onSendEmail,
-  additionalEmailLists = [],
-  promotionalList = { name: 'Promotional Subscribers', emails: [] }
+  additionalEmailLists = []
 }) => {
   const [activeTab, setActiveTab] = useState('Members');
 
@@ -52,37 +51,22 @@ const AdminPage = ({
       name: 'Coaches', 
       count: stats.coaches,
       emails: members.filter(m => m.role === 'coach').map(m => m.personal_info.email)
-    },
-    ...additionalEmailLists.map(list => ({
-      ...list,
-      count: list.emails.length
-    }))
+    }
   ];
 
-  // Keep promotional list separate
-  const promotionalEmailList = {
-    id: 'promotional',
-    ...promotionalList,
-    count: promotionalList.emails.length,
-    isPromotional: true
-  };
+  // Combine member lists with additional lists
+  const recipientLists = [
+    ...additionalEmailLists,
+    ...memberLists
+  ];
 
-  // Combine all lists while keeping promotional separate
-  const recipientLists = [promotionalEmailList, ...memberLists];
-
-  console.log('AdminPage - Recipient Lists:', {
-    memberLists: memberLists.map(list => ({
-      id: list.id,
-      name: list.name,
-      count: list.count,
-      emailCount: list.emails.length,
-      sampleEmails: list.emails.slice(0, 3)
-    })),
-    promotionalList: {
-      ...promotionalEmailList,
-      sampleEmails: promotionalEmailList.emails.slice(0, 3)
-    }
-  });
+  console.log('AdminPage - Recipient Lists:', recipientLists.map(list => ({
+    id: list.id,
+    name: list.name,
+    count: list.count || list.emails.length,
+    emailCount: list.emails.length,
+    sampleEmails: list.emails.slice(0, 3)
+  })));
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -124,11 +108,7 @@ AdminPage.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     emails: PropTypes.arrayOf(PropTypes.string).isRequired
-  })),
-  promotionalList: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    emails: PropTypes.arrayOf(PropTypes.string).isRequired
-  })
+  }))
 };
 
 export default AdminPage;

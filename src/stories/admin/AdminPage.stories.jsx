@@ -24,21 +24,28 @@ DefaultView.args = {
   onUpdateMember: handleOnUpdateMember,
   additionalEmailLists: [
     {
-      id: 'tournament_signups',
-      name: 'Tournament Sign-ups',
-      emails: ['bcaylor4129@outlook.com', 'interested1@example.com', 'interested2@example.com']
+        "_id": "67636aaf6227d42bc53abffd",
+        "id": "promotional",
+        "name": "Promotional Email Subscribers",
+        "emails": [
+            "stephaniedanielleeaton@gmail.com"
+        ],
+        "created_at": "2024-12-19T00:37:03.457Z",
+        "updated_at": "2024-12-19T00:37:03.457Z",
+        "__v": 0
     },
     {
-      id: 'volunteer_list',
-      name: 'Event Volunteers',
-      emails: ['volunteer1@example.com', 'volunteer2@example.com', 'volunteer3@example.com']
+        "_id": "67636adf6227d42bc53abfff",
+        "id": "lynxcup2025",
+        "name": "Lynx Cup 2025 Registrants",
+        "emails": [
+            "stephaniedanielleeaton@gmail.com"
+        ],
+        "created_at": "2024-12-19T00:37:51.113Z",
+        "updated_at": "2024-12-19T00:37:51.113Z",
+        "__v": 0
     }
-  ],
-  promotionalList: {
-    id: 'promotional',
-    name: 'Promotional Subscribers',
-    emails: ['promo1@example.com', 'promo2@example.com', 'promo3@example.com', 'bcaylor4129@outlook.com']
-  },
+],
   members: [
     {
       _id: '6653a9822c69de37c98e196e',
