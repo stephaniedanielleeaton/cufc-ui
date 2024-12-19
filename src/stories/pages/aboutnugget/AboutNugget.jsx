@@ -2,8 +2,9 @@ import React from 'react';
 import imageSrc from '../../assets/longswordcrop.jpg';
 import UpcomingStartDates from './components/UpcomingStartDates';
 import NotificationSignup from '../../components/notificationsignup/NotificationSignup';
+import PropTypes from 'prop-types';
 
-function AboutNugget({ onNavigationClick }) {
+function AboutNugget({ onNavigationClick, onEmailSignup }) {
   return (
     <div className="min-h-screen py-10 bg-gray-50">
       <div className="max-w-screen-lg mx-auto">
@@ -59,7 +60,7 @@ function AboutNugget({ onNavigationClick }) {
 
           {/* Notification Signup */}
           <section className="mb-16">
-            <NotificationSignup onSubmit={() => {}} />
+            <NotificationSignup onSubmit={onEmailSignup} />
           </section>
 
           {/* Equipment Section */}
@@ -107,5 +108,10 @@ function AboutNugget({ onNavigationClick }) {
     </div>
   );
 }
+
+AboutNugget.propTypes = {
+  onNavigationClick: PropTypes.func.isRequired,
+  onEmailSignup: PropTypes.func.isRequired,
+};
 
 export default AboutNugget;

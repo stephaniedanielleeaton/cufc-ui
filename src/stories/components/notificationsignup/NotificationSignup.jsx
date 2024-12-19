@@ -23,7 +23,7 @@ function NotificationSignup({ onSubmit }) {
     <div className="w-full rounded-xl bg-gray-100/50 text-Navy py-10 md:py-12 px-6 md:px-12">
       <div className="max-w-2xl mx-auto">
         <h3 className="text-lg font-bold mb-2">
-          Stay Updated
+          Want to know when new class dates are available?
         </h3>
         <p className="text-sm text-Navy/80 mb-4">
           Sign up to receive notifications about upcoming class dates and events.
@@ -35,7 +35,7 @@ function NotificationSignup({ onSubmit }) {
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <span className="text-sm">Thank you! We'll keep you updated about new class dates.</span>
+              <span className="text-sm">Thank you! We'll keep you updated.</span>
             </div>
           </div>
         ) : (
