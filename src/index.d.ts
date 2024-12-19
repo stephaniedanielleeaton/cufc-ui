@@ -4,6 +4,10 @@ export interface Props {
   onNavigationClick?: (page: string) => void;
 }
 
+export interface EmailSubmitProps {
+  onSubmit: (email: string) => Promise<void>;
+}
+
 export const AboutUs: FC<Props>;
 export const AboutNugget: FC<Props>;
 export const Classes: FC<Props>;
@@ -21,3 +25,5 @@ export const SciotoOpen2024SignUp: FC<Props>;
 export const LynxCup2025SignUp: FC<Props>;
 export const UpcomingStartDates: FC<Props>;
 export const LoadingPopup: FC<{ isOpen: boolean; message?: string }>;
+export const NotificationSignup: FC<EmailSubmitProps>;
+export const UnsubscribeForm: FC<EmailSubmitProps>;

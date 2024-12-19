@@ -28,4 +28,10 @@ declare module 'cufc-ui' {
   export const LynxCup2025SignUp: React.ComponentType<any>;
   export const UpcomingStartDates: React.ComponentType<any>;
   export const SciotoOpen2024SignUp: React.ComponentType<any>;
+  export const NotificationSignup: React.ComponentType<{
+    onSubmit: (email: string) => Promise<void>;
+  }>;
+  export const UnsubscribeForm: React.ComponentType<{
+    onSubmit: (email: string) => Promise<void>;
+  }>;
 }

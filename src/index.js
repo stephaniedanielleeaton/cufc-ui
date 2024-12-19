@@ -21,3 +21,5 @@ export { default as NuggetCTA } from './stories/pages/homepage/nuggetcta/NuggetC
 export { default as SciotoOpen2024SignUp } from './stories/events/sciotoopen/SciotoOpen2024SignUp.jsx';
 export { default as LynxCup2025SignUp } from './stories/events/lynxcup/LynxCup2025SignUp.jsx';
 export { default as UpcomingStartDates } from './stories/pages/aboutnugget/components/UpcomingStartDates';
+export { default as NotificationSignup } from './stories/components/notificationsignup/NotificationSignup.jsx';
+export { default as UnsubscribeForm } from './stories/components/unsubscribe/UnsubscribeForm.jsx';
