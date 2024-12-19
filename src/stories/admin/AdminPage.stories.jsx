@@ -22,6 +22,22 @@ export const DefaultView = Template.bind({});
 DefaultView.args = {
   onNavigationClick: handleOnNavigationClick,
   onUpdateMember: handleOnUpdateMember,
+  additionalEmailLists: [
+    {
+      id: 'tournament_signups',
+      name: 'Tournament Sign-ups',
+      emails: ['bcaylor4129@outlook.com', 'interested1@example.com', 'interested2@example.com']
+    },
+    {
+      id: 'volunteer_list',
+      name: 'Event Volunteers',
+      emails: ['volunteer1@example.com', 'volunteer2@example.com', 'volunteer3@example.com']
+    }
+  ],
+  promotionalList: {
+    name: 'Promotional Subscribers',
+    emails: ['promo1@example.com', 'promo2@example.com', 'promo3@example.com', 'bcaylor4129@outlook.com']
+  },
   members: [
     {
       _id: '6653a9822c69de37c98e196e',

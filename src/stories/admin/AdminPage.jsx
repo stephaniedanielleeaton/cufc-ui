@@ -6,7 +6,16 @@ import AdminStats from './adminstats/AdminStats.jsx';
 import AdminNavigation from './adminnavigation/AdminNavigation.jsx';
 import EmailSender from '../components/emailsender/EmailSender.jsx';
 
-const AdminPage = ({ members, onUpdateMember, onDeleteMember, onAddMember, attendanceAggregate, onSendEmail }) => {
+const AdminPage = ({ 
+  members, 
+  onUpdateMember, 
+  onDeleteMember, 
+  onAddMember, 
+  attendanceAggregate, 
+  onSendEmail,
+  additionalEmailLists = [],
+  promotionalList = { name: 'Promotional Subscribers', emails: [] }
+}) => {
   const [activeTab, setActiveTab] = useState('Members');
 
   const isWithinLastTwoMonths = (date) => {
@@ -25,13 +34,7 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, onAddMember, atten
   };
 
   // Prepare recipient lists for email component
-  const recipientLists = [
-    { 
-      id: 'promotional', 
-      name: 'Promotional Subscribers', 
-      count: members.filter(m => m.promotional_consent === true).length,
-      emails: members.filter(m => m.promotional_consent === true).map(m => m.personal_info.email)
-    },
+  const memberLists = [
     { 
       id: 'all', 
       name: 'All Members', 
@@ -49,16 +52,37 @@ const AdminPage = ({ members, onUpdateMember, onDeleteMember, onAddMember, atten
       name: 'Coaches', 
       count: stats.coaches,
       emails: members.filter(m => m.role === 'coach').map(m => m.personal_info.email)
-    }
+    },
+    ...additionalEmailLists.map(list => ({
+      ...list,
+      count: list.emails.length
+    }))
   ];
 
-  console.log('AdminPage - Recipient Lists:', recipientLists.map(list => ({
-    id: list.id,
-    name: list.name,
-    count: list.count,
-    emailCount: list.emails.length,
-    sampleEmails: list.emails.slice(0, 3) // Show first 3 emails as sample
-  })));
+  // Keep promotional list separate
+  const promotionalEmailList = {
+    id: 'promotional',
+    ...promotionalList,
+    count: promotionalList.emails.length,
+    isPromotional: true
+  };
+
+  // Combine all lists while keeping promotional separate
+  const recipientLists = [promotionalEmailList, ...memberLists];
+
+  console.log('AdminPage - Recipient Lists:', {
+    memberLists: memberLists.map(list => ({
+      id: list.id,
+      name: list.name,
+      count: list.count,
+      emailCount: list.emails.length,
+      sampleEmails: list.emails.slice(0, 3)
+    })),
+    promotionalList: {
+      ...promotionalEmailList,
+      sampleEmails: promotionalEmailList.emails.slice(0, 3)
+    }
+  });
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -96,6 +120,15 @@ AdminPage.propTypes = {
   onAddMember: PropTypes.func,
   attendanceAggregate: PropTypes.array,
   onSendEmail: PropTypes.func.isRequired,
+  additionalEmailLists: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    emails: PropTypes.arrayOf(PropTypes.string).isRequired
+  })),
+  promotionalList: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    emails: PropTypes.arrayOf(PropTypes.string).isRequired
+  })
 };
 
 export default AdminPage;
