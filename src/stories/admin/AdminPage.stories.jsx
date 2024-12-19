@@ -35,6 +35,7 @@ DefaultView.args = {
     }
   ],
   promotionalList: {
+    id: 'promotional',
     name: 'Promotional Subscribers',
     emails: ['promo1@example.com', 'promo2@example.com', 'promo3@example.com', 'bcaylor4129@outlook.com']
   },
