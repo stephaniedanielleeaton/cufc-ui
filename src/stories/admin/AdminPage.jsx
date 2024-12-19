@@ -56,14 +56,17 @@ const AdminPage = ({
 
   // Combine member lists with additional lists
   const recipientLists = [
-    ...additionalEmailLists,
+    ...additionalEmailLists.map(list => ({
+      ...list,
+      count: list.emails.length // Ensure count is set based on emails array length
+    })),
     ...memberLists
   ];
 
   console.log('AdminPage - Recipient Lists:', recipientLists.map(list => ({
     id: list.id,
     name: list.name,
-    count: list.count || list.emails.length,
+    count: list.count,
     emailCount: list.emails.length,
     sampleEmails: list.emails.slice(0, 3)
   })));
