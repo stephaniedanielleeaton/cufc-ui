@@ -23,11 +23,19 @@ function EmailSender({ onSend, recipientLists = [] }) {
         .map(email => email.trim())
         .filter(email => email !== '');
 
+      // If a list is selected, add its emails to the additional emails
+      const selectedListEmails = selectedList 
+        ? recipientLists.find(list => list.id === selectedList)?.emails || []
+        : [];
+
+      // Combine both sets of emails and remove duplicates
+      const allEmails = [...new Set([...extraEmails, ...selectedListEmails])];
+
       await onSend({
         subject,
         message,
         selectedList,
-        additionalEmails: extraEmails,
+        additionalEmails: allEmails,
         isPromotional
       });
       setIsSent(true);
