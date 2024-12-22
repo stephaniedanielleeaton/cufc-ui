@@ -46,7 +46,17 @@ function EmailSender({ onSend, recipientLists = [] }) {
 
   return (
     <div className="w-full rounded-xl bg-white shadow-md p-6">
-      <h2 className="text-xl font-bold text-Navy mb-6">Send Email</h2>
+      <div className="flex justify-between items-start mb-6">
+        <h2 className="text-xl font-bold text-Navy">Send Email</h2>
+        <a 
+          href="https://www.ftc.gov/business-guidance/resources/can-spam-act-compliance-guide-business"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm text-MediumPink hover:text-DeepRed underline"
+        >
+          FTC CAN-SPAM Act Compliance Guide
+        </a>
+      </div>
       
       {isSent ? (
         <div className="space-y-4">
