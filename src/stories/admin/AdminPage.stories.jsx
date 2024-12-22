@@ -20,6 +20,12 @@ const Template = (args) => <AdminPage {...args} />;
 export const DefaultView = Template.bind({});
 
 DefaultView.args = {
+  onSendEmail: async (emailData) => {
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log('Email data:', emailData);
+    return Promise.resolve();
+  }, 
   onNavigationClick: handleOnNavigationClick,
   onUpdateMember: handleOnUpdateMember,
   additionalEmailLists: [
