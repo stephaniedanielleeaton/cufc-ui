@@ -29,13 +29,12 @@ function EmailSender({ onSend, recipientLists = [] }) {
         : [];
 
       // Combine both sets of emails and remove duplicates
-      const allEmails = [...new Set([...extraEmails, ...selectedListEmails])];
+      const recipientEmails = [...new Set([...extraEmails, ...selectedListEmails])];
 
       await onSend({
         subject,
         message,
-        selectedList,
-        additionalEmails: allEmails,
+        recipientEmails,
         isPromotional
       });
       setIsSent(true);
