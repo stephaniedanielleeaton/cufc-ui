@@ -38,7 +38,7 @@ function Schedule() {
 
   const upcomingClosures = [
     {
-      dates: 'Dec 25',
+      dates: 'Dec 25-26, 2024',
       reason: 'Christmas Holiday',
     },
   ];
