@@ -26,7 +26,7 @@ function UnsubscribeForm({ onSubmit }) {
           Unsubscribe from Updates
         </h3>
         <p className="text-sm text-Navy/80 mb-4">
-          Enter your email address below to unsubscribe from class notifications.
+          Enter your email address below to unsubscribe from promotional emails.
         </p>
         
         {isSubmitted ? (

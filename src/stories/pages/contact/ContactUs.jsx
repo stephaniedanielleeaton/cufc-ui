@@ -12,6 +12,7 @@ function ContactUs({ onSubmit, instagramLink, facebookLink }) {
     message: '',
   });
   const [emailStatusMessage, setEmailStatusMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,11 +31,23 @@ function ContactUs({ onSubmit, instagramLink, facebookLink }) {
     }
     try {
       await onSubmit({ ...formData });
-      setEmailStatusMessage('Email sent!');
+      setIsSubmitted(true);
+      setEmailStatusMessage('');
     } catch (error) {
       setEmailStatusMessage('Error sending email');
       console.error('Error sending email:', error);
     }
+  };
+
+  const handleSendAnother = () => {
+    setIsSubmitted(false);
+    setFormData({
+      fullName: '',
+      emailAddress: '',
+      contactNumber: '',
+      message: '',
+    });
+    setEmailStatusMessage('');
   };
 
   return (
@@ -86,69 +99,87 @@ function ContactUs({ onSubmit, instagramLink, facebookLink }) {
 
             {/* Contact Form */}
             <div className="bg-white rounded-xl shadow-sm p-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address*</label>
-                  <input
-                    type="email"
-                    placeholder="your.email@example.com"
-                    name="emailAddress"
-                    value={formData.emailAddress}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
-                  <input
-                    type="tel"
-                    placeholder="(123) 456-7890"
-                    name="contactNumber"
-                    value={formData.contactNumber}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Message*</label>
-                  <textarea
-                    placeholder="How can we help you?"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="4"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors resize-none"
-                  ></textarea>
-                </div>
-
-                <div>
+              {isSubmitted ? (
+                <div className="text-center space-y-6">
+                  <div className="bg-MediumPink p-8 rounded-lg text-white mb-6">
+                    <svg className="w-16 h-16 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
+                    <p className="text-white/90">Thank you for contacting us. We'll get back to you soon!</p>
+                  </div>
                   <button
-                    type="submit"
-                    className="w-full bg-MediumPink text-white text-lg font-bold px-8 py-3 rounded-lg transition-all duration-300 hover:bg-MediumPink/90 hover:scale-105 shadow-lg"
+                    onClick={handleSendAnother}
+                    className="bg-Navy hover:bg-Navy/90 text-white px-6 py-3 rounded-lg transition-colors duration-200"
                   >
-                    SUBMIT
+                    Send Another Message
                   </button>
-                  {emailStatusMessage && (
-                    <p className={`mt-4 text-center ${emailStatusMessage.includes('Error') ? 'text-red-500' : 'text-green-500'}`}>
-                      {emailStatusMessage}
-                    </p>
-                  )}
                 </div>
-              </form>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address*</label>
+                    <input
+                      type="email"
+                      placeholder="your.email@example.com"
+                      name="emailAddress"
+                      value={formData.emailAddress}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Contact Number</label>
+                    <input
+                      type="tel"
+                      placeholder="(123) 456-7890"
+                      name="contactNumber"
+                      value={formData.contactNumber}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Message*</label>
+                    <textarea
+                      placeholder="How can we help you?"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      rows="4"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-MediumPink/20 focus:border-MediumPink transition-colors resize-none"
+                    ></textarea>
+                  </div>
+
+                  <div>
+                    <button
+                      type="submit"
+                      className="w-full bg-MediumPink text-white text-lg font-bold px-8 py-3 rounded-lg transition-all duration-300 hover:bg-MediumPink/90 hover:scale-105 shadow-lg"
+                    >
+                      SUBMIT
+                    </button>
+                    {emailStatusMessage && (
+                      <p className={`mt-4 text-center ${emailStatusMessage.includes('Error') ? 'text-red-500' : 'text-green-500'}`}>
+                        {emailStatusMessage}
+                      </p>
+                    )}
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>
