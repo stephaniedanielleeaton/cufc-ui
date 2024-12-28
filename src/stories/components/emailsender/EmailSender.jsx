@@ -1,14 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 function EmailSender({ onSend, recipientLists = [] }) {
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
-  const [selectedList, setSelectedList] = useState('');
+  const [selectedLists, setSelectedLists] = useState([]);
   const [additionalEmails, setAdditionalEmails] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [sendResult, setSendResult] = useState(null);
+  const messageRef = useRef(null);
+
+  const adjustTextareaHeight = () => {
+    const textarea = messageRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${Math.max(textarea.scrollHeight, 200)}px`;
+    }
+  };
+
+  useEffect(() => {
+    adjustTextareaHeight();
+  }, [message]);
+
+  const handleMessageChange = (e) => {
+    setMessage(e.target.value);
+  };
+
+  const handleListChange = (listId) => {
+    setSelectedLists(prev => {
+      if (prev.includes(listId)) {
+        return prev.filter(id => id !== listId);
+      } else {
+        return [...prev, listId];
+      }
+    });
+  };
+
+  // Calculate total recipients from selected lists
+  const totalSelectedRecipients = selectedLists.reduce((total, listId) => {
+    const list = recipientLists.find(l => l.id === listId);
+    return total + (list ? list.count : 0);
+  }, 0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,10 +53,11 @@ function EmailSender({ onSend, recipientLists = [] }) {
         .map(email => email.trim())
         .filter(email => email !== '');
 
-      // If a list is selected, add its emails to the additional emails
-      const selectedListEmails = selectedList 
-        ? recipientLists.find(list => list.id === selectedList)?.emails || []
-        : [];
+      // Get emails from all selected lists
+      const selectedListEmails = selectedLists.reduce((emails, listId) => {
+        const list = recipientLists.find(l => l.id === listId);
+        return list ? [...emails, ...list.emails] : emails;
+      }, []);
 
       // Combine both sets of emails and remove duplicates
       const recipientEmails = [...new Set([...extraEmails, ...selectedListEmails])];
@@ -40,7 +74,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
       // Reset form
       setSubject('');
       setMessage('');
-      setSelectedList('');
+      setSelectedLists([]);
       setAdditionalEmails('');
     } catch (error) {
       console.error('Error sending email:', error);
@@ -134,41 +168,40 @@ function EmailSender({ onSend, recipientLists = [] }) {
             <div className="space-y-4">
               {/* Email List Selection */}
               <div>
-                <label htmlFor="recipientList" className="block text-sm font-medium text-gray-700 mb-1">
-                  Choose a recipient list (optional)
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Choose recipient lists (optional)
                 </label>
-                <select
-                  id="recipientList"
-                  value={selectedList}
-                  onChange={(e) => {
-                    const newSelectedList = e.target.value;
-                    setSelectedList(newSelectedList);
-                    if (newSelectedList) {
-                      const selectedListData = recipientLists.find(list => list.id === newSelectedList);
-                      console.log('Selected List:', {
-                        id: selectedListData.id,
-                        name: selectedListData.name,
-                        count: selectedListData.count,
-                        emails: selectedListData.emails
-                      });
-                    }
-                  }}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy"
-                >
-                  <option value="">No predefined list</option>
+                <div className="space-y-2 border border-gray-300 rounded-lg p-4 bg-white">
                   {recipientLists.map((list) => (
-                    <option key={list.id} value={list.id}>
-                      {list.name} ({list.count} recipients)
-                    </option>
+                    <div key={list.id} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        id={`list-${list.id}`}
+                        checked={selectedLists.includes(list.id)}
+                        onChange={() => handleListChange(list.id)}
+                        className="w-4 h-4 text-Navy border-gray-300 rounded focus:ring-Navy"
+                      />
+                      <label 
+                        htmlFor={`list-${list.id}`} 
+                        className="ml-2 text-sm text-gray-700 cursor-pointer flex-1"
+                      >
+                        {list.name} ({list.count} recipients)
+                      </label>
+                    </div>
                   ))}
-                </select>
+                </div>
+                {selectedLists.length > 0 && (
+                  <p className="mt-2 text-sm text-gray-600">
+                    Total recipients from selected lists: {totalSelectedRecipients}
+                  </p>
+                )}
               </div>
 
               {/* Additional Emails Input */}
               <div>
                 <label htmlFor="additionalEmails" className="block text-sm font-medium text-gray-700 mb-1">
                   Additional email addresses
-                  {!selectedList && <span className="text-red-500 ml-1">*</span>}
+                  {selectedLists.length === 0 && <span className="text-red-500 ml-1">*</span>}
                 </label>
                 <textarea
                   id="additionalEmails"
@@ -176,7 +209,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
                   onChange={(e) => setAdditionalEmails(e.target.value)}
                   placeholder="Enter email addresses separated by commas"
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy h-24"
-                  required={!selectedList}
+                  required={selectedLists.length === 0}
                 />
                 <p className="mt-1 text-sm text-gray-500">
                   Separate multiple email addresses with commas
@@ -209,9 +242,10 @@ function EmailSender({ onSend, recipientLists = [] }) {
             </label>
             <textarea
               id="message"
+              ref={messageRef}
               value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy h-48"
+              onChange={handleMessageChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy min-h-[200px] resize-none"
               required
             />
           </div>
