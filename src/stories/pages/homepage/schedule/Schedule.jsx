@@ -1,61 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Schedule() {
-  const scheduleItems = [
-    {
-      discipline: 'Saber',
-      day: 'Monday',
-      time: '7:00pm - 9:00pm',
-    },
-    {
-      discipline: 'Longsword',
-      day: 'Wednesday',
-      time: '6:30pm - 8:30pm',
-    },
-    {
-      discipline: 'Footwork & Thrusting Weapons',
-      day: 'Thursday',
-      time: '7:00pm - 9:00pm',
-    },
-    {
-      discipline: 'Longsword Fundamentals',
-      day: 'Saturday',
-      time: '10:00am - 11:30am',
-      subtitle: '(Starting in Early 2025)',
-    },
-    {
-      discipline: 'Open Floor',
-      day: 'Saturday',
-      time: '11:00am - 1:00pm',
-    },
-    {
-      discipline: 'Marginalized Gender Open Floor Brunch',
-      day: 'Sunday',
-      time: 'Variable',
-      subtitle: '(Check Discord for schedule)',
-    },
-  ];
-
-  const upcomingClosures = [
-    {
-      dates: 'Dec 25-26, 2024',
-      reason: 'Christmas Holiday',
-    },
-  ];
-
-  const upcomingEvents = [
-    {
-      date: 'January 11-12, 2025',
-      title: 'Arto Fama Workshop',
-      description: 'Open Floor will be cancelled. Email for registration details.',
-    },
-    {
-      date: 'February 14-16, 2025',
-      title: 'LynxCup 2025',
-      description: 'Open floor and classes will be cancelled for tournament. See event page for registration.',
-    },
-  ];
-
+function Schedule({ scheduleItems, upcomingClosures, upcomingEvents }) {
   return (
     <div className="bg-Navy">
       <div className="container mx-auto px-6 py-16 md:py-24">
@@ -145,5 +91,29 @@ function Schedule() {
     </div>
   );
 }
+
+Schedule.propTypes = {
+  scheduleItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      discipline: PropTypes.string.isRequired,
+      day: PropTypes.string.isRequired,
+      time: PropTypes.string.isRequired,
+      subtitle: PropTypes.string,
+    })
+  ).isRequired,
+  upcomingClosures: PropTypes.arrayOf(
+    PropTypes.shape({
+      dates: PropTypes.string.isRequired,
+      reason: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  upcomingEvents: PropTypes.arrayOf(
+    PropTypes.shape({
+      date: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+};
 
 export default Schedule;
