@@ -4,7 +4,7 @@ import UpcomingStartDates from './components/UpcomingStartDates';
 import NotificationSignup from '../../components/notificationsignup/NotificationSignup';
 import PropTypes from 'prop-types';
 
-function AboutNugget({ onNavigationClick, onEmailSignup }) {
+function AboutNugget({ onNavigationClick, onEmailSignup, upcomingDates }) {
   return (
     <div className="min-h-screen py-10 bg-gray-50">
       <div className="max-w-screen-lg mx-auto">
@@ -38,7 +38,7 @@ function AboutNugget({ onNavigationClick, onEmailSignup }) {
 
             <h3 className="text-lg font-semibold text-Navy mb-4">Topics we cover in class:</h3>
             <ul className="list-none space-y-3 mb-6">
-              {[
+              {[/* eslint-disable-line */
                 "Basic footwork and stances",
                 "Proper cutting, thrusting structure and blade alignment",
                 "Accurately reading distance between you and your opponent",
@@ -56,7 +56,7 @@ function AboutNugget({ onNavigationClick, onEmailSignup }) {
           </section>
 
           {/* Class Schedule Section */}
-          <UpcomingStartDates onNavigationClick={onNavigationClick} />
+          <UpcomingStartDates onNavigationClick={onNavigationClick} upcomingDates={upcomingDates} />
 
           {/* Notification Signup */}
           <section className="mb-16">
@@ -112,6 +112,14 @@ function AboutNugget({ onNavigationClick, onEmailSignup }) {
 AboutNugget.propTypes = {
   onNavigationClick: PropTypes.func.isRequired,
   onEmailSignup: PropTypes.func.isRequired,
+  upcomingDates: PropTypes.arrayOf(
+    PropTypes.shape({
+      startDate: PropTypes.string.isRequired,
+      schedule: PropTypes.string.isRequired,
+      meetingTime: PropTypes.string.isRequired,
+      courseTitle: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default AboutNugget;
