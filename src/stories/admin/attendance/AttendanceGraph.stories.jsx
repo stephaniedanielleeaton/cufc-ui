@@ -2,7 +2,7 @@ import React from 'react';
 import AttendanceGraph from './AttendanceGraph.jsx';
 
 export default {
-  title: 'Attendance/AttendanceGraph',
+  title: 'Admin/AttendanceGraph',
   component: AttendanceGraph,
 };
 

@@ -80,7 +80,7 @@ const mockResponses = {
 };
 
 export default {
-  title: 'Components/EmailSender',
+  title: 'Admin/EmailSender',
   component: EmailSender,
   parameters: {
     layout: 'centered',
