@@ -40,7 +40,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
   // Calculate total recipients from selected lists
   const totalSelectedRecipients = selectedLists.reduce((total, listId) => {
     const list = recipientLists.find(l => l.id === listId);
-    return total + (list ? list.count : 0);
+    return total + (list ? list.emails.length : 0);
   }, 0);
 
   const handleSubmit = async (e) => {
@@ -185,7 +185,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
                         htmlFor={`list-${list.id}`} 
                         className="ml-2 text-sm text-gray-700 cursor-pointer flex-1"
                       >
-                        {list.name} ({list.count} recipients)
+                        {list.name} ({list.emails.length} recipients)
                       </label>
                     </div>
                   ))}
@@ -291,7 +291,6 @@ EmailSender.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      count: PropTypes.number.isRequired,
       emails: PropTypes.arrayOf(PropTypes.string).isRequired
     })
   ).isRequired
