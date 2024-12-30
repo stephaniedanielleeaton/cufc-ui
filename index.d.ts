@@ -47,4 +47,7 @@ declare module 'cufc-ui' {
       recentlyCheckedIn: number;
     };
   }>;
+  export const AdminMembers: React.ComponentType<any>;
+  export const EmailSender: React.ComponentType<any>;
+  export const AttendanceGraph: React.ComponentType<any>;
 }

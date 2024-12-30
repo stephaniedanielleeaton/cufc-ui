@@ -4,7 +4,7 @@ import AttendanceGraph from '../attendance/AttendanceGraph.jsx';
 import MembersSection from './adminmembers/AdminMembers.jsx';
 import MemberStats from './memberstats/MemberStats.jsx';
 import AdminNavigation from './adminnavigation/AdminNavigation.jsx';
-import EmailSender from '../components/emailsender/EmailSender.jsx';
+import EmailSender from './emailsender/EmailSender.jsx';
 
 const AdminPage = ({ 
   members, 
