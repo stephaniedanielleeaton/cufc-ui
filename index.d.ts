@@ -5,7 +5,6 @@ declare module 'cufc-ui' {
   export const BaseSelect: React.ComponentType<any>;
   export const BaseTextInput: React.ComponentType<any>;
   export const BaseButton: React.ComponentType<any>;
-  export const AdminPage: React.ComponentType<any>;
   export const UserPage: React.ComponentType<any>;
   export const AboutMember: React.ComponentType<any>;
   export const AdminMember: React.ComponentType<any>;

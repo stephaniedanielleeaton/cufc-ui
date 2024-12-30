@@ -18,9 +18,8 @@ export { default as UpcomingStartDates } from './stories/pages/aboutnugget/compo
 export { default as NotificationSignup } from './stories/components/notificationsignup/NotificationSignup.jsx';
 export { default as UnsubscribeForm } from './stories/components/unsubscribe/UnsubscribeForm.jsx';
 // Admin Page Components
-export { default as AdminPage } from './stories/admin/AdminPage.jsx';
 export { default as AdminNavigation } from './stories/admin/adminnavigation/AdminNavigation.jsx';
 export { default as MemberStats } from './stories/admin/memberstats/MemberStats.jsx';
 export { default as AdminMembers } from './stories/admin/adminmembers/AdminMembers.jsx';
 export { default as EmailSender } from './stories/admin/emailsender/EmailSender.jsx';
-export { default as AttendanceGraph } from './stories/attendance/AttendanceGraph.jsx';
+export { default as AttendanceGraph } from './stories/admin/attendance/AttendanceGraph.jsx';
