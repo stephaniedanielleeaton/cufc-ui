@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 import PersonCheckInCard from './PersonCheckInCard.jsx';
 
 export default {
-  title: 'Pages/PersonCheckInPage/Cards/PersonCheckInCard',
+  title: 'CheckIn/Cards/PersonCheckInCard',
   component: PersonCheckInCard,
   tags: ['autodocs'],
 };

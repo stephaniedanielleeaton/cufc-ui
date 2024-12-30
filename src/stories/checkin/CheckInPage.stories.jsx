@@ -2,7 +2,7 @@ import React from 'react';
 import PersonCheckInPage from './CheckInPage.jsx';
 
 export default {
-  title: 'PersonCheckInPage',
+  title: 'CheckIn/PersonCheckInPage',
   component: PersonCheckInPage,
   tags: ['autodocs'],
 };

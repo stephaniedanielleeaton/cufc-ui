@@ -2,7 +2,7 @@ import React from 'react';
 import FormSection from './FormSection';
 
 export default {
-  title: 'Components/NewMemberSignUp/FormSection',
+  title: 'NewMemberSignUp/FormSection',
   component: FormSection,
   parameters: {
     layout: 'fullscreen',

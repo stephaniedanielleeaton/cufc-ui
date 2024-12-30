@@ -2,7 +2,7 @@ import React from 'react';
 import ClassOptions from './ClassOptions';
 
 export default {
-  title: 'Components/NewMemberSignUp/ClassOptions',
+  title: 'NewMemberSignUp/ClassOptions',
   component: ClassOptions,
   parameters: {
     layout: 'padded',
