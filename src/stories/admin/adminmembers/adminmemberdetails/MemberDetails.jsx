@@ -8,23 +8,22 @@ const MemberDetails = ({ member, onUpdateMember, onDeleteMember }) => {
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
     const inputValue = type === 'checkbox' ? checked : value;
-
     const keys = name.split('.');
 
-    if (keys.length > 1) {
-      setMemberData((prevData) => ({
-        ...prevData,
-        [keys[0]]: {
-          ...prevData[keys[0]],
-          [keys[1]]: inputValue,
-        },
-      }));
-    } else {
-      setMemberData((prevData) => ({
-        ...prevData,
-        [name]: inputValue,
-      }));
-    }
+    setMemberData(prevData => {
+      const setNestedValue = (obj, path, value) => {
+        const [head, ...rest] = path;
+        if (rest.length === 0) {
+          return { ...obj, [head]: value };
+        }
+        return {
+          ...obj,
+          [head]: setNestedValue(obj[head] || {}, rest, value)
+        };
+      };
+
+      return setNestedValue(prevData, keys, inputValue);
+    });
   };
 
   const handleSubmit = (e) => {

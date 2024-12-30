@@ -1,8 +1,8 @@
-import AdminStats from './AdminStats';
+import MemberStats from './MemberStats';
 
 export default {
-  title: 'Admin/AdminStats',
-  component: AdminStats,
+  title: 'Admin/MemberStats',
+  component: MemberStats,
 };
 
 const mockStats = {
