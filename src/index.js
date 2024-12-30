@@ -23,3 +23,5 @@ export { default as LynxCup2025SignUp } from './stories/events/lynxcup/LynxCup20
 export { default as UpcomingStartDates } from './stories/pages/aboutnugget/components/UpcomingStartDates';
 export { default as NotificationSignup } from './stories/components/notificationsignup/NotificationSignup.jsx';
 export { default as UnsubscribeForm } from './stories/components/unsubscribe/UnsubscribeForm.jsx';
+export { default as AdminNavigation } from './stories/admin/adminnavigation/AdminNavigation.jsx';
+export { default as MemberStats } from './stories/admin/memberstats/MemberStats.jsx';

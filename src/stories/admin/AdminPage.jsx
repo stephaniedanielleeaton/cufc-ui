@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AttendanceGraph from '../attendance/AttendanceGraph.jsx';
 import MembersSection from './adminmembers/AdminMembers.jsx';
-import AdminStats from './adminstats/AdminStats.jsx';
+import MemberStats from './memberstats/MemberStats.jsx';
 import AdminNavigation from './adminnavigation/AdminNavigation.jsx';
 import EmailSender from '../components/emailsender/EmailSender.jsx';
 
@@ -73,7 +73,7 @@ const AdminPage = ({
         <div className="bg-white rounded-lg shadow-sm p-4 mt-4">
           {activeTab === 'Members' ? (
             <div>
-              <AdminStats stats={stats} />
+              <MemberStats stats={stats} />
               <MembersSection
                 members={members}
                 onUpdateMember={onUpdateMember}

@@ -34,4 +34,17 @@ declare module 'cufc-ui' {
   export const UnsubscribeForm: React.ComponentType<{
     onSubmit: (email: string) => Promise<void>;
   }>;
+  export const AdminNavigation: React.ComponentType<{
+    activeTab: string;
+    onTabChange: (tab: string) => void;
+  }>;
+  export const MemberStats: React.ComponentType<{
+    stats: {
+      total: number;
+      active: number;
+      coaches: number;
+      checkedIn: number;
+      recentlyCheckedIn: number;
+    };
+  }>;
 }
