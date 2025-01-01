@@ -10,6 +10,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
   const [isSent, setIsSent] = useState(false);
   const [sendResult, setSendResult] = useState(null);
   const messageRef = useRef(null);
+  const resultsRef = useRef(null);
 
   const adjustTextareaHeight = () => {
     const textarea = messageRef.current;
@@ -76,6 +77,12 @@ function EmailSender({ onSend, recipientLists = [] }) {
       setMessage('');
       setSelectedLists([]);
       setAdditionalEmails('');
+
+      // Scroll to results after a brief delay to ensure the DOM has updated
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+
     } catch (error) {
       console.error('Error sending email:', error);
     } finally {
@@ -84,7 +91,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
   };
 
   return (
-    <div className="w-full rounded-xl bg-white shadow-md p-6">
+    <div className="w-full rounded-xl bg-white shadow-md p-6" ref={resultsRef}>
       <div className="flex justify-between items-start mb-6">
         <h2 className="text-xl font-bold text-Navy">Send Email</h2>
         <a 
@@ -161,7 +168,7 @@ function EmailSender({ onSend, recipientLists = [] }) {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Recipients Section */}
-          <div>
+          <fieldset disabled={isLoading} className={isLoading ? 'opacity-50' : ''}>
             <label className="block text-sm font-medium text-Navy mb-2">
               Recipients
             </label>
@@ -179,7 +186,8 @@ function EmailSender({ onSend, recipientLists = [] }) {
                         id={`list-${list.id}`}
                         checked={selectedLists.includes(list.id)}
                         onChange={() => handleListChange(list.id)}
-                        className="w-4 h-4 text-Navy border-gray-300 rounded focus:ring-Navy"
+                        className="w-4 h-4 text-Navy border-gray-300 rounded focus:ring-Navy disabled:bg-gray-100 disabled:cursor-not-allowed"
+                        disabled={isLoading}
                       />
                       <label 
                         htmlFor={`list-${list.id}`} 
@@ -208,15 +216,16 @@ function EmailSender({ onSend, recipientLists = [] }) {
                   value={additionalEmails}
                   onChange={(e) => setAdditionalEmails(e.target.value)}
                   placeholder="Enter email addresses separated by commas"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy h-24"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy h-24 disabled:bg-gray-100 disabled:cursor-not-allowed"
                   required={selectedLists.length === 0}
+                  disabled={isLoading}
                 />
                 <p className="mt-1 text-sm text-gray-500">
                   Separate multiple email addresses with commas
                 </p>
               </div>
             </div>
-          </div>
+          </fieldset>
 
           {/* Subject Input */}
           <div>
@@ -229,8 +238,9 @@ function EmailSender({ onSend, recipientLists = [] }) {
               id="subject"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={isLoading}
             />
           </div>
 
@@ -245,17 +255,18 @@ function EmailSender({ onSend, recipientLists = [] }) {
               ref={messageRef}
               value={message}
               onChange={handleMessageChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy min-h-[200px] resize-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-Navy focus:border-Navy min-h-[200px] resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
               required
+              disabled={isLoading}
             />
           </div>
 
           {/* Submit Button */}
-          <div className="flex justify-end">
+          <div className="flex flex-col items-end gap-2">
             <button
               type="submit"
               disabled={isLoading}
-              className={`px-6 py-3 font-bold rounded-lg transition-all duration-300 shadow-md flex items-center gap-2
+              className={`w-fit px-6 py-3 font-bold rounded-lg transition-all duration-300 shadow-md flex items-center gap-2
                 ${isLoading 
                   ? 'bg-gray-400 cursor-not-allowed'
                   : 'bg-Navy text-white hover:bg-Navy/90 hover:scale-105'
@@ -278,6 +289,11 @@ function EmailSender({ onSend, recipientLists = [] }) {
                 </>
               )}
             </button>
+            {isLoading && (
+              <div className="text-sm text-gray-600 italic">
+                This process may take a few minutes depending on the number of recipients
+              </div>
+            )}
           </div>
         </form>
       )}

@@ -82,16 +82,19 @@ const mockResponses = {
 export default {
   title: 'Admin/EmailSender',
   component: EmailSender,
-  parameters: {
-    layout: 'centered',
-  },
 };
 
 export const AllSuccessful = {
   args: {
     recipientLists: mockRecipientLists,
     onSend: async (emailData) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Simulate longer delay for more recipients
+      const totalRecipients = emailData.recipientEmails.length;
+      const baseDelay = 2000; // Base delay of 2 seconds
+      const perRecipientDelay = 50; // Additional 50ms per recipient
+      const totalDelay = baseDelay + (totalRecipients * perRecipientDelay);
+      
+      await new Promise((resolve) => setTimeout(resolve, totalDelay));
       console.log('Email data:', emailData);
       return mockResponses.success;
     },
@@ -115,7 +118,13 @@ export const PartialSuccess = {
   args: {
     recipientLists: mockRecipientLists,
     onSend: async (emailData) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Simulate a longer delay for partial success
+      const totalRecipients = emailData.recipientEmails.length;
+      const baseDelay = 3000; // Base delay of 3 seconds
+      const perRecipientDelay = 75; // Additional 75ms per recipient
+      const totalDelay = baseDelay + (totalRecipients * perRecipientDelay);
+      
+      await new Promise((resolve) => setTimeout(resolve, totalDelay));
       console.log('Email data:', emailData);
       return mockResponses.partial;
     },
@@ -139,7 +148,8 @@ export const AllBlocked = {
   args: {
     recipientLists: mockRecipientLists,
     onSend: async (emailData) => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Simulate quick response for blocked emails
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       console.log('Email data:', emailData);
       return mockResponses.blocked;
     },
@@ -157,4 +167,36 @@ export const AllBlocked = {
       </div>
     );
   }
+};
+
+export const SlowProcessing = {
+  args: {
+    recipientLists: mockRecipientLists,
+    onSend: async (emailData) => {
+      // Simulate a very slow processing time
+      const totalRecipients = emailData.recipientEmails.length;
+      const baseDelay = 5000; // Base delay of 5 seconds
+      const perRecipientDelay = 100; // Additional 100ms per recipient
+      const totalDelay = baseDelay + (totalRecipients * perRecipientDelay);
+      
+      await new Promise((resolve) => setTimeout(resolve, totalDelay));
+      console.log('Email data:', emailData);
+      return {
+        ...mockResponses.success,
+        message: `Completed after ${Math.round(totalDelay/1000)} seconds: ${totalRecipients} successful`,
+      };
+    },
+  },
+  render: (args) => {
+    return (
+      <div className="space-y-4">
+        <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+          <p className="text-amber-800">
+            This story simulates a slow email sending process. The delay increases with the number of recipients selected.
+          </p>
+        </div>
+        <EmailSender {...args} />
+      </div>
+    );
+  },
 };
