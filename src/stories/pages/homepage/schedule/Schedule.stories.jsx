@@ -9,12 +9,6 @@ const mockScheduleItems = [
     time: '7:00 PM - 9:00 PM',
   },
   {
-    discipline: 'Rapier',
-    subtitle: 'Intermediate & Advanced',
-    day: 'Tuesday',
-    time: '7:00 PM - 9:00 PM',
-  },
-  {
     discipline: 'Sword & Buckler',
     day: 'Thursday',
     time: '7:00 PM - 9:00 PM',
@@ -24,6 +18,12 @@ const mockScheduleItems = [
     subtitle: 'Supervised free practice',
     day: 'Saturday',
     time: '2:00 PM - 5:00 PM',
+  },
+  {
+    discipline: 'Rapier',
+    subtitle: 'Intermediate & Advanced',
+    day: 'Tuesday',
+    time: '7:00 PM - 9:00 PM',
   },
 ];
 

@@ -2,6 +2,38 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import ScheduleForm from './ScheduleForm';
 
+// Helper function to get the day index (0 for Monday, 6 for Sunday)
+const getDayIndex = (day) => {
+  // Extract the first day if multiple days are listed
+  const firstDay = day.split('&')[0].trim().toLowerCase();
+  
+  const dayMap = {
+    'monday': 0,
+    'mon': 0,
+    'tuesday': 1,
+    'tue': 1,
+    'wednesday': 2,
+    'wed': 2,
+    'thursday': 3,
+    'thu': 3,
+    'friday': 4,
+    'fri': 4,
+    'saturday': 5,
+    'sat': 5,
+    'sunday': 6,
+    'sun': 6
+  };
+
+  // Find the first word that matches a day
+  const words = firstDay.split(' ');
+  for (const word of words) {
+    if (dayMap[word] !== undefined) {
+      return dayMap[word];
+    }
+  }
+  return 7; // Return high number for items without recognized days
+};
+
 function Schedule({ 
   scheduleItems, 
   upcomingClosures, 
@@ -107,7 +139,7 @@ function Schedule({
           <div className="absolute inset-0 bg-LightPink/5 -skew-y-3 rounded-3xl" />
           
           <div className="relative grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
-            {scheduleItems.map((item, index) => (
+            {[...scheduleItems].sort((a, b) => getDayIndex(a.day) - getDayIndex(b.day)).map((item, index) => (
               <div 
                 key={index}
                 className="bg-Navy-light/30 backdrop-blur-sm rounded-xl p-6 transform transition-all duration-300 hover:scale-105 hover:bg-Navy-light/40 relative"
