@@ -1,90 +1,154 @@
 import React from 'react';
-import Schedule from './Schedule.jsx';
+import Schedule from './Schedule';
 
 const mockScheduleItems = [
   {
-    discipline: 'Saber',
-    day: 'Monday',
-    time: '7:00pm - 9:00pm',
-  },
-  {
     discipline: 'Longsword',
-    day: 'Wednesday',
-    time: '6:30pm - 8:30pm',
+    subtitle: 'All skill levels welcome',
+    day: 'Monday & Wednesday',
+    time: '7:00 PM - 9:00 PM',
   },
   {
-    discipline: 'Footwork & Thrusting Weapons',
+    discipline: 'Rapier',
+    subtitle: 'Intermediate & Advanced',
+    day: 'Tuesday',
+    time: '7:00 PM - 9:00 PM',
+  },
+  {
+    discipline: 'Sword & Buckler',
     day: 'Thursday',
-    time: '7:00pm - 9:00pm',
-  },
-  {
-    discipline: 'Longsword Fundamentals',
-    day: 'Saturday',
-    time: '10:00am - 11:30am',
-    subtitle: '(Starting in Early 2025)',
+    time: '7:00 PM - 9:00 PM',
   },
   {
     discipline: 'Open Floor',
+    subtitle: 'Supervised free practice',
     day: 'Saturday',
-    time: '11:00am - 1:00pm',
-  },
-  {
-    discipline: 'Marginalized Gender Open Floor Brunch',
-    day: 'Sunday',
-    time: 'Variable',
-    subtitle: '(Check Discord for schedule)',
-  },
-];
-
-const mockUpcomingClosures = [
-  {
-    dates: 'Dec 25-26, 2024',
-    reason: 'Christmas Holiday',
+    time: '2:00 PM - 5:00 PM',
   },
 ];
 
 const mockUpcomingEvents = [
   {
-    date: 'January 11-12, 2025',
-    title: 'Arto Fama Workshop',
-    description: 'Open Floor will be cancelled. Email for registration details.',
+    date: 'March 15-17, 2024',
+    title: 'Spring HEMA Tournament',
+    description: 'Annual competition featuring longsword and rapier categories',
   },
   {
-    date: 'February 14-16, 2025',
-    title: 'LynxCup 2025',
-    description: 'Open floor and classes will be cancelled for tournament. See event page for registration.',
+    date: 'April 5, 2024',
+    title: 'Beginner Workshop',
+    description: 'Introduction to HEMA fundamentals and safety',
+  },
+  {
+    date: 'May 20, 2024',
+    title: 'Guest Instructor: Master Smith',
+    description: 'Special workshop on German longsword techniques',
   },
 ];
 
-export default {
-  title: 'Pages/Homepage/Schedule',
-  component: Schedule,
-  tags: ['autodocs'],
-  parameters: {
-    layout: 'fullscreen',
+const mockUpcomingClosures = [
+  {
+    dates: 'December 24-26, 2023',
+    reason: 'Christmas Holiday',
+  },
+  {
+    dates: 'December 31, 2023 - January 1, 2024',
+    reason: 'New Year Holiday',
+  },
+  {
+    dates: 'January 15, 2024',
+    reason: 'Facility Maintenance',
+  },
+];
+
+const mockHandlers = {
+  onDeleteScheduleItem: (item) => {
+    console.log('Delete schedule item:', item);
+  },
+  onDeleteClosure: (closure) => {
+    console.log('Delete closure:', closure);
+  },
+  onDeleteEvent: (event) => {
+    console.log('Delete event:', event);
+  },
+  onAddScheduleItem: (item) => {
+    console.log('Add new schedule item:', item);
+    alert('New class would be added: ' + item.discipline);
+  },
+  onAddClosure: (closure) => {
+    console.log('Add new closure:', closure);
+    alert('New closure would be added for: ' + closure.dates);
+  },
+  onAddEvent: (event) => {
+    console.log('Add new event:', event);
+    alert('New event would be added: ' + event.title);
+  },
+  onEditScheduleItem: (item) => {
+    console.log('Edit schedule item:', item);
+    alert('Class would be updated: ' + item.discipline);
+  },
+  onEditClosure: (closure) => {
+    console.log('Edit closure:', closure);
+    alert('Closure would be updated for: ' + closure.dates);
+  },
+  onEditEvent: (event) => {
+    console.log('Edit event:', event);
+    alert('Event would be updated: ' + event.title);
   },
 };
 
+export default {
+  title: 'Pages/Schedule',
+  component: Schedule,
+  parameters: {
+    layout: 'fullscreen',
+  },
+  argTypes: {
+    isAdmin: {
+      control: 'boolean',
+      description: 'Enable admin features like editing and deleting items',
+    },
+  },
+};
+
+// Default view (non-admin)
 export const Default = {
   args: {
     scheduleItems: mockScheduleItems,
     upcomingClosures: mockUpcomingClosures,
     upcomingEvents: mockUpcomingEvents,
+    isAdmin: false,
   },
 };
 
-export const NoEvents = {
+// Admin view with edit controls
+export const AdminView = {
   args: {
     scheduleItems: mockScheduleItems,
     upcomingClosures: mockUpcomingClosures,
-    upcomingEvents: [],
+    upcomingEvents: mockUpcomingEvents,
+    isAdmin: true,
+    ...mockHandlers,
   },
 };
 
-export const NoClosures = {
+// Empty states
+export const EmptyState = {
   args: {
-    scheduleItems: mockScheduleItems,
+    scheduleItems: [],
     upcomingClosures: [],
-    upcomingEvents: mockUpcomingEvents,
+    upcomingEvents: [],
+    isAdmin: true,
+    ...mockHandlers,
+  },
+};
+
+// Loading state example (if needed in the future)
+export const WithFewItems = {
+  args: {
+    scheduleItems: mockScheduleItems.slice(0, 2),
+    upcomingClosures: mockUpcomingClosures.slice(0, 1),
+    upcomingEvents: mockUpcomingEvents.slice(0, 1),
+    isAdmin: true,
+    ...mockHandlers,
   },
 };
