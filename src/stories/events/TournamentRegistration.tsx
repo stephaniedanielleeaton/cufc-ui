@@ -20,6 +20,7 @@ interface Tournament {
     basePrice: number;
     location: string;
     events: Event[];
+    mutuallyExclusiveEventGroups: string[][];
 }
 
 interface TournamentRegistrationProps {
@@ -121,15 +122,26 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
     };
 
     const handleEventSelection = (event: React.ChangeEvent<HTMLInputElement>, eventPrice: number) => {
-        const { checked, name } = event.target;
+        const { checked, name: selectedEventId } = event.target;
         let newSelectedEvents = [...formData.selectedEvents];
         let newTotalPrice = totalPrice;
 
+        // Check if the selected event is part of any exclusive group
+        const exclusiveGroup = tournament.mutuallyExclusiveEventGroups.find(group => 
+            group.includes(selectedEventId)
+        );
+
         if (checked) {
-            newSelectedEvents.push(name);
+            // If this event is part of an exclusive group, remove any other selected events from the same group
+            if (exclusiveGroup) {
+                newSelectedEvents = newSelectedEvents.filter(eventId => 
+                    !exclusiveGroup.includes(eventId)
+                );
+            }
+            newSelectedEvents.push(selectedEventId);
             newTotalPrice += eventPrice;
         } else {
-            newSelectedEvents = newSelectedEvents.filter(id => id !== name);
+            newSelectedEvents = newSelectedEvents.filter(id => id !== selectedEventId);
             newTotalPrice -= eventPrice;
         }
 
@@ -141,6 +153,29 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
             ...prev,
             selectedEvents: newSelectedEvents.length === 0 ? 'Please select at least one event' : undefined
         }));
+    };
+
+    const isEventDisabled = (eventId: string) => {
+        // If the event is already at capacity
+        const event = tournament.events.find(e => e._id === eventId);
+        if (event && event.registrants.length >= event.registrationCap) {
+            return true;
+        }
+
+        // If the event is part of an exclusive group
+        const exclusiveGroup = tournament.mutuallyExclusiveEventGroups.find(group => 
+            group.includes(eventId)
+        );
+
+        if (exclusiveGroup) {
+            // Check if any other event from the same group is already selected
+            const hasSelectedFromGroup = formData.selectedEvents.some(selectedId => 
+                exclusiveGroup.includes(selectedId) && selectedId !== eventId
+            );
+            return hasSelectedFromGroup;
+        }
+
+        return false;
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -173,6 +208,58 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                             {format(new Date(tournament.startDate), 'MMMM d, yyyy')} - {format(new Date(tournament.endDate), 'MMMM d, yyyy')}
                         </p>
                         <p className="text-sm mt-1">{tournament.location}</p>
+                    </div>
+                </div>
+
+                {/* Events and Schedule */}
+                <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-8">
+                    <h2 className="text-2xl font-bold text-Navy mb-6">Events and Schedule</h2>
+                    <div className="divide-y divide-gray-100">
+                        {Object.entries(
+                            tournament.events
+                                .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
+                                .reduce((acc, event) => {
+                                    const eventDate = new Date(event.startTime);
+                                    const dateKey = eventDate.toDateString();
+                                    
+                                    if (!acc[dateKey]) {
+                                        acc[dateKey] = [];
+                                    }
+                                    acc[dateKey].push(event);
+                                    return acc;
+                                }, {})
+                        ).map(([dateKey, events]) => {
+                            const eventDate = new Date(dateKey);
+                            return (
+                                <div key={dateKey} className="py-4 first:pt-0 last:pb-0">
+                                    <div className="text-lg font-semibold text-Navy mb-3">
+                                        {format(eventDate, 'EEEE, MMMM d, yyyy')}
+                                    </div>
+                                    <div className="space-y-3 pl-2 sm:pl-4">
+                                        {events.map(event => (
+                                            <div 
+                                                key={event._id} 
+                                                className="flex flex-col sm:flex-row sm:items-start py-2 hover:bg-gray-50 rounded-md transition-colors"
+                                            >
+                                                <div className="font-medium text-gray-600 mb-1 sm:mb-0 sm:w-20">
+                                                    {format(new Date(event.startTime), 'h:mm a')}
+                                                </div>
+                                                <div className="flex-grow">
+                                                    <div className="text-gray-900 font-medium">
+                                                        {event.name}
+                                                    </div>
+                                                    {event.description && (
+                                                        <div className="text-sm text-gray-500 mt-1 pr-4">
+                                                            {event.description}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -324,7 +411,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                                         className="h-4 w-4 text-periwinkle border-gray-300 rounded focus:ring-periwinkle"
                                                         onChange={(e) => handleEventSelection(e, event.price)}
                                                         checked={formData.selectedEvents.includes(event._id)}
-                                                        disabled={event.registrants.length >= event.registrationCap}
+                                                        disabled={isEventDisabled(event._id)}
                                                     />
                                                     <label className="ml-2 block text-sm font-medium text-gray-700">
                                                         {event.name}

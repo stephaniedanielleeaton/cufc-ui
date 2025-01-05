@@ -20,6 +20,7 @@ const sampleTournament = {
     endDate: '2025-02-16T17:00:00-05:00',
     basePrice: 45.00,
     location: '6475 E Main St. #111, Reynoldsburg, OH 43068',
+    mutuallyExclusiveEventGroups: [['e2', 'e1']],
     events: [
         {
             _id: 'e1',
