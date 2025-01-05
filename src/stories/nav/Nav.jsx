@@ -130,41 +130,43 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
       </div>
 
       {/* Logo */}
-      <div className="hidden md:flex justify-around items-center h-[187px] px-8 bg-white">
+      <div className="hidden md:flex justify-around items-center h-[187px] px-8 bg-white overflow-hidden">
         <div className="flex-none flex justify-center items-center bg-white h-full">
           <img src={logoFullColourNavySvg} alt="Logo" className="w-[200px] cursor-pointer" onClick={() => onNavigationClick('')} />
         </div>
-        <nav className="md:w-1/2 lg:w-1/3 flex items-center justify-center space-x-8">
-          <span
-            className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer whitespace-nowrap"
-            onClick={() => onNavigationClick('intro')}
-          >
-            GET STARTED
-          </span>
-          <span
-            className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
-            onClick={() => onNavigationClick('about')}
-          >
-            ABOUT
-          </span>
-          <span
-            className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
-            onClick={() => onNavigationClick('classes')}
-          >
-            CLASSES
-          </span>
-          <span
-            className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
-            onClick={() => onNavigationClick('events')}
-          >
-            EVENTS
-          </span>
-          <span
-            className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
-            onClick={() => onNavigationClick('contact')}
-          >
-            CONTACT
-          </span>
+        <nav className="md:w-1/2 lg:w-2/3 flex items-center justify-center">
+          <div className="flex items-center justify-center gap-4 lg:gap-8 flex-wrap">
+            <span
+              className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
+              onClick={() => onNavigationClick('intro')}
+            >
+              GET STARTED
+            </span>
+            <span
+              className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
+              onClick={() => onNavigationClick('about')}
+            >
+              ABOUT
+            </span>
+            <span
+              className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
+              onClick={() => onNavigationClick('classes')}
+            >
+              CLASSES
+            </span>
+            <span
+              className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
+              onClick={() => onNavigationClick('events')}
+            >
+              EVENTS
+            </span>
+            <span
+              className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
+              onClick={() => onNavigationClick('contact')}
+            >
+              CONTACT
+            </span>
+          </div>
         </nav>
       </div>
     </div>
