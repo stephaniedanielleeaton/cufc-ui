@@ -325,19 +325,26 @@ export const TournamentRegistration = ({
                                         </div>
                                         <div className="space-y-4">
                                             {events.map(event => {
-                                                const isDisabled = isEventDisabled(event._id);
+                                                const isAtCapacity = event.registrants.length >= event.registrationCap;
+                                                const exclusiveGroup = tournament.mutuallyExclusiveEventGroups.find(group => 
+                                                    group.includes(event._id)
+                                                );
+                                                const hasSelectedFromGroup = exclusiveGroup && formData.selectedEvents.some(selectedId => 
+                                                    exclusiveGroup.includes(selectedId) && selectedId !== event._id
+                                                );
+                                                
                                                 return (
                                                     <Tooltip
                                                         key={event._id}
-                                                        text={isDisabled ? "You are already signed up for an event in this category" : ""}
+                                                        text={hasSelectedFromGroup ? "You are already signed up for an event in this category" : isAtCapacity ? "This event is full" : ""}
                                                     >
                                                         <div
                                                             className={`p-4 rounded-lg border-2 transition-all ${
                                                                 formData.selectedEvents.includes(event._id)
                                                                     ? 'bg-lightGreen border-darkGreen selected-event'
                                                                     : 'bg-white border-gray-200 hover:border-Navy unselected-event'
-                                                            } ${isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
-                                                            onClick={() => !isDisabled && handleEventSelection({ target: { checked: !formData.selectedEvents.includes(event._id), name: event._id } }, event.price)}
+                                                            } ${(isAtCapacity || hasSelectedFromGroup) ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+                                                            onClick={() => !(isAtCapacity || hasSelectedFromGroup) && handleEventSelection({ target: { checked: !formData.selectedEvents.includes(event._id), name: event._id } }, event.price)}
                                                         >
                                                             {/* Top Section: Time, Name, Price */}
                                                             <div className="flex flex-wrap items-start gap-3">
@@ -354,8 +361,8 @@ export const TournamentRegistration = ({
                                                                 <div className="flex flex-row items-center gap-4">
                                                                     <div className="flex flex-col items-end">
                                                                         <span className="text-lg font-semibold">${event.price.toFixed(2)}</span>
-                                                                        <p className="text-sm text-gray-500">
-                                                                            {event.registrants.length} / {event.registrationCap} registered
+                                                                        <p className={`text-sm ${isAtCapacity ? 'text-red-500 font-medium' : 'text-gray-500'}`}>
+                                                                            {isAtCapacity ? 'Event Full' : `${event.registrants.length} / ${event.registrationCap} registered`}
                                                                         </p>
                                                                     </div>
                                                                     <div className="flex items-center justify-center w-8 h-8">
@@ -365,7 +372,7 @@ export const TournamentRegistration = ({
                                                                             className="w-5 h-5 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
                                                                             onChange={(e) => handleEventSelection(e, event.price)}
                                                                             checked={formData.selectedEvents.includes(event._id)}
-                                                                            disabled={isDisabled}
+                                                                            disabled={isAtCapacity || hasSelectedFromGroup}
                                                                         />
                                                                     </div>
                                                                 </div>
