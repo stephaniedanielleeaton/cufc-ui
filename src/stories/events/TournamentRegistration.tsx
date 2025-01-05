@@ -108,10 +108,9 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
         
-        if (touched[name]) {
-            const error = validateField(name, value);
-            setErrors(prev => ({ ...prev, [name]: error }));
-        }
+        // Always validate on change and clear error if valid
+        const error = validateField(name, value);
+        setErrors(prev => ({ ...prev, [name]: error }));
     };
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -137,12 +136,11 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
         setFormData(prev => ({ ...prev, selectedEvents: newSelectedEvents }));
         setTotalPrice(newTotalPrice);
 
-        if (touched.selectedEvents) {
-            setErrors(prev => ({
-                ...prev,
-                selectedEvents: newSelectedEvents.length === 0 ? 'Please select at least one event' : undefined
-            }));
-        }
+        // Update selectedEvents error
+        setErrors(prev => ({
+            ...prev,
+            selectedEvents: newSelectedEvents.length === 0 ? 'Please select at least one event' : undefined
+        }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -333,9 +331,6 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                                     </label>
                                                 </div>
                                                 <p className="mt-1 text-sm text-gray-500 ml-6">
-                                                    {event.description}
-                                                </p>
-                                                <p className="mt-1 text-sm text-gray-500 ml-6">
                                                     {format(new Date(event.startTime), 'MMMM d, yyyy h:mm a')}
                                                 </p>
                                             </div>
@@ -366,11 +361,11 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                         <div className="flex justify-end">
                             <button
                                 type="submit"
-                                disabled={isLoading || Object.keys(errors).length > 0}
+                                disabled={isLoading || (Object.keys(errors).length > 0 && Object.values(errors).some(error => error !== undefined))}
                                 className={`px-6 py-3 rounded-md text-white font-medium ${
-                                    isLoading || Object.keys(errors).length > 0
+                                    isLoading || (Object.keys(errors).length > 0 && Object.values(errors).some(error => error !== undefined))
                                         ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-Navy hover:bg-blue-700'
+                                        : 'bg-Navy hover:bg-Navy/80 active:bg-Navy/90'
                                 }`}
                             >
                                 {isLoading ? (
