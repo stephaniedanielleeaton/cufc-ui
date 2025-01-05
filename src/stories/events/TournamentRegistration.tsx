@@ -83,30 +83,82 @@ export const TournamentRegistration = ({
     const [touched, setTouched] = useState<Record<string, boolean>>({});
     const [isLoading, setIsLoading] = useState(propIsLoading);
 
-    const validateField = (name: string, value: any): string | undefined => {
+    const validateField = (name: keyof FormData, value: string | boolean | string[]) => {
+        let error: string | undefined;
+
         switch (name) {
-            case 'selectedEvents':
-                return value.length === 0 ? 'Please select at least one event' : undefined;
             case 'preferredFirstName':
             case 'preferredLastName':
             case 'legalFirstName':
             case 'legalLastName':
-                return !value.trim() ? `${name.replace(/([A-Z])/g, ' $1').trim()} is required` : undefined;
+                if (!value) {
+                    error = 'This field is required';
+                }
+                break;
             case 'email':
-                return !value.trim()
-                    ? 'Email is required'
-                    : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
-                    ? 'Please enter a valid email'
-                    : undefined;
+                if (!value) {
+                    error = 'Email is required';
+                } else if (!/\S+@\S+\.\S+/.test(value as string)) {
+                    error = 'Please enter a valid email address';
+                }
+                break;
             case 'phoneNumber':
-                return !value.trim() ? 'Phone number is required' : undefined;
+                if (!value) {
+                    error = 'Phone number is required';
+                }
+                break;
+            case 'selectedEvents':
+                if ((value as string[]).length === 0) {
+                    error = 'Please select at least one event';
+                }
+                break;
+            case 'clubAffiliation':
+                if (!value) {
+                    error = 'Club affiliation is required';
+                }
+                break;
             case 'guardianFirstName':
             case 'guardianLastName':
-                return formData.isGuardian && !value.trim()
-                    ? `Guardian ${name.replace('guardian', '').replace(/([A-Z])/g, ' $1').trim()} is required`
-                    : undefined;
-            default:
-                return undefined;
+                if (formData.isGuardian && !value) {
+                    error = 'This field is required when registering as a guardian';
+                }
+                break;
+        }
+
+        return error;
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked } = e.target;
+        const inputValue = type === 'checkbox' ? checked : value;
+
+        setFormData(prev => ({
+            ...prev,
+            [name]: inputValue
+        }));
+
+        // If unchecking guardian, clear the guardian fields and their errors
+        if (name === 'isGuardian' && !checked) {
+            setFormData(prev => ({
+                ...prev,
+                guardianFirstName: '',
+                guardianLastName: '',
+                [name]: inputValue
+            }));
+            setErrors(prev => ({
+                ...prev,
+                guardianFirstName: undefined,
+                guardianLastName: undefined
+            }));
+            return;
+        }
+
+        // Only validate if the field has been touched
+        if (touched[name as keyof FormData]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: validateField(name as keyof FormData, inputValue)
+            }));
         }
     };
 
@@ -122,7 +174,7 @@ export const TournamentRegistration = ({
                     isValid = false;
                 }
             } else {
-                const error = validateField(key, formData[key as keyof FormData] as string);
+                const error = validateField(key as keyof FormData, formData[key as keyof FormData] as string);
                 if (error) {
                     newErrors[key as keyof FormErrors] = error;
                     isValid = false;
@@ -134,32 +186,10 @@ export const TournamentRegistration = ({
         return isValid;
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type, checked } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-
-        // Clear guardian fields when unchecking the box
-        if (name === 'isGuardian' && !checked) {
-            setFormData(prev => ({
-                ...prev,
-                guardianFirstName: '',
-                guardianLastName: '',
-                [name]: checked
-            }));
-        }
-
-        // Always validate on change and clear error if valid
-        const error = validateField(name, type === 'checkbox' ? checked : value);
-        setErrors(prev => ({ ...prev, [name]: error }));
-    };
-
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setTouched(prev => ({ ...prev, [name]: true }));
-        const error = validateField(name, value);
+        const error = validateField(name as keyof FormData, value);
         setErrors(prev => ({ ...prev, [name]: error }));
     };
 
@@ -244,7 +274,7 @@ export const TournamentRegistration = ({
 
         const newErrors: { [key: string]: string } = {};
         fieldsToValidate.forEach(field => {
-            const error = validateField(field, formData[field as keyof FormData]);
+            const error = validateField(field as keyof FormData, formData[field as keyof FormData]);
             if (error) {
                 newErrors[field] = error;
             }
@@ -412,7 +442,7 @@ export const TournamentRegistration = ({
                                     type="text"
                                     name="preferredFirstName"
                                     value={formData.preferredFirstName}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     aria-invalid={touched.preferredFirstName && errors.preferredFirstName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
@@ -433,7 +463,7 @@ export const TournamentRegistration = ({
                                     type="text"
                                     name="preferredLastName"
                                     value={formData.preferredLastName}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     aria-invalid={touched.preferredLastName && errors.preferredLastName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
@@ -454,7 +484,7 @@ export const TournamentRegistration = ({
                                     type="text"
                                     name="legalFirstName"
                                     value={formData.legalFirstName}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     aria-invalid={touched.legalFirstName && errors.legalFirstName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
@@ -475,7 +505,7 @@ export const TournamentRegistration = ({
                                     type="text"
                                     name="legalLastName"
                                     value={formData.legalLastName}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     aria-invalid={touched.legalLastName && errors.legalLastName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
@@ -496,7 +526,7 @@ export const TournamentRegistration = ({
                                     type="email"
                                     name="email"
                                     value={formData.email}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     aria-invalid={touched.email && errors.email ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
@@ -517,7 +547,7 @@ export const TournamentRegistration = ({
                                     type="tel"
                                     name="phoneNumber"
                                     value={formData.phoneNumber}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     aria-invalid={touched.phoneNumber && errors.phoneNumber ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
@@ -538,7 +568,7 @@ export const TournamentRegistration = ({
                                     type="text"
                                     name="clubAffiliation"
                                     value={formData.clubAffiliation}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     onBlur={handleBlur}
                                     aria-invalid={touched.clubAffiliation && errors.clubAffiliation ? 'true' : 'false'}
                                     className="w-full border rounded-md h-12 px-3 focus:outline-none focus:border-periwinkle"
@@ -557,7 +587,7 @@ export const TournamentRegistration = ({
                                     type="checkbox"
                                     name="isGuardian"
                                     checked={formData.isGuardian}
-                                    onChange={handleChange}
+                                    onChange={handleInputChange}
                                     className="w-4 h-4 mt-1 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
                                 />
                                 <span className="text-sm text-gray-700">
@@ -577,7 +607,7 @@ export const TournamentRegistration = ({
                                         type="text"
                                         name="guardianFirstName"
                                         value={formData.guardianFirstName}
-                                        onChange={handleChange}
+                                        onChange={handleInputChange}
                                         onBlur={handleBlur}
                                         aria-invalid={touched.guardianFirstName && errors.guardianFirstName ? 'true' : 'false'}
                                         className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
@@ -598,7 +628,7 @@ export const TournamentRegistration = ({
                                         type="text"
                                         name="guardianLastName"
                                         value={formData.guardianLastName}
-                                        onChange={handleChange}
+                                        onChange={handleInputChange}
                                         onBlur={handleBlur}
                                         aria-invalid={touched.guardianLastName && errors.guardianLastName ? 'true' : 'false'}
                                         className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
