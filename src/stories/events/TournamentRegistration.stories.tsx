@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { TournamentRegistration } from './TournamentRegistration';
+import bannerImage from '../assets/lynxcup2025_keyart.png';
 
 const meta = {
     title: 'Events/Tournament Registration',
@@ -95,8 +96,8 @@ export const Default: Story = {
         tournament: sampleTournament,
         onSubmit: async (values) => {
             console.log('Form submitted:', values);
-            await new Promise(resolve => setTimeout(resolve, 1000));
         },
+        bannerImage: bannerImage,
     },
 };
 
@@ -106,13 +107,13 @@ export const WithSomeFullEvents: Story = {
             ...sampleTournament,
             events: sampleTournament.events.map((event, index) => ({
                 ...event,
-                registrants: Array(index === 1 ? 32 : 20).fill({}) // Second event is full
-            }))
+                registrants: index === 0 ? Array(event.registrationCap).fill({}) : [],
+            })),
         },
         onSubmit: async (values) => {
             console.log('Form submitted:', values);
-            await new Promise(resolve => setTimeout(resolve, 1000));
         },
+        bannerImage: bannerImage,
     },
 };
 
@@ -121,5 +122,6 @@ export const Loading: Story = {
         tournament: sampleTournament,
         onSubmit: async () => {},
         isLoading: true,
+        bannerImage: bannerImage,
     },
 };

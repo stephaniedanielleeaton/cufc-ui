@@ -27,6 +27,7 @@ interface TournamentRegistrationProps {
     tournament: Tournament;
     onSubmit: (values: any) => Promise<void>;
     isLoading?: boolean;
+    bannerImage: string;
 }
 
 interface FormData {
@@ -53,6 +54,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
     tournament,
     onSubmit,
     isLoading = false,
+    bannerImage,
 }) => {
     const [formData, setFormData] = useState<FormData>({
         preferredFirstName: '',
@@ -198,6 +200,17 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
 
     return (
         <div className="min-h-screen bg-gray-50">
+            {/* Banner Image */}
+            <div className="max-w-5xl mx-auto">
+                <div className="w-full h-[300px] relative overflow-hidden mb-8">
+                    <img
+                        src={bannerImage}
+                        alt={`${tournament.name} Banner`}
+                        className="w-full h-full object-cover"
+                    />
+                </div>
+            </div>
+            
             <div className="max-w-4xl mx-auto p-4 md:p-6">
                 {/* Tournament Header */}
                 <div className="bg-Navy text-white p-6 rounded-lg mb-8">
