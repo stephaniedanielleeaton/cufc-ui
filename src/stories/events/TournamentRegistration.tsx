@@ -38,6 +38,10 @@ interface FormData {
     email: string;
     phoneNumber: string;
     selectedEvents: string[];
+    clubAffiliation: string;
+    isGuardian: boolean;
+    guardianFirstName: string;
+    guardianLastName: string;
 }
 
 interface FormErrors {
@@ -48,6 +52,9 @@ interface FormErrors {
     email?: string;
     phoneNumber?: string;
     selectedEvents?: string;
+    clubAffiliation?: string;
+    guardianFirstName?: string;
+    guardianLastName?: string;
 }
 
 export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
@@ -63,24 +70,42 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
         legalLastName: '',
         email: '',
         phoneNumber: '',
+        clubAffiliation: '',
         selectedEvents: [],
+        isGuardian: false,
+        guardianFirstName: '',
+        guardianLastName: '',
     });
 
     const [errors, setErrors] = useState<FormErrors>({});
     const [totalPrice, setTotalPrice] = useState(tournament.basePrice);
     const [touched, setTouched] = useState<Record<string, boolean>>({});
 
-    const validateField = (name: string, value: string): string | undefined => {
-        if (!value) {
-            return `${name.replace(/([A-Z])/g, ' $1').toLowerCase()} is required`;
+    const validateField = (name: string, value: any): string | undefined => {
+        switch (name) {
+            case 'selectedEvents':
+                return value.length === 0 ? 'Please select at least one event' : undefined;
+            case 'preferredFirstName':
+            case 'preferredLastName':
+            case 'legalFirstName':
+            case 'legalLastName':
+                return !value.trim() ? `${name.replace(/([A-Z])/g, ' $1').trim()} is required` : undefined;
+            case 'email':
+                return !value.trim()
+                    ? 'Email is required'
+                    : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+                    ? 'Please enter a valid email'
+                    : undefined;
+            case 'phoneNumber':
+                return !value.trim() ? 'Phone number is required' : undefined;
+            case 'guardianFirstName':
+            case 'guardianLastName':
+                return formData.isGuardian && !value.trim()
+                    ? `Guardian ${name.replace('guardian', '').replace(/([A-Z])/g, ' $1').trim()} is required`
+                    : undefined;
+            default:
+                return undefined;
         }
-        if (name === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-            return 'Please enter a valid email address';
-        }
-        if (name === 'phoneNumber' && !/^\d{10}$/.test(value.replace(/\D/g, ''))) {
-            return 'Please enter a valid 10-digit phone number';
-        }
-        return undefined;
     };
 
     const validateForm = (): boolean => {
@@ -108,11 +133,24 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-        
+        const { name, value, type, checked } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+
+        // Clear guardian fields when unchecking the box
+        if (name === 'isGuardian' && !checked) {
+            setFormData(prev => ({
+                ...prev,
+                guardianFirstName: '',
+                guardianLastName: '',
+                [name]: checked
+            }));
+        }
+
         // Always validate on change and clear error if valid
-        const error = validateField(name, value);
+        const error = validateField(name, type === 'checkbox' ? checked : value);
         setErrors(prev => ({ ...prev, [name]: error }));
     };
 
@@ -183,26 +221,32 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
-        // Validate form before submission
+        // Mark all fields as touched
+        const fieldsToValidate = [
+            'selectedEvents',
+            'preferredFirstName',
+            'preferredLastName',
+            'legalFirstName',
+            'legalLastName',
+            'email',
+            'phoneNumber',
+            ...(formData.isGuardian ? ['guardianFirstName', 'guardianLastName'] : [])
+        ];
+
+        // Set all fields as touched
+        const newTouched = fieldsToValidate.reduce((acc, field) => ({
+            ...acc,
+            [field]: true
+        }), {});
+        setTouched(newTouched);
+
         const newErrors: { [key: string]: string } = {};
-        
-        if (formData.selectedEvents.length === 0) {
-            newErrors.selectedEvents = 'Please select at least one event';
-        }
-        if (!formData.preferredFirstName.trim()) {
-            newErrors.preferredFirstName = 'First name is required';
-        }
-        if (!formData.preferredLastName.trim()) {
-            newErrors.preferredLastName = 'Last name is required';
-        }
-        if (!formData.email.trim()) {
-            newErrors.email = 'Email is required';
-        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            newErrors.email = 'Please enter a valid email';
-        }
-        if (!formData.preferredFirstName.trim()) {
-            formData.preferredFirstName = formData.legalFirstName;
-        }
+        fieldsToValidate.forEach(field => {
+            const error = validateField(field, formData[field as keyof FormData]);
+            if (error) {
+                newErrors[field] = error;
+            }
+        });
 
         setErrors(newErrors);
 
@@ -212,6 +256,13 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                 await onSubmit(formData);
             } catch (error) {
                 console.error('Form submission error:', error);
+            }
+        } else {
+            console.log('Form has errors:', newErrors);
+            // Scroll to the first error
+            const firstErrorField = document.querySelector('[aria-invalid="true"]');
+            if (firstErrorField) {
+                firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
         }
     };
@@ -244,9 +295,9 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
 
                 {/* Event Registration */}
                 <form onSubmit={handleSubmit} className="space-y-8">
-                    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-8">
-                        <h2 className="text-2xl font-bold text-Navy mb-6">Event Registration</h2>
-                        <div className="divide-y divide-gray-100">
+                    <div>
+                        <h2 className="text-2xl font-bold text-Navy mb-6">Event Registration and Schedule</h2>
+                        <div className="space-y-6">
                             {Object.entries(
                                 tournament.events
                                     .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
@@ -343,6 +394,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                     value={formData.preferredFirstName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    aria-invalid={touched.preferredFirstName && errors.preferredFirstName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
                                         touched.preferredFirstName && errors.preferredFirstName
                                             ? 'border-red-500'
@@ -363,6 +415,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                     value={formData.preferredLastName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    aria-invalid={touched.preferredLastName && errors.preferredLastName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
                                         touched.preferredLastName && errors.preferredLastName
                                             ? 'border-red-500'
@@ -383,6 +436,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                     value={formData.legalFirstName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    aria-invalid={touched.legalFirstName && errors.legalFirstName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
                                         touched.legalFirstName && errors.legalFirstName
                                             ? 'border-red-500'
@@ -403,6 +457,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                     value={formData.legalLastName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    aria-invalid={touched.legalLastName && errors.legalLastName ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
                                         touched.legalLastName && errors.legalLastName
                                             ? 'border-red-500'
@@ -423,6 +478,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                     value={formData.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    aria-invalid={touched.email && errors.email ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
                                         touched.email && errors.email
                                             ? 'border-red-500'
@@ -443,6 +499,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                     value={formData.phoneNumber}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    aria-invalid={touched.phoneNumber && errors.phoneNumber ? 'true' : 'false'}
                                     className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
                                         touched.phoneNumber && errors.phoneNumber
                                             ? 'border-red-500'
@@ -453,7 +510,89 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                     <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>
                                 )}
                             </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Club Affiliation
+                                </label>
+                                <input
+                                    type="text"
+                                    name="clubAffiliation"
+                                    value={formData.clubAffiliation}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    aria-invalid={touched.clubAffiliation && errors.clubAffiliation ? 'true' : 'false'}
+                                    className="w-full border rounded-md h-12 px-3 focus:outline-none focus:border-periwinkle"
+                                    placeholder="Optional"
+                                />
+                                {touched.clubAffiliation && errors.clubAffiliation && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.clubAffiliation}</p>
+                                )}
+                            </div>
                         </div>
+
+                        {/* Guardian Checkbox */}
+                        <div className="mt-12">
+                            <label className="flex items-start space-x-3 cursor-pointer">
+                                <input
+                                    type="checkbox"
+                                    name="isGuardian"
+                                    checked={formData.isGuardian}
+                                    onChange={handleChange}
+                                    className="w-4 h-4 mt-1 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
+                                />
+                                <span className="text-sm text-gray-700">
+                                    I am a guardian signing up on behalf of a minor that is at least 14 years of age
+                                </span>
+                            </label>
+                        </div>
+
+                        {/* Guardian Information - Conditional Rendering */}
+                        {formData.isGuardian && (
+                            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Guardian First Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="guardianFirstName"
+                                        value={formData.guardianFirstName}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        aria-invalid={touched.guardianFirstName && errors.guardianFirstName ? 'true' : 'false'}
+                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                            touched.guardianFirstName && errors.guardianFirstName
+                                                ? 'border-red-500'
+                                                : 'focus:border-periwinkle'
+                                        }`}
+                                    />
+                                    {touched.guardianFirstName && errors.guardianFirstName && (
+                                        <p className="mt-1 text-sm text-red-500">{errors.guardianFirstName}</p>
+                                    )}
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                                        Guardian Last Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="guardianLastName"
+                                        value={formData.guardianLastName}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        aria-invalid={touched.guardianLastName && errors.guardianLastName ? 'true' : 'false'}
+                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                            touched.guardianLastName && errors.guardianLastName
+                                                ? 'border-red-500'
+                                                : 'focus:border-periwinkle'
+                                        }`}
+                                    />
+                                    {touched.guardianLastName && errors.guardianLastName && (
+                                        <p className="mt-1 text-sm text-red-500">{errors.guardianLastName}</p>
+                                    )}
+                                </div>
+                            </div>
+                        )}
                     </div>
 
                     {/* Total Price */}
