@@ -1,7 +1,17 @@
 // tailwind.config.js
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}', './.storybook/**/*.{js,jsx,ts,tsx}'],
-  safelist: ['font-extrabold', 'font-bold', 'font-semibold', 'font-normal', 'text-3xl', 'text-4xl'],
+  safelist: [
+    'bg-lightGreen',
+    'border-darkGreen',
+    'bg-white',
+    'border-gray-200',
+    'hover:border-Navy',
+    'text-white',
+    'bg-Navy',
+    'hover:bg-MediumPink',
+    'bg-gray-300'
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -44,23 +54,12 @@ module.exports = {
         TextBlack: '#212223',
         // New Inspired
         LightNavy: '#DFE8F1',
-      },
-      google: {
-        'text-gray': '#3c4043',
-        'button-blue': '#1a73e8',
-        'button-blue-hover': '#5195ee',
-        'button-dark': '#202124',
-        'button-dark-hover': '#555658',
-        'button-border-light': '#dadce0',
-        'logo-blue': '#4285f4',
-        'logo-green': '#34a853',
-        'logo-yellow': '#fbbc05',
-        'logo-red': '#ea4335',
-      },
-      gradientColorStops: {
-        'blue-pink': 'linear-gradient(90deg, #375A7A 1.85%, #BD929F 50%)',
+        // Custom Greens (flat structure)
+        lightGreen: '#E6F4EA',
+        mediumGreen: '#34A853',
+        darkGreen: '#1E8E3E'
       },
     },
   },
-  plugins: [require('@tailwindcss/line-clamp'), require('tailwindcss-grid-areas')],
-};
+  plugins: [],
+}

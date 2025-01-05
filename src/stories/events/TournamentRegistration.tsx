@@ -25,9 +25,9 @@ interface Tournament {
 
 interface TournamentRegistrationProps {
     tournament: Tournament;
-    onSubmit: (values: any) => Promise<void>;
+    onSubmit: (formData: FormData) => Promise<void>;
+    bannerImage?: string;
     isLoading?: boolean;
-    bannerImage: string;
 }
 
 interface FormData {
@@ -57,12 +57,12 @@ interface FormErrors {
     guardianLastName?: string;
 }
 
-export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
+export const TournamentRegistration = ({
     tournament,
     onSubmit,
-    isLoading = false,
     bannerImage,
-}) => {
+    isLoading: propIsLoading = false,
+}: TournamentRegistrationProps) => {
     const [formData, setFormData] = useState<FormData>({
         preferredFirstName: '',
         preferredLastName: '',
@@ -80,6 +80,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
     const [errors, setErrors] = useState<FormErrors>({});
     const [totalPrice, setTotalPrice] = useState(tournament.basePrice);
     const [touched, setTouched] = useState<Record<string, boolean>>({});
+    const [isLoading, setIsLoading] = useState(propIsLoading);
 
     const validateField = (name: string, value: any): string | undefined => {
         switch (name) {
@@ -253,9 +254,12 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
         // If there are no errors, submit the form
         if (Object.keys(newErrors).length === 0) {
             try {
+                setIsLoading(true);
                 await onSubmit(formData);
             } catch (error) {
                 console.error('Form submission error:', error);
+            } finally {
+                setIsLoading(false);
             }
         } else {
             console.log('Form has errors:', newErrors);
@@ -322,11 +326,12 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                             {events.map(event => (
                                                 <div
                                                     key={event._id}
-                                                    className={`relative bg-white rounded-lg p-6 mb-4 border-2 transition-all duration-200 ${
+                                                    className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
                                                         formData.selectedEvents.includes(event._id)
-                                                            ? 'border-green-500'
-                                                            : 'border-gray-200 hover:border-gray-300'
+                                                            ? 'bg-lightGreen border-darkGreen selected-event'
+                                                            : 'bg-white border-gray-200 hover:border-Navy unselected-event'
                                                     }`}
+                                                    onClick={() => handleEventSelection({ target: { checked: !formData.selectedEvents.includes(event._id), name: event._id } }, event.price)}
                                                 >
                                                     {/* Top Section: Time, Name, Price */}
                                                     <div className="flex flex-wrap items-start gap-3">
@@ -620,7 +625,7 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                         <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
-                                    Processing...
+                                    Redirecting to checkout...
                                 </div>
                             ) : (
                                 'Register'

@@ -8,6 +8,9 @@ const meta = {
     parameters: {
         layout: 'fullscreen',
     },
+    argTypes: {
+        onSubmit: { action: 'submitted' },
+    },
 } satisfies Meta<typeof TournamentRegistration>;
 
 export default meta;
@@ -123,6 +126,18 @@ export const Loading: Story = {
     args: {
         tournament: sampleTournament,
         onSubmit: async () => {},
+        isLoading: true,
+        bannerImage: bannerImage,
+    },
+};
+
+export const WithLoading: Story = {
+    args: {
+        tournament: sampleTournament,
+        onSubmit: async () => {
+            // Simulate a longer API delay
+            await new Promise(resolve => setTimeout(resolve, 5000));
+        },
         isLoading: true,
         bannerImage: bannerImage,
     },

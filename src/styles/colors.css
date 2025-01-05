@@ -1,0 +1,19 @@
+:root {
+  --light-green: #E6F4EA;
+  --medium-green: #34A853;
+  --dark-green: #1E8E3E;
+}
+
+.selected-event {
+  background-color: var(--light-green);
+  border-color: var(--dark-green);
+}
+
+.unselected-event {
+  background-color: white;
+  border-color: #E5E7EB; /* gray-200 */
+}
+
+.unselected-event:hover {
+  border-color: #182A3A; /* Navy */
+}
