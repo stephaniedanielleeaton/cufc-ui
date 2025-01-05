@@ -617,7 +617,7 @@ export const TournamentRegistration = ({
 
                         {/* Guardian Checkbox */}
                         <div className="mt-12">
-                            <label className="flex items-start space-x-3 cursor-pointer">
+                            <label className="flex items-start space-x-3 mt-2 cursor-pointer">
                                 <input
                                     type="checkbox"
                                     name="isGuardian"
