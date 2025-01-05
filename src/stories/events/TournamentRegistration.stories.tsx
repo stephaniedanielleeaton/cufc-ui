@@ -96,7 +96,38 @@ const sampleTournament = {
 
 export const Default: Story = {
     args: {
-        tournament: sampleTournament,
+        tournament: {
+            _id: '1',
+            name: 'Sample Tournament',
+            description: 'A fun tournament for all skill levels',
+            startDate: '2024-06-15T00:00:00.000Z',
+            endDate: '2024-06-16T00:00:00.000Z',
+            basePrice: 25,
+            location: '123 Main St, Anytown, USA',
+            events: [
+                {
+                    _id: '1',
+                    name: 'Singles A',
+                    description: 'Advanced singles competition',
+                    startTime: '2024-06-15T09:00:00.000Z',
+                    registrationCap: 32,
+                    price: 20,
+                    registrants: []
+                },
+                // ... other events
+            ],
+            mutuallyExclusiveEventGroups: [['1', '2'], ['3', '4']]
+        },
+        additionalResources: [
+            {
+                name: 'Tournament Rules',
+                link: 'https://example.com/rules.pdf'
+            },
+            {
+                name: 'Join our Discord',
+                link: 'https://discord.gg/example'
+            }
+        ],
         onSubmit: async (values) => {
             console.log('Form submitted:', values);
             await new Promise(resolve => setTimeout(resolve, 1000));
