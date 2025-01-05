@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { format } from 'date-fns';
+import { Tooltip } from '../components/Tooltip';
 
 interface Event {
     _id: string;
@@ -323,58 +324,65 @@ export const TournamentRegistration = ({
                                             {format(eventDate, 'EEEE, MMMM d, yyyy')}
                                         </div>
                                         <div className="space-y-4">
-                                            {events.map(event => (
-                                                <div
-                                                    key={event._id}
-                                                    className={`p-4 rounded-lg border-2 transition-all cursor-pointer ${
-                                                        formData.selectedEvents.includes(event._id)
-                                                            ? 'bg-lightGreen border-darkGreen selected-event'
-                                                            : 'bg-white border-gray-200 hover:border-Navy unselected-event'
-                                                    }`}
-                                                    onClick={() => handleEventSelection({ target: { checked: !formData.selectedEvents.includes(event._id), name: event._id } }, event.price)}
-                                                >
-                                                    {/* Top Section: Time, Name, Price */}
-                                                    <div className="flex flex-wrap items-start gap-3">
-                                                        <div className="flex-1 min-w-0">
-                                                            <div>
-                                                                <div className="font-medium text-gray-900">
-                                                                    {event.name}
+                                            {events.map(event => {
+                                                const isDisabled = isEventDisabled(event._id);
+                                                return (
+                                                    <Tooltip
+                                                        key={event._id}
+                                                        text={isDisabled ? "You are already signed up for an event in this category" : ""}
+                                                    >
+                                                        <div
+                                                            className={`p-4 rounded-lg border-2 transition-all ${
+                                                                formData.selectedEvents.includes(event._id)
+                                                                    ? 'bg-lightGreen border-darkGreen selected-event'
+                                                                    : 'bg-white border-gray-200 hover:border-Navy unselected-event'
+                                                            } ${isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+                                                            onClick={() => !isDisabled && handleEventSelection({ target: { checked: !formData.selectedEvents.includes(event._id), name: event._id } }, event.price)}
+                                                        >
+                                                            {/* Top Section: Time, Name, Price */}
+                                                            <div className="flex flex-wrap items-start gap-3">
+                                                                <div className="flex-1 min-w-0">
+                                                                    <div>
+                                                                        <div className="font-medium text-gray-900">
+                                                                            {event.name}
+                                                                        </div>
+                                                                        <div className="text-sm text-gray-600">
+                                                                            {format(new Date(event.startTime), 'h:mm a')}
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                                <div className="text-sm text-gray-600">
-                                                                    {format(new Date(event.startTime), 'h:mm a')}
+                                                                <div className="flex flex-row items-center gap-4">
+                                                                    <div className="flex flex-col items-end">
+                                                                        <span className="text-lg font-semibold">${event.price.toFixed(2)}</span>
+                                                                        <p className="text-sm text-gray-500">
+                                                                            {event.registrants.length} / {event.registrationCap} registered
+                                                                        </p>
+                                                                    </div>
+                                                                    <div className="flex items-center justify-center w-8 h-8">
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            name={event._id}
+                                                                            className="w-5 h-5 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
+                                                                            onChange={(e) => handleEventSelection(e, event.price)}
+                                                                            checked={formData.selectedEvents.includes(event._id)}
+                                                                            disabled={isDisabled}
+                                                                        />
+                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                            
+                                                            {/* Bottom Section: Description */}
+                                                            {event.description && (
+                                                                <div className="mt-6 pt-4 pl-7">
+                                                                    <p className="text-sm text-gray-700 leading-relaxed">
+                                                                        {event.description}
+                                                                    </p>
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                        <div className="flex flex-row items-center gap-4">
-                                                            <div className="flex flex-col items-end">
-                                                                <span className="text-lg font-semibold">${event.price.toFixed(2)}</span>
-                                                                <p className="text-sm text-gray-500">
-                                                                    {event.registrants.length} / {event.registrationCap} registered
-                                                                </p>
-                                                            </div>
-                                                            <div className="flex items-center justify-center w-8 h-8">
-                                                                <input
-                                                                    type="checkbox"
-                                                                    name={event._id}
-                                                                    className="w-5 h-5 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
-                                                                    onChange={(e) => handleEventSelection(e, event.price)}
-                                                                    checked={formData.selectedEvents.includes(event._id)}
-                                                                    disabled={isEventDisabled(event._id)}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    {/* Bottom Section: Description */}
-                                                    {event.description && (
-                                                        <div className="mt-6 pt-4 pl-7">
-                                                            <p className="text-sm text-gray-700 leading-relaxed">
-                                                                {event.description}
-                                                            </p>
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            ))}
+                                                    </Tooltip>
+                                                );
+                                            })}
                                         </div>
                                     </div>
                                 );
