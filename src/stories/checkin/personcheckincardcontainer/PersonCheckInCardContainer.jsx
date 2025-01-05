@@ -191,6 +191,7 @@ const PersonCheckInCardContainer = ({ members, onCheckIn }) => {
             className="w-auto px-4 h-14 rounded-lg text-lg font-medium bg-red-100 text-red-600 hover:bg-red-200 transition-all duration-200 ease-in-out flex items-center gap-2"
           >
             Clear Filter
+            <span className="text-xl">×</span>
           </button>
         )}
       </div>
