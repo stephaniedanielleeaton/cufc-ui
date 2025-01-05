@@ -96,6 +96,7 @@ export const Default: Story = {
         tournament: sampleTournament,
         onSubmit: async (values) => {
             console.log('Form submitted:', values);
+            await new Promise(resolve => setTimeout(resolve, 1000));
         },
         bannerImage: bannerImage,
     },
@@ -107,11 +108,12 @@ export const WithSomeFullEvents: Story = {
             ...sampleTournament,
             events: sampleTournament.events.map((event, index) => ({
                 ...event,
-                registrants: index === 0 ? Array(event.registrationCap).fill({}) : [],
-            })),
+                registrants: Array(index === 1 ? 32 : 20).fill({}) // Second event is full
+            }))
         },
         onSubmit: async (values) => {
             console.log('Form submitted:', values);
+            await new Promise(resolve => setTimeout(resolve, 1000));
         },
         bannerImage: bannerImage,
     },

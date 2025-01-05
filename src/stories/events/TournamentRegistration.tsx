@@ -183,18 +183,36 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         
-        // Mark all fields as touched
-        const allTouched = Object.keys(formData).reduce((acc, key) => ({
-            ...acc,
-            [key]: true
-        }), {});
-        setTouched(allTouched);
+        // Validate form before submission
+        const newErrors: { [key: string]: string } = {};
+        
+        if (formData.selectedEvents.length === 0) {
+            newErrors.selectedEvents = 'Please select at least one event';
+        }
+        if (!formData.preferredFirstName.trim()) {
+            newErrors.preferredFirstName = 'First name is required';
+        }
+        if (!formData.preferredLastName.trim()) {
+            newErrors.preferredLastName = 'Last name is required';
+        }
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email';
+        }
+        if (!formData.preferredFirstName.trim()) {
+            formData.preferredFirstName = formData.legalFirstName;
+        }
 
-        if (validateForm()) {
-            await onSubmit({
-                ...formData,
-                totalPrice,
-            });
+        setErrors(newErrors);
+
+        // If there are no errors, submit the form
+        if (Object.keys(newErrors).length === 0) {
+            try {
+                await onSubmit(formData);
+            } catch (error) {
+                console.error('Form submission error:', error);
+            }
         }
     };
 
@@ -224,265 +242,253 @@ export const TournamentRegistration: React.FC<TournamentRegistrationProps> = ({
                     </div>
                 </div>
 
-                {/* Events and Schedule */}
-                <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-8">
-                    <h2 className="text-2xl font-bold text-Navy mb-6">Events and Schedule</h2>
-                    <div className="divide-y divide-gray-100">
-                        {Object.entries(
-                            tournament.events
-                                .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
-                                .reduce((acc, event) => {
-                                    const eventDate = new Date(event.startTime);
-                                    const dateKey = eventDate.toDateString();
-                                    
-                                    if (!acc[dateKey]) {
-                                        acc[dateKey] = [];
-                                    }
-                                    acc[dateKey].push(event);
-                                    return acc;
-                                }, {})
-                        ).map(([dateKey, events]) => {
-                            const eventDate = new Date(dateKey);
-                            return (
-                                <div key={dateKey} className="py-4 first:pt-0 last:pb-0">
-                                    <div className="text-lg font-semibold text-Navy mb-3">
-                                        {format(eventDate, 'EEEE, MMMM d, yyyy')}
-                                    </div>
-                                    <div className="space-y-3 pl-2 sm:pl-4">
-                                        {events.map(event => (
-                                            <div 
-                                                key={event._id} 
-                                                className="flex flex-col sm:flex-row sm:items-start py-2 hover:bg-gray-50 rounded-md transition-colors"
-                                            >
-                                                <div className="font-medium text-gray-600 mb-1 sm:mb-0 sm:w-20">
-                                                    {format(new Date(event.startTime), 'h:mm a')}
-                                                </div>
-                                                <div className="flex-grow">
-                                                    <div className="text-gray-900 font-medium">
-                                                        {event.name}
+                {/* Event Registration */}
+                <form onSubmit={handleSubmit} className="space-y-8">
+                    <div className="bg-white rounded-lg shadow-lg p-4 sm:p-6 mb-8">
+                        <h2 className="text-2xl font-bold text-Navy mb-6">Event Registration</h2>
+                        <div className="divide-y divide-gray-100">
+                            {Object.entries(
+                                tournament.events
+                                    .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
+                                    .reduce((acc, event) => {
+                                        const eventDate = new Date(event.startTime);
+                                        const dateKey = eventDate.toDateString();
+                                        
+                                        if (!acc[dateKey]) {
+                                            acc[dateKey] = [];
+                                        }
+                                        acc[dateKey].push(event);
+                                        return acc;
+                                    }, {})
+                            ).map(([dateKey, events]) => {
+                                const eventDate = new Date(dateKey);
+                                return (
+                                    <div key={dateKey} className="py-4 first:pt-0 last:pb-0">
+                                        <div className="text-lg font-semibold text-Navy mb-3">
+                                            {format(eventDate, 'EEEE, MMMM d, yyyy')}
+                                        </div>
+                                        <div className="space-y-4">
+                                            {events.map(event => (
+                                                <div
+                                                    key={event._id}
+                                                    className={`relative bg-white rounded-lg p-6 mb-4 border-2 transition-all duration-200 ${
+                                                        formData.selectedEvents.includes(event._id)
+                                                            ? 'border-green-500'
+                                                            : 'border-gray-200 hover:border-gray-300'
+                                                    }`}
+                                                >
+                                                    {/* Top Section: Time, Name, Price */}
+                                                    <div className="flex flex-wrap items-start gap-3">
+                                                        <div className="flex-1 min-w-0">
+                                                            <div>
+                                                                <div className="font-medium text-gray-900">
+                                                                    {event.name}
+                                                                </div>
+                                                                <div className="text-sm text-gray-600">
+                                                                    {format(new Date(event.startTime), 'h:mm a')}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex flex-row items-center gap-4">
+                                                            <div className="flex flex-col items-end">
+                                                                <span className="text-lg font-semibold">${event.price.toFixed(2)}</span>
+                                                                <p className="text-sm text-gray-500">
+                                                                    {event.registrants.length} / {event.registrationCap} registered
+                                                                </p>
+                                                            </div>
+                                                            <div className="flex items-center justify-center w-8 h-8">
+                                                                <input
+                                                                    type="checkbox"
+                                                                    name={event._id}
+                                                                    className="w-5 h-5 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
+                                                                    onChange={(e) => handleEventSelection(e, event.price)}
+                                                                    checked={formData.selectedEvents.includes(event._id)}
+                                                                    disabled={isEventDisabled(event._id)}
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                    
+                                                    {/* Bottom Section: Description */}
                                                     {event.description && (
-                                                        <div className="text-sm text-gray-500 mt-1 pr-4">
-                                                            {event.description}
+                                                        <div className="mt-6 pt-4 pl-7">
+                                                            <p className="text-sm text-gray-700 leading-relaxed">
+                                                                {event.description}
+                                                            </p>
                                                         </div>
                                                     )}
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-
-                {/* Registration Form */}
-                <div className="bg-white rounded-lg shadow-lg p-6">
-                    <form onSubmit={handleSubmit}>
-                        {/* Personal Information */}
-                        <div className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Preferred First Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="preferredFirstName"
-                                        value={formData.preferredFirstName}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
-                                            touched.preferredFirstName && errors.preferredFirstName
-                                                ? 'border-red-500'
-                                                : 'focus:border-periwinkle'
-                                        }`}
-                                    />
-                                    {touched.preferredFirstName && errors.preferredFirstName && (
-                                        <p className="mt-1 text-sm text-red-500">{errors.preferredFirstName}</p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Preferred Last Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="preferredLastName"
-                                        value={formData.preferredLastName}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
-                                            touched.preferredLastName && errors.preferredLastName
-                                                ? 'border-red-500'
-                                                : 'focus:border-periwinkle'
-                                        }`}
-                                    />
-                                    {touched.preferredLastName && errors.preferredLastName && (
-                                        <p className="mt-1 text-sm text-red-500">{errors.preferredLastName}</p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Legal First Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="legalFirstName"
-                                        value={formData.legalFirstName}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
-                                            touched.legalFirstName && errors.legalFirstName
-                                                ? 'border-red-500'
-                                                : 'focus:border-periwinkle'
-                                        }`}
-                                    />
-                                    {touched.legalFirstName && errors.legalFirstName && (
-                                        <p className="mt-1 text-sm text-red-500">{errors.legalFirstName}</p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Legal Last Name
-                                    </label>
-                                    <input
-                                        type="text"
-                                        name="legalLastName"
-                                        value={formData.legalLastName}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
-                                            touched.legalLastName && errors.legalLastName
-                                                ? 'border-red-500'
-                                                : 'focus:border-periwinkle'
-                                        }`}
-                                    />
-                                    {touched.legalLastName && errors.legalLastName && (
-                                        <p className="mt-1 text-sm text-red-500">{errors.legalLastName}</p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Email
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
-                                            touched.email && errors.email
-                                                ? 'border-red-500'
-                                                : 'focus:border-periwinkle'
-                                        }`}
-                                    />
-                                    {touched.email && errors.email && (
-                                        <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-1">
-                                        Phone Number
-                                    </label>
-                                    <input
-                                        type="tel"
-                                        name="phoneNumber"
-                                        value={formData.phoneNumber}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
-                                            touched.phoneNumber && errors.phoneNumber
-                                                ? 'border-red-500'
-                                                : 'focus:border-periwinkle'
-                                        }`}
-                                    />
-                                    {touched.phoneNumber && errors.phoneNumber && (
-                                        <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Event Selection */}
-                        <div className="mb-8">
-                            <h2 className="text-xl font-semibold mb-4">Event Selection</h2>
-                            <div className="space-y-4">
-                                {tournament.events.map((event) => (
-                                    <div
-                                        key={event._id}
-                                        className="p-4 border rounded-lg hover:border-periwinkle transition-colors"
-                                    >
-                                        <div className="flex items-start">
-                                            <div className="flex-1">
-                                                <div className="flex items-center">
-                                                    <input
-                                                        type="checkbox"
-                                                        name={event._id}
-                                                        className="h-4 w-4 text-periwinkle border-gray-300 rounded focus:ring-periwinkle"
-                                                        onChange={(e) => handleEventSelection(e, event.price)}
-                                                        checked={formData.selectedEvents.includes(event._id)}
-                                                        disabled={isEventDisabled(event._id)}
-                                                    />
-                                                    <label className="ml-2 block text-sm font-medium text-gray-700">
-                                                        {event.name}
-                                                    </label>
-                                                </div>
-                                                <p className="mt-1 text-sm text-gray-500 ml-6">
-                                                    {format(new Date(event.startTime), 'MMMM d, yyyy h:mm a')}
-                                                </p>
-                                            </div>
-                                            <div className="text-right">
-                                                <span className="text-lg font-semibold">${event.price.toFixed(2)}</span>
-                                                <p className="text-sm text-gray-500">
-                                                    {event.registrants.length} / {event.registrationCap} registered
-                                                </p>
-                                            </div>
+                                            ))}
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                            {touched.selectedEvents && errors.selectedEvents && (
-                                <p className="mt-2 text-sm text-red-500">{errors.selectedEvents}</p>
-                            )}
+                                );
+                            })}
                         </div>
+                        {touched.selectedEvents && errors.selectedEvents && (
+                            <p className="mt-2 text-sm text-red-500">{errors.selectedEvents}</p>
+                        )}
+                    </div>
 
-                        {/* Total Price */}
-                        <div className="mb-8 p-4 bg-gray-50 rounded-lg">
-                            <div className="flex justify-between items-center">
-                                <span className="text-lg font-medium">Total Price:</span>
-                                <span className="text-2xl font-bold">${totalPrice.toFixed(2)}</span>
-                            </div>
-                        </div>
-
-                        {/* Submit Button */}
-                        <div className="flex justify-end">
-                            <button
-                                type="submit"
-                                disabled={isLoading || (Object.keys(errors).length > 0 && Object.values(errors).some(error => error !== undefined))}
-                                className={`px-6 py-3 rounded-md text-white font-medium ${
-                                    isLoading || (Object.keys(errors).length > 0 && Object.values(errors).some(error => error !== undefined))
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-Navy hover:bg-Navy/80 active:bg-Navy/90'
-                                }`}
-                            >
-                                {isLoading ? (
-                                    <div className="flex items-center">
-                                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                        </svg>
-                                        Processing...
-                                    </div>
-                                ) : (
-                                    'Register'
+                    {/* Personal Information */}
+                    <div className="mb-8">
+                        <h2 className="text-xl font-semibold mb-4">Personal Information</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Preferred First Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="preferredFirstName"
+                                    value={formData.preferredFirstName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                        touched.preferredFirstName && errors.preferredFirstName
+                                            ? 'border-red-500'
+                                            : 'focus:border-periwinkle'
+                                    }`}
+                                />
+                                {touched.preferredFirstName && errors.preferredFirstName && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.preferredFirstName}</p>
                                 )}
-                            </button>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Preferred Last Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="preferredLastName"
+                                    value={formData.preferredLastName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                        touched.preferredLastName && errors.preferredLastName
+                                            ? 'border-red-500'
+                                            : 'focus:border-periwinkle'
+                                    }`}
+                                />
+                                {touched.preferredLastName && errors.preferredLastName && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.preferredLastName}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Legal First Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="legalFirstName"
+                                    value={formData.legalFirstName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                        touched.legalFirstName && errors.legalFirstName
+                                            ? 'border-red-500'
+                                            : 'focus:border-periwinkle'
+                                    }`}
+                                />
+                                {touched.legalFirstName && errors.legalFirstName && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.legalFirstName}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Legal Last Name
+                                </label>
+                                <input
+                                    type="text"
+                                    name="legalLastName"
+                                    value={formData.legalLastName}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                        touched.legalLastName && errors.legalLastName
+                                            ? 'border-red-500'
+                                            : 'focus:border-periwinkle'
+                                    }`}
+                                />
+                                {touched.legalLastName && errors.legalLastName && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.legalLastName}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                        touched.email && errors.email
+                                            ? 'border-red-500'
+                                            : 'focus:border-periwinkle'
+                                    }`}
+                                />
+                                {touched.email && errors.email && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Phone Number
+                                </label>
+                                <input
+                                    type="tel"
+                                    name="phoneNumber"
+                                    value={formData.phoneNumber}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className={`w-full border rounded-md h-12 px-3 focus:outline-none ${
+                                        touched.phoneNumber && errors.phoneNumber
+                                            ? 'border-red-500'
+                                            : 'focus:border-periwinkle'
+                                    }`}
+                                />
+                                {touched.phoneNumber && errors.phoneNumber && (
+                                    <p className="mt-1 text-sm text-red-500">{errors.phoneNumber}</p>
+                                )}
+                            </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+
+                    {/* Total Price */}
+                    <div className="mb-8 p-4 bg-gray-50 rounded-lg">
+                        <div className="flex justify-between items-center">
+                            <span className="text-lg font-medium">Total Price:</span>
+                            <span className="text-2xl font-bold">${totalPrice.toFixed(2)}</span>
+                        </div>
+                    </div>
+
+                    {/* Submit Button */}
+                    <div className="flex justify-end">
+                        <button
+                            type="submit"
+                            disabled={isLoading || (Object.keys(errors).length > 0 && Object.values(errors).some(error => error !== undefined))}
+                            className={`px-6 py-3 rounded-md text-white font-medium ${
+                                isLoading || (Object.keys(errors).length > 0 && Object.values(errors).some(error => error !== undefined))
+                                    ? 'bg-gray-400 cursor-not-allowed'
+                                    : 'bg-Navy hover:bg-Navy/80 active:bg-Navy/90'
+                            }`}
+                        >
+                            {isLoading ? (
+                                <div className="flex items-center">
+                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Processing...
+                                </div>
+                            ) : (
+                                'Register'
+                            )}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     );
