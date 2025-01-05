@@ -317,13 +317,15 @@ export const TournamentRegistration = ({
             
             <div className="max-w-4xl mx-auto p-4 md:p-6">
                 {/* Tournament Header */}
-                <div className="bg-Navy text-white p-6 rounded-lg mb-8">
-                    <h1 className="text-3xl font-bold text-center">{tournament.name}</h1>
-                    <p className="text-center mt-2 text-gray-200">{tournament.description}</p>
-                    <div className="mt-4 text-center">
-                        <p className="text-lg">
+                <div className="text-center mb-8">
+                    <h1 className="text-4xl font-bold text-Navy mb-2">{tournament.name}</h1>
+                    <div className="space-y-2">
+                        <p className="text-xl text-gray-600">
                             {format(new Date(tournament.startDate), 'MMMM d')} - {format(new Date(tournament.endDate), 'MMMM d, yyyy')}
                         </p>
+                        {tournament.description && (
+                            <p className="text-gray-600 max-w-2xl mx-auto">{tournament.description}</p>
+                        )}
                     </div>
                 </div>
 
