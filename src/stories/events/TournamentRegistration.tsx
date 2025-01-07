@@ -150,7 +150,7 @@ export const TournamentRegistration = ({
                 ...prev,
                 guardianFirstName: '',
                 guardianLastName: '',
-                [name]: inputValue
+                isGuardian: checked
             }));
             setErrors(prev => ({
                 ...prev,
@@ -415,7 +415,7 @@ export const TournamentRegistration = ({
                             {Object.entries(
                                 tournament.events
                                     .sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime())
-                                    .reduce((acc, event) => {
+                                    .reduce<Record<string, Event[]>>((acc, event) => {
                                         const eventDate = new Date(event.startTime);
                                         const dateKey = eventDate.toDateString();
                                         
@@ -453,7 +453,40 @@ export const TournamentRegistration = ({
                                                                     ? 'bg-lightGreen border-darkGreen selected-event'
                                                                     : 'bg-white border-gray-200 hover:border-Navy unselected-event'
                                                             } ${(isAtCapacity || hasSelectedFromGroup) ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
-                                                            onClick={() => !(isAtCapacity || hasSelectedFromGroup) && handleEventSelection({ target: { checked: !formData.selectedEvents.includes(event._id), name: event._id } }, event.price)}
+                                                            onClick={() => {
+                                                                if (!(isAtCapacity || hasSelectedFromGroup)) {
+                                                                    const syntheticEvent = {
+                                                                        target: {
+                                                                            checked: !formData.selectedEvents.includes(event._id),
+                                                                            name: event._id,
+                                                                            value: event._id,
+                                                                            type: 'checkbox',
+                                                                            tagName: 'INPUT'
+                                                                        } as HTMLInputElement,
+                                                                        currentTarget: {
+                                                                            checked: !formData.selectedEvents.includes(event._id),
+                                                                            name: event._id,
+                                                                            value: event._id,
+                                                                            type: 'checkbox',
+                                                                            tagName: 'INPUT'
+                                                                        } as HTMLInputElement,
+                                                                        nativeEvent: new Event('change'),
+                                                                        bubbles: true,
+                                                                        cancelable: false,
+                                                                        defaultPrevented: false,
+                                                                        eventPhase: 0,
+                                                                        isTrusted: true,
+                                                                        preventDefault: () => {},
+                                                                        isDefaultPrevented: () => false,
+                                                                        stopPropagation: () => {},
+                                                                        isPropagationStopped: () => false,
+                                                                        persist: () => {},
+                                                                        timeStamp: Date.now(),
+                                                                        type: 'change'
+                                                                    } as React.ChangeEvent<HTMLInputElement>;
+                                                                    handleEventSelection(syntheticEvent, event.price);
+                                                                }
+                                                            }}
                                                         >
                                                             {/* Top Section: Time, Name, Price */}
                                                             <div className="flex flex-wrap items-start gap-3">
