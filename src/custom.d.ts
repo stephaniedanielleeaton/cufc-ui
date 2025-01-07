@@ -17,3 +17,17 @@ declare module '*.svg' {
     const content: string;
     export default content;
 }
+
+declare module '*.stories.tsx' {
+  import { Meta, StoryObj } from '@storybook/react';
+  const meta: Meta;
+  export default meta;
+  export const Story: StoryObj;
+}
+
+declare module '*.stories.ts' {
+  import { Meta, StoryObj } from '@storybook/react';
+  const meta: Meta;
+  export default meta;
+  export const Story: StoryObj;
+}

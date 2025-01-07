@@ -23,3 +23,5 @@ export { default as MemberStats } from './stories/admin/memberstats/MemberStats.
 export { default as AdminMembers } from './stories/admin/adminmembers/AdminMembers.jsx';
 export { default as EmailSender } from './stories/admin/emailsender/EmailSender.jsx';
 export { default as AttendanceGraph } from './stories/admin/attendance/AttendanceGraph.jsx';
+
+export { default as TournamentRegistration } from './stories/events/TournamentRegistration.tsx';

@@ -22,7 +22,7 @@ interface TournamentRegistrationProps {
     additionalResources?: AdditionalResource[];
 }
 
-export const TournamentRegistration = ({
+const TournamentRegistration = ({
     tournament,
     onSubmit,
     bannerImage,
@@ -319,3 +319,5 @@ export const TournamentRegistration = ({
         </div>
     );
 };
+
+export default TournamentRegistration;
