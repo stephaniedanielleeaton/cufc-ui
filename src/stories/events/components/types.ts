@@ -25,6 +25,11 @@ export interface Tournament {
     mutuallyExclusiveEventGroups: string[][];
 }
 
+export interface SelectedEvent {
+    id: string;
+    name: string;
+}
+
 export interface FormData {
     preferredFirstName: string;
     preferredLastName: string;
@@ -32,7 +37,7 @@ export interface FormData {
     legalLastName: string;
     email: string;
     phoneNumber: string;
-    selectedEvents: string[];
+    selectedEvents: SelectedEvent[];
     clubAffiliation: string;
     isGuardian: boolean;
     guardianFirstName: string;

@@ -52,11 +52,23 @@ export const TournamentRegistration = ({
 
         switch (name) {
             case 'preferredFirstName':
+                if (!value) {
+                    error = 'Preferred first name is required';
+                }
+                break;
             case 'preferredLastName':
+                if (!value) {
+                    error = 'Preferred last name is required';
+                }
+                break;
             case 'legalFirstName':
+                if (!value) {
+                    error = 'Legal first name is required';
+                }
+                break;
             case 'legalLastName':
                 if (!value) {
-                    error = 'This field is required';
+                    error = 'Legal last name is required';
                 }
                 break;
             case 'email':
@@ -76,15 +88,14 @@ export const TournamentRegistration = ({
                     error = 'Please select at least one event';
                 }
                 break;
-            case 'clubAffiliation':
-                if (!value) {
-                    error = 'Club affiliation is required';
+            case 'guardianFirstName':
+                if (formData.isGuardian && !value) {
+                    error = 'Guardian first name is required';
                 }
                 break;
-            case 'guardianFirstName':
             case 'guardianLastName':
                 if (formData.isGuardian && !value) {
-                    error = 'This field is required when registering as a guardian';
+                    error = 'Guardian last name is required';
                 }
                 break;
         }
@@ -131,11 +142,14 @@ export const TournamentRegistration = ({
         let newSelectedEvents = [...formData.selectedEvents];
         let newTotalPrice = totalPrice;
 
+        const selectedEvent = tournament.events.find(e => e._id === selectedEventId);
+        if (!selectedEvent) return;
+
         if (checked) {
-            newSelectedEvents.push(selectedEventId);
+            newSelectedEvents.push({ id: selectedEventId, name: selectedEvent.name });
             newTotalPrice += eventPrice;
         } else {
-            newSelectedEvents = newSelectedEvents.filter(id => id !== selectedEventId);
+            newSelectedEvents = newSelectedEvents.filter(event => event.id !== selectedEventId);
             newTotalPrice -= eventPrice;
         }
 
@@ -167,7 +181,6 @@ export const TournamentRegistration = ({
             'legalLastName',
             'email',
             'phoneNumber',
-            'clubAffiliation',
             ...(formData.isGuardian ? ['guardianFirstName', 'guardianLastName'] : [])
         ];
 
@@ -200,10 +213,10 @@ export const TournamentRegistration = ({
             }
         } else {
             console.log('Form has errors:', newErrors);
-            // Scroll to the first error
+            // Scroll to the first error - check both input fields and containers
             const firstErrorField = document.querySelector('[aria-invalid="true"]');
             if (firstErrorField) {
-                firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                firstErrorField.scrollIntoView({ block: 'start', behavior: 'smooth' });
             }
         }
     };
@@ -252,6 +265,39 @@ export const TournamentRegistration = ({
                                 <span className="text-2xl font-bold">${totalPrice.toFixed(2)}</span>
                             </div>
                         </div>
+
+                        {Object.values(errors).some(error => error !== undefined) && (
+                            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md">
+                                <div className="flex">
+                                    <div className="flex-shrink-0">
+                                        <svg className="h-5 w-5 text-red-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <div className="ml-3">
+                                        <h3 className="text-sm font-medium text-red-800">
+                                            Please fix the following errors:
+                                        </h3>
+                                        <div className="mt-2 text-sm text-red-700">
+                                            <ul className="list-disc pl-5 space-y-1">
+                                                {Object.entries(errors).map(([field, error]) => (
+                                                    error && (
+                                                        <li key={field} className="cursor-pointer hover:text-red-900" onClick={() => {
+                                                            const errorField = document.querySelector(`[name="${field}"], [data-field="${field}"]`);
+                                                            if (errorField) {
+                                                                errorField.scrollIntoView({ block: 'start', behavior: 'smooth' });
+                                                            }
+                                                        }}>
+                                                            {error}
+                                                        </li>
+                                                    )
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         <div className="flex justify-end">
                             <button

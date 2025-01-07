@@ -1,11 +1,11 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { Tournament, Event } from './types';
+import { Tournament, Event, SelectedEvent } from './types';
 import { Tooltip } from '../../components/Tooltip';
 
 interface EventSelectionFormProps {
     tournament: Tournament;
-    selectedEvents: string[];
+    selectedEvents: SelectedEvent[];
     errors: { selectedEvents?: string };
     touched: { selectedEvents?: boolean };
     onEventSelection: (event: React.ChangeEvent<HTMLInputElement>, eventPrice: number) => void;
@@ -23,8 +23,8 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
         const exclusiveGroup = tournament.mutuallyExclusiveEventGroups.find(group => 
             group.includes(event._id)
         );
-        const hasSelectedFromGroup = exclusiveGroup && selectedEvents.some(selectedId => 
-            exclusiveGroup.includes(selectedId) && selectedId !== event._id
+        const hasSelectedFromGroup = exclusiveGroup && selectedEvents.some(selectedEvent => 
+            exclusiveGroup.includes(selectedEvent.id) && selectedEvent.id !== event._id
         );
         
         return isAtCapacity || hasSelectedFromGroup;
@@ -45,7 +45,11 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
     return (
         <div>
             <h2 className="text-2xl font-bold text-Navy mb-6">Event Registration and Schedule</h2>
-            <div className="space-y-6">
+            <div 
+                className="space-y-6"
+                aria-invalid={touched.selectedEvents && errors.selectedEvents ? 'true' : 'false'}
+                data-field="selectedEvents"
+            >
                 {Object.entries(eventsByDate).map(([dateKey, events]) => {
                     const eventDate = new Date(dateKey);
                     return (
@@ -67,7 +71,7 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                                         <Tooltip key={event._id} text={tooltipText}>
                                             <div
                                                 className={`p-4 rounded-lg border-2 transition-all ${
-                                                    selectedEvents.includes(event._id)
+                                                    selectedEvents.some(e => e.id === event._id)
                                                         ? 'bg-lightGreen border-darkGreen selected-event'
                                                         : 'bg-white border-gray-200 hover:border-Navy unselected-event'
                                                 } ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
@@ -75,7 +79,7 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                                                     if (!disabled) {
                                                         const syntheticEvent = {
                                                             target: {
-                                                                checked: !selectedEvents.includes(event._id),
+                                                                checked: !selectedEvents.some(e => e.id === event._id),
                                                                 name: event._id,
                                                                 type: 'checkbox',
                                                             }
@@ -110,7 +114,7 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                                                                 name={event._id}
                                                                 className="w-5 h-5 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
                                                                 onChange={(e) => onEventSelection(e, event.price)}
-                                                                checked={selectedEvents.includes(event._id)}
+                                                                checked={selectedEvents.some(e => e.id === event._id)}
                                                                 disabled={disabled}
                                                             />
                                                         </div>
