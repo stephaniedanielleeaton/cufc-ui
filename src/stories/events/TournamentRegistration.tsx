@@ -3,7 +3,8 @@ import {
     Tournament,
     FormData,
     FormErrors,
-    AdditionalResource
+    AdditionalResource,
+    SelectedEvent
 } from './components/types';
 import { TournamentHeader } from './components/TournamentHeader';
 import { LocationSection } from './components/LocationSection';
@@ -47,7 +48,7 @@ export const TournamentRegistration = ({
     const [touched, setTouched] = useState<Record<string, boolean>>({});
     const [isLoading, setIsLoading] = useState(propIsLoading);
 
-    const validateField = (name: keyof FormData, value: string | boolean | string[]) => {
+    const validateField = (name: keyof FormData, value: string | boolean | SelectedEvent[]) => {
         let error: string | undefined;
 
         switch (name) {
@@ -84,7 +85,7 @@ export const TournamentRegistration = ({
                 }
                 break;
             case 'selectedEvents':
-                if ((value as string[]).length === 0) {
+                if ((value as SelectedEvent[]).length === 0) {
                     error = 'Please select at least one event';
                 }
                 break;
