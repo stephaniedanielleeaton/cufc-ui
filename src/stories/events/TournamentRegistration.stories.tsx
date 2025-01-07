@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { TournamentRegistration } from './TournamentRegistration';
+import TournamentRegistration from './TournamentRegistration';
 import bannerImage from '../assets/lynxcup2025_keyart.png';
 
 const meta = {
@@ -22,7 +22,7 @@ const sampleTournament = {
     description: "Columbus United Fencing Club is proud to bring together our best judges and event staff to host our largest and most exciting event of the year.",
     startDate: "2025-02-14T12:00:00-05:00",
     endDate: "2025-02-16T17:00:00-05:00",
-    basePrice: 45,
+    basePrice: 4500,
     location: "6475 E Main St. #111, Reynoldsburg, OH 43068",
     mutuallyExclusiveEventGroups: [
         ["6779cd35ca216b1769e11c43", "6779cd35ca216b1769e11c44", "6779cd35ca216b1769e11c42"]  // Longsword Div 1, 2, and 3
@@ -34,7 +34,7 @@ const sampleTournament = {
             description: "Open Saber competition",
             startTime: "2025-02-14T12:00:00-05:00",
             registrationCap: 32,
-            price: 45,
+            price: 4500,
             registrants: []
         },
         {
@@ -43,7 +43,7 @@ const sampleTournament = {
             description: "Longsword Div 3 is recommended if you have never competed before, or if you typically get knocked out in the first round of brackets.",
             startTime: "2025-02-14T16:00:00-05:00",
             registrationCap: 32,
-            price: 45,
+            price: 4500,
             registrants: []
         },
         {
@@ -52,7 +52,7 @@ const sampleTournament = {
             description: "Division 1 is required for any fencer with a Longsword HEMA Rating above 1400.",
             startTime: "2025-02-15T09:00:00-05:00",
             registrationCap: 32,
-            price: 45,
+            price: 4500,
             registrants: []
         },
         {
@@ -61,7 +61,7 @@ const sampleTournament = {
             description: "",
             startTime: "2025-02-15T12:00:00-05:00",
             registrationCap: 32,
-            price: 45,
+            price: 4500,
             registrants: []
         },
         {
@@ -79,7 +79,7 @@ const sampleTournament = {
             description: "Rapier and Dagger competition",
             startTime: "2025-02-16T12:00:00-05:00",
             registrationCap: 32,
-            price: 45,
+            price: 4500,
             registrants: []
         },
         {
@@ -88,7 +88,7 @@ const sampleTournament = {
             description: "Sword and Buckler competition",
             startTime: "2025-02-16T14:00:00-05:00",
             registrationCap: 32,
-            price: 45,
+            price: 4500,
             registrants: []
         }
     ]
@@ -99,24 +99,32 @@ export const Default: Story = {
         tournament: {
             _id: '1',
             name: 'Sample Tournament',
-            description: 'A fun tournament for all skill levels',
-            startDate: '2024-06-15T00:00:00.000Z',
-            endDate: '2024-06-16T00:00:00.000Z',
-            basePrice: 25,
+            description: 'A sample tournament for testing',
+            startDate: '2025-01-01T09:00:00-05:00',
+            endDate: '2025-01-03T17:00:00-05:00',
+            basePrice: 2000,
             location: '123 Main St, Anytown, USA',
             events: [
                 {
                     _id: '1',
-                    name: 'Singles A',
-                    description: 'Advanced singles competition',
-                    startTime: '2024-06-15T09:00:00.000Z',
+                    name: 'Event 1',
+                    description: 'First event',
+                    startTime: '2025-01-01T10:00:00-05:00',
                     registrationCap: 32,
-                    price: 20,
+                    price: 2000,
                     registrants: []
                 },
-                // ... other events
+                {
+                    _id: '2',
+                    name: 'Event 2',
+                    description: 'Second event',
+                    startTime: '2025-01-02T10:00:00-05:00',
+                    registrationCap: 32,
+                    price: 2000,
+                    registrants: []
+                }
             ],
-            mutuallyExclusiveEventGroups: [['1', '2'], ['3', '4']]
+            mutuallyExclusiveEventGroups: []
         },
         additionalResources: [
             {

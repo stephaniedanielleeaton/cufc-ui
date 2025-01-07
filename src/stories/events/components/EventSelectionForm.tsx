@@ -102,7 +102,7 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                                                     <div className="flex flex-row items-center gap-4">
                                                         <div className="flex flex-col items-end">
                                                             <span className="text-lg font-semibold">
-                                                                ${event.price.toFixed(2)}
+                                                                ${(event.price / 100).toFixed(2)}
                                                             </span>
                                                             <p className={`text-sm ${isAtCapacity ? 'text-red-500 font-medium' : 'text-gray-500'}`}>
                                                                 {isAtCapacity ? 'Event Full' : `${event.registrants.length} / ${event.registrationCap} registered`}

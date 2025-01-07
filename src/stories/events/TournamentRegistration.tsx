@@ -263,7 +263,7 @@ const TournamentRegistration = ({
                         <div className="mb-8 p-4 bg-gray-50 rounded-lg">
                             <div className="flex justify-between items-center">
                                 <span className="text-lg font-medium">Total Price:</span>
-                                <span className="text-2xl font-bold">${totalPrice.toFixed(2)}</span>
+                                <span className="text-2xl font-bold">${(totalPrice / 100).toFixed(2)}</span>
                             </div>
                         </div>
 
