@@ -74,7 +74,7 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                                                     selectedEvents.some(e => e.id === event._id)
                                                         ? 'bg-lightGreen border-darkGreen selected-event'
                                                         : 'bg-white border-gray-200 hover:border-Navy unselected-event'
-                                                } ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+                                                } ${disabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                                                 onClick={() => {
                                                     if (!disabled) {
                                                         const syntheticEvent = {
@@ -88,31 +88,20 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                                                     }
                                                 }}
                                             >
-                                                <div className="flex flex-wrap items-start gap-3">
-                                                    <div className="flex-1 min-w-0">
-                                                        <div>
-                                                            <div className="font-medium text-gray-900">
-                                                                {event.name}
-                                                            </div>
-                                                            <div className="text-sm text-gray-600">
-                                                                {format(new Date(event.startTime), 'h:mm a')}
-                                                            </div>
+                                                <div className="flex items-stretch gap-4">
+                                                    <div className="flex-1 py-2">
+                                                        <div className="text-xl font-semibold text-gray-900 mb-3">{event.name}</div>
+                                                        <div className={disabled ? 'opacity-50' : ''}>
+                                                            <div className="text-lg font-semibold text-Navy mb-1">${(event.price / 100).toFixed(2)}</div>
                                                         </div>
                                                     </div>
-                                                    <div className="flex flex-row items-center gap-4">
-                                                        <div className="flex flex-col items-end">
-                                                            <span className="text-lg font-semibold">
-                                                                ${(event.price / 100).toFixed(2)}
-                                                            </span>
-                                                            <p className={`text-sm ${isAtCapacity ? 'text-red-500 font-medium' : 'text-gray-500'}`}>
-                                                                {isAtCapacity ? 'Event Full' : `${event.registrants.length} / ${event.registrationCap} registered`}
-                                                            </p>
-                                                        </div>
-                                                        <div className="flex items-center justify-center w-8 h-8">
+                                                    <div className="flex flex-col items-center gap-2 px-3">
+                                                        <div className="text-sm font-medium text-pink-600">{format(new Date(event.startTime), 'h:mm a')}</div>
+                                                        <div className={disabled ? 'opacity-50' : ''}>
                                                             <input
                                                                 type="checkbox"
                                                                 name={event._id}
-                                                                className="w-5 h-5 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
+                                                                className="w-6 h-6 text-periwinkle border-gray-300 rounded focus:ring-periwinkle cursor-pointer"
                                                                 onChange={(e) => onEventSelection(e, event.price)}
                                                                 checked={selectedEvents.some(e => e.id === event._id)}
                                                                 disabled={disabled}
@@ -121,8 +110,12 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                                                     </div>
                                                 </div>
                                                 
+                                                <div className={`mt-1 text-sm ${isAtCapacity ? 'text-red-500 font-medium' : 'text-gray-500'}`}>
+                                                    {isAtCapacity ? 'Event Full' : `${event.registrants.length} / ${event.registrationCap} registered`}
+                                                </div>
+                                                
                                                 {event.description && (
-                                                    <div className="mt-6 pt-4 pl-7">
+                                                    <div className="mt-3 pl-7">
                                                         <p className="text-sm text-gray-700 leading-relaxed">
                                                             {event.description}
                                                         </p>
@@ -137,9 +130,6 @@ export const EventSelectionForm: React.FC<EventSelectionFormProps> = ({
                     );
                 })}
             </div>
-            {touched.selectedEvents && errors.selectedEvents && (
-                <p className="mt-2 text-sm text-red-500">{errors.selectedEvents}</p>
-            )}
         </div>
     );
 };

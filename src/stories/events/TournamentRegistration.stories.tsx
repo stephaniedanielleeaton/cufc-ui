@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 const sampleTournament = {
     _id: "6779cd35ca216b1769e11c40",
     name: "Lynx Cup 2025",
-    description: "Columbus United Fencing Club is proud to bring together our best judges and event staff to host our largest and most exciting event of the year.",
+    description: "Columbus United Fencing Club is proud to bring together our best judges and event staff to host our largest and most exciting event of the year.\n\nPricing\n\nBefore January 15th, 2025:\nAdmission: $45 + $45 per event\nOn and After January 15th, 2025:\nAdmission: $50 + $50 per event\n\nRegistration cut off for each event is Febuary 7th, 2025.",
     startDate: "2025-02-14T12:00:00-05:00",
     endDate: "2025-02-16T17:00:00-05:00",
     basePrice: 4500,
