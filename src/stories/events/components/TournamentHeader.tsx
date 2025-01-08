@@ -27,7 +27,7 @@ export const TournamentHeader: React.FC<TournamentHeaderProps> = ({ tournament, 
                     {format(new Date(tournament.startDate), 'MMMM d')} - {format(new Date(tournament.endDate), 'MMMM d, yyyy')}
                 </p>
                 {tournament.description && (
-                    <p className="text-gray-600 max-w-2xl mx-auto">{tournament.description}</p>
+                    <p className="text-gray-600 max-w-2xl mx-auto whitespace-pre-line">{tournament.description}</p>
                 )}
             </div>
         </div>
