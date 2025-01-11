@@ -11,11 +11,11 @@ export const TournamentHeader: React.FC<TournamentHeaderProps> = ({ tournament, 
     <>
         {bannerImage && (
             <div className="max-w-4xl mx-auto">
-                <div className="w-full h-[200px] md:h-[150px] relative overflow-hidden mb-8">
+                <div className="w-full relative mb-8">
                     <img
                         src={bannerImage}
                         alt="Tournament banner"
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full max-h-[400px] object-contain rounded-lg"
                     />
                 </div>
             </div>
