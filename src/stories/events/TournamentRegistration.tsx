@@ -12,7 +12,9 @@ import { AdditionalResourcesSection } from './components/AdditionalResourcesSect
 import { PersonalInformationForm } from './components/PersonalInformationForm';
 import { GuardianInformationForm } from './components/GuardianInformationForm';
 import { EventSelectionForm } from './components/EventSelectionForm';
+import { PriceBreakdown } from './components/PriceBreakdown';
 import LoadingPopup from '../components/LoadingPopup';
+import { calculatePrice } from './utils/calculatePrice';
 
 interface TournamentRegistrationProps {
     tournament: Tournament;
@@ -44,7 +46,7 @@ const TournamentRegistration = ({
     });
 
     const [errors, setErrors] = useState<FormErrors>({});
-    const [totalPrice, setTotalPrice] = useState(tournament.basePrice);
+    const [priceBreakdown, setPriceBreakdown] = useState(() => calculatePrice(tournament, []));
     const [touched, setTouched] = useState<Record<string, boolean>>({});
     const [isLoading, setIsLoading] = useState(propIsLoading);
 
@@ -141,21 +143,18 @@ const TournamentRegistration = ({
     const handleEventSelection = (event: React.ChangeEvent<HTMLInputElement>, eventPrice: number) => {
         const { checked, name: selectedEventId } = event.target;
         let newSelectedEvents = [...formData.selectedEvents];
-        let newTotalPrice = totalPrice;
 
         const selectedEvent = tournament.events.find(e => e._id === selectedEventId);
         if (!selectedEvent) return;
 
         if (checked) {
             newSelectedEvents.push({ id: selectedEventId, name: selectedEvent.name });
-            newTotalPrice += eventPrice;
         } else {
             newSelectedEvents = newSelectedEvents.filter(event => event.id !== selectedEventId);
-            newTotalPrice -= eventPrice;
         }
 
         setFormData(prev => ({ ...prev, selectedEvents: newSelectedEvents }));
-        setTotalPrice(newTotalPrice);
+        setPriceBreakdown(calculatePrice(tournament, newSelectedEvents));
 
         setErrors(prev => ({
             ...prev,
@@ -260,10 +259,16 @@ const TournamentRegistration = ({
                             onBlur={handleBlur}
                         />
 
+                        {/* Price Display */}
+                        <div className="mb-8">
+                            <h3 className="text-lg font-semibold mb-4">Price Breakdown</h3>
+                            <PriceBreakdown {...priceBreakdown} />
+                        </div>
+
                         <div className="mb-8 p-4 bg-gray-50 rounded-lg">
                             <div className="flex justify-between items-center">
                                 <span className="text-lg font-medium">Total Price:</span>
-                                <span className="text-2xl font-bold">${(totalPrice / 100).toFixed(2)}</span>
+                                <span className="text-2xl font-bold">${(priceBreakdown.finalPrice / 100).toFixed(2)}</span>
                             </div>
                         </div>
 

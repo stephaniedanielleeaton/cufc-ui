@@ -50,4 +50,59 @@ declare module 'cufc-ui' {
   export const EmailSender: React.ComponentType<any>;
   export const AttendanceGraph: React.ComponentType<any>;
   export const TournamentRegistration: React.ComponentType<any>;
+
+  export interface Event {
+    _id: string;
+    name: string;
+    description: string;
+    startTime: string;
+    registrationCap: number;
+    price: number;
+    registrants: any[];
+  }
+
+  export interface DiscountRule {
+    name: string;
+    description: string;
+    type: 'QUANTITY' | 'COMBINATION' | 'PACKAGE';
+    minimumEvents?: number;
+    requiredEventIds?: string[];
+    discountAmount: number;
+    isPercentage: boolean;
+    priority: number;
+    stackable: boolean;
+  }
+
+  export interface Tournament {
+    _id: string;
+    name: string;
+    description: string;
+    startDate: string;
+    endDate: string;
+    basePrice: number;
+    location: string;
+    events: Event[];
+    mutuallyExclusiveEventGroups: string[][];
+    discountRules: DiscountRule[];
+  }
+
+  export interface SelectedEvent {
+    id: string;
+    name: string;
+  }
+
+  export interface PriceBreakdown {
+    basePrice: number;
+    eventPrices: { eventId: string; price: number; name: string }[];
+    appliedDiscounts: {
+      name: string;
+      description: string;
+      amount: number;
+      stackable: boolean;
+    }[];
+    totalDiscount: number;
+    finalPrice: number;
+  }
+
+  export function calculatePrice(tournament: Tournament, selectedEvents: SelectedEvent[]): PriceBreakdown;
 }

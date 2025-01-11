@@ -13,6 +13,18 @@ export interface AdditionalResource {
     link: string;
 }
 
+export interface DiscountRule {
+    name: string;
+    description: string;
+    type: 'QUANTITY' | 'COMBINATION' | 'PACKAGE';
+    minimumEvents?: number;
+    requiredEventIds?: string[];
+    discountAmount: number;
+    isPercentage: boolean;
+    priority: number;
+    stackable: boolean;
+}
+
 export interface Tournament {
     _id: string;
     name: string;
@@ -23,6 +35,7 @@ export interface Tournament {
     location: string;
     events: Event[];
     mutuallyExclusiveEventGroups: string[][];
+    discountRules: DiscountRule[];
 }
 
 export interface SelectedEvent {

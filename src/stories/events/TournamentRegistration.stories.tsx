@@ -49,7 +49,7 @@ const sampleTournament = {
         {
             _id: "6779cd35ca216b1769e11c43",
             name: "Longsword Div 1",
-            description: "Division 1 is required for any fencer with a Longsword HEMA Rating above 1400.",
+            description: "Longsword Div 1 is recommended if you have placed in the top 3 of a tournament before.",
             startTime: "2025-02-15T09:00:00-05:00",
             registrationCap: 32,
             price: 4500,
@@ -90,6 +90,28 @@ const sampleTournament = {
             registrationCap: 32,
             price: 4500,
             registrants: []
+        }
+    ],
+    discountRules: [
+        {
+            name: "Multi-Event Discount",
+            description: "Save 15% when you sign up for 2 or more events",
+            type: "QUANTITY",
+            minimumEvents: 2,
+            discountAmount: 15,
+            isPercentage: true,
+            priority: 1,
+            stackable: true
+        },
+        {
+            name: "Early Bird Special",
+            description: "Save $20 when you register for any event before January 15th",
+            type: "QUANTITY",
+            minimumEvents: 1,
+            discountAmount: 2000,
+            isPercentage: false,
+            priority: 2,
+            stackable: true
         }
     ]
 };

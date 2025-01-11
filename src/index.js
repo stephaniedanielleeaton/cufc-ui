@@ -24,4 +24,5 @@ export { default as AdminMembers } from './stories/admin/adminmembers/AdminMembe
 export { default as EmailSender } from './stories/admin/emailsender/EmailSender.jsx';
 export { default as AttendanceGraph } from './stories/admin/attendance/AttendanceGraph.jsx';
 
-export { default as TournamentRegistration } from './stories/events/TournamentRegistration.tsx';
+export { default as TournamentRegistration } from './stories/events/TournamentRegistration';
+export { calculatePrice } from './stories/events/utils/calculatePrice';
