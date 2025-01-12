@@ -59,14 +59,14 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
           Donate
         </a>
         <div className="relative w-full text-center">
-          <div className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 inline-block border border-LightPink mb-0.5">Current Students Only</div>
+          <div className="text-LightPink text-xs px-3 py-0.5 rounded-full border border-LightPink mb-0.5">Current Students Only</div>
           <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleNavigationClick('dropin')}>
             Drop In
           </a>
         </div>
         <div className="relative w-full text-center mt-4">
-          <div className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 inline-block border border-LightPink mb-0.5">Admin</div>
-          <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={() => handleAuth()}>
+          <div className="text-LightPink text-xs px-3 py-0.5 rounded-full border border-LightPink mb-0.5">Admin</div>
+          <a href="#" className="text-white text-xl block hover:text-LightPink transition-colors" onClick={handleAuth}>
             {isAuthenticated ? 'Sign Out' : 'Sign In'}
           </a>
         </div>
@@ -80,14 +80,14 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden md:flex justify-around items-center min-h-16 bg-Navy h-full">
+      <div className="hidden md:flex justify-around items-center min-h-16 bg-Navy h-full pt-3">
         <div className="flex items-center">
           <img src={prideFlagSvg} alt="Pride Flag" className="h-8 w-8 mr-4" />
         </div>
         <nav className="md:w-1/2 lg:w-1/3 flex items-center justify-center text-white">
           <div className="button flex flex-col items-center px-4 whitespace-nowrap">
-            <span className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 whitespace-nowrap border border-LightPink mb-0.5">Current Students Only</span>
-            <div className="flex items-center justify-center h-16">
+            <span className="text-LightPink text-xs px-3 py-0.5 rounded-full border border-LightPink mb-0 whitespace-nowrap">Current Students Only</span>
+            <div className="flex items-center justify-center h-14">
               <span
                 className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
                 onClick={() => onNavigationClick('dropin')}
@@ -97,9 +97,12 @@ function Nav({ onNavigationClick, userProfilePic, isAuthenticated, handleAuth, i
             </div>
           </div>
           <div className="button flex flex-col items-center px-4 whitespace-nowrap bg-Navy-light/30 backdrop-blur-sm hover:bg-Navy-light/40 transition-colors cursor-pointer" onClick={() => handleAuth()}>
-            <span className="text-white text-xs px-3 py-0.5 rounded-full bg-LightPink/90 whitespace-nowrap border border-LightPink mb-0.5">Admin</span>
-            <div className="flex items-center justify-center h-16">
-              <span className="font-Khula font-normal text-base tracking-[2.4px]">
+            <span className="text-LightPink text-xs px-3 py-0.5 rounded-full border border-LightPink mb-0 whitespace-nowrap">Admin</span>
+            <div className="flex items-center justify-center h-14">
+              <span
+                className="font-Khula font-normal text-base hover:text-LightPink transition-colors tracking-[2.4px] cursor-pointer"
+                onClick={handleAuth}
+              >
                 {isAuthenticated ? 'SIGN OUT' : 'SIGN IN'}
               </span>
             </div>
