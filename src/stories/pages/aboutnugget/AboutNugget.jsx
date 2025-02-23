@@ -85,8 +85,8 @@ function AboutNugget({ onNavigationClick, onEmailSignup, upcomingDates }) {
             <h2 className="text-3xl font-bold text-Navy mb-6">What happens at the end?</h2>
             <p className="text-gray-700 leading-relaxed">
               At the end of four weeks, you will be sparring ready. You will be invited to join the rest of our class
-              offerings. Although the class will be focus on a singular weapon form, the basics you learn will allow you to join
-              in any of our other class offerings.
+              offerings. Although the class will focus on a singular weapon form, the basics you learn will allow you to join
+              any of our other class offerings.
             </p>
           </section>
 
