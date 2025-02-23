@@ -47,13 +47,13 @@ UpcomingStartDates.propTypes = {
 UpcomingStartDates.defaultProps = {
   upcomingDates: [
     {
-      startDate: "January 9th, 2025",
+      startDate: "April 3rd, 2025",
       schedule: "Thursday evenings",
       meetingTime: "Meeting every Thursday at 7:00pm to 8:30pm for four weeks",
       courseTitle: "Introduction to HEMA through Rapier"
     },
     {
-      startDate: "February 22nd, 2025",
+      startDate: "May 17th, 2025",
       schedule: "Saturday mornings",
       meetingTime: "Meeting every Saturday at 10:00am to 11:30am for four weeks",
       courseTitle: "Introduction to HEMA through Longsword"

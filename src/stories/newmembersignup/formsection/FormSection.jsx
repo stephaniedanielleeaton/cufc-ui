@@ -26,13 +26,11 @@ function FormSection({
       const age = today.getFullYear() - birthDate.getFullYear();
       const monthDiff = today.getMonth() - birthDate.getMonth();
       
-      // Adjust age if birthday hasn't occurred this year
-      const isOldEnough = age > 16 || (age === 16 && monthDiff >= 0 && today.getDate() >= birthDate.getDate());
-      
+      // Always reset guardian checkbox when date changes
       setFormData((prevData) => ({
         ...prevData,
         [name]: value,
-        isGuardian: false // Reset guardian checkbox when date changes
+        isGuardian: false // Reset guardian checkbox on any date change
       }));
       return;
     }
