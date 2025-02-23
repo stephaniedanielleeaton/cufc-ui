@@ -48,7 +48,7 @@ const ClassOptions = ({ selectedOption, onSelect }) => {
             href="/intro"
             className="flex items-center justify-center gap-2 p-4 text-Navy hover:text-MediumPink font-semibold transition-colors hover:bg-Navy/5"
           >
-            <span>Learn About Getting Started</span>
+            <span>Learn About Our Intro Courses</span>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

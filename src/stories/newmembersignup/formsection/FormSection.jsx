@@ -19,11 +19,51 @@ function FormSection({
 }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
+    if (name === 'dateOfBirth') {
+      const birthDate = new Date(value);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      
+      // Adjust age if birthday hasn't occurred this year
+      const isOldEnough = age > 16 || (age === 16 && monthDiff >= 0 && today.getDate() >= birthDate.getDate());
+      
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+        isGuardian: false // Reset guardian checkbox when date changes
+      }));
+      return;
+    }
+    
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleCheckboxChange = (e) => {
     setFormData((prevData) => ({ ...prevData, isGuardian: e.target.checked }));
+  };
+
+  const calculateAge = (birthDate) => {
+    if (!birthDate) return null;
+    const today = new Date();
+    const birth = new Date(birthDate);
+    const age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    const adjustedAge = monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate()) ? age - 1 : age;
+    return adjustedAge;
+  };
+
+  const age = formData.dateOfBirth ? calculateAge(formData.dateOfBirth) : null;
+  const isUnder16 = age !== null && age < 16;
+  const isMinor = age !== null && age >= 16 && age < 18;
+  const isAdult = age !== null && age >= 18;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!isUnder16) {
+      onNext(e);
+    }
   };
 
   return (
@@ -42,22 +82,62 @@ function FormSection({
             onSelect={(id) => setFormData((prevData) => ({ ...prevData, requestedMembershipType: id }))}
           />
 
-          <form onSubmit={onNext} className="mt-8">
-            {/* Guardian Checkbox */}
-            <div className="bg-gray-50 p-4 mb-8 md:rounded-lg">
-              <div className="flex items-center space-x-3">
+          {/* Age Requirement Section - Always Enabled */}
+          <div className="mt-8 bg-Navy/5 p-6 mb-8 md:rounded-lg">
+            <div>
+              <h3 className="text-lg font-semibold text-Navy border-b border-Navy/20 pb-2 mb-4">
+                Date of Birth
+              </h3>
+              <div className="max-w-xs">
                 <input
-                  type="checkbox"
-                  name="isGuardian"
-                  checked={formData.isGuardian}
-                  onChange={handleCheckboxChange}
-                  className="h-5 w-5 text-Navy border-gray-300 rounded focus:ring-Navy"
+                  type="date"
+                  name="dateOfBirth"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                  className={`w-full px-3 py-2 border-b focus:ring-0 transition-colors ${
+                    errors.dateOfBirth ? 'border-red-500' : 'border-gray-300 focus:border-Navy'
+                  }`}
                 />
-                <label className="text-sm text-gray-700">
-                  I am a guardian signing up on behalf of a minor that is at least 16 years of age
-                </label>
+                {errors.dateOfBirth && (
+                  <p className="mt-1 text-sm text-red-500">{errors.dateOfBirth}</p>
+                )}
               </div>
+              <p className="text-sm text-MediumPink mt-2 flex items-center gap-1">
+                <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                Fencers must be at least 16 years of age
+              </p>
+              {isUnder16 && (
+                <p className="text-sm text-red-500 mt-2 flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                  Registration is not available for fencers under 16 years of age
+                </p>
+              )}
             </div>
+          </div>
+
+          {/* Rest of Form - Disabled for under 16 */}
+          <form onSubmit={handleSubmit} className={isUnder16 ? 'opacity-50 pointer-events-none' : ''}>
+            {/* Guardian Checkbox - Show for ages 16-17 */}
+            {isMinor && (
+              <div className="bg-Navy/5 p-6 mb-8 md:rounded-lg">
+                <div className="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    name="isGuardian"
+                    checked={formData.isGuardian}
+                    onChange={handleCheckboxChange}
+                    className="h-5 w-5 mt-1 text-Navy border-gray-300 rounded focus:ring-Navy"
+                  />
+                  <label className="text-sm text-gray-700 font-medium">
+                    I am a guardian registering on behalf of this minor (16-17 years old)
+                  </label>
+                </div>
+              </div>
+            )}
 
             {/* Form Sections */}
             <div className="space-y-8">
@@ -132,27 +212,6 @@ function FormSection({
                 </div>
               </section>
 
-              {/* Date of Birth */}
-              <section>
-                <h3 className="text-lg font-semibold text-Navy border-b border-gray-200 pb-2 mb-4">
-                  Date of Birth
-                </h3>
-                <div className="max-w-xs">
-                  <input
-                    type="date"
-                    name="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                    className={`w-full px-3 py-2 border-b focus:ring-0 transition-colors ${
-                      errors.dateOfBirth ? 'border-red-500' : 'border-gray-300 focus:border-Navy'
-                    }`}
-                  />
-                  {errors.dateOfBirth && (
-                    <p className="mt-1 text-sm text-red-500">{errors.dateOfBirth}</p>
-                  )}
-                </div>
-              </section>
-
               {/* Guardian Information */}
               {formData.isGuardian && (
                 <section>
@@ -169,7 +228,7 @@ function FormSection({
                         name="guardianFirstName"
                         value={formData.guardianFirstName}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border-b border-gray-300 focus:border-Navy focus:ring-0 transition-colors"
+                        className="w-full px-3 py-2 border-b border-gray-300 focus:border-Navy focus:ring-0"
                         placeholder="Enter guardian's first name"
                       />
                     </div>
@@ -182,7 +241,7 @@ function FormSection({
                         name="guardianLastName"
                         value={formData.guardianLastName}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 border-b border-gray-300 focus:border-Navy focus:ring-0 transition-colors"
+                        className="w-full px-3 py-2 border-b border-gray-300 focus:border-Navy focus:ring-0"
                         placeholder="Enter guardian's last name"
                       />
                     </div>
