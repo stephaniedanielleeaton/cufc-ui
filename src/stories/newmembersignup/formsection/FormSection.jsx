@@ -59,9 +59,17 @@ function FormSection({
   const isMinor = age !== null && age >= 16 && age < 18;
   const isAdult = age !== null && age >= 18;
 
+  const hasUnderAgeFamilyMembers = formData.requestedMembershipType === 'familyPlan' && 
+    formData.additionalFamilyMembers.some(member => {
+      const age = calculateAge(member.dateOfBirth);
+      return age !== null && age < 16;
+    });
+
+  const isFormDisabled = isUnder16 || (isMinor && !formData.isGuardian) || hasUnderAgeFamilyMembers;
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isUnder16) {
+    if (!isUnder16 && !hasUnderAgeFamilyMembers) {
       onNext(e);
     }
   };
@@ -379,6 +387,16 @@ function FormSection({
                   <h3 className="text-lg font-semibold text-Navy border-b border-gray-200 pb-2 mb-4">
                     Family Members
                   </h3>
+                  {hasUnderAgeFamilyMembers && (
+                    <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-sm text-red-600 flex items-center gap-1">
+                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                        Registration is not available for family members under 16 years of age
+                      </p>
+                    </div>
+                  )}
                   <div className="space-y-4">
                     {formData.additionalFamilyMembers.map((member, index) => (
                       <div key={index} className="bg-gray-50 p-4 md:rounded-lg">
@@ -481,15 +499,20 @@ function FormSection({
             <div className="mt-8 sticky bottom-0 -mx-4 p-4 bg-white border-t border-gray-200 md:relative md:mx-0 md:p-0 md:bg-transparent md:border-0">
               <button
                 type="submit"
-                disabled={buttonDisabled}
+                disabled={isFormDisabled || buttonDisabled}
                 className={`w-full py-3 px-6 md:rounded-lg text-center font-semibold transition-all ${
-                  buttonDisabled
+                  isFormDisabled || buttonDisabled
                     ? 'bg-gray-300 cursor-not-allowed'
                     : 'bg-Navy text-white hover:bg-MediumPink'
                 }`}
               >
                 {buttonText || 'Continue'}
               </button>
+              {hasUnderAgeFamilyMembers && (
+                <p className="mt-2 text-sm text-red-500 text-center">
+                  Please remove any family members under 16 years of age to continue
+                </p>
+              )}
             </div>
 
             {/* Status Message */}
