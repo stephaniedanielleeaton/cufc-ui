@@ -103,7 +103,7 @@ function Classes({ onNavigationClick }) {
                 <h3 className="font-bold text-xl text-Navy mb-2">Longsword Fundamentals</h3>
                 <p className="text-wine font-semibold mb-2">Saturdays @ 10:00 - 11:30 am</p>
                 <p className="text-gray-700">
-                  This is a new class intended to focus on fundamental structure and technique for longsword fencers in their first year.
+                  This is a new class intended to focus on fundamental structure and technique for longsword fencers in their three months.
                 </p>
               </div>
 
