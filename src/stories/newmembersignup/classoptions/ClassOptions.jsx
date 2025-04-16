@@ -1,35 +1,79 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const options = [
-  {
-    id: 'nugget',
-    header: 'Introduction to HEMA Course',
-    price: '$110  (Select date at checkout)',
-    description: 'Perfect for beginners looking to start their HEMA journey',
-  },
+const introOption = {
+  id: 'nugget',
+  header: 'Introduction to HEMA Course',
+  price: '$110 (One-time fee)',
+  description: 'Perfect for complete beginners with no prior HEMA experience. This introductory course is your first step into historical fencing.',
+  details: 'Select your preferred start date at checkout',
+};
+
+const experiencedOptions = [
   {
     id: 'fullMembership',
     header: 'Full Class Access',
     price: '$110/month',
     description: 'Access to all regular HEMA classes and open practice sessions',
+    recurring: 'Monthly membership fee starts on signup date',
+    requiresExperience: true,
   },
   {
     id: 'familyPlan',
     header: 'Family Plan',
     price: '$110 + $65/month for each additional family member',
     description: 'Train together with your family members at a discounted rate',
+    recurring: 'Monthly membership fee starts on signup date',
+    requiresExperience: true,
   },
   {
     id: 'dropIn',
     header: 'Drop-in Classes',
     price: '$20 per class',
     description: 'Flexible option for occasional training, fees due on class day',
-    note: 'Only available to experienced fencers or those who have completed any of our introduction courses.',
+    requiresExperience: true,
   },
 ];
 
 const ClassOptions = ({ selectedOption, onSelect }) => {
+  const renderMembershipOption = (option) => (
+    <button
+      key={option.id}
+      onClick={() => onSelect(option.id)}
+      className={`w-full p-6 text-left transition-all ${
+        selectedOption === option.id
+          ? 'bg-Navy/5 border-Navy'
+          : 'bg-white hover:bg-gray-50 border-gray-200'
+      } border rounded-lg`}
+    >
+      <div className="flex items-start space-x-3">
+        <input
+          type="radio"
+          name="membershipOption"
+          checked={selectedOption === option.id}
+          onChange={() => onSelect(option.id)}
+          className="mt-1.5 h-4 w-4 text-Navy border-gray-300 focus:ring-Navy"
+        />
+        <div className="flex-1">
+          <h4 className="font-semibold text-gray-900">{option.header}</h4>
+          <p className="text-sm text-gray-600 mt-1">{option.description}</p>
+          {option.details && (
+            <p className="text-xs text-gray-500 mt-1">{option.details}</p>
+          )}
+          {option.recurring && (
+            <p className="text-xs text-Navy mt-1 flex items-center gap-1">
+              <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              {option.recurring}
+            </p>
+          )}
+          <p className="text-Navy font-bold mt-2">{option.price}</p>
+        </div>
+      </div>
+    </button>
+  );
+
   return (
     <div className="space-y-8">
       {/* Quick Links - Mobile Optimized */}
@@ -62,41 +106,23 @@ const ClassOptions = ({ selectedOption, onSelect }) => {
           Choose Your Membership
         </h3>
 
-        <div className="grid gap-4">
-          {options.map((option) => (
-            <button
-              key={option.id}
-              onClick={() => onSelect(option.id)}
-              className={`w-full p-6 text-left transition-all ${
-                selectedOption === option.id
-                  ? 'bg-Navy/5 border-Navy'
-                  : 'bg-white hover:bg-gray-50 border-gray-200'
-              } border rounded-lg`}
-            >
-              <div className="flex items-start space-x-3">
-                <input
-                  type="radio"
-                  name="membershipOption"
-                  checked={selectedOption === option.id}
-                  onChange={() => onSelect(option.id)}
-                  className="mt-1.5 h-4 w-4 text-Navy border-gray-300 focus:ring-Navy"
-                />
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900">{option.header}</h4>
-                  <p className="text-sm text-gray-600 mt-1">{option.description}</p>
-                  {option.note && (
-                    <p className="text-xs text-MediumPink mt-1 flex items-center gap-1">
-                      <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                      </svg>
-                      {option.note}
-                    </p>
-                  )}
-                  <p className="text-Navy font-bold mt-2">{option.price}</p>
-                </div>
-              </div>
-            </button>
-          ))}
+        {/* New Member Section */}
+        <div className="mb-8">
+          <h4 className="text-lg font-semibold text-Navy mb-4">New to HEMA?</h4>
+          {renderMembershipOption(introOption)}
+        </div>
+
+        {/* Experienced Member Section */}
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <h4 className="text-lg font-semibold text-Navy">Experienced Fencer Options</h4>
+            <div className="text-xs bg-Navy/10 text-Navy px-2 py-1 rounded">
+              Requires prior experience or completed intro course
+            </div>
+          </div>
+          <div className="grid gap-4">
+            {experiencedOptions.map(renderMembershipOption)}
+          </div>
         </div>
       </div>
     </div>
