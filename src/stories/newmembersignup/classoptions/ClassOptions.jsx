@@ -102,9 +102,6 @@ const ClassOptions = ({ selectedOption, onSelect }) => {
 
       {/* Membership Options */}
       <div>
-        <h3 className="text-xl font-bold text-Navy text-center mb-6">
-          Choose Your Membership
-        </h3>
 
         {/* New Member Section */}
         <div className="mb-8">
@@ -116,7 +113,7 @@ const ClassOptions = ({ selectedOption, onSelect }) => {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <h4 className="text-lg font-semibold text-Navy">Experienced Fencer Options</h4>
-            <div className="text-xs bg-Navy/10 text-Navy px-2 py-1 rounded">
+            <div className="text-xs bg-MediumPink/10 text-Wine px-2 py-1 rounded">
               Requires prior experience or completed intro course
             </div>
           </div>
